@@ -588,8 +588,8 @@ PlayerSettings:
   apiCompatibilityLevelPerPlatform: {}
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
-  metroPackageName: Parry_game_prototype
-  metroPackageVersion: 
+  metroPackageName: Parrygameprototype
+  metroPackageVersion: 1.0.0.0
   metroCertificatePath: 
   metroCertificatePassword: 
   metroCertificateSubject: 
@@ -597,7 +597,7 @@ PlayerSettings:
   metroCertificateNotAfter: 0000000000000000
   metroApplicationDescription: Parry_game_prototype
   wsaImages: {}
-  metroTileShortName: 
+  metroTileShortName: Parry_game_prototype
   metroTileShowName: 0
   metroMediumTileShowName: 0
   metroLargeTileShowName: 0

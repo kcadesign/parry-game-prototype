@@ -3,20 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour
+public class PlayerMove : MonoBehaviour
 {
     protected PlayerControls playerControls;
+    private Rigidbody2D _rigidBody;
+
     private Vector2 _movementAxis;
-    public Vector2 MovementAxis { get { return _movementAxis; } }
 
     [SerializeField] private float _rollSpeed = 5;
-    private Rigidbody2D rigidBody;
-
 
     private void Awake()
     {
         playerControls = new PlayerControls();
-        rigidBody = GetComponent<Rigidbody2D>();
+        _rigidBody = GetComponent<Rigidbody2D>();
     }
 
     private void OnEnable()
@@ -47,14 +46,11 @@ public class PlayerController : MonoBehaviour
         _movementAxis = Vector2.zero;
     }
 
-
-    // Start is called before the first frame update
     void Start()
     {
 
     }
 
-    // Update is called once per frame
     void Update()
     {
 
@@ -67,9 +63,7 @@ public class PlayerController : MonoBehaviour
 
     private void HandleHorizontalMovement()
     {
-        Vector2 movementDirection;
-
-        movementDirection.x = _movementAxis.x;
+        Vector2 movementDirection = _movementAxis;
         movementDirection.y = 0f;
 
         Vector2 movementForce = _rollSpeed * Time.fixedDeltaTime * movementDirection;
@@ -77,8 +71,7 @@ public class PlayerController : MonoBehaviour
 
         if (_movementAxis.magnitude > 0)
         {
-            rigidBody.AddForce(movementForce, ForceMode2D.Impulse);
+            _rigidBody.AddForce(movementForce, ForceMode2D.Impulse);
         }
-
     }
 }
