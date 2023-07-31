@@ -6,7 +6,6 @@ using UnityEngine.InputSystem;
 public class PlayerBlock : MonoBehaviour
 {
     protected PlayerControls playerControls;
-    private Rigidbody2D _rigidBody;
 
     public SpriteRenderer spriteRenderer;
     private Color _originalColor;
@@ -14,7 +13,6 @@ public class PlayerBlock : MonoBehaviour
     private void Awake()
     {
         playerControls = new PlayerControls();
-        _rigidBody = GetComponent<Rigidbody2D>();
 
         _originalColor = spriteRenderer.color;
     }
@@ -45,7 +43,7 @@ public class PlayerBlock : MonoBehaviour
 
     private void Block_canceled(InputAction.CallbackContext value)
     {
-        print("--Player is not blocking");
+        print("Button released");
         spriteRenderer.color = _originalColor;
 
     }

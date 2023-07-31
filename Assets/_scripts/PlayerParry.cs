@@ -6,17 +6,15 @@ using UnityEngine.InputSystem;
 public class PlayerParry : MonoBehaviour
 {
     protected PlayerControls playerControls;
-    private Rigidbody2D _rigidBody;
 
-    public SpriteRenderer spriteRenderer;
+    public SpriteRenderer BodySpriteRenderer;
     private Color _originalColor;
 
     private void Awake()
     {
         playerControls = new PlayerControls();
-        _rigidBody = GetComponent<Rigidbody2D>();
 
-        _originalColor = spriteRenderer.color;
+        _originalColor = BodySpriteRenderer.color;
     }
 
     private void OnEnable()
@@ -39,14 +37,14 @@ public class PlayerParry : MonoBehaviour
     private void Parry_performed(InputAction.CallbackContext value)
     {
         print("**PARRY**");
-        spriteRenderer.color = Color.white;
+        BodySpriteRenderer.color = Color.white;
 
     }
 
     private void Parry_canceled(InputAction.CallbackContext value)
     {
-        print("Parry window closed");
-        //spriteRenderer.color = _originalColor;
+        //print("Parry window closed");
+        //BodySpriteRenderer.color = _originalColor;
 
     }
 

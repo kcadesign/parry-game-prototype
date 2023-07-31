@@ -11,6 +11,7 @@ public class PlayerMove : MonoBehaviour
     private Vector2 _movementAxis;
 
     [SerializeField] private float _rollSpeed = 5;
+    [SerializeField] private float _maxVelocity = 2;
 
     private void Awake()
     {
@@ -24,7 +25,6 @@ public class PlayerMove : MonoBehaviour
 
         playerControls.Gameplay.Rolling.performed += Rolling_performed;
         playerControls.Gameplay.Rolling.canceled += Rolling_canceled;
-
     }
 
     private void OnDisable()
@@ -33,7 +33,6 @@ public class PlayerMove : MonoBehaviour
 
         playerControls.Gameplay.Rolling.performed -= Rolling_performed;
         playerControls.Gameplay.Rolling.canceled -= Rolling_canceled;
-
     }
 
     private void Rolling_performed(InputAction.CallbackContext value)
@@ -44,16 +43,6 @@ public class PlayerMove : MonoBehaviour
     private void Rolling_canceled(InputAction.CallbackContext value)
     {
         _movementAxis = Vector2.zero;
-    }
-
-    void Start()
-    {
-
-    }
-
-    void Update()
-    {
-
     }
 
     void FixedUpdate()
@@ -72,6 +61,11 @@ public class PlayerMove : MonoBehaviour
         if (_movementAxis.magnitude > 0)
         {
             _rigidBody.AddForce(movementForce, ForceMode2D.Impulse);
+        }
+        
+        if(_rigidBody.velocity.magnitude > _maxVelocity)
+        {
+            _rigidBody.velocity = Vector2.ClampMagnitude(_rigidBody.velocity, _maxVelocity);
         }
     }
 }
