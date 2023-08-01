@@ -5,10 +5,15 @@ using UnityEngine.InputSystem;
 
 public class PlayerBlock : MonoBehaviour
 {
+    public delegate void Block();
+    public static event Block OnBlock;
+
     protected PlayerControls playerControls;
 
     public SpriteRenderer spriteRenderer;
     private Color _originalColor;
+
+    private bool _isBlocking = false;
 
     private void Awake()
     {
@@ -39,6 +44,8 @@ public class PlayerBlock : MonoBehaviour
         print("++Player is blocking");
         spriteRenderer.color = Color.blue;
 
+        _isBlocking = true;
+        OnBlock?.Invoke();
     }
 
     private void Block_canceled(InputAction.CallbackContext value)
@@ -46,15 +53,7 @@ public class PlayerBlock : MonoBehaviour
         print("Button released");
         spriteRenderer.color = _originalColor;
 
+        _isBlocking = false;
     }
 
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
-    }
 }

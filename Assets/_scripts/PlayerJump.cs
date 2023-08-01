@@ -11,6 +11,8 @@ public class PlayerJump : MonoBehaviour
 
     [SerializeField] private float _jumpPower = 5;
 
+    private bool _canJump = false;
+
     private void Awake()
     {
         playerControls = new PlayerControls();
@@ -23,6 +25,24 @@ public class PlayerJump : MonoBehaviour
 
         playerControls.Gameplay.Jump.performed += Jump_performed;
         playerControls.Gameplay.Jump.canceled += Jump_canceled;
+
+        PlayerBlock.OnBlock += PlayerBlock_OnBlock;
+    }
+
+    private void OnDisable()
+    {
+        playerControls.Gameplay.Disable();
+
+        playerControls.Gameplay.Jump.performed -= Jump_performed;
+        playerControls.Gameplay.Jump.canceled -= Jump_canceled;
+
+        PlayerBlock.OnBlock -= PlayerBlock_OnBlock;
+
+    }
+
+    private void PlayerBlock_OnBlock()
+    {
+        _canJump = true;
     }
 
     private void Jump_performed(InputAction.CallbackContext value)
@@ -33,30 +53,20 @@ public class PlayerJump : MonoBehaviour
 
     private void Jump_canceled(InputAction.CallbackContext value)
     {
-        HandleJump();
+        if (_canJump)
+        {
+            HandleJump();
+        }
+        _canJump = false;
     }
 
     private void HandleJump()
     {
-        Vector2 jumpForce = new Vector2 (0,0);
+
+        Vector2 jumpForce = new Vector2(0, 0);
         jumpForce.y = _jumpPower;
 
         _rigidBody.AddForce(jumpForce, ForceMode2D.Impulse);
     }
 
-    private void OnDisable()
-    {
-        playerControls.Gameplay.Disable();
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
