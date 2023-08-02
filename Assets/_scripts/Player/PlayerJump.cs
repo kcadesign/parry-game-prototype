@@ -37,7 +37,6 @@ public class PlayerJump : MonoBehaviour
         playerControls.Gameplay.Jump.canceled -= Jump_canceled;
 
         PlayerBlock.OnBlock -= PlayerBlock_OnBlock;
-
     }
 
     private void PlayerBlock_OnBlock()
@@ -47,7 +46,6 @@ public class PlayerJump : MonoBehaviour
 
     private void Jump_performed(InputAction.CallbackContext value)
     {
-        //throw new System.NotImplementedException();
         return;
     }
 
@@ -62,7 +60,6 @@ public class PlayerJump : MonoBehaviour
 
     private void HandleJump()
     {
-
         Vector2 jumpForce = new Vector2(0, 0);
         jumpForce.y = _jumpPower;
 

@@ -7,6 +7,9 @@ public class PlayerParry : MonoBehaviour
 {
     protected PlayerControls playerControls;
 
+    public delegate void Parry();
+    public static event Parry OnParry;
+
     public SpriteRenderer BodySpriteRenderer;
     private Color _originalColor;
 
@@ -39,6 +42,7 @@ public class PlayerParry : MonoBehaviour
         print("**PARRY**");
         BodySpriteRenderer.color = Color.white;
 
+        OnParry?.Invoke();
     }
 
     private void Parry_canceled(InputAction.CallbackContext value)
