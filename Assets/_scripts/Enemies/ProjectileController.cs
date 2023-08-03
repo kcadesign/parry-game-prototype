@@ -6,7 +6,7 @@ public class ProjectileController : MonoBehaviour
 {
     private Rigidbody2D _rigidBody;
 
-    //[SerializeField] private float _speed = 5;
+    [SerializeField] private float _speed = 5;
 
     private Vector2 _movementDirection = Vector2.left;
 
@@ -35,7 +35,7 @@ public class ProjectileController : MonoBehaviour
 
     void Start()
     {
-        _rigidBody.AddForce(_movementDirection, ForceMode2D.Impulse);
+        _rigidBody.AddForce(_movementDirection * _speed, ForceMode2D.Impulse);
     }
 
     void Update()
