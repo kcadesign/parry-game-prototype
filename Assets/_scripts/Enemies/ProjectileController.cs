@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class ProjectileController : MonoBehaviour
 {
+    public delegate void Deflect(bool deflected);
+    public static event Deflect OnDeflect;
+
     private Rigidbody2D _rigidBody;
 
     [SerializeField] private float _speed = 5;
@@ -46,15 +49,19 @@ public class ProjectileController : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         print(collision.gameObject.tag);
+        
         if (collision.gameObject.CompareTag("Player") && _deflect)
         {
             //_movementDirection = Vector2.zero;
             Destroy(gameObject,3f);
+            OnDeflect?.Invoke(_deflect);
+
         }
-        else
+        else if (collision.gameObject.CompareTag("Player") && !_deflect)
         {
             Destroy(gameObject);
         }
+
     }
     
 }
