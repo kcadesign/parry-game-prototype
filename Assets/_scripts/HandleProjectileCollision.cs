@@ -37,14 +37,13 @@ public class HandleProjectileCollision : MonoBehaviour
     {
         
     }
-
+    
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (_takeDamage)
+        if (collision.gameObject.CompareTag("Projectile") && _takeDamage)
         {
             Destroy(transform.parent.gameObject);
         }
-
     }
 
 

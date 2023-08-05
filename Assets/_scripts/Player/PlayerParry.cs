@@ -7,11 +7,13 @@ public class PlayerParry : MonoBehaviour
 {
     protected PlayerControls playerControls;
 
-    public delegate void Parry();
-    public static event Parry OnParry;
+    public delegate void ParrPressed(bool parryPressed);
+    public static event ParrPressed OnParry;
 
     public SpriteRenderer BodySpriteRenderer;
     private Color _originalColor;
+
+    private bool _canParry = false;
 
     private void Awake()
     {
@@ -39,16 +41,18 @@ public class PlayerParry : MonoBehaviour
 
     private void Parry_performed(InputAction.CallbackContext value)
     {
-        print("**PARRY**");
+        print("Parry button pressed");
         BodySpriteRenderer.color = Color.white;
-
-        OnParry?.Invoke();
+        _canParry = true;
+        OnParry?.Invoke(_canParry);
     }
 
     private void Parry_canceled(InputAction.CallbackContext value)
     {
         //print("Parry window closed");
         //BodySpriteRenderer.color = _originalColor;
+        _canParry = false;
+        OnParry?.Invoke(_canParry);
 
     }
 

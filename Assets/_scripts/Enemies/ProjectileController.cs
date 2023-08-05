@@ -9,11 +9,14 @@ public class ProjectileController : MonoBehaviour
 
     private Rigidbody2D _rigidBody;
 
+    private SpriteRenderer _projectileSpriteRenderer;
+
+
     [SerializeField] private float _speed = 5;
 
     private Vector2 _movementDirection = Vector2.left;
 
-    private bool _deflect = false;
+    private bool _canDamageEnemy = false;
 
     private void OnEnable()
     {
@@ -29,11 +32,12 @@ public class ProjectileController : MonoBehaviour
     private void Awake()
     {
         _rigidBody = GetComponent<Rigidbody2D>();
+        _projectileSpriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    private void PlayerParry_OnParry()
+    private void PlayerParry_OnParry(bool parryPerformed)
     {
-        _deflect = true;
+        print(parryPerformed);
     }
 
     void Start()
@@ -50,18 +54,27 @@ public class ProjectileController : MonoBehaviour
     {
         print(collision.gameObject.tag);
         
-        if (collision.gameObject.CompareTag("Player") && _deflect)
+        if (collision.gameObject.CompareTag("Player") && _canDamageEnemy)
         {
             //_movementDirection = Vector2.zero;
+            _projectileSpriteRenderer.color = Color.blue;
+
             Destroy(gameObject,3f);
-            OnDeflect?.Invoke(_deflect);
+            OnDeflect?.Invoke(_canDamageEnemy);
 
         }
-        else if (collision.gameObject.CompareTag("Player") && !_deflect)
+        else if (collision.gameObject.CompareTag("Player") && !_canDamageEnemy)
         {
             Destroy(gameObject);
         }
 
     }
-    
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy") && _canDamageEnemy)
+        {
+            Destroy(gameObject);
+        }
+    }
 }
