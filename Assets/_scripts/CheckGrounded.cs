@@ -8,7 +8,7 @@ public class CheckGrounded : MonoBehaviour
     public static event Grounded OnGrounded;
 
     public float raycastDistance = 0.1f;
-    public LayerMask groundLayer;  // Layer mask for ground objects
+    public LayerMask groundLayer;
 
     private bool _isGrounded = false;
 
@@ -19,9 +19,6 @@ public class CheckGrounded : MonoBehaviour
 
         if (hit.collider != null)
         {
-            // Player is on the ground
-            Debug.Log("Player is on the ground");
-
             // Draw the raycast in the Scene view
             Debug.DrawRay(transform.position, Vector2.down * raycastDistance, Color.green);
 
@@ -30,15 +27,11 @@ public class CheckGrounded : MonoBehaviour
         }
         else
         {
-            // Player is in the air
-            Debug.Log("Player is in the air");
-
             // Draw the raycast in the Scene view
             Debug.DrawRay(transform.position, Vector2.down * raycastDistance, Color.red);
 
             _isGrounded = false;
             OnGrounded?.Invoke(_isGrounded);
-
         }
     }
 }

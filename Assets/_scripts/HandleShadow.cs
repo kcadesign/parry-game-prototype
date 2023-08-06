@@ -27,7 +27,7 @@ public class HandleShadow : MonoBehaviour
     {
         if (grounded)
         {
-            SetTransparency(0.1f);
+            SetTransparency(0.2f);
         }
         else if (!grounded)
         {
