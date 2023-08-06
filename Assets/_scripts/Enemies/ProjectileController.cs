@@ -16,16 +16,17 @@ public class ProjectileController : MonoBehaviour
 
     private Vector2 _movementDirection = Vector2.left;
 
-    private bool _canDamageEnemy = false;
+    private bool _deflected = false;
+    private bool _parryPerformed = false;
 
     private void OnEnable()
     {
-        PlayerParry.OnParry += PlayerParry_OnParry;
+        PlayerParry.OnParryActive += PlayerParry_OnParryActive;
     }
 
     private void OnDisable()
     {
-        PlayerParry.OnParry -= PlayerParry_OnParry;
+        PlayerParry.OnParryActive -= PlayerParry_OnParryActive;
 
     }
 
@@ -35,9 +36,10 @@ public class ProjectileController : MonoBehaviour
         _projectileSpriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    private void PlayerParry_OnParry(bool parryPerformed)
+    private void PlayerParry_OnParryActive(bool parryPerformed)
     {
         print(parryPerformed);
+        _parryPerformed = parryPerformed;
     }
 
     void Start()
@@ -54,27 +56,36 @@ public class ProjectileController : MonoBehaviour
     {
         print(collision.gameObject.tag);
         
-        if (collision.gameObject.CompareTag("Player") && _canDamageEnemy)
+        if (collision.gameObject.CompareTag("Player") && _parryPerformed)
         {
             //_movementDirection = Vector2.zero;
             _projectileSpriteRenderer.color = Color.blue;
 
-            Destroy(gameObject,3f);
-            OnDeflect?.Invoke(_canDamageEnemy);
+            _deflected = true;
+            OnDeflect?.Invoke(_deflected);
+
+            Destroy(gameObject, 3f);
 
         }
-        else if (collision.gameObject.CompareTag("Player") && !_canDamageEnemy)
+        else if (collision.gameObject.CompareTag("Player") && !_parryPerformed)
         {
+            _deflected = false;
             Destroy(gameObject);
         }
-
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Enemy") && _canDamageEnemy)
+        if (collision.gameObject.CompareTag("Enemy") && !_deflected)
         {
+            return;
+        }
+        else if(collision.gameObject.CompareTag("Enemy") && _deflected)
+        {
+
             Destroy(gameObject);
+            Destroy(collision.transform.parent.gameObject);
+
         }
     }
 }

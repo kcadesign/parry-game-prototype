@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HandleProjectileCollision : MonoBehaviour
+public class HandleCollision : MonoBehaviour
 {
-    private bool _takeDamage;
+    private bool _deflected;
 
     private void OnEnable()
     {
@@ -23,7 +23,7 @@ public class HandleProjectileCollision : MonoBehaviour
 
     private void ProjectileController_OnDeflect(bool deflected)
     {
-        _takeDamage = deflected;
+        _deflected = deflected;
     }
 
     // Start is called before the first frame update
@@ -40,7 +40,7 @@ public class HandleProjectileCollision : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Projectile") && _takeDamage)
+        if (collision.gameObject.CompareTag("Projectile") && _deflected)
         {
             Destroy(transform.parent.gameObject);
         }
