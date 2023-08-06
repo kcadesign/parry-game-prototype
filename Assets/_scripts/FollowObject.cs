@@ -20,4 +20,5 @@ public class FollowObject : MonoBehaviour
         gameObject.transform.position = ObjectToFollow.transform.position + _offset;
         
     }
+
 }

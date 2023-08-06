@@ -42,7 +42,7 @@ public class PlayerBlock : MonoBehaviour
     private void Block_performed(InputAction.CallbackContext value)
     {
         print("++Player is blocking");
-        spriteRenderer.color = Color.blue;
+        spriteRenderer.color = new Color(0.47f, 0.82f, 0.96f);
 
         //_isBlocking = true;
         OnBlock?.Invoke();
