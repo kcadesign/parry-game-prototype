@@ -1261,44 +1261,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &298727544 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 984528649344972825, guid: 9b60d9937a2653a4fa996b5d49e6adbe, type: 3}
-  m_PrefabInstance: {fileID: 4573385881440942747}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &298727546
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 298727544}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dac1b8ae165b340448c807e964d57e96, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!95 &298727547
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 298727544}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 886672555fca2f9409989194d5dc2e8f, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &419505942
 GameObject:
   m_ObjectHideFlags: 0
@@ -3776,6 +3738,44 @@ Transform:
   - {fileID: 42941833}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1446978449 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4735869055321282793, guid: 9b60d9937a2653a4fa996b5d49e6adbe, type: 3}
+  m_PrefabInstance: {fileID: 4573385881440942747}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1446978452
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1446978449}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 886672555fca2f9409989194d5dc2e8f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1446978453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1446978449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dac1b8ae165b340448c807e964d57e96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1489580708
 GameObject:
   m_ObjectHideFlags: 0
@@ -5668,18 +5668,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8289817049810985546, guid: 9b60d9937a2653a4fa996b5d49e6adbe, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.019
+      objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: 2311094827682122089, guid: 9b60d9937a2653a4fa996b5d49e6adbe, type: 3}
-    - {fileID: 2363099528628856723, guid: 9b60d9937a2653a4fa996b5d49e6adbe, type: 3}
+    - {fileID: 6759642280024779516, guid: 9b60d9937a2653a4fa996b5d49e6adbe, type: 3}
+    - {fileID: 14497260837529688, guid: 9b60d9937a2653a4fa996b5d49e6adbe, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 984528649344972825, guid: 9b60d9937a2653a4fa996b5d49e6adbe, type: 3}
+    - targetCorrespondingSourceObject: {fileID: 4735869055321282793, guid: 9b60d9937a2653a4fa996b5d49e6adbe, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 298727547}
-    - targetCorrespondingSourceObject: {fileID: 984528649344972825, guid: 9b60d9937a2653a4fa996b5d49e6adbe, type: 3}
+      addedObject: {fileID: 1446978452}
+    - targetCorrespondingSourceObject: {fileID: 4735869055321282793, guid: 9b60d9937a2653a4fa996b5d49e6adbe, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 298727546}
+      addedObject: {fileID: 1446978453}
   m_SourcePrefab: {fileID: 100100000, guid: 9b60d9937a2653a4fa996b5d49e6adbe, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
