@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-
 public class AnimatePlayerFace : MonoBehaviour
 {
     protected PlayerControls playerControls;
@@ -45,14 +44,6 @@ public class AnimatePlayerFace : MonoBehaviour
         _movementAxis = Vector2.zero;
     }
 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
         if (MovingLeft())
@@ -71,9 +62,7 @@ public class AnimatePlayerFace : MonoBehaviour
         else
         {
             _faceAnimator.SetBool("RollingRight", false);
-
         }
-
     }
 
     private bool MovingLeft()
@@ -99,5 +88,4 @@ public class AnimatePlayerFace : MonoBehaviour
             return false;
         }
     }
-
 }

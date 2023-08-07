@@ -330,7 +330,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 896266811827397794}
-  BlockingColor: {r: 0.47058824, g: 0.8235294, b: 0.9607843, a: 1}
+  BlockingColor: {r: 0.19223918, g: 0.6040155, b: 0.764151, a: 1}
 --- !u!114 &2932793820295555927
 MonoBehaviour:
   m_ObjectHideFlags: 0
