@@ -41,7 +41,7 @@ public class AnimatePlayerFace : MonoBehaviour
 
     private void Rolling_canceled(InputAction.CallbackContext value)
     {
-        _movementAxis = Vector2.zero;
+        _movementAxis = value.ReadValue<Vector2>();
     }
 
     void Update()
