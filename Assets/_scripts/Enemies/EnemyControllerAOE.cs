@@ -51,7 +51,7 @@ public class EnemyControllerAOE : MonoBehaviour
         _targetInAttackRange = Physics2D.OverlapCircle(AttackCentre.position, AttackRange, TargetLayer) != null;
 
         if (!_targetInSightRange && !_targetInAttackRange) ChangeState(_enemyState.Idle);
-        else if (_targetInSightRange && !_targetInAttackRange) ChangeState(_enemyState.Transform);
+        else if (_targetInSightRange && !_targetInAttackRange) ChangeState(_enemyState.TransformIdle);
         else if (_targetInSightRange && _targetInAttackRange) ChangeState(_enemyState.Attack);
 
         switch (_currentState)
