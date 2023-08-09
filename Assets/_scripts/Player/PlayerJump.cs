@@ -39,9 +39,9 @@ public class PlayerJump : MonoBehaviour
         PlayerBlock.OnBlock -= PlayerBlock_OnBlock;
     }
 
-    private void PlayerBlock_OnBlock()
+    private void PlayerBlock_OnBlock(bool isBlocking)
     {
-        _canJump = true;
+        _canJump = isBlocking;
     }
 
     private void Jump_performed(InputAction.CallbackContext value)

@@ -23,19 +23,8 @@ public class AnimatePlayerParry : MonoBehaviour
 
     private void PlayerParry_OnParryActive(bool parryPressed)
     {
-        Debug.Log(parryPressed);
+        Debug.Log($"Parry pressed: {parryPressed}");
         _playerAnimator.SetBool("Parry", parryPressed);
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

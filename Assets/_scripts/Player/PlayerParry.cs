@@ -41,7 +41,7 @@ public class PlayerParry : MonoBehaviour
 
     private void Parry_performed(InputAction.CallbackContext value)
     {
-        print("Parry button pressed");
+        //print("Parry button pressed");
         BodySpriteRenderer.color = Color.white;
         _parryActive = true;
         OnParryActive?.Invoke(_parryActive);

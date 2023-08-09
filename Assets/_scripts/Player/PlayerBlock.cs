@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerBlock : MonoBehaviour
 {
-    public delegate void Block();
+    public delegate void Block(bool isBlocking);
     public static event Block OnBlock;
 
     protected PlayerControls playerControls;
@@ -13,6 +13,8 @@ public class PlayerBlock : MonoBehaviour
     public SpriteRenderer spriteRenderer;
     private Color _originalColor;
     public Color BlockingColor;
+
+    private bool _isBlocking;
 
     //private bool _isBlocking = false;
 
@@ -42,19 +44,22 @@ public class PlayerBlock : MonoBehaviour
 
     private void Block_performed(InputAction.CallbackContext value)
     {
-        print("++Player is blocking");
+        _isBlocking = true;
+
+        //print("++Player is blocking");
         spriteRenderer.color = BlockingColor;
 
-        //_isBlocking = true;
-        OnBlock?.Invoke();
+        OnBlock?.Invoke(_isBlocking);
     }
 
     private void Block_canceled(InputAction.CallbackContext value)
     {
-        print("Button released");
+        _isBlocking = false;
+
+        //print("Button released");
         spriteRenderer.color = _originalColor;
 
-        //_isBlocking = false;
+        OnBlock?.Invoke(_isBlocking);
     }
 
 }
