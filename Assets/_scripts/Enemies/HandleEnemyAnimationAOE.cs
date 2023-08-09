@@ -19,6 +19,11 @@ public class HandleEnemyAnimationAOE : MonoBehaviour
         EnemyControllerAOE.OnEnemyStateChange += EnemyControllerAOE_OnEnemyStateChange;
     }
 
+    private void OnDisable()
+    {
+        EnemyControllerAOE.OnEnemyStateChange -= EnemyControllerAOE_OnEnemyStateChange;
+    }
+
     private void EnemyControllerAOE_OnEnemyStateChange(bool inSightRange, bool inAttackRange)
     {
         _targetInSightRange = inSightRange;

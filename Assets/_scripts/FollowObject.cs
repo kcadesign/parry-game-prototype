@@ -15,8 +15,17 @@ public class FollowObject : MonoBehaviour
 
     void Update()
     {
-        gameObject.transform.position = ObjectToFollow.transform.position + _offset;
+        SetPosition();
+        SetRotationConstraint();
+    }
 
+    private void SetPosition()
+    {
+        gameObject.transform.position = ObjectToFollow.transform.position + _offset;
+    }
+
+    private void SetRotationConstraint()
+    {
         Quaternion targetRotation = ObjectToFollow.transform.rotation;
 
         if (ConstrainXRotation)

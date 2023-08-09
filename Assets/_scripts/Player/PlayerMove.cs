@@ -62,13 +62,11 @@ public class PlayerMove : MonoBehaviour
         if (_movementAxis.magnitude > 0 && _rigidBody.velocity.magnitude < _maxVelocity)
         {
             _rigidBody.AddForce(movementForce, ForceMode2D.Impulse);
-            
         }
         
         if(_rigidBody.velocity.magnitude > _maxVelocity)
         {
             _rigidBody.velocity = Vector2.ClampMagnitude(_rigidBody.velocity, _maxVelocity);
         }
-        
     }
 }
