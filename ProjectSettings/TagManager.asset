@@ -43,3 +43,15 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background
+    uniqueID: 3282087955
+    locked: 0
+  - name: LevelGeometry
+    uniqueID: 2001634731
+    locked: 0
+  - name: Characters
+    uniqueID: 3288309501
+    locked: 0
+  - name: Foreground
+    uniqueID: 1218235449
+    locked: 0

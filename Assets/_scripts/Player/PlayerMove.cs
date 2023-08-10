@@ -39,6 +39,10 @@ public class PlayerMove : MonoBehaviour
 
         PlayerBlock.OnBlock += PlayerBlock_OnBlock;
     }
+    void FixedUpdate()
+    {
+        HandleHorizontalMovement();
+    }
 
     private void Rolling_performed(InputAction.CallbackContext value)
     {
@@ -51,7 +55,7 @@ public class PlayerMove : MonoBehaviour
     }
 
     private void PlayerBlock_OnBlock(bool isBlocking)
-    {
+    {/*
         if (isBlocking)
         {
             _rigidBody.velocity = Vector2.zero;
@@ -59,12 +63,7 @@ public class PlayerMove : MonoBehaviour
         else
         {
             return;
-        }
-    }
-
-    void FixedUpdate()
-    {
-        HandleHorizontalMovement();
+        }*/
     }
 
     private void HandleHorizontalMovement()
@@ -75,7 +74,7 @@ public class PlayerMove : MonoBehaviour
         Vector2 movementForce = _rollSpeed * Time.fixedDeltaTime * movementDirection;
         movementForce.y = 0f;
 
-        // Would like to be able to add force in the opposite direction even if velecity is over max
+        // Would like to be able to add force in the opposite direction even if velocity is over max
         if (_movementAxis.magnitude > 0 && _rigidBody.velocity.magnitude < _maxVelocity)
         {
             _rigidBody.AddForce(movementForce, ForceMode2D.Impulse);
