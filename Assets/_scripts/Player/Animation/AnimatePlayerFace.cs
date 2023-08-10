@@ -4,88 +4,20 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class AnimatePlayerFace : MonoBehaviour
-{
-    protected PlayerControls playerControls;
+{    
+    public Rigidbody2D _playerRigidbody;
 
     private Animator _faceAnimator;
 
-    private Vector2 _movementAxis;
-
     private void Awake()
     {
-        playerControls = new PlayerControls();
-
         _faceAnimator = GetComponent<Animator>();
-    }
-
-    private void OnEnable()
-    {
-        playerControls.Gameplay.Enable();
-
-        playerControls.Gameplay.Rolling.performed += Rolling_performed;
-        playerControls.Gameplay.Rolling.canceled += Rolling_canceled;
-    }
-
-    private void OnDisable()
-    {
-        playerControls.Gameplay.Disable();
-
-        playerControls.Gameplay.Rolling.performed -= Rolling_performed;
-        playerControls.Gameplay.Rolling.canceled -= Rolling_canceled;
-    }
-
-    private void Rolling_performed(InputAction.CallbackContext value)
-    {
-        _movementAxis = value.ReadValue<Vector2>();
-    }
-
-    private void Rolling_canceled(InputAction.CallbackContext value)
-    {
-        _movementAxis = value.ReadValue<Vector2>();
     }
 
     void Update()
     {
-        if (MovingLeft())
-        {
-            _faceAnimator.SetBool("RollingLeft", true);
-        }
-        else
-        {
-            _faceAnimator.SetBool("RollingLeft", false);
-        }
+        float velocityX = _playerRigidbody.velocity.x;
 
-        if (MovingRight())
-        {
-            _faceAnimator.SetBool("RollingRight", true);
-        }
-        else
-        {
-            _faceAnimator.SetBool("RollingRight", false);
-        }
-    }
-
-    private bool MovingLeft()
-    {
-        if(_movementAxis.x < -0)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-
-    private bool MovingRight()
-    {
-        if (_movementAxis.x > 0)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        _faceAnimator.SetFloat("VelocityX", velocityX);
     }
 }
