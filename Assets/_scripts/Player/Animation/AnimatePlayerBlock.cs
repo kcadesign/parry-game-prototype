@@ -23,7 +23,7 @@ public class AnimatePlayerBlock : MonoBehaviour
     }
     private void PlayerBlock_OnBlock(bool isBlocking)
     {
-        Debug.Log($"Block pressed: {isBlocking}");
+        //Debug.Log($"Block pressed: {isBlocking}");
 
         _playerAnimator.SetBool("Block", isBlocking);
     }

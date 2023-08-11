@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class HandleShadow : MonoBehaviour
 {
-    private SpriteRenderer _shadowSpriteRenderer;
+    public SpriteRenderer _shadowSpriteRenderer;
 
     private void Awake()
     {
-        _shadowSpriteRenderer = GetComponent<SpriteRenderer>();
+        //_shadowSpriteRenderer = GetComponent<SpriteRenderer>();
 
     }
 
@@ -25,13 +25,18 @@ public class HandleShadow : MonoBehaviour
 
     private void CheckGrounded_OnGrounded(bool grounded)
     {
+        print($"{gameObject.name} is grounded: {grounded}");
         if (grounded)
         {
             SetTransparency(0.2f);
+            _shadowSpriteRenderer.enabled = true;
+
         }
         else if (!grounded)
         {
             SetTransparency(0f);
+            _shadowSpriteRenderer.enabled = false;
+
         }
     }
 

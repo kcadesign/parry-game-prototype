@@ -23,7 +23,7 @@ public class AnimatePlayerParry : MonoBehaviour
 
     private void PlayerParry_OnParryActive(bool parryPressed)
     {
-        Debug.Log($"Parry pressed: {parryPressed}");
+        //Debug.Log($"Parry pressed: {parryPressed}");
         _playerAnimator.SetBool("Parry", parryPressed);
     }
 

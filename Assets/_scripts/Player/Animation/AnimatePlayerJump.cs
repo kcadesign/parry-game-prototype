@@ -19,18 +19,13 @@ public class AnimatePlayerJump : MonoBehaviour
     private void OnDisable()
     {
         PlayerBlock.OnBlock -= PlayerBlock_OnBlock;
-
     }
 
     private void PlayerBlock_OnBlock(bool isBlocking)
     {
         if (isBlocking)
         {
-            _playerAnimator.SetBool("Jump", false);
-        }
-        else if (!isBlocking)
-        {
-            _playerAnimator.SetBool("Jump", true);
+            _playerAnimator.SetTrigger("Jumping");
         }
     }
 }
