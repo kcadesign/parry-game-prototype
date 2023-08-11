@@ -6,22 +6,26 @@ public class HandleEnemyAnimationAOE : MonoBehaviour
 {
     private Animator _enemyStateAnimator;
 
+    private EnemyControllerAOE _enemyControllerAOE;
+
     private bool _targetInSightRange;
     private bool _targetInAttackRange;
 
     private void Awake()
-    {
+    {        
+        _enemyControllerAOE = GetComponent<EnemyControllerAOE>();
+
         _enemyStateAnimator = GetComponent<Animator>();
     }
 
     private void OnEnable()
     {
-        EnemyControllerAOE.OnEnemyStateChange += EnemyControllerAOE_OnEnemyStateChange;
+        _enemyControllerAOE.OnEnemyStateChange += EnemyControllerAOE_OnEnemyStateChange;
     }
 
     private void OnDisable()
     {
-        EnemyControllerAOE.OnEnemyStateChange -= EnemyControllerAOE_OnEnemyStateChange;
+        _enemyControllerAOE.OnEnemyStateChange -= EnemyControllerAOE_OnEnemyStateChange;
     }
 
     private void EnemyControllerAOE_OnEnemyStateChange(bool inSightRange, bool inAttackRange)

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CheckGrounded : MonoBehaviour
+public class CheckPlayerGrounded : MonoBehaviour
 {
     public delegate void Grounded(bool grounded);
     public static event Grounded OnGrounded;

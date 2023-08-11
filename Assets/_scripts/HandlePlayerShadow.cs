@@ -2,30 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HandleShadow : MonoBehaviour
+public class HandlePlayerShadow : MonoBehaviour
 {
-    public SpriteRenderer _shadowSpriteRenderer;
+    private SpriteRenderer _shadowSpriteRenderer;
 
     private void Awake()
     {
-        //_shadowSpriteRenderer = GetComponent<SpriteRenderer>();
+        _shadowSpriteRenderer = GetComponent<SpriteRenderer>();
 
     }
 
     private void OnEnable()
     {
-        CheckGrounded.OnGrounded += CheckGrounded_OnGrounded;
+        CheckPlayerGrounded.OnGrounded += CheckGrounded_OnGrounded;
     }
 
     private void OnDisable()
     {
-        CheckGrounded.OnGrounded -= CheckGrounded_OnGrounded;
+        CheckPlayerGrounded.OnGrounded -= CheckGrounded_OnGrounded;
 
     }
 
     private void CheckGrounded_OnGrounded(bool grounded)
     {
-        print($"{gameObject.name} is grounded: {grounded}");
+        //print($"{gameObject.name} is grounded: {grounded}");
         if (grounded)
         {
             SetTransparency(0.2f);

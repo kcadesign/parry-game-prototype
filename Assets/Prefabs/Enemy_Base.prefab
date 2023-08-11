@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 7312862635284531580}
   - component: {fileID: 1318550729453077939}
   - component: {fileID: 149938076767217192}
-  - component: {fileID: 7354345851067911784}
   m_Layer: 0
   m_Name: Body
   m_TagString: Enemy
@@ -92,22 +91,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53c83f9871f536445ad3f541e3635e38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &7354345851067911784
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 356470923549015120}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d5e110f959e93943a70ee08495c3cf4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  raycastDistance: 0.6
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 128
 --- !u!1 &510685736195808007
 GameObject:
   m_ObjectHideFlags: 0
@@ -413,7 +396,7 @@ GameObject:
   - component: {fileID: 5766289236949534529}
   - component: {fileID: 1095461650909332885}
   - component: {fileID: 6136258636924724209}
-  - component: {fileID: 7076692017910498738}
+  - component: {fileID: 748093654036407081}
   m_Layer: 3
   m_Name: Shadow
   m_TagString: Enemy
@@ -505,7 +488,7 @@ MonoBehaviour:
   ConstrainXRotation: 0
   ConstrainYRotation: 0
   ConstrainZRotation: 0
---- !u!114 &7076692017910498738
+--- !u!114 &748093654036407081
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -514,7 +497,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1427366281849500424}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 23f07e50ba1afaa46b1c23a84486427a, type: 3}
+  m_Script: {fileID: 11500000, guid: 22f611873b5d23049902952b8789e837, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1792582295900474637
@@ -951,6 +934,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4965216006796813274}
   - component: {fileID: 2707078571820849382}
+  - component: {fileID: 779344666430308512}
   m_Layer: 0
   m_Name: Collider
   m_TagString: Enemy
@@ -1022,6 +1006,22 @@ PolygonCollider2D:
       - {x: -0.0013338923, y: -0.5017444}
       - {x: 0.4999932, y: -0.001329422}
   m_UseDelaunayMesh: 0
+--- !u!114 &779344666430308512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7122244835396543621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c99ba319f8187a4ca855739c6343833, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  raycastDistance: 0.6
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!1 &7163741700348250463
 GameObject:
   m_ObjectHideFlags: 0

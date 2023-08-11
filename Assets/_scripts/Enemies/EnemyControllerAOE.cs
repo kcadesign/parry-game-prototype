@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyControllerAOE : MonoBehaviour
 {
     public delegate void EnemyStateChange(bool inSightRange, bool inAttackRange);
-    public static event EnemyStateChange OnEnemyStateChange; 
+    public event EnemyStateChange OnEnemyStateChange; 
 
     [Header("Layer Mask")]
     public LayerMask TargetLayer;
