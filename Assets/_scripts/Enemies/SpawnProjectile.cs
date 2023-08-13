@@ -5,25 +5,25 @@ using UnityEngine;
 public class SpawnProjectile : MonoBehaviour
 {
     public GameObject Projectile;
+    public Transform SpawnPointTransform;
+    private Vector2 SpawnPointPosition;
 
     [SerializeField] private float _spawnDelay;
     [SerializeField] private float _spawnRate;
 
-    // Start is called before the first frame update
+    private void Awake()
+    {
+        SpawnPointPosition = SpawnPointTransform.position;
+    }
+
     void Start()
     {
         InvokeRepeating(nameof(InstantiateProjectile), _spawnDelay, _spawnRate);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void InstantiateProjectile()
     {
-        Instantiate(Projectile, transform.position, transform.rotation, transform);
+        Instantiate(Projectile, SpawnPointPosition, transform.rotation, transform);
 
     }
 }

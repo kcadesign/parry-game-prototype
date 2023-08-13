@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Transform_to_projectile_type
+  m_Name: Base_to_projectile_type
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
