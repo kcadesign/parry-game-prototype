@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyControllerAOE : MonoBehaviour
+public class EnemyControllerBase : MonoBehaviour
 {
     public delegate void EnemyStateChange(bool inSightRange, bool inAttackRange);
     public event EnemyStateChange OnEnemyStateChange; 
