@@ -36,18 +36,21 @@ public class HandleEnemyAnimation : MonoBehaviour
 
     void Update()
     {
+        // No target - Idle animation
         if (!_targetInSightRange && !_targetInAttackRange) 
         {
             _enemyStateAnimator.SetBool("Idle", true);
             _enemyStateAnimator.SetBool("Transform", false);
             _enemyStateAnimator.SetBool("Attack", false);
-        } 
+        }
+        // Target aquired but cant attack - Transform animation
         else if (_targetInSightRange && !_targetInAttackRange)
         {
             _enemyStateAnimator.SetBool("Idle", false);
             _enemyStateAnimator.SetBool("Transform", true);
             _enemyStateAnimator.SetBool("Attack", false);
         }
+        // Target in attack range - Attack animation
         else if (_targetInSightRange && _targetInAttackRange)
         {
             _enemyStateAnimator.SetBool("Idle", false);
