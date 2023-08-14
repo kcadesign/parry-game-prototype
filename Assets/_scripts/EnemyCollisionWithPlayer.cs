@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HandleCollisionWithPlayer : MonoBehaviour
+public class EnemyCollisionWithPlayer : MonoBehaviour
 {
     //private PhysicsMaterial2D _bouncyMaterial;
     //public PhysicsMaterial2D _defaultMaterial;
