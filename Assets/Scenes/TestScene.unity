@@ -4786,7 +4786,7 @@ Transform:
   m_GameObject: {fileID: 1551723022}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.82, y: -5.23, z: 0}
+  m_LocalPosition: {x: 1.82, y: -5.42, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4807,9 +4807,9 @@ MonoBehaviour:
   m_Spline:
     m_IsOpenEnded: 0
     m_ControlPoints:
-    - position: {x: -1.7583804, y: -4.0335226, z: 0}
-      leftTangent: {x: 0.53597355, y: -0.0004825592, z: 0}
-      rightTangent: {x: -0.32381773, y: 0.00029182434, z: 0}
+    - position: {x: -2.1085238, y: -6.13438, z: 0}
+      leftTangent: {x: 1.8610117, y: 0.05046749, z: 0}
+      rightTangent: {x: -0.90218925, y: -0.02446556, z: 0}
       mode: 1
       height: 1
       spriteIndex: 0
@@ -5015,9 +5015,9 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
-    - position: {x: 30.400335, y: -4.6061735, z: 0}
-      leftTangent: {x: 6.3657093, y: 1.3358545, z: 0}
-      rightTangent: {x: -0.5439148, y: -0.00042247772, z: 0}
+    - position: {x: 30.356567, y: -6.1818156, z: 0}
+      leftTangent: {x: 6.3657074, y: 1.3358555, z: 0}
+      rightTangent: {x: -0.5439167, y: -0.00042152405, z: 0}
       mode: 2
       height: 1
       spriteIndex: 0
