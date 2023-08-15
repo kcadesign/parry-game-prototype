@@ -8,7 +8,6 @@ public class BouncePadCollisionWithPlayer : MonoBehaviour
     public CircleCollider2D DefaultCollider;
 
     private bool _isParrying;
-    //[SerializeField] private float _damageForce = 5;
 
     private void Awake()
     {
@@ -37,16 +36,15 @@ public class BouncePadCollisionWithPlayer : MonoBehaviour
 
     void FixedUpdate()
     {
-        HandleCollision();
+        HandlePlayerInteraction();
     }
 
-    private void HandleCollision()
+    private void HandlePlayerInteraction()
     {
         if (!_isParrying)
         {
             DefaultCollider.enabled = true;
             BouncyCollider.enabled = false;
-
         }
         else
         {
