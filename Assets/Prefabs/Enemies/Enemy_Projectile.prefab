@@ -60,6 +60,14 @@ PrefabInstance:
       propertyPath: AttackRange
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 2438401792639508263, guid: 715772b3e9fa50342b2c3cbb6c67e910, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.02185787
+      objectReference: {fileID: 0}
+    - target: {fileID: 3128982658590945412, guid: 715772b3e9fa50342b2c3cbb6c67e910, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.02185787
+      objectReference: {fileID: 0}
     - target: {fileID: 3387896665610157354, guid: 715772b3e9fa50342b2c3cbb6c67e910, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -72,6 +80,10 @@ PrefabInstance:
       propertyPath: SpawnPointTransform
       value: 
       objectReference: {fileID: 5687739439628117225}
+    - target: {fileID: 6136258636924724209, guid: 715772b3e9fa50342b2c3cbb6c67e910, type: 3}
+      propertyPath: UseLerping
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7312862635284531580, guid: 715772b3e9fa50342b2c3cbb6c67e910, type: 3}
       propertyPath: m_Controller
       value: 
@@ -79,6 +91,18 @@ PrefabInstance:
     - target: {fileID: 7976323921639655483, guid: 715772b3e9fa50342b2c3cbb6c67e910, type: 3}
       propertyPath: m_Name
       value: Enemy_Projectile
+      objectReference: {fileID: 0}
+    - target: {fileID: 7976323921639655483, guid: 715772b3e9fa50342b2c3cbb6c67e910, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8189051595209934430, guid: 715772b3e9fa50342b2c3cbb6c67e910, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.02185787
+      objectReference: {fileID: 0}
+    - target: {fileID: 8189051595209934430, guid: 715772b3e9fa50342b2c3cbb6c67e910, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8920459025456609424, guid: 715772b3e9fa50342b2c3cbb6c67e910, type: 3}

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FollowObject : MonoBehaviour
+public class FriendFollowPlayer : MonoBehaviour
 {
     [Header("Position Parameters")]
     public GameObject ObjectToFollow;
@@ -13,8 +13,13 @@ public class FollowObject : MonoBehaviour
     public bool ConstrainYRotation = false;
     public bool ConstrainZRotation = false;
 
+    [Header("Lerping")]
+    public bool UseLerping = true; // Flag to enable lerping
+    public float LerpSpeed = 5f;    // Lerping speed
 
-    void Update()
+    private Vector3 targetPosition;
+
+    void FixedUpdate()
     {
         SetPosition();
         SetRotationConstraint();
@@ -22,8 +27,17 @@ public class FollowObject : MonoBehaviour
 
     private void SetPosition()
     {
-        // Directly set the position without lerping
-        transform.position = ObjectToFollow.transform.position + _offset;
+        if (UseLerping)
+        {
+            // Lerp towards the target position
+            targetPosition = ObjectToFollow.transform.position + _offset;
+            transform.position = Vector3.Lerp(transform.position, targetPosition, LerpSpeed * Time.fixedDeltaTime);
+        }
+        else
+        {
+            // Directly set the position without lerping
+            transform.position = ObjectToFollow.transform.position + _offset;
+        }
     }
 
     private void SetRotationConstraint()

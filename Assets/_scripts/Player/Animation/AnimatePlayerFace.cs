@@ -14,7 +14,7 @@ public class AnimatePlayerFace : MonoBehaviour
         _faceAnimator = GetComponent<Animator>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
         float velocityX = _playerRigidbody.velocity.x;
 

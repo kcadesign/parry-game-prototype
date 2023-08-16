@@ -39,6 +39,7 @@ public class PlayerMove : MonoBehaviour
 
         PlayerBlock.OnBlock += PlayerBlock_OnBlock;
     }
+
     void FixedUpdate()
     {
         HandleHorizontalMovement();

@@ -399,11 +399,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71005d1a2cfbe01489bbf182f68021d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ObjectToFollow: {fileID: 6715703871435085181}
+  ObjectToFollow: {fileID: 8479203604809838673}
   _offset: {x: 0, y: 0, z: 0}
-  ConstrainXRotation: 0
-  ConstrainYRotation: 0
+  ConstrainXRotation: 1
+  ConstrainYRotation: 1
   ConstrainZRotation: 1
+  UseLerping: 0
+  LerpSpeed: 5
 --- !u!1 &6235831042135693138
 GameObject:
   m_ObjectHideFlags: 0
@@ -591,6 +593,8 @@ MonoBehaviour:
   ConstrainXRotation: 0
   ConstrainYRotation: 0
   ConstrainZRotation: 1
+  UseLerping: 0
+  LerpSpeed: 5
 --- !u!114 &3377657581028320100
 MonoBehaviour:
   m_ObjectHideFlags: 0
