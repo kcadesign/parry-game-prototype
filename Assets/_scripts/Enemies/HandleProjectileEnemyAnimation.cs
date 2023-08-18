@@ -2,33 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HandleEnemyAnimation : MonoBehaviour
+public class HandleProjectileEnemyAnimation : MonoBehaviour
 {
     private Animator _enemyStateAnimator;
 
-    private EnemyControllerBase _enemyController;
+    private ProjectileEnemyController _enemyController;
 
     private bool _targetInSightRange;
     private bool _targetInAttackRange;
 
     private void Awake()
     {        
-        _enemyController = GetComponent<EnemyControllerBase>();
-
         _enemyStateAnimator = GetComponent<Animator>();
+
+        _enemyController = GetComponent<ProjectileEnemyController>();
     }
 
     private void OnEnable()
     {
-        _enemyController.OnEnemyStateChange += EnemyControllerAOE_OnEnemyStateChange;
+        _enemyController.OnEnemyStateChange += _enemyController_OnEnemyStateChange;
     }
 
     private void OnDisable()
     {
-        _enemyController.OnEnemyStateChange -= EnemyControllerAOE_OnEnemyStateChange;
+        _enemyController.OnEnemyStateChange -= _enemyController_OnEnemyStateChange;
     }
 
-    private void EnemyControllerAOE_OnEnemyStateChange(bool inSightRange, bool inAttackRange)
+    private void _enemyController_OnEnemyStateChange(bool inSightRange, bool inAttackRange)
     {
         Debug.Log($"Player is in sight range: {inSightRange}");
         Debug.Log($"Player is in attack range: {inAttackRange}");

@@ -824,6 +824,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BodySpriteRenderer: {fileID: 1174499328987127420}
+  ParryColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &4242945545593811527
 MonoBehaviour:
   m_ObjectHideFlags: 0

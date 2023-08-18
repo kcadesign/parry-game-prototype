@@ -11,7 +11,7 @@ public class PlayerParry : MonoBehaviour
     public static event ParryActive OnParryActive;
 
     public SpriteRenderer BodySpriteRenderer;
-    private Color _originalColor;
+    public Color ParryColor;
 
     private bool _parryActive = false;
 
@@ -19,7 +19,6 @@ public class PlayerParry : MonoBehaviour
     {
         playerControls = new PlayerControls();
 
-        _originalColor = BodySpriteRenderer.color;
     }
 
     private void OnEnable()
@@ -32,13 +31,6 @@ public class PlayerParry : MonoBehaviour
         PlayerBlock.OnBlock += PlayerBlock_OnBlock;
     }
 
-    private void PlayerBlock_OnBlock(bool isBlocking)
-    {
-        //BodySpriteRenderer.color = _originalColor;
-            _parryActive = false;
-            OnParryActive?.Invoke(_parryActive);
-            print("Parry button released");
-    }
 
     private void OnDisable()
     {
@@ -47,31 +39,29 @@ public class PlayerParry : MonoBehaviour
         playerControls.Gameplay.Parry.performed -= Parry_performed;
         playerControls.Gameplay.Parry.canceled -= Parry_canceled;
 
+        PlayerBlock.OnBlock -= PlayerBlock_OnBlock;
     }
 
     private void Parry_performed(InputAction.CallbackContext value)
     {
-        print("Parry button pressed");
-        BodySpriteRenderer.color = Color.white;
+        //print("Parry button pressed");
+        BodySpriteRenderer.color = ParryColor;
         _parryActive = true;
         OnParryActive?.Invoke(_parryActive);
     }
 
     private void Parry_canceled(InputAction.CallbackContext value)
     {
+        //print("Parry button released");
+        _parryActive = false;
+        OnParryActive?.Invoke(_parryActive);
+    }
+    private void PlayerBlock_OnBlock(bool isBlocking)
+    {
+        //BodySpriteRenderer.color = _originalColor;
         _parryActive = false;
         OnParryActive?.Invoke(_parryActive);
         print("Parry button released");
-    }
-
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -80,7 +70,7 @@ public class PlayerParry : MonoBehaviour
 
         if (_parryActive)
         {
-            if (collision.gameObject.CompareTag("Enemy"))                
+            if (collision.gameObject.CompareTag("Enemy"))
             {
                 // Will need to refactor for health points
                 Destroy(collision.gameObject.transform.parent.gameObject);

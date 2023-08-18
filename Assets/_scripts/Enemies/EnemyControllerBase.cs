@@ -13,13 +13,13 @@ public class EnemyControllerBase : MonoBehaviour
     [Header("Interaction Parameters")]
     public Transform SightCentre;
     public float SightRange;
-    private bool _targetInSightRange = false;
+    protected bool _targetInSightRange = false;
 
     public Transform AttackCentre;
     public float AttackRange;
-    private bool _targetInAttackRange = false;
+    protected bool _targetInAttackRange = false;
 
-    private enum _enemyState
+    protected enum _enemyState
     {
         Idle,
         Transform,
@@ -27,20 +27,20 @@ public class EnemyControllerBase : MonoBehaviour
         Attack
     }
 
-    private _enemyState _currentState;
+    protected _enemyState _currentState;
 
-    void Start()
+    protected void Start()
     {
         ChangeState(_enemyState.Idle);
     }
 
-    void Update()
+    protected void Update()
     {
         HandleState();
         //Debug.Log(_currentState);
     }
 
-    private void ChangeState(_enemyState newState)
+    protected void ChangeState(_enemyState newState)
     {
         _currentState = newState;
     }
@@ -79,22 +79,22 @@ public class EnemyControllerBase : MonoBehaviour
         }
     }
 
-    private void PerformIdleActions()
+    protected virtual void PerformIdleActions()
     {
         
     }
 
-    private void PerformTransformActions()
+    protected virtual void PerformTransformActions()
     {
 
     }
 
-    private void PerformTransformIdleActions()
+    protected virtual void PerformTransformIdleActions()
     {
 
     }
 
-    private void PerformAttackActions()
+    protected virtual void PerformAttackActions()
     {
 
     }
