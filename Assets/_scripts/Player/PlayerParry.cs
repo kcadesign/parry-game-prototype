@@ -28,6 +28,16 @@ public class PlayerParry : MonoBehaviour
 
         playerControls.Gameplay.Parry.performed += Parry_performed;
         playerControls.Gameplay.Parry.canceled += Parry_canceled;
+
+        PlayerBlock.OnBlock += PlayerBlock_OnBlock;
+    }
+
+    private void PlayerBlock_OnBlock(bool isBlocking)
+    {
+        //BodySpriteRenderer.color = _originalColor;
+            _parryActive = false;
+            OnParryActive?.Invoke(_parryActive);
+            print("Parry button released");
     }
 
     private void OnDisable()
@@ -41,7 +51,7 @@ public class PlayerParry : MonoBehaviour
 
     private void Parry_performed(InputAction.CallbackContext value)
     {
-        //print("Parry button pressed");
+        print("Parry button pressed");
         BodySpriteRenderer.color = Color.white;
         _parryActive = true;
         OnParryActive?.Invoke(_parryActive);
@@ -49,11 +59,9 @@ public class PlayerParry : MonoBehaviour
 
     private void Parry_canceled(InputAction.CallbackContext value)
     {
-        //print("Parry window closed");
-        //BodySpriteRenderer.color = _originalColor;
         _parryActive = false;
         OnParryActive?.Invoke(_parryActive);
-
+        print("Parry button released");
     }
 
     void Start()

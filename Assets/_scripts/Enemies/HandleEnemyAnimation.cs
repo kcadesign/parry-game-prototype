@@ -30,6 +30,9 @@ public class HandleEnemyAnimation : MonoBehaviour
 
     private void EnemyControllerAOE_OnEnemyStateChange(bool inSightRange, bool inAttackRange)
     {
+        Debug.Log($"Player is in sight range: {inSightRange}");
+        Debug.Log($"Player is in attack range: {inAttackRange}");
+
         _targetInSightRange = inSightRange;
         _targetInAttackRange = inAttackRange;
     }
