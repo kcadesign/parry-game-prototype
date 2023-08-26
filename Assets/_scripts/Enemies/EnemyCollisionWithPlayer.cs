@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class EnemyCollisionWithPlayer : MonoBehaviour
 {
+    public delegate void DamagePlayer(int damageAmount);
+    public static event DamagePlayer OnDamagePlayer;
+
     //private PhysicsMaterial2D _bouncyMaterial;
     //public PhysicsMaterial2D _defaultMaterial;
 
     private bool _isParrying;
+    [SerializeField] private int _damageAmount = 5;
     [SerializeField] private float _damageForce = 5;
+
 
     private void Awake()
     {
@@ -30,8 +35,6 @@ public class EnemyCollisionWithPlayer : MonoBehaviour
         _isParrying = parryPressed;
     }
 
-
-
     void Start()
     {
         
@@ -46,6 +49,8 @@ public class EnemyCollisionWithPlayer : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Player") && !_isParrying)
         {
+            // Damage value is set here and sent to be subtracted from player health
+            OnDamagePlayer?.Invoke(_damageAmount);
             collision.rigidbody.AddForce(Vector2.left * _damageForce, ForceMode2D.Impulse);
 
         }

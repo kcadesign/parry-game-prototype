@@ -61,7 +61,7 @@ public class PlayerParry : MonoBehaviour
         //BodySpriteRenderer.color = _originalColor;
         _parryActive = false;
         OnParryActive?.Invoke(_parryActive);
-        print("Parry button released");
+        //print("Parry button released");
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
