@@ -18,13 +18,23 @@ public class HandlePlayerCollisions : MonoBehaviour
     private bool _isBlocking = false;
 
     private float _originalMass;
-    [SerializeField] private float _hitStunMass = 10;
+    //[SerializeField] private float _hitStunMass = 10;
+
+    private float _originalLinearDrag;
+    //[SerializeField] private float _hitStunLinearDrag = 5;
+
+    private float _originalGravity;
+
+    [SerializeField] private float _hitStunMultiplier = 2;
+
     [SerializeField] private float _hitStunDuration = 3;
 
     private void Awake()
     {
         _rigidBody = GetComponent<Rigidbody2D>();
         _originalMass = _rigidBody.mass;
+        _originalLinearDrag = _rigidBody.drag;
+        _originalGravity = _rigidBody.gravityScale;
     }
 
     private void OnEnable()
@@ -39,15 +49,11 @@ public class HandlePlayerCollisions : MonoBehaviour
         PlayerBlock.OnBlock -= PlayerBlock_OnBlock;
     }
 
-    private void Update()
-    {
-        print(_rigidBody.mass);
-    }
-
     private void PlayerParry_OnParryActive(bool parryPressed)
     {
         _isParrying = parryPressed;
     }
+
     private void PlayerBlock_OnBlock(bool isBlocking)
     {
         _isBlocking = isBlocking;
@@ -64,8 +70,14 @@ public class HandlePlayerCollisions : MonoBehaviour
 
     private IEnumerator SlowMovement()
     {
-        _rigidBody.mass = _hitStunMass;
+        _rigidBody.mass *= _hitStunMultiplier;
+        _rigidBody.drag *= _hitStunMultiplier;
+        _rigidBody.gravityScale *= _hitStunMultiplier;
+
         yield return new WaitForSeconds(_hitStunDuration);
+
         _rigidBody.mass = _originalMass;
+        _rigidBody.drag = _originalLinearDrag;
+        _rigidBody.gravityScale = _originalGravity;
     }
 }
