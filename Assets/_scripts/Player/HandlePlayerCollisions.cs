@@ -12,5 +12,60 @@ public class HandlePlayerCollisions : MonoBehaviour
     // - no parry with bounce pad
     // - parry with bounce pad
 
+    private Rigidbody2D _rigidBody;
 
+    private bool _isParrying = false;
+    private bool _isBlocking = false;
+
+    private float _originalMass;
+    [SerializeField] private float _hitStunMass = 10;
+    [SerializeField] private float _hitStunDuration = 3;
+
+    private void Awake()
+    {
+        _rigidBody = GetComponent<Rigidbody2D>();
+        _originalMass = _rigidBody.mass;
+    }
+
+    private void OnEnable()
+    {
+        PlayerParry.OnParryActive += PlayerParry_OnParryActive;
+        PlayerBlock.OnBlock += PlayerBlock_OnBlock;
+    }
+
+    private void OnDisable()
+    {
+        PlayerParry.OnParryActive -= PlayerParry_OnParryActive;
+        PlayerBlock.OnBlock -= PlayerBlock_OnBlock;
+    }
+
+    private void Update()
+    {
+        print(_rigidBody.mass);
+    }
+
+    private void PlayerParry_OnParryActive(bool parryPressed)
+    {
+        _isParrying = parryPressed;
+    }
+    private void PlayerBlock_OnBlock(bool isBlocking)
+    {
+        _isBlocking = isBlocking;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.CompareTag("Enemy") && !_isParrying && !_isBlocking)
+        {
+            print("OUCH!!");
+            StartCoroutine(SlowMovement());
+        }
+    }
+
+    private IEnumerator SlowMovement()
+    {
+        _rigidBody.mass = _hitStunMass;
+        yield return new WaitForSeconds(_hitStunDuration);
+        _rigidBody.mass = _originalMass;
+    }
 }

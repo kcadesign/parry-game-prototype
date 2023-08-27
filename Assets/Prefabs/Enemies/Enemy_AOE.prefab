@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6401076756250161671}
   - component: {fileID: 8066322717319864389}
   - component: {fileID: 4624318348785348545}
+  - component: {fileID: 8056391855080528950}
   m_Layer: 0
   m_Name: AttackCircle
   m_TagString: Untagged
@@ -121,6 +122,20 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &8056391855080528950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 331857377044040761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 697fe9d43113de544a6cf8e5d698d57c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _damageAmount: 10
+  _damageForce: 30
 --- !u!1 &6923480787049829576
 GameObject:
   m_ObjectHideFlags: 0
@@ -271,6 +286,10 @@ PrefabInstance:
     - target: {fileID: 3951709903884019464, guid: 715772b3e9fa50342b2c3cbb6c67e910, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5906391850735681325, guid: 715772b3e9fa50342b2c3cbb6c67e910, type: 3}
+      propertyPath: _damageForce
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 6136258636924724209, guid: 715772b3e9fa50342b2c3cbb6c67e910, type: 3}
       propertyPath: UseLerping
