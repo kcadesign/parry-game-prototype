@@ -10,15 +10,11 @@ public class PlayerParry : MonoBehaviour
     public delegate void ParryActive(bool parryPressed);
     public static event ParryActive OnParryActive;
 
-    public SpriteRenderer BodySpriteRenderer;
-    public Color ParryColor;
-
     private bool _parryActive = false;
 
     private void Awake()
     {
         playerControls = new PlayerControls();
-
     }
 
     private void OnEnable()
@@ -45,7 +41,6 @@ public class PlayerParry : MonoBehaviour
     private void Parry_performed(InputAction.CallbackContext value)
     {
         //print("Parry button pressed");
-        BodySpriteRenderer.color = ParryColor;
         _parryActive = true;
         OnParryActive?.Invoke(_parryActive);
     }

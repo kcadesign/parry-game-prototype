@@ -6,6 +6,9 @@ public class AnimatePlayerParry : MonoBehaviour
 {
     private Animator _playerAnimator;
 
+    public SpriteRenderer BodySpriteRenderer;
+    public Color ParryColor;
+
     private void OnEnable()
     {
         PlayerParry.OnParryActive += PlayerParry_OnParryActive;
@@ -25,6 +28,8 @@ public class AnimatePlayerParry : MonoBehaviour
     {
         //Debug.Log($"Parry pressed: {parryPressed}");
         _playerAnimator.SetBool("Parry", parryPressed);
+
+        BodySpriteRenderer.color = ParryColor;
     }
 
 }

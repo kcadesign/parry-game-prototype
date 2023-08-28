@@ -10,9 +10,6 @@ public class PlayerBlock : MonoBehaviour
 
     protected PlayerControls playerControls;
 
-    public SpriteRenderer spriteRenderer;
-    private Color _originalColor;
-    public Color BlockingColor;
 
     private bool _isBlocking;
 
@@ -22,7 +19,6 @@ public class PlayerBlock : MonoBehaviour
     {
         playerControls = new PlayerControls();
 
-        _originalColor = spriteRenderer.color;
     }
 
     private void OnEnable()
@@ -47,7 +43,6 @@ public class PlayerBlock : MonoBehaviour
         _isBlocking = true;
 
         //print("++Player is blocking");
-        spriteRenderer.color = BlockingColor;
 
         OnBlock?.Invoke(_isBlocking);
     }
@@ -57,7 +52,6 @@ public class PlayerBlock : MonoBehaviour
         _isBlocking = false;
 
         //print("Button released");
-        spriteRenderer.color = _originalColor;
 
         OnBlock?.Invoke(_isBlocking);
     }
