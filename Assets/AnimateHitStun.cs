@@ -2,15 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AnimatePlayerBlock : MonoBehaviour
+public class AnimateHitStun : MonoBehaviour
 {
     private Animator _playerAnimator;
 
     public SpriteRenderer SpriteRenderer;
 
     private Color _originalColor;
-    public Color BlockingColor;
-
+    public Color StunColor;
 
     private void Awake()
     {
@@ -21,23 +20,18 @@ public class AnimatePlayerBlock : MonoBehaviour
 
     private void OnEnable()
     {
-        PlayerBlock.OnBlock += PlayerBlock_OnBlock;
+        HandlePlayerCollisions.OnStunned += HandlePlayerCollisions_OnStunned;
     }
 
     private void OnDisable()
     {
-        PlayerBlock.OnBlock -= PlayerBlock_OnBlock;
+        HandlePlayerCollisions.OnStunned -= HandlePlayerCollisions_OnStunned;
     }
-
-    private void PlayerBlock_OnBlock(bool isBlocking)
+    private void HandlePlayerCollisions_OnStunned(bool stunned)
     {
-        //Debug.Log($"Block pressed: {isBlocking}");
-
-        _playerAnimator.SetBool("Block", isBlocking);
-
-        if (isBlocking)
+        if (stunned)
         {
-            SpriteRenderer.color = BlockingColor;
+            SpriteRenderer.color = StunColor;
         }
         else
         {

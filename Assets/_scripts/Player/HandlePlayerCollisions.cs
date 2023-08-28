@@ -12,10 +12,15 @@ public class HandlePlayerCollisions : MonoBehaviour
     // - no parry with bounce pad
     // - parry with bounce pad
 
+    public delegate void Stunned(bool stunned);
+    public static event Stunned OnStunned;
+
     private Rigidbody2D _rigidBody;
 
     private bool _isParrying = false;
     private bool _isBlocking = false;
+
+    private bool _playerStunned = false;
 
     private float _originalMass;
     //[SerializeField] private float _hitStunMass = 10;
@@ -61,20 +66,30 @@ public class HandlePlayerCollisions : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.CompareTag("Enemy") && !_isParrying && !_isBlocking)
+        if(collision.gameObject.CompareTag("Enemy") && !_isParrying && !_isBlocking && !_playerStunned)
         {
             print("OUCH!!");
-            StartCoroutine(SlowMovement());
+            StartCoroutine(StunActions());
+        }
+        else
+        {
+            return;
         }
     }
 
-    private IEnumerator SlowMovement()
+    private IEnumerator StunActions()
     {
+        _playerStunned = true;
+        OnStunned?.Invoke(_playerStunned);
+
         _rigidBody.mass *= _hitStunMultiplier;
         _rigidBody.drag *= _hitStunMultiplier;
         _rigidBody.gravityScale *= _hitStunMultiplier;
 
         yield return new WaitForSeconds(_hitStunDuration);
+
+        _playerStunned = false;
+        OnStunned?.Invoke(_playerStunned);
 
         _rigidBody.mass = _originalMass;
         _rigidBody.drag = _originalLinearDrag;

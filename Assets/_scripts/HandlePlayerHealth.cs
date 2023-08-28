@@ -36,7 +36,7 @@ public class HandlePlayerHealth : MonoBehaviour
     private void EnemyCollisionWithPlayer_OnDamagePlayer(int damageAmount)
     {
         PlayerHealth.Damage(damageAmount);
-        print($"Player health is: {PlayerHealth.GetHealth()}");
+        //print($"Player health is: {PlayerHealth.GetHealth()}");
     }
 
     private void PlayerParry_OnParryActive(bool parryPressed)

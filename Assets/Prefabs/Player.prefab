@@ -811,8 +811,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 229e4f8210a3c414d8983696e65535c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spriteRenderer: {fileID: 1174499328987127420}
-  BlockingColor: {r: 0.19223918, g: 0.6040155, b: 0.764151, a: 1}
 --- !u!114 &36215996473939614
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -825,8 +823,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe39bce75e43f5341aeff4594cfec336, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BodySpriteRenderer: {fileID: 1174499328987127420}
-  ParryColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &4242945545593811527
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1052,6 +1048,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f8824ba1f9d85d4793c9e48bb15486f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BodySpriteRenderer: {fileID: 1174499328987127420}
+  ParryColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &9145117336661421644
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1064,6 +1062,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 680840b0d1c215d428f8df76fd3e069e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 1174499328987127420}
+  BlockingColor: {r: 0, g: 0.61087227, b: 1, a: 1}
 --- !u!114 &1828075962067087173
 MonoBehaviour:
   m_ObjectHideFlags: 0
