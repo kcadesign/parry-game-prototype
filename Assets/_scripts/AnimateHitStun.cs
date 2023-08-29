@@ -8,14 +8,14 @@ public class AnimateHitStun : MonoBehaviour
 
     public SpriteRenderer SpriteRenderer;
 
-    private Color _originalColor;
-    public Color StunColor;
+    //private Color _originalColor;
+    //public Color StunColor;
 
     private void Awake()
     {
         _playerAnimator = GetComponent<Animator>();
 
-        _originalColor = SpriteRenderer.color;
+        //_originalColor = SpriteRenderer.color;
     }
 
     private void OnEnable()
@@ -29,6 +29,8 @@ public class AnimateHitStun : MonoBehaviour
     }
     private void HandlePlayerCollisions_OnStunned(bool stunned)
     {
+        _playerAnimator.SetBool("Stunned", stunned);
+        /*
         if (stunned)
         {
             SpriteRenderer.color = StunColor;
@@ -37,6 +39,7 @@ public class AnimateHitStun : MonoBehaviour
         {
             SpriteRenderer.color = _originalColor;
         }
+        */
     }
 
 }

@@ -700,6 +700,7 @@ GameObject:
   - component: {fileID: 7987222072584019903}
   - component: {fileID: 6140860106109771891}
   - component: {fileID: 7555413703909545340}
+  - component: {fileID: 4823260171903798048}
   m_Layer: 3
   m_Name: Collider
   m_TagString: Player
@@ -879,6 +880,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hitStunMultiplier: 4
   _hitStunDuration: 3
+--- !u!114 &4823260171903798048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6715703871435085181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af72374e06e3e1c4a947be9de0612ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _parryScript: {fileID: 36215996473939614}
+  _blockScript: {fileID: 8254977020391799762}
+  _jumpScript: {fileID: 4242945545593811527}
 --- !u!1 &7385957761161727684
 GameObject:
   m_ObjectHideFlags: 0
@@ -978,6 +994,7 @@ GameObject:
   - component: {fileID: 7657647775944686218}
   - component: {fileID: 9145117336661421644}
   - component: {fileID: 1828075962067087173}
+  - component: {fileID: 5925122361013271507}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -1049,7 +1066,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BodySpriteRenderer: {fileID: 1174499328987127420}
-  ParryColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &9145117336661421644
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1062,8 +1078,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 680840b0d1c215d428f8df76fd3e069e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spriteRenderer: {fileID: 1174499328987127420}
-  BlockingColor: {r: 0, g: 0.61087227, b: 1, a: 1}
+  SpriteRenderer: {fileID: 1174499328987127420}
 --- !u!114 &1828075962067087173
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1076,6 +1091,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f05d565020a6534782f98d1f4660c36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5925122361013271507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7496463149572796925}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b2020a931e43b14783721ec4d6f7939, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpriteRenderer: {fileID: 1174499328987127420}
 --- !u!1 &8322588062777987545
 GameObject:
   m_ObjectHideFlags: 0
@@ -1235,7 +1263,7 @@ SpriteRenderer:
   m_SortingLayer: 3
   m_SortingOrder: 4
   m_Sprite: {fileID: 21300000, guid: 85bd93e92d4468e479567e88e6af1a9c, type: 3}
-  m_Color: {r: 1, g: 0.60784316, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.6078432, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

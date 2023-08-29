@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class PlayerStateManager : MonoBehaviour
 {
-    private PlayerParry _parryScript;
-    private PlayerBlock _blockScript;
-    private PlayerJump _jumpScript;
+    public PlayerParry _parryScript;
+    public PlayerBlock _blockScript;
+    public PlayerJump _jumpScript;
 
     private void Awake()
     {
-        _parryScript = GetComponent<PlayerParry>();
-        _blockScript = GetComponent<PlayerBlock>();
-        _jumpScript = GetComponent<PlayerJump>();
+        
     }
 
     private void OnEnable()

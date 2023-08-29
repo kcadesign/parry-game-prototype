@@ -7,7 +7,16 @@ public class AnimatePlayerParry : MonoBehaviour
     private Animator _playerAnimator;
 
     public SpriteRenderer BodySpriteRenderer;
-    public Color ParryColor;
+
+    //private Color _originalColor;
+    //public Color ParryColor;
+
+    private void Awake()
+    {
+        _playerAnimator = GetComponent<Animator>();
+
+        //_originalColor = BodySpriteRenderer.color;
+    }
 
     private void OnEnable()
     {
@@ -19,17 +28,21 @@ public class AnimatePlayerParry : MonoBehaviour
         PlayerParry.OnParryActive -= PlayerParry_OnParryActive;
     }
 
-    private void Awake()
-    {
-        _playerAnimator = GetComponent<Animator>();
-    }
-
     private void PlayerParry_OnParryActive(bool parryPressed)
     {
         //Debug.Log($"Parry pressed: {parryPressed}");
-        _playerAnimator.SetBool("Parry", parryPressed);
 
-        BodySpriteRenderer.color = ParryColor;
+        _playerAnimator.SetBool("Parry", parryPressed);
+        /*
+        if (parryPressed)
+        {
+            BodySpriteRenderer.color = ParryColor;
+        }
+        else
+        {
+            BodySpriteRenderer.color = _originalColor;
+        }
+        */
     }
 
 }

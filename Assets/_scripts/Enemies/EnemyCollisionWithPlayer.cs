@@ -41,15 +41,15 @@ public class EnemyCollisionWithPlayer : MonoBehaviour
             // Determine the direction to apply force based on player's relative position to enemy
             float approachDirectionX = (playerCenterX - enemyCenterX);
 
-            print(approachDirectionX);
+            //print(approachDirectionX);
 
             if(approachDirectionX > 0)
             {
-                collision.rigidbody.AddForce(Vector2.right * _damageForce, ForceMode2D.Impulse);
+                collision.rigidbody.AddForce(new Vector2(1,1) * _damageForce, ForceMode2D.Impulse);
             }
             else if(approachDirectionX < 0)
             {
-                collision.rigidbody.AddForce(Vector2.left * _damageForce, ForceMode2D.Impulse);
+                collision.rigidbody.AddForce(new Vector2(-1, 1) * _damageForce, ForceMode2D.Impulse);
             }
         }
     }

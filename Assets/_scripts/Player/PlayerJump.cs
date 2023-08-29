@@ -39,6 +39,12 @@ public class PlayerJump : MonoBehaviour
         PlayerBlock.OnBlock -= PlayerBlock_OnBlock;
     }
 
+    private void Update()
+    {
+        //print(_canJump);
+        print(_jumpPower);
+    }
+
     private void PlayerBlock_OnBlock(bool isBlocking)
     {
         _canJump = isBlocking;
@@ -49,13 +55,18 @@ public class PlayerJump : MonoBehaviour
         return;
     }
 
+    // On button release jump is performed
     private void Jump_canceled(InputAction.CallbackContext value)
     {
         if (_canJump)
         {
             HandleJump();
         }
-        _canJump = false;
+        else
+        {
+            _canJump = false;
+
+        }
     }
 
     private void HandleJump()

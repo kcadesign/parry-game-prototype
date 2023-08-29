@@ -8,15 +8,14 @@ public class AnimatePlayerBlock : MonoBehaviour
 
     public SpriteRenderer SpriteRenderer;
 
-    private Color _originalColor;
-    public Color BlockingColor;
-
+    //private Color _originalColor;
+    //public Color BlockingColor;
 
     private void Awake()
     {
         _playerAnimator = GetComponent<Animator>();
 
-        _originalColor = SpriteRenderer.color;
+        //_originalColor = SpriteRenderer.color;
     }
 
     private void OnEnable()
@@ -34,7 +33,7 @@ public class AnimatePlayerBlock : MonoBehaviour
         //Debug.Log($"Block pressed: {isBlocking}");
 
         _playerAnimator.SetBool("Block", isBlocking);
-
+        /*
         if (isBlocking)
         {
             SpriteRenderer.color = BlockingColor;
@@ -43,6 +42,7 @@ public class AnimatePlayerBlock : MonoBehaviour
         {
             SpriteRenderer.color = _originalColor;
         }
+        */
     }
 
 }
