@@ -53,6 +53,7 @@ public class EnemyControllerBase : MonoBehaviour
         if (!_targetInSightRange && !_targetInAttackRange) ChangeState(_enemyState.Idle);
         else if (_targetInSightRange && !_targetInAttackRange) ChangeState(_enemyState.TransformIdle);
         else if (_targetInSightRange && _targetInAttackRange) ChangeState(_enemyState.Attack);
+        else ChangeState(_enemyState.Idle);
 
         switch (_currentState)
         {

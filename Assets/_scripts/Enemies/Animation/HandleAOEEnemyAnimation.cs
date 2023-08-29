@@ -60,5 +60,11 @@ public class HandleAOEEnemyAnimation : MonoBehaviour
             _enemyStateAnimator.SetBool("Transform", false);
             _enemyStateAnimator.SetBool("Attack", true);
         }
+        else
+        {
+            _enemyStateAnimator.SetBool("Idle", true);
+            _enemyStateAnimator.SetBool("Transform", false);
+            _enemyStateAnimator.SetBool("Attack", false);
+        }
     }
 }
