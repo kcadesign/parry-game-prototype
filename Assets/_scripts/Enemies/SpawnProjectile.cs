@@ -15,7 +15,7 @@ public class SpawnProjectile : MonoBehaviour
     {
         SpawnPointPosition = SpawnPointTransform.position;
     }
-
+    
     private void OnEnable()
     {
         InvokeRepeating(nameof(InstantiateProjectile), _spawnDelay, _spawnRate);
@@ -30,7 +30,7 @@ public class SpawnProjectile : MonoBehaviour
     {
 
     }
-
+    
     private void InstantiateProjectile()
     {
         Instantiate(Projectile, SpawnPointPosition, transform.rotation);

@@ -72,20 +72,16 @@ public class ProjectileController : MonoBehaviour
             _deflected = false;
             Destroy(gameObject);
         }
-    }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
         if (collision.gameObject.CompareTag("Enemy") && !_deflected)
         {
             return;
         }
-        else if(collision.gameObject.CompareTag("Enemy") && _deflected)
+        else if (collision.gameObject.CompareTag("Enemy") && _deflected)
         {
-
             Destroy(gameObject);
             Destroy(collision.transform.parent.gameObject);
-
         }
     }
+
 }
