@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AnimateHitStun : MonoBehaviour
+public class AnimatePlayerHitStun : MonoBehaviour
 {
     private Animator _playerAnimator;
 

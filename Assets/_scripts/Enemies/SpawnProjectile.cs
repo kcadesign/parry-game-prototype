@@ -18,19 +18,14 @@ public class SpawnProjectile : MonoBehaviour
     
     private void OnEnable()
     {
-        InvokeRepeating(nameof(InstantiateProjectile), _spawnDelay, _spawnRate);
+        Invoke(nameof(InstantiateProjectile),0);
     }
 
     private void OnDisable()
     {
         CancelInvoke(nameof(InstantiateProjectile));
     }
-
-    void Start()
-    {
-
-    }
-    
+        
     private void InstantiateProjectile()
     {
         Instantiate(Projectile, SpawnPointPosition, transform.rotation);
