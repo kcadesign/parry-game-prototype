@@ -33,16 +33,6 @@ public class AnimatePlayerParry : MonoBehaviour
         //Debug.Log($"Parry pressed: {parryPressed}");
 
         _playerAnimator.SetBool("Parry", parryPressed);
-        /*
-        if (parryPressed)
-        {
-            BodySpriteRenderer.color = ParryColor;
-        }
-        else
-        {
-            BodySpriteRenderer.color = _originalColor;
-        }
-        */
     }
 
 }
