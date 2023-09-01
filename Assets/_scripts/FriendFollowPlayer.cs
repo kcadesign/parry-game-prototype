@@ -6,7 +6,12 @@ public class FriendFollowPlayer : MonoBehaviour
 {
     [Header("Position Parameters")]
     public GameObject ObjectToFollow;
-    [SerializeField] private Vector3 _offset;
+    public Vector3 Offset;
+
+    [Header("Position Constraints")]
+    public bool ConstrainXPosition = false;
+    public bool ConstrainYPosition = false;
+    public bool ConstrainZPosition = false;
 
     [Header("Rotation Constraints")]
     public bool ConstrainXRotation = false;
@@ -30,13 +35,30 @@ public class FriendFollowPlayer : MonoBehaviour
         if (UseLerping)
         {
             // Lerp towards the target position
-            targetPosition = ObjectToFollow.transform.position + _offset;
+            targetPosition = ObjectToFollow.transform.position + Offset;
+
+            if (ConstrainXPosition)
+                targetPosition.x = transform.position.x;
+            if (ConstrainYPosition)
+                targetPosition.y = transform.position.y;
+            if (ConstrainZPosition)
+                targetPosition.z = transform.position.z;
+
             transform.position = Vector3.Lerp(transform.position, targetPosition, LerpSpeed * Time.fixedDeltaTime);
         }
         else
         {
             // Directly set the position without lerping
-            transform.position = ObjectToFollow.transform.position + _offset;
+            Vector3 newPosition = ObjectToFollow.transform.position + Offset;
+
+            if (ConstrainXPosition)
+                newPosition.x = transform.position.x;
+            if (ConstrainYPosition)
+                newPosition.y = transform.position.y;
+            if (ConstrainZPosition)
+                newPosition.z = transform.position.z;
+
+            transform.position = newPosition;
         }
     }
 

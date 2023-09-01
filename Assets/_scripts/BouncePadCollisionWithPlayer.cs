@@ -42,7 +42,6 @@ public class BouncePadCollisionWithPlayer : MonoBehaviour
     private void FixedUpdate()
     {
         HandlePlayerInteraction();
-        //print(_friendDeployed);
     }
 
     private void HandlePlayerInteraction()

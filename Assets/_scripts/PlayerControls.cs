@@ -271,6 +271,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""ActivateFriend"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cb4a2589-c931-4b0b-81ed-069423db3a19"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ActivateFriend"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }

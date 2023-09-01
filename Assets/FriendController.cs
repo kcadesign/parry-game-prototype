@@ -12,9 +12,8 @@ public class FriendController : MonoBehaviour
     public Transform PlayerTransform;
 
     public FriendFollowPlayer FollowScript;
-    private Vector3 _spawnPosition;
+    
     public Vector3 SpawnOffset;
-
 
     private bool _playerGrounded;
     private bool _friendDeployed = false;
@@ -34,7 +33,6 @@ public class FriendController : MonoBehaviour
         CheckPlayerGrounded.OnGrounded += CheckPlayerGrounded_OnGrounded;
     }
 
-
     private void OnDisable()
     {
         playerControls.Gameplay.Disable();
@@ -43,45 +41,49 @@ public class FriendController : MonoBehaviour
         playerControls.Gameplay.ActivateFriend.canceled -= ActivateFriend_canceled;
 
         CheckPlayerGrounded.OnGrounded -= CheckPlayerGrounded_OnGrounded;
-
     }
 
     private void ActivateFriend_performed(InputAction.CallbackContext value)
     {
-        // On button press, friend appears below the player
-        // If player is grounded friend will not appear below player
-        // If friend has been positioned, pressing the button again brings the friend back to the player
-        _spawnPosition = PlayerTransform.position + SpawnOffset;
+        Vector3 spawnPosition = PlayerTransform.position + SpawnOffset;
 
         if (!_playerGrounded && !_friendDeployed)
         {
-            FollowScript.enabled = false;
-            gameObject.transform.position = _spawnPosition;
+            FollowScript.Offset = new Vector3(0f, -2f, 0f);
+            FollowScript.UseLerping = false;
+            FollowScript.ConstrainYPosition = true;
+
+            gameObject.transform.position = spawnPosition;
             _friendDeployed = true;
 
             OnFriendDeployed?.Invoke(_friendDeployed);
-            print(_friendDeployed);
         }
-        /*
-        if (_friendDeployed)
+        else if (_friendDeployed)
         {
-            //FollowScript.enabled = true;
+            FollowScript.Offset = new Vector3(-1f, 0.2f, 0f);
+            FollowScript.UseLerping = true;
+            FollowScript.ConstrainXPosition = false;
+            FollowScript.ConstrainYPosition = false;
+            FollowScript.ConstrainZPosition = false;
+
             _friendDeployed = false;
 
             OnFriendDeployed?.Invoke(_friendDeployed);
-
         }
-        */
     }
 
     private void ActivateFriend_canceled(InputAction.CallbackContext value)
     {
-        // on button release do nothing
-        throw new System.NotImplementedException();
+        return;
     }
 
-    private void CheckPlayerGrounded_OnGrounded(bool grounded)
+    private void CheckPlayerGrounded_OnGrounded(bool grounded) => _playerGrounded = grounded;
+        
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        _playerGrounded = grounded;
+        FollowScript.UseLerping = false;
+        FollowScript.ConstrainXPosition = true;
+        FollowScript.ConstrainYPosition = true;
+        FollowScript.ConstrainZPosition = true;
     }
 }
