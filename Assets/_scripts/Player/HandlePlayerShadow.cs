@@ -9,7 +9,6 @@ public class HandlePlayerShadow : MonoBehaviour
     private void Awake()
     {
         _shadowSpriteRenderer = GetComponent<SpriteRenderer>();
-
     }
 
     private void OnEnable()
@@ -20,7 +19,6 @@ public class HandlePlayerShadow : MonoBehaviour
     private void OnDisable()
     {
         CheckPlayerGrounded.OnGrounded -= CheckGrounded_OnGrounded;
-
     }
 
     private void CheckGrounded_OnGrounded(bool grounded)
@@ -30,26 +28,12 @@ public class HandlePlayerShadow : MonoBehaviour
         {
             SetTransparency(0.2f);
             _shadowSpriteRenderer.enabled = true;
-
         }
         else if (!grounded)
         {
             SetTransparency(0f);
             _shadowSpriteRenderer.enabled = false;
-
         }
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     private void SetTransparency(float alphaValue)

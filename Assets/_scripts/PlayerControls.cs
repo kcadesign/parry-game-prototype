@@ -62,6 +62,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": ""Hold"",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ActivateFriend"",
+                    ""type"": ""Button"",
+                    ""id"": ""90f67c6b-0652-4f29-a98e-f5d71cf18b25"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -251,6 +260,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e4487b11-7dad-4906-9aa0-89f106be3947"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ActivateFriend"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -263,6 +283,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Gameplay_Block = m_Gameplay.FindAction("Block", throwIfNotFound: true);
         m_Gameplay_Parry = m_Gameplay.FindAction("Parry", throwIfNotFound: true);
         m_Gameplay_Jump = m_Gameplay.FindAction("Jump", throwIfNotFound: true);
+        m_Gameplay_ActivateFriend = m_Gameplay.FindAction("ActivateFriend", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -328,6 +349,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_Block;
     private readonly InputAction m_Gameplay_Parry;
     private readonly InputAction m_Gameplay_Jump;
+    private readonly InputAction m_Gameplay_ActivateFriend;
     public struct GameplayActions
     {
         private @PlayerControls m_Wrapper;
@@ -336,6 +358,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Block => m_Wrapper.m_Gameplay_Block;
         public InputAction @Parry => m_Wrapper.m_Gameplay_Parry;
         public InputAction @Jump => m_Wrapper.m_Gameplay_Jump;
+        public InputAction @ActivateFriend => m_Wrapper.m_Gameplay_ActivateFriend;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -357,6 +380,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Jump.started += instance.OnJump;
             @Jump.performed += instance.OnJump;
             @Jump.canceled += instance.OnJump;
+            @ActivateFriend.started += instance.OnActivateFriend;
+            @ActivateFriend.performed += instance.OnActivateFriend;
+            @ActivateFriend.canceled += instance.OnActivateFriend;
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
@@ -373,6 +399,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Jump.started -= instance.OnJump;
             @Jump.performed -= instance.OnJump;
             @Jump.canceled -= instance.OnJump;
+            @ActivateFriend.started -= instance.OnActivateFriend;
+            @ActivateFriend.performed -= instance.OnActivateFriend;
+            @ActivateFriend.canceled -= instance.OnActivateFriend;
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -396,5 +425,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnBlock(InputAction.CallbackContext context);
         void OnParry(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
+        void OnActivateFriend(InputAction.CallbackContext context);
     }
 }

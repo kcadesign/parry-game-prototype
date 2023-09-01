@@ -42,7 +42,7 @@ public class PlayerJump : MonoBehaviour
     private void Update()
     {
         //print(_canJump);
-        print(_jumpPower);
+        //print(_jumpPower);
     }
 
     private void PlayerBlock_OnBlock(bool isBlocking)
