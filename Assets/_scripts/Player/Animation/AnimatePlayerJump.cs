@@ -13,25 +13,19 @@ public class AnimatePlayerJump : MonoBehaviour
 
     private void OnEnable()
     {
-        PlayerJump.OnJump += PlayerJump_OnJump;
+        PlayerBlock.OnBlock += PlayerBlock_OnBlock;
     }
 
     private void OnDisable()
     {
-        PlayerJump.OnJump -= PlayerJump_OnJump;
+        PlayerBlock.OnBlock -= PlayerBlock_OnBlock;
     }
 
-    private void PlayerJump_OnJump(bool isJumping)
+    private void PlayerBlock_OnBlock(bool isBlocking)
     {
-        Debug.Log(isJumping);
-        if (isJumping)
+        if (isBlocking)
         {
-            _playerAnimator.SetBool("Jumping", true);
-        }
-        else
-        {
-            _playerAnimator.SetBool("Jumping", false);
+            _playerAnimator.SetTrigger("Jumping");
         }
     }
-
 }

@@ -6,9 +6,6 @@ using UnityEngine.InputSystem;
 
 public class PlayerJump : MonoBehaviour
 {
-    public delegate void Jump(bool isJumping);
-    public static event Jump OnJump;
-
     protected PlayerControls playerControls;
     private Rigidbody2D _rigidBody;
 
@@ -61,15 +58,15 @@ public class PlayerJump : MonoBehaviour
     // On button release jump is performed
     private void Jump_canceled(InputAction.CallbackContext value)
     {
-        bool jumping;
         if (_canJump)
         {
-            jumping = true;
             HandleJump();
-            OnJump?.Invoke(jumping);
+        }
+        else
+        {
+            _canJump = false;
 
         }
-        
     }
 
     private void HandleJump()
