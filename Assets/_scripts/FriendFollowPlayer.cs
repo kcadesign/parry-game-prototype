@@ -7,6 +7,8 @@ public class FriendFollowPlayer : MonoBehaviour
     [Header("Position Parameters")]
     public GameObject ObjectToFollow;
     public Vector3 Offset;
+    private bool _onPlayerLeft;
+    private bool _onPlayerRight;
 
     [Header("Position Constraints")]
     public bool ConstrainXPosition = false;
@@ -23,15 +25,54 @@ public class FriendFollowPlayer : MonoBehaviour
     public float LerpSpeed = 5f;    // Lerping speed
 
     private Vector3 targetPosition;
+    private bool _friendDeployed = false;
+
+    private void Awake()
+    {
+        SetRotationConstraint();
+    }
+
+    private void OnEnable()
+    {
+        FriendController.OnFriendDeployed += FriendController_OnFriendDeployed;
+        PlayerMove.OnPlayerMoveInput += PlayerMove_OnPlayerMoveInput;
+    }
+
+    private void OnDisable()
+    {
+        FriendController.OnFriendDeployed -= FriendController_OnFriendDeployed;
+        PlayerMove.OnPlayerMoveInput -= PlayerMove_OnPlayerMoveInput;
+    }
+    private void FriendController_OnFriendDeployed(bool friendDeployed)
+    {
+        _friendDeployed = friendDeployed;
+    }
+
+    private void PlayerMove_OnPlayerMoveInput(Vector2 moveVector)
+    {
+        // change this to be based on velocity
+        if(moveVector.x > 0)
+        {
+            _onPlayerLeft = true;
+            _onPlayerRight = false;
+
+        }
+        else if(moveVector.x < 0)
+        {
+            _onPlayerLeft = false;
+
+            _onPlayerRight = true;
+        }
+    }
 
     void FixedUpdate()
     {
         SetPosition();
-        SetRotationConstraint();
     }
 
     private void SetPosition()
     {
+        SetFollowSide();
         if (UseLerping)
         {
             // Lerp towards the target position
@@ -80,5 +121,24 @@ public class FriendFollowPlayer : MonoBehaviour
         }
 
         transform.rotation = targetRotation;
+    }
+
+    private void SetFollowSide()
+    {
+        if (_friendDeployed)
+        {
+            return;
+        }
+        else if (!_friendDeployed)
+        {
+            if (_onPlayerLeft)
+            {
+                Offset = new Vector3(-1, 0.2f, 0);
+            }
+            else if (_onPlayerRight)
+            {
+                Offset = new Vector3(1, 0.2f, 0);
+            }
+        }
     }
 }

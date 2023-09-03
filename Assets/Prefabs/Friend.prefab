@@ -569,7 +569,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.24265185
 --- !u!58 &3729226376875230242
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -604,7 +604,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.24417338
 --- !u!114 &7589148258558366250
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -618,7 +618,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ObjectToFollow: {fileID: 0}
-  _offset: {x: -0.8, y: 0.2, z: 0}
+  Offset: {x: -1, y: 0.2, z: 0}
+  ConstrainXPosition: 0
+  ConstrainYPosition: 0
+  ConstrainZPosition: 0
   ConstrainXRotation: 0
   ConstrainYRotation: 0
   ConstrainZRotation: 1
@@ -651,8 +654,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerTransform: {fileID: 0}
-  FollowScript: {fileID: 448106157946196709}
-  SpawnOffset: {x: 0, y: -1.5, z: 0}
+  FollowScript: {fileID: 7589148258558366250}
+  SpawnOffset: {x: 0, y: -1.2, z: 0}
 --- !u!1 &4619957181071745978
 GameObject:
   m_ObjectHideFlags: 0
@@ -1208,7 +1211,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5451710754139085690}
-  - component: {fileID: 448106157946196709}
   - component: {fileID: 7697154767245308772}
   m_Layer: 0
   m_Name: Friend
@@ -1233,25 +1235,6 @@ Transform:
   - {fileID: 339107082761455933}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &448106157946196709
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8136905446148232760}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b24b048b21c208847b7d8679d2306695, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObjectToFollow: {fileID: 0}
-  _offset: {x: -0.8, y: 0.2, z: 0}
-  ConstrainXRotation: 0
-  ConstrainYRotation: 0
-  ConstrainZRotation: 1
-  UseLerping: 1
-  LerpSpeed: 10
 --- !u!95 &7697154767245308772
 Animator:
   serializedVersion: 5

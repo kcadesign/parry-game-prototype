@@ -5,6 +5,9 @@ using UnityEngine.InputSystem;
 
 public class PlayerMove : MonoBehaviour
 {
+    public delegate void PlayerVelocityChange(Vector2 playerVelocity);
+    public static event PlayerVelocityChange OnPlayerMoveInput;
+
     protected PlayerControls playerControls;
     private Rigidbody2D _rigidBody;
 
@@ -43,6 +46,8 @@ public class PlayerMove : MonoBehaviour
     void FixedUpdate()
     {
         HandleHorizontalMovement();
+        OnPlayerMoveInput?.Invoke(_rigidBody.velocity);
+
     }
 
     private void Rolling_performed(InputAction.CallbackContext value)

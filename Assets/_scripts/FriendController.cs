@@ -55,8 +55,6 @@ public class FriendController : MonoBehaviour
 
             gameObject.transform.position = spawnPosition;
             _friendDeployed = true;
-
-            OnFriendDeployed?.Invoke(_friendDeployed);
         }
         else if (_friendDeployed)
         {
@@ -67,9 +65,8 @@ public class FriendController : MonoBehaviour
             FollowScript.ConstrainZPosition = false;
 
             _friendDeployed = false;
-
-            OnFriendDeployed?.Invoke(_friendDeployed);
         }
+        OnFriendDeployed?.Invoke(_friendDeployed);
     }
 
     private void ActivateFriend_canceled(InputAction.CallbackContext value)
