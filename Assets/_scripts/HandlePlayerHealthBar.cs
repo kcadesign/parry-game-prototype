@@ -9,6 +9,11 @@ public class HandlePlayerHealthBar : MonoBehaviour
     private float _currentFill;
     private float _maxFill = 100;
 
+    private void Awake()
+    {
+        _currentFill = _maxFill;
+    }
+
     private void OnEnable()
     {
         HandlePlayerHealth.OnHealthChange += HandlePlayerHealth_OnHealthChange;
@@ -20,7 +25,7 @@ public class HandlePlayerHealthBar : MonoBehaviour
 
     private void HandlePlayerHealth_OnHealthChange(int currentHealth)
     {
-        print($"Current health is: {currentHealth}");
+        //print($"Current health is: {currentHealth}");
 
         _currentFill = currentHealth;
         GetSetCurrentFill();
@@ -29,10 +34,8 @@ public class HandlePlayerHealthBar : MonoBehaviour
 
     private void GetSetCurrentFill()
     {
-
         float currentFillPercentage = _currentFill / _maxFill;
         BarValueMask.fillAmount = currentFillPercentage;        
-        print($"Current fill is: {currentFillPercentage}");
-
+        //print($"Current fill is: {currentFillPercentage}");
     }
 }
