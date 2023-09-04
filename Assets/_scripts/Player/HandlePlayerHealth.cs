@@ -36,6 +36,10 @@ public class HandlePlayerHealth : MonoBehaviour
     private void EnemyCollisionWithPlayer_OnDamagePlayer(int damageAmount)
     {
         PlayerHealth.Damage(damageAmount);
+
+        _currentHealth = PlayerHealth.GetHealth();
+        OnHealthChange?.Invoke(_currentHealth);
+
         //print($"Player health is: {PlayerHealth.GetHealth()}");
     }
 
@@ -44,8 +48,4 @@ public class HandlePlayerHealth : MonoBehaviour
         _isParrying = parryPressed;
     }
 
-    void Update()
-    {
-        _currentHealth = PlayerHealth.GetHealth();
-    }
 }
