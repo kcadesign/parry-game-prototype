@@ -58,19 +58,11 @@ public class PlayerParry : MonoBehaviour
         OnParryActive?.Invoke(_parryActive);
         //print("Parry button released");
     }
-
+    /*
     private void OnCollisionEnter2D(Collision2D collision)
     {
         //print(collision.gameObject.tag);
 
-        if (_parryActive)
-        {
-            if (collision.gameObject.CompareTag("Enemy"))
-            {
-                // Will need to refactor for health points
-                Destroy(collision.gameObject.transform.parent.gameObject);
-            }
-
-        }
-    }
+        
+    }*/
 }

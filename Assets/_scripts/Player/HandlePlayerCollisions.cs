@@ -15,6 +15,11 @@ public class HandlePlayerCollisions : MonoBehaviour
     public delegate void Stunned(bool stunned);
     public static event Stunned OnStunned;
 
+    public delegate void DamageEnemy(int damageAmount);
+    public static event DamageEnemy OnDamageEnemy;
+
+    [SerializeField] private int _damageAmount = 1;
+
     private Rigidbody2D _rigidBody;
 
     private bool _isParrying = false;
@@ -71,9 +76,9 @@ public class HandlePlayerCollisions : MonoBehaviour
             print("OUCH!!");
             StartCoroutine(StunActions());
         }
-        else
+        else if (collision.gameObject.CompareTag("Enemy") && _isParrying)
         {
-            return;
+            OnDamageEnemy?.Invoke(_damageAmount);
         }
     }
 

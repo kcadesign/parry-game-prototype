@@ -12,12 +12,14 @@ public class HandlePlayerHealthBar : MonoBehaviour
     private void Awake()
     {
         _currentFill = _maxFill;
+        GetSetCurrentFill();
     }
 
     private void OnEnable()
     {
         HandlePlayerHealth.OnHealthChange += HandlePlayerHealth_OnHealthChange;
     }
+
     private void OnDisable()
     {
         HandlePlayerHealth.OnHealthChange -= HandlePlayerHealth_OnHealthChange;
