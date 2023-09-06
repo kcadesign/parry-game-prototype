@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class HandleEnemyHealth : MonoBehaviour
 {
-    public HealthSystem EnemyHealth;
-
-    [SerializeField] private int _maxHealth = 2;
-    private int _currentHealth;
+    private HealthSystem _enemyHealth;
+    [SerializeField] private int maxHealth = 2;
+    private int currentHealth;
 
     private void Awake()
     {
-        EnemyHealth = new HealthSystem(_maxHealth);
-        _currentHealth = EnemyHealth.GetHealth();
+        _enemyHealth = new HealthSystem(maxHealth);
+        currentHealth = _enemyHealth.GetHealth();
     }
 
     private void OnEnable()
@@ -23,22 +22,25 @@ public class HandleEnemyHealth : MonoBehaviour
     private void OnDisable()
     {
         HandlePlayerCollisions.OnDamageEnemy -= HandlePlayerCollisions_OnDamageEnemy;
-
     }
 
-    private void HandlePlayerCollisions_OnDamageEnemy(int damageAmount)
+    // This code is causing all subscribed enemies to take the same damage at the same time
+    private void HandlePlayerCollisions_OnDamageEnemy(GameObject collisionObject, int damageAmount)
     {
-        EnemyHealth.Damage(damageAmount);
+        if(collisionObject == gameObject)
+        {
+            _enemyHealth.Damage(damageAmount);
 
-        _currentHealth = EnemyHealth.GetHealth();
-        Debug.Log($"Enemy health: {_currentHealth}");
+            currentHealth = _enemyHealth.GetHealth();
+            Debug.Log($"{gameObject.transform.parent.gameObject.transform.parent}'s health: {currentHealth}");
 
-        CheckHealth();
+            CheckHealth();
+        }
     }
 
     private void CheckHealth()
     {
-        if(_currentHealth <= 0)
+        if (currentHealth <= 0)
         {
             Destroy(gameObject.transform.parent.gameObject);
         }

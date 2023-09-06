@@ -12,7 +12,6 @@ public class EnemyCollisionWithPlayer : MonoBehaviour
     [SerializeField] private int _damageAmount = 5;
     [SerializeField] private float _damageForce = 5;
 
-
     private void OnEnable()
     {
         PlayerParry.OnParryActive += PlayerParry_OnParryActive;
@@ -35,22 +34,25 @@ public class EnemyCollisionWithPlayer : MonoBehaviour
             // Damage value is set here and sent to be subtracted from player health
             OnDamagePlayer?.Invoke(_damageAmount);
 
-            float enemyCenterX = transform.position.x;
-            float playerCenterX = collision.transform.position.x;
+            HandleKnockBack(collision);
+        }
+    }
 
-            // Determine the direction to apply force based on player's relative position to enemy
-            float approachDirectionX = (playerCenterX - enemyCenterX);
+    private void HandleKnockBack(Collision2D collision)
+    {
+        float enemyCenterX = transform.position.x;
+        float playerCenterX = collision.transform.position.x;
 
-            //print(approachDirectionX);
+        // Determine the direction to apply force based on player's relative position to enemy
+        float approachDirectionX = (playerCenterX - enemyCenterX);
 
-            if(approachDirectionX > 0)
-            {
-                collision.rigidbody.AddForce(new Vector2(1,1) * _damageForce, ForceMode2D.Impulse);
-            }
-            else if(approachDirectionX < 0)
-            {
-                collision.rigidbody.AddForce(new Vector2(-1, 1) * _damageForce, ForceMode2D.Impulse);
-            }
+        if (approachDirectionX > 0)
+        {
+            collision.rigidbody.AddForce(new Vector2(1, 1) * _damageForce, ForceMode2D.Impulse);
+        }
+        else if (approachDirectionX < 0)
+        {
+            collision.rigidbody.AddForce(new Vector2(-1, 1) * _damageForce, ForceMode2D.Impulse);
         }
     }
 }

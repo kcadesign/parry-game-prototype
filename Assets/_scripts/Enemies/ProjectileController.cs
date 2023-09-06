@@ -8,12 +8,9 @@ public class ProjectileController : MonoBehaviour
     public static event Deflect OnDeflect;
 
     private Rigidbody2D _rigidBody;
-
     private SpriteRenderer _projectileSpriteRenderer;
 
-
     [SerializeField] private float _speed = 5;
-
     private Vector2 _movementDirection = Vector2.left;
 
     private bool _deflected = false;
@@ -27,7 +24,6 @@ public class ProjectileController : MonoBehaviour
     private void OnDisable()
     {
         PlayerParry.OnParryActive -= PlayerParry_OnParryActive;
-
     }
 
     private void Awake()

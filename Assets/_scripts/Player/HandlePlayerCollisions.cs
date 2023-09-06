@@ -15,7 +15,7 @@ public class HandlePlayerCollisions : MonoBehaviour
     public delegate void Stunned(bool stunned);
     public static event Stunned OnStunned;
 
-    public delegate void DamageEnemy(int damageAmount);
+    public delegate void DamageEnemy(GameObject collisionObject, int damageAmount);
     public static event DamageEnemy OnDamageEnemy;
 
     [SerializeField] private int _damageAmount = 1;
@@ -78,7 +78,7 @@ public class HandlePlayerCollisions : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("Enemy") && _isParrying)
         {
-            OnDamageEnemy?.Invoke(_damageAmount);
+            OnDamageEnemy?.Invoke(collision.gameObject, _damageAmount);
         }
     }
 
