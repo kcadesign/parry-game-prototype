@@ -26,7 +26,6 @@ public class BouncePadCollisionWithPlayer : MonoBehaviour
     {
         PlayerParry.OnParryActive -= PlayerParry_OnParryActive;
         FriendController.OnFriendDeployed -= FriendController_OnFriendDeployed;
-
     }
 
     private void PlayerParry_OnParryActive(bool parryPressed)
@@ -64,6 +63,5 @@ public class BouncePadCollisionWithPlayer : MonoBehaviour
                 BouncyCollider.enabled = true;
             }
         }
-
     }
 }

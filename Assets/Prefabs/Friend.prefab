@@ -626,7 +626,7 @@ MonoBehaviour:
   ConstrainYRotation: 0
   ConstrainZRotation: 1
   UseLerping: 1
-  LerpSpeed: 10
+  LerpSpeed: 17
 --- !u!114 &4644594047176681210
 MonoBehaviour:
   m_ObjectHideFlags: 0

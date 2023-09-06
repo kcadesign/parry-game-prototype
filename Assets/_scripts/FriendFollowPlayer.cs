@@ -48,19 +48,17 @@ public class FriendFollowPlayer : MonoBehaviour
         _friendDeployed = friendDeployed;
     }
 
-    private void PlayerMove_OnPlayerMoveInput(Vector2 moveVector)
+    private void PlayerMove_OnPlayerMoveInput(Vector2 playerVelocity)
     {
         // change this to be based on velocity
-        if(moveVector.x > 0)
+        if(playerVelocity.x > 0)
         {
             _onPlayerLeft = true;
             _onPlayerRight = false;
-
         }
-        else if(moveVector.x < 0)
+        else if(playerVelocity.x < 0)
         {
             _onPlayerLeft = false;
-
             _onPlayerRight = true;
         }
     }
