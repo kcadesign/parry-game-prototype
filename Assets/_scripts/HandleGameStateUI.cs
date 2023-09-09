@@ -23,6 +23,8 @@ public class HandleGameStateUI : MonoBehaviour
 
     private void HandlePlayerHealth_OnHealthChange(int currentHealth, bool playerAlive)
     {
+        Debug.Log(playerAlive);
+
         if(!playerAlive)
         {
             GameOverUI.SetActive(true);

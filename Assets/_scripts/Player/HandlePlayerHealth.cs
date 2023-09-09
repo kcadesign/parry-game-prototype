@@ -13,8 +13,6 @@ public class HandlePlayerHealth : MonoBehaviour
     private int _currentHealth;
     private bool _playerAlive = true;
 
-    //private bool _isParrying;
-
     private void Awake()
     {
         PlayerHealth = new HealthSystem(_maxHealth);
@@ -25,9 +23,13 @@ public class HandlePlayerHealth : MonoBehaviour
 
     private void OnEnable()
     {
-        //PlayerParry.OnParryActive += PlayerParry_OnParryActive;
         HandleEnemyDamageOutput.OnOutputDamage += HandleEnemyDamageOutput_OnOutputDamage;
         PlayerTriggerEnter.OnAreaDamagePlayer += PlayerTriggerEnter_OnAreaDamagePlayer;
+    }
+    private void OnDisable()
+    {
+        HandleEnemyDamageOutput.OnOutputDamage += HandleEnemyDamageOutput_OnOutputDamage;
+        PlayerTriggerEnter.OnAreaDamagePlayer -= PlayerTriggerEnter_OnAreaDamagePlayer;
     }
 
     private void HandleEnemyDamageOutput_OnOutputDamage(int damageAmount)
@@ -35,7 +37,27 @@ public class HandlePlayerHealth : MonoBehaviour
         PlayerHealth.Damage(damageAmount);
 
         _currentHealth = PlayerHealth.GetHealth();
-        if(_currentHealth <= 0)
+        CheckPlayerAlive();
+
+        OnHealthChange?.Invoke(_currentHealth, _playerAlive);
+
+        Debug.Log(_currentHealth);
+    }
+
+
+    private void PlayerTriggerEnter_OnAreaDamagePlayer(int damageAmount)
+    {
+        PlayerHealth.Damage(damageAmount);
+
+        _currentHealth = PlayerHealth.GetHealth();
+        CheckPlayerAlive();
+
+        OnHealthChange?.Invoke(_currentHealth, _playerAlive);
+    }
+
+    private void CheckPlayerAlive()
+    {
+        if (_currentHealth <= 0)
         {
             _playerAlive = false;
         }
@@ -43,27 +65,5 @@ public class HandlePlayerHealth : MonoBehaviour
         {
             _playerAlive = true;
         }
-        OnHealthChange?.Invoke(_currentHealth, _playerAlive);
     }
-
-    private void OnDisable()
-    {
-        //PlayerParry.OnParryActive -= PlayerParry_OnParryActive;
-        HandleEnemyDamageOutput.OnOutputDamage += HandleEnemyDamageOutput_OnOutputDamage;
-        PlayerTriggerEnter.OnAreaDamagePlayer -= PlayerTriggerEnter_OnAreaDamagePlayer;
-    }
-
-    private void PlayerTriggerEnter_OnAreaDamagePlayer(int damageAmount)
-    {
-        PlayerHealth.Damage(damageAmount);
-
-        _currentHealth = PlayerHealth.GetHealth();
-        OnHealthChange?.Invoke(_currentHealth, _playerAlive);
-    }
-
-    /*
-    private void PlayerParry_OnParryActive(bool parryPressed)
-    {
-        _isParrying = parryPressed;
-    }*/
 }
