@@ -134,7 +134,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 697fe9d43113de544a6cf8e5d698d57c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damageAmount: 10
   _damageForce: 30
 --- !u!1 &6923480787049829576
 GameObject:
@@ -291,6 +290,10 @@ PrefabInstance:
       propertyPath: _damageForce
       value: 200
       objectReference: {fileID: 0}
+    - target: {fileID: 5906391850735681325, guid: 715772b3e9fa50342b2c3cbb6c67e910, type: 3}
+      propertyPath: _damageAmount
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 6136258636924724209, guid: 715772b3e9fa50342b2c3cbb6c67e910, type: 3}
       propertyPath: UseLerping
       value: 0
@@ -348,6 +351,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 356470923549015120, guid: 715772b3e9fa50342b2c3cbb6c67e910, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3017891266519728403}
+    - targetCorrespondingSourceObject: {fileID: 728813285803240858, guid: 715772b3e9fa50342b2c3cbb6c67e910, type: 3}
+      insertIndex: 3
+      addedObject: {fileID: 7655233637999548204}
   m_SourcePrefab: {fileID: 100100000, guid: 715772b3e9fa50342b2c3cbb6c67e910, type: 3}
 --- !u!4 &1514347532400581323 stripped
 Transform:
@@ -390,6 +396,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53c83f9871f536445ad3f541e3635e38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &4085475802599378212 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 728813285803240858, guid: 715772b3e9fa50342b2c3cbb6c67e910, type: 3}
+  m_PrefabInstance: {fileID: 3652354747383472318}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7655233637999548204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4085475802599378212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a46814dcb4fe9184694a63da56db36f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _damageAmount: 15
 --- !u!4 &8523124881359225700 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4965216006796813274, guid: 715772b3e9fa50342b2c3cbb6c67e910, type: 3}

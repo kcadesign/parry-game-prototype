@@ -20,6 +20,5 @@ public class HandleEnterFinish : MonoBehaviour
             _levelFinished = false;
         }
         OnLevelFinish?.Invoke(_levelFinished);
-
     }
 }

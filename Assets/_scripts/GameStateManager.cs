@@ -18,9 +18,9 @@ public class GameStateManager : MonoBehaviour
         HandlePlayerHealth.OnHealthChange -= HandlePlayerHealth_OnHealthChange;
         HandleEnterFinish.OnLevelFinish += HandleEnterFinish_OnLevelFinish;
     }
-    private void HandlePlayerHealth_OnHealthChange(int currentHealth)
+    private void HandlePlayerHealth_OnHealthChange(int currentHealth, bool playerAlive)
     {
-        if (currentHealth <= 0)
+        if (!playerAlive)
         {
             _pauseTime = true;
         }

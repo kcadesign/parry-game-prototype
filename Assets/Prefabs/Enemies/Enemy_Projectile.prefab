@@ -111,6 +111,14 @@ PrefabInstance:
       propertyPath: SpawnPointTransform
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5906391850735681325, guid: 715772b3e9fa50342b2c3cbb6c67e910, type: 3}
+      propertyPath: _damageForce
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 5906391850735681325, guid: 715772b3e9fa50342b2c3cbb6c67e910, type: 3}
+      propertyPath: _damageAmount
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 6136258636924724209, guid: 715772b3e9fa50342b2c3cbb6c67e910, type: 3}
       propertyPath: UseLerping
       value: 0
@@ -150,6 +158,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 356470923549015120, guid: 715772b3e9fa50342b2c3cbb6c67e910, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8205693467128868973}
+    - targetCorrespondingSourceObject: {fileID: 728813285803240858, guid: 715772b3e9fa50342b2c3cbb6c67e910, type: 3}
+      insertIndex: 3
+      addedObject: {fileID: 6934873063746582790}
   m_SourcePrefab: {fileID: 100100000, guid: 715772b3e9fa50342b2c3cbb6c67e910, type: 3}
 --- !u!4 &494274930228524924 stripped
 Transform:
@@ -177,9 +188,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   SightCentre: {fileID: 494274930228524924}
-  SightRange: 5
+  SightRange: 7
   AttackCentre: {fileID: 494274930228524924}
-  AttackRange: 4.5
+  AttackRange: 5
   ProjectileSpawner: {fileID: 2683621568721076759}
 --- !u!114 &8205693467128868973
 MonoBehaviour:
@@ -193,6 +204,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74111d55764c3674cb4c5640821ccc85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &5199047444778776892 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 728813285803240858, guid: 715772b3e9fa50342b2c3cbb6c67e910, type: 3}
+  m_PrefabInstance: {fileID: 4772682870128104614}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6934873063746582790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5199047444778776892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a46814dcb4fe9184694a63da56db36f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _damageAmount: 15
 --- !u!4 &7318410471515287251 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2858605179961948789, guid: 715772b3e9fa50342b2c3cbb6c67e910, type: 3}

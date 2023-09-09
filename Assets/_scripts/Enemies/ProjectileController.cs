@@ -34,13 +34,15 @@ public class ProjectileController : MonoBehaviour
 
     private void PlayerParry_OnParryActive(bool parryPerformed)
     {
-        print(parryPerformed);
+        //print(parryPerformed);
         _parryPerformed = parryPerformed;
     }
 
     void Start()
     {
         _rigidBody.AddForce(_movementDirection * _speed, ForceMode2D.Impulse);
+        Destroy(gameObject, 5f);
+
     }
 
     void Update()
