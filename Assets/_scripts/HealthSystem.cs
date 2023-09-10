@@ -21,11 +21,11 @@ public class HealthSystem
     public void Damage(int damageAmount)
     {
         _health -= damageAmount;
-
+        /*
         if (_health < 0)
         {
             _health = 0;
-        }
+        }*/
     }
 
     public void Heal(int healAmount)
@@ -36,5 +36,10 @@ public class HealthSystem
         {
             _health = _healthMax;
         }
+    }
+
+    public void ChangeHealth(int healthAmount)
+    {
+        _health = healthAmount;
     }
 }

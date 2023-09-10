@@ -31,10 +31,15 @@ public class EnemyCollisionWithPlayer : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player") && !_isParrying)
         {
-            // Damage value is set here and sent to be subtracted from player health
+            _damageConditionMet = true;
             OnDamagePlayer?.Invoke(_damageConditionMet);
 
             HandleKnockBack(collision);
+        }
+        else
+        {
+            _damageConditionMet = false;
+            OnDamagePlayer?.Invoke(_damageConditionMet);
         }
     }
 

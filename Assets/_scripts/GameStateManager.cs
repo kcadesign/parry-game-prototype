@@ -10,14 +10,18 @@ public class GameStateManager : MonoBehaviour
     {
         HandlePlayerHealth.OnHealthChange += HandlePlayerHealth_OnHealthChange;
         HandleEnterFinish.OnLevelFinish += HandleEnterFinish_OnLevelFinish;
+        HandleGameStateUI.OnGameRestart += HandleGameStateUI_OnGameRestart;
     }
 
 
     private void OnDisable()
     {
         HandlePlayerHealth.OnHealthChange -= HandlePlayerHealth_OnHealthChange;
-        HandleEnterFinish.OnLevelFinish += HandleEnterFinish_OnLevelFinish;
+        HandleEnterFinish.OnLevelFinish -= HandleEnterFinish_OnLevelFinish;
+        HandleGameStateUI.OnGameRestart -= HandleGameStateUI_OnGameRestart;
+
     }
+
     private void HandlePlayerHealth_OnHealthChange(int currentHealth, bool playerAlive)
     {
         if (!playerAlive)
@@ -44,6 +48,12 @@ public class GameStateManager : MonoBehaviour
         HandlePauseTime();
     }
 
+    private void HandleGameStateUI_OnGameRestart(Vector3 respawnPosition)
+    {
+        _pauseTime = false;
+        HandlePauseTime();
+    }
+
     private void HandlePauseTime()
     {
         if (_pauseTime)
@@ -54,5 +64,7 @@ public class GameStateManager : MonoBehaviour
         {
             Time.timeScale = 1f;
         }
-    }
+    }    
+
+
 }

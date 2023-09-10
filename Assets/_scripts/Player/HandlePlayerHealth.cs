@@ -25,15 +25,27 @@ public class HandlePlayerHealth : MonoBehaviour
     {
         HandleEnemyDamageOutput.OnOutputDamage += HandleEnemyDamageOutput_OnOutputDamage;
         PlayerTriggerEnter.OnAreaDamagePlayer += PlayerTriggerEnter_OnAreaDamagePlayer;
+        HandleGameStateUI.OnGameRestart += HandleGameStateUI_OnGameRestart;
     }
+
+
     private void OnDisable()
     {
         HandleEnemyDamageOutput.OnOutputDamage += HandleEnemyDamageOutput_OnOutputDamage;
         PlayerTriggerEnter.OnAreaDamagePlayer -= PlayerTriggerEnter_OnAreaDamagePlayer;
-    }
+        HandleGameStateUI.OnGameRestart -= HandleGameStateUI_OnGameRestart;
 
+    }
+    /*
+    private void Update()
+    {
+        Debug.Log($"Current player health is: {PlayerHealth.GetHealth()}");
+    }
+    */
     private void HandleEnemyDamageOutput_OnOutputDamage(int damageAmount)
     {
+        Debug.Log($"Damage player for {damageAmount}");
+
         PlayerHealth.Damage(damageAmount);
 
         _currentHealth = PlayerHealth.GetHealth();
@@ -41,12 +53,14 @@ public class HandlePlayerHealth : MonoBehaviour
 
         OnHealthChange?.Invoke(_currentHealth, _playerAlive);
 
-        Debug.Log(_currentHealth);
+        //Debug.Log($"Player health is: {_currentHealth}");
     }
 
 
     private void PlayerTriggerEnter_OnAreaDamagePlayer(int damageAmount)
     {
+        Debug.Log($"Area damage for {damageAmount}");
+
         PlayerHealth.Damage(damageAmount);
 
         _currentHealth = PlayerHealth.GetHealth();
@@ -65,5 +79,15 @@ public class HandlePlayerHealth : MonoBehaviour
         {
             _playerAlive = true;
         }
+    }    
+    
+    private void HandleGameStateUI_OnGameRestart(Vector3 respawnPosition)
+    {
+        PlayerHealth.ChangeHealth(_maxHealth);
+        _currentHealth = PlayerHealth.GetHealth();
+        CheckPlayerAlive();
+        OnHealthChange?.Invoke(_currentHealth, _playerAlive);
+        //Debug.Log($"Player health is: {_currentHealth}");
     }
+
 }

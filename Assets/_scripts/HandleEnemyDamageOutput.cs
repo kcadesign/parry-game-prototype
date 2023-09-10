@@ -21,7 +21,11 @@ public class HandleEnemyDamageOutput : MonoBehaviour
 
     private void EnemyCollisionWithPlayer_OnDamagePlayer(bool damageConditionMet)
     {
-        SendDamage(_damageAmount);
+        if (damageConditionMet)
+        {
+            SendDamage(_damageAmount);
+            Debug.Log($"Send {_damageAmount} damage");
+        }
     }
 
     private void SendDamage(int damageAmount) => OnOutputDamage?.Invoke(damageAmount);

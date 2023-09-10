@@ -27,7 +27,7 @@ public class HandlePlayerHealthBar : MonoBehaviour
 
     private void HandlePlayerHealth_OnHealthChange(int currentHealth, bool playerAlive)
     {
-        //print($"Current health is: {currentHealth}");
+        Debug.Log($"Current health is: {currentHealth}");
 
         _currentFill = currentHealth;
         GetSetCurrentFill();
