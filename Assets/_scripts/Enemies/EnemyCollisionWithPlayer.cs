@@ -8,6 +8,7 @@ public class EnemyCollisionWithPlayer : MonoBehaviour
     public static event DamagePlayer OnDamagePlayer;
 
     private bool _isParrying;
+    public bool EnemyHit = false;
 
     private bool _damageConditionMet;
     [SerializeField] private float _damageForce = 5;
@@ -27,6 +28,12 @@ public class EnemyCollisionWithPlayer : MonoBehaviour
         _isParrying = parryPressed;
     }
 
+    private void Update()
+    {
+        EnemyHit = false;
+
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player") && !_isParrying)
@@ -36,11 +43,13 @@ public class EnemyCollisionWithPlayer : MonoBehaviour
 
             HandleKnockBack(collision);
         }
-        else
+        else if (collision.gameObject.CompareTag("Player") && _isParrying)
         {
+            EnemyHit = true;
             _damageConditionMet = false;
             OnDamagePlayer?.Invoke(_damageConditionMet);
         }
+        
     }
 
     private void HandleKnockBack(Collision2D collision)

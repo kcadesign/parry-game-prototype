@@ -16,7 +16,6 @@ public class ProjectileEnemyController : EnemyControllerBase
     protected override void PerformAttackActions()
     {
         base.PerformAttackActions();
-
     }
 
     private void EnableProjectiles() => ProjectileSpawner.SetActive(true);
