@@ -2,14 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProjectileCollisions : HandleEnemyCollisions
+public class HandleProjectileCollisions : HandleEnemyCollisions
 {
-    public delegate void Deflect(bool deflected);
+    public delegate void Deflect(GameObject collisionObject, int DamageAmount);
     public static event Deflect OnDeflect;
 
     private SpriteRenderer _projectileSpriteRenderer;
 
     private bool _deflected = false;
+    [SerializeField] private int _damageAmount = 5;
 
     private void Awake()
     {
@@ -27,7 +28,7 @@ public class ProjectileCollisions : HandleEnemyCollisions
             _projectileSpriteRenderer.color = Color.blue;
 
             _deflected = true;
-            OnDeflect?.Invoke(_deflected);
+            OnDeflect?.Invoke(collision.gameObject, _damageAmount);
 
             Destroy(gameObject, 3f);
 
@@ -45,9 +46,7 @@ public class ProjectileCollisions : HandleEnemyCollisions
         }
         else if (collision.gameObject.CompareTag("Enemy") && _deflected)
         {
-            
-            Destroy(gameObject);
-            Destroy(collision.transform.parent.gameObject);
+            OnDeflect?.Invoke(collision.gameObject, _damageAmount);
         }
     }
 }

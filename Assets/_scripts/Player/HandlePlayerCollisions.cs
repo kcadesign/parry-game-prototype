@@ -18,7 +18,7 @@ public class HandlePlayerCollisions : MonoBehaviour
     public delegate void DamageEnemy(GameObject collisionObject, int damageAmount);
     public static event DamageEnemy OnDamageEnemy;
 
-    [SerializeField] private int _inflictDamage = 1;
+    [SerializeField] private int _damageAmount = 1;
 
     private Rigidbody2D _rigidBody;
 
@@ -79,7 +79,7 @@ public class HandlePlayerCollisions : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("Enemy") && _isParrying)
         {
-            OnDamageEnemy?.Invoke(collision.gameObject, _inflictDamage);
+            OnDamageEnemy?.Invoke(collision.gameObject, _damageAmount);
         }
     }
 

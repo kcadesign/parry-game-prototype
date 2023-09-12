@@ -178,6 +178,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyHit: 0
   _damageForce: 5
+  _damageAmount: 1
 --- !u!114 &1081858378717514709
 MonoBehaviour:
   m_ObjectHideFlags: 0

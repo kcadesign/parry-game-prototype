@@ -10,6 +10,8 @@ public class HandleBaseEnemyAnimation : MonoBehaviour
     private Animator _enemyStateAnimator;
     [SerializeField] private EnemyControllerBase _enemyController;
 
+    public ParticleSystem DestructionParticle;
+
     protected virtual void Awake()
     {
         _enemyStateAnimator = GetComponent<Animator>();
@@ -77,10 +79,21 @@ public class HandleBaseEnemyAnimation : MonoBehaviour
         }
     }
 
+    protected virtual void OnDestroy()
+    {
+        if (DestructionParticle != null)
+        {
+            // Instantiate and play the Particle System at the position of the destroyed object
+            Instantiate(DestructionParticle, transform.position, Quaternion.identity).Play();
+        }
+    }
+
     private IEnumerator FlashEnemy(SpriteRenderer spriteRenderer)
     {
         spriteRenderer.color = new Color(0, 0, 100, 0);
         yield return new WaitForSeconds(0.15f);
         spriteRenderer.color = new Color(0, 0, 100, 100);
     }
+
+
 }

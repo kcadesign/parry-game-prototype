@@ -17,17 +17,31 @@ public class HandleEnemyHealth : MonoBehaviour
     private void OnEnable()
     {
         HandlePlayerCollisions.OnDamageEnemy += HandlePlayerCollisions_OnDamageEnemy;
+        HandleProjectileCollisions.OnDeflect += HandleProjectileCollisions_OnDeflect;
     }
 
     private void OnDisable()
     {
         HandlePlayerCollisions.OnDamageEnemy -= HandlePlayerCollisions_OnDamageEnemy;
+        HandleProjectileCollisions.OnDeflect -= HandleProjectileCollisions_OnDeflect;
     }
 
     // This code is causing all subscribed enemies to take the same damage at the same time
     private void HandlePlayerCollisions_OnDamageEnemy(GameObject collisionObject, int damageAmount)
     {
         if(collisionObject == gameObject)
+        {
+            _enemyHealth.Damage(damageAmount);
+
+            currentHealth = _enemyHealth.GetHealth();
+            Debug.Log($"{gameObject.transform.parent.gameObject.transform.parent.name}'s health: {currentHealth}");
+
+            CheckHealth();
+        }
+    }
+    private void HandleProjectileCollisions_OnDeflect(GameObject collisionObject, int damageAmount)
+    {
+        if (collisionObject == gameObject)
         {
             _enemyHealth.Damage(damageAmount);
 
