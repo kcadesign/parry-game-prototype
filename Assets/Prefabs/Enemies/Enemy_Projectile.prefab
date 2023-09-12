@@ -216,10 +216,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BodySprites:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 9003497152318318749}
+  - {fileID: 6827681978862675468}
+  - {fileID: 7215612344966411530}
+  - {fileID: 7095133558757763888}
   CollisionHandler: {fileID: 1426587547283188619}
   _enemyController: {fileID: 6814644162195053283}
 --- !u!1 &5199047444778776892 stripped
@@ -240,9 +240,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damageAmount: 15
+--- !u!212 &6827681978862675468 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 2088321527222235818, guid: 715772b3e9fa50342b2c3cbb6c67e910, type: 3}
+  m_PrefabInstance: {fileID: 4772682870128104614}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &7095133558757763888 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 2327520610296954774, guid: 715772b3e9fa50342b2c3cbb6c67e910, type: 3}
+  m_PrefabInstance: {fileID: 4772682870128104614}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &7215612344966411530 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 2745217726467711404, guid: 715772b3e9fa50342b2c3cbb6c67e910, type: 3}
+  m_PrefabInstance: {fileID: 4772682870128104614}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7318410471515287251 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2858605179961948789, guid: 715772b3e9fa50342b2c3cbb6c67e910, type: 3}
+  m_PrefabInstance: {fileID: 4772682870128104614}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &9003497152318318749 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 4524183848824568891, guid: 715772b3e9fa50342b2c3cbb6c67e910, type: 3}
   m_PrefabInstance: {fileID: 4772682870128104614}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7595573696897975681

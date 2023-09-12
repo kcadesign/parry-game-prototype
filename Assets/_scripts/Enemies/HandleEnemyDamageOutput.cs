@@ -11,12 +11,12 @@ public class HandleEnemyDamageOutput : MonoBehaviour
 
     private void OnEnable()
     {
-        EnemyCollisionWithPlayer.OnDamagePlayer += EnemyCollisionWithPlayer_OnDamagePlayer;
+        HandleEnemyCollisions.OnDamagePlayer += EnemyCollisionWithPlayer_OnDamagePlayer;
     }
 
     private void OnDisable()
     {
-        EnemyCollisionWithPlayer.OnDamagePlayer -= EnemyCollisionWithPlayer_OnDamagePlayer;
+        HandleEnemyCollisions.OnDamagePlayer -= EnemyCollisionWithPlayer_OnDamagePlayer;
     }
 
     private void EnemyCollisionWithPlayer_OnDamagePlayer(bool damageConditionMet)

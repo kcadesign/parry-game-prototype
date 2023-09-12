@@ -701,6 +701,7 @@ GameObject:
   - component: {fileID: 6140860106109771891}
   - component: {fileID: 7555413703909545340}
   - component: {fileID: 4823260171903798048}
+  - component: {fileID: 6837420590063717220}
   m_Layer: 3
   m_Name: Collider
   m_TagString: Player
@@ -866,6 +867,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHealth: 100
+  _noDamageTime: 7
 --- !u!114 &7555413703909545340
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -878,7 +880,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 387900a09b1b81646a84ce32b5a0b1cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damageAmount: 1
+  _inflictDamage: 1
   _hitStunMultiplier: 4
   _hitStunDuration: 3
 --- !u!114 &4823260171903798048
@@ -896,6 +898,18 @@ MonoBehaviour:
   _parryScript: {fileID: 36215996473939614}
   _blockScript: {fileID: 8254977020391799762}
   _jumpScript: {fileID: 4242945545593811527}
+--- !u!114 &6837420590063717220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6715703871435085181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f46ca228f24498248a6562ba27577995, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7385957761161727684
 GameObject:
   m_ObjectHideFlags: 0

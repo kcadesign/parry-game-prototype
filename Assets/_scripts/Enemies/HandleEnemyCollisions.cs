@@ -2,39 +2,38 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyCollisionWithPlayer : MonoBehaviour
+public class HandleEnemyCollisions : MonoBehaviour
 {
     public delegate void DamagePlayer(bool damageConditionMet);
     public static event DamagePlayer OnDamagePlayer;
 
-    private bool _isParrying;
-    public bool EnemyHit = false;
+    protected bool _isParrying;
+    [HideInInspector] public bool EnemyHit = false;
 
-    private bool _damageConditionMet;
+    protected bool _damageConditionMet;
     [SerializeField] private float _damageForce = 5;
 
-    private void OnEnable()
+    protected void OnEnable()
     {
         PlayerParry.OnParryActive += PlayerParry_OnParryActive;
     }
 
-    private void OnDisable()
+    protected void OnDisable()
     {
         PlayerParry.OnParryActive -= PlayerParry_OnParryActive;
     }
 
-    private void PlayerParry_OnParryActive(bool parryPressed)
+    protected void PlayerParry_OnParryActive(bool parryPressed)
     {
         _isParrying = parryPressed;
     }
 
-    private void Update()
+    protected void Update()
     {
         EnemyHit = false;
-
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player") && !_isParrying)
         {
@@ -49,10 +48,9 @@ public class EnemyCollisionWithPlayer : MonoBehaviour
             _damageConditionMet = false;
             OnDamagePlayer?.Invoke(_damageConditionMet);
         }
-        
     }
 
-    private void HandleKnockBack(Collision2D collision)
+    protected void HandleKnockBack(Collision2D collision)
     {
         float enemyCenterX = transform.position.x;
         float playerCenterX = collision.transform.position.x;

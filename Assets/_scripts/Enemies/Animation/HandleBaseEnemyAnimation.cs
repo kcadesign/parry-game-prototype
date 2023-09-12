@@ -5,7 +5,7 @@ using UnityEngine;
 public class HandleBaseEnemyAnimation : MonoBehaviour
 {    
     public SpriteRenderer[] BodySprites;
-    public EnemyCollisionWithPlayer CollisionHandler;
+    public HandleEnemyCollisions CollisionHandler;
 
     private Animator _enemyStateAnimator;
     [SerializeField] private EnemyControllerBase _enemyController;
