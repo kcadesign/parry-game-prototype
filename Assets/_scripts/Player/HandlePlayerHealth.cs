@@ -13,6 +13,10 @@ public class HandlePlayerHealth : MonoBehaviour
     private int _currentHealth;
     private bool _playerAlive = true;
 
+    private float _autoHealTimer;
+    [SerializeField] private float _noDamageTime = 5f;
+    private bool _isCounting = false;
+
     private void Awake()
     {
         PlayerHealth = new HealthSystem(_maxHealth);
@@ -28,20 +32,34 @@ public class HandlePlayerHealth : MonoBehaviour
         HandleGameStateUI.OnGameRestart += HandleGameStateUI_OnGameRestart;
     }
 
-
     private void OnDisable()
     {
         HandleEnemyDamageOutput.OnOutputDamage += HandleEnemyDamageOutput_OnOutputDamage;
         PlayerTriggerEnter.OnAreaDamagePlayer -= PlayerTriggerEnter_OnAreaDamagePlayer;
         HandleGameStateUI.OnGameRestart -= HandleGameStateUI_OnGameRestart;
-
     }
-    /*
+
     private void Update()
     {
-        Debug.Log($"Current player health is: {PlayerHealth.GetHealth()}");
+        if(_isCounting)
+        {
+            _autoHealTimer += Time.deltaTime;
+            if(_autoHealTimer >= _noDamageTime)
+            {
+                PlayerHealth.ChangeHealth(_maxHealth);
+                _currentHealth = PlayerHealth.GetHealth();
+                OnHealthChange?.Invoke(_currentHealth, _playerAlive);
+
+                StopHealTimer();
+                ResetHealTimer();
+            }
+        }
+        else if(!_isCounting)
+        {
+            ResetHealTimer();
+        }
     }
-    */
+
     private void HandleEnemyDamageOutput_OnOutputDamage(int damageAmount)
     {
         Debug.Log($"Damage player for {damageAmount}");
@@ -51,11 +69,11 @@ public class HandlePlayerHealth : MonoBehaviour
         _currentHealth = PlayerHealth.GetHealth();
         CheckPlayerAlive();
 
+        ResetHealTimer();
+        StartHealTimer();
+
         OnHealthChange?.Invoke(_currentHealth, _playerAlive);
-
-        //Debug.Log($"Player health is: {_currentHealth}");
     }
-
 
     private void PlayerTriggerEnter_OnAreaDamagePlayer(int damageAmount)
     {
@@ -65,6 +83,9 @@ public class HandlePlayerHealth : MonoBehaviour
 
         _currentHealth = PlayerHealth.GetHealth();
         CheckPlayerAlive();
+
+        ResetHealTimer();
+        StartHealTimer();
 
         OnHealthChange?.Invoke(_currentHealth, _playerAlive);
     }
@@ -87,7 +108,10 @@ public class HandlePlayerHealth : MonoBehaviour
         _currentHealth = PlayerHealth.GetHealth();
         CheckPlayerAlive();
         OnHealthChange?.Invoke(_currentHealth, _playerAlive);
-        //Debug.Log($"Player health is: {_currentHealth}");
     }
 
+    public void StartHealTimer() => _isCounting = true;
+    public void StopHealTimer() => _isCounting = false;
+    public void ResetHealTimer() => _autoHealTimer = 0f;
+    
 }

@@ -24,7 +24,7 @@ public class HandleEnemyDamageOutput : MonoBehaviour
         if (damageConditionMet)
         {
             SendDamage(_damageAmount);
-            Debug.Log($"Send {_damageAmount} damage");
+            //Debug.Log($"Send {_damageAmount} damage");
         }
     }
 

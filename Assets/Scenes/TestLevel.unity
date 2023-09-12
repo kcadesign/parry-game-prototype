@@ -3506,7 +3506,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6637845232770132101, guid: 74c443ba2655ceb44b346c90ba283c56, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3801,10 +3801,6 @@ PrefabInstance:
     - target: {fileID: 3209484956386172061, guid: c100491962615af48ad2f8c1c1a2ec07, type: 3}
       propertyPath: m_Name
       value: Enemy_Projectile (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 4278401494969155733, guid: c100491962615af48ad2f8c1c1a2ec07, type: 3}
-      propertyPath: BodySprites.Array.size
-      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4278401494969155733, guid: c100491962615af48ad2f8c1c1a2ec07, type: 3}
       propertyPath: BodySprites.Array.data[0]
@@ -5540,6 +5536,10 @@ PrefabInstance:
     - target: {fileID: 3209484956386172061, guid: c100491962615af48ad2f8c1c1a2ec07, type: 3}
       propertyPath: m_Name
       value: Enemy_Projectile
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209484956386172061, guid: c100491962615af48ad2f8c1c1a2ec07, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5643219601588262816, guid: c100491962615af48ad2f8c1c1a2ec07, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8668,7 +8668,7 @@ GameObject:
   - component: {fileID: 1565585973}
   m_Layer: 0
   m_Name: NegativeZone
-  m_TagString: Untagged
+  m_TagString: EnvironmentHazard
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10077,6 +10077,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1908540448}
     m_Modifications:
+    - target: {fileID: 6140860106109771891, guid: 9b60d9937a2653a4fa996b5d49e6adbe, type: 3}
+      propertyPath: _noDamageTime
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 7021646279443362266, guid: 9b60d9937a2653a4fa996b5d49e6adbe, type: 3}
       propertyPath: m_LocalPosition.x
       value: -34.399998

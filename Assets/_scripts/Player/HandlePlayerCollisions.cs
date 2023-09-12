@@ -18,7 +18,7 @@ public class HandlePlayerCollisions : MonoBehaviour
     public delegate void DamageEnemy(GameObject collisionObject, int damageAmount);
     public static event DamageEnemy OnDamageEnemy;
 
-    [SerializeField] private int _damageAmount = 1;
+    [SerializeField] private int _inflictDamage = 1;
 
     private Rigidbody2D _rigidBody;
 
@@ -71,14 +71,23 @@ public class HandlePlayerCollisions : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.CompareTag("Enemy") && !_isParrying && !_isBlocking && !_playerStunned)
+        if (collision.gameObject.CompareTag("Enemy") && !_isParrying && !_isBlocking && !_playerStunned)
         {
-            print("OUCH!!");
+            Debug.Log($"Player hurt by {collision.gameObject.tag}");
+
             StartCoroutine(StunActions());
         }
         else if (collision.gameObject.CompareTag("Enemy") && _isParrying)
         {
-            OnDamageEnemy?.Invoke(collision.gameObject, _damageAmount);
+            OnDamageEnemy?.Invoke(collision.gameObject, _inflictDamage);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("EnvironmentHazard"))
+        {
+            Debug.Log($"Player hurt by {collision.gameObject.tag}");
         }
     }
 
