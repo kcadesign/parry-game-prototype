@@ -21,7 +21,7 @@ public class HandleProjectileCollisions : HandleEnemyCollisions
     {
         base.OnCollisionEnter2D(collision);
 
-        print(collision.gameObject.tag);
+        Debug.Log($"Projectile collided with {collision.gameObject.tag}");
 
         if (collision.gameObject.CompareTag("Player") && _isParrying)
         {

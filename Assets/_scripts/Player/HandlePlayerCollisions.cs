@@ -4,21 +4,11 @@ using UnityEngine;
 
 public class HandlePlayerCollisions : MonoBehaviour
 {
-    // Types of collision
-    // - no parry with enemy
-    // - parry with enemy
-    // - no parry with attack
-    // - parry with attack
-    // - no parry with bounce pad
-    // - parry with bounce pad
-
     public delegate void Stunned(bool stunned);
     public static event Stunned OnStunned;
 
     public delegate void DamageEnemy(GameObject collisionObject, int damageAmount);
     public static event DamageEnemy OnDamageEnemy;
-
-    [SerializeField] private int _damageAmount = 1;
 
     private Rigidbody2D _rigidBody;
 
@@ -28,16 +18,13 @@ public class HandlePlayerCollisions : MonoBehaviour
     private bool _playerStunned = false;
 
     private float _originalMass;
-    //[SerializeField] private float _hitStunMass = 10;
-
     private float _originalLinearDrag;
-    //[SerializeField] private float _hitStunLinearDrag = 5;
-
     private float _originalGravity;
 
     [SerializeField] private float _hitStunMultiplier = 2;
-
     [SerializeField] private float _hitStunDuration = 3;
+
+    [SerializeField] private int _damageAmount = 1;
 
     private void Awake()
     {

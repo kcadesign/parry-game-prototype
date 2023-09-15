@@ -10,15 +10,11 @@ public class PlayerBlock : MonoBehaviour
 
     protected PlayerControls playerControls;
 
-
     private bool _isBlocking;
-
-    //private bool _isBlocking = false;
 
     private void Awake()
     {
         playerControls = new PlayerControls();
-
     }
 
     private void OnEnable()
@@ -35,14 +31,18 @@ public class PlayerBlock : MonoBehaviour
 
         playerControls.Gameplay.Block.performed -= Block_performed;
         playerControls.Gameplay.Block.canceled -= Block_canceled;
+    }
 
+    private void Update()
+    {
+        //Debug.Log($"Player is blocking: {_isBlocking}");
     }
 
     private void Block_performed(InputAction.CallbackContext value)
     {
         _isBlocking = true;
 
-        //print("++Player is blocking");
+        //Debug.Log("Player is blocking");
 
         OnBlock?.Invoke(_isBlocking);
     }
@@ -51,7 +51,7 @@ public class PlayerBlock : MonoBehaviour
     {
         _isBlocking = false;
 
-        //print("Button released");
+        //Debug.Log($"Player is blocking: {_isBlocking}");
 
         OnBlock?.Invoke(_isBlocking);
     }

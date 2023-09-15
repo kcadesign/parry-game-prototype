@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class AnimatePlayerFace : MonoBehaviour
+public class AnimatePlayerMovement : MonoBehaviour
 {    
     public Rigidbody2D _playerRigidbody;
-
     private Animator _faceAnimator;
 
     private void Awake()
@@ -19,5 +18,7 @@ public class AnimatePlayerFace : MonoBehaviour
         float velocityX = _playerRigidbody.velocity.x;
 
         _faceAnimator.SetFloat("VelocityX", velocityX);
+
     }
+
 }

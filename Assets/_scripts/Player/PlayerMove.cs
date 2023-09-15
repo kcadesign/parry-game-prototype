@@ -28,10 +28,7 @@ public class PlayerMove : MonoBehaviour
 
         playerControls.Gameplay.Rolling.performed += Rolling_performed;
         playerControls.Gameplay.Rolling.canceled += Rolling_canceled;
-
-        PlayerBlock.OnBlock += PlayerBlock_OnBlock;
     }
-
 
     private void OnDisable()
     {
@@ -39,15 +36,12 @@ public class PlayerMove : MonoBehaviour
 
         playerControls.Gameplay.Rolling.performed -= Rolling_performed;
         playerControls.Gameplay.Rolling.canceled -= Rolling_canceled;
-
-        PlayerBlock.OnBlock += PlayerBlock_OnBlock;
     }
 
     void FixedUpdate()
     {
         HandleHorizontalMovement();
         OnPlayerMoveInput?.Invoke(_rigidBody.velocity);
-
     }
 
     private void Rolling_performed(InputAction.CallbackContext value)
@@ -58,18 +52,6 @@ public class PlayerMove : MonoBehaviour
     private void Rolling_canceled(InputAction.CallbackContext value)
     {
         _movementAxis = Vector2.zero;
-    }
-
-    private void PlayerBlock_OnBlock(bool isBlocking)
-    {/*
-        if (isBlocking)
-        {
-            _rigidBody.velocity = Vector2.zero;
-        }
-        else
-        {
-            return;
-        }*/
     }
 
     private void HandleHorizontalMovement()

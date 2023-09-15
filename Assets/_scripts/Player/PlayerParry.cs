@@ -27,7 +27,6 @@ public class PlayerParry : MonoBehaviour
         PlayerBlock.OnBlock += PlayerBlock_OnBlock;
     }
 
-
     private void OnDisable()
     {
         playerControls.Gameplay.Disable();
@@ -53,16 +52,8 @@ public class PlayerParry : MonoBehaviour
     }
     private void PlayerBlock_OnBlock(bool isBlocking)
     {
-        //BodySpriteRenderer.color = _originalColor;
         _parryActive = false;
         OnParryActive?.Invoke(_parryActive);
         //print("Parry button released");
     }
-    /*
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        //print(collision.gameObject.tag);
-
-        
-    }*/
 }

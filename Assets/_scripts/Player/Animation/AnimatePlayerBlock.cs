@@ -5,17 +5,11 @@ using UnityEngine;
 public class AnimatePlayerBlock : MonoBehaviour
 {
     private Animator _playerAnimator;
-
     public SpriteRenderer SpriteRenderer;
-
-    //private Color _originalColor;
-    //public Color BlockingColor;
 
     private void Awake()
     {
         _playerAnimator = GetComponent<Animator>();
-
-        //_originalColor = SpriteRenderer.color;
     }
 
     private void OnEnable()
@@ -30,19 +24,7 @@ public class AnimatePlayerBlock : MonoBehaviour
 
     private void PlayerBlock_OnBlock(bool isBlocking)
     {
-        //Debug.Log($"Block pressed: {isBlocking}");
-
         _playerAnimator.SetBool("Block", isBlocking);
-        /*
-        if (isBlocking)
-        {
-            SpriteRenderer.color = BlockingColor;
-        }
-        else
-        {
-            SpriteRenderer.color = _originalColor;
-        }
-        */
     }
 
 }

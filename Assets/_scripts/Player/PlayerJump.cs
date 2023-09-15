@@ -39,12 +39,6 @@ public class PlayerJump : MonoBehaviour
         PlayerBlock.OnBlock -= PlayerBlock_OnBlock;
     }
 
-    private void Update()
-    {
-        //print(_canJump);
-        //print(_jumpPower);
-    }
-
     private void PlayerBlock_OnBlock(bool isBlocking)
     {
         _canJump = isBlocking;
@@ -71,8 +65,10 @@ public class PlayerJump : MonoBehaviour
 
     private void HandleJump()
     {
-        Vector2 jumpForce = new Vector2(0, 0);
-        jumpForce.y = _jumpPower;
+        Vector2 jumpForce = new(0, 0)
+        {
+            y = _jumpPower
+        };
 
         _rigidBody.AddForce(jumpForce, ForceMode2D.Impulse);
     }

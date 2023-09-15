@@ -94,6 +94,4 @@ public class HandleBaseEnemyAnimation : MonoBehaviour
         yield return new WaitForSeconds(0.15f);
         spriteRenderer.color = new Color(0, 0, 100, 100);
     }
-
-
 }

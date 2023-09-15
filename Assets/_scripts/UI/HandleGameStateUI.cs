@@ -31,7 +31,7 @@ public class HandleGameStateUI : MonoBehaviour
 
     private void HandlePlayerHealth_OnHealthChange(int currentHealth, bool playerAlive)
     {
-        Debug.Log($"Player is alive: {playerAlive}");
+        //Debug.Log($"Player is alive: {playerAlive}");
 
         if(!playerAlive)
         {
