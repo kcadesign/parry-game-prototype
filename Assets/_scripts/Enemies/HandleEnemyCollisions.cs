@@ -38,7 +38,7 @@ public class HandleEnemyCollisions : MonoBehaviour
     protected void Update()
     {
         EnemyHit = false;
-        Debug.Log($"Player is blocking: {_isBlocking}");
+        //Debug.Log($"Player is blocking: {_isBlocking}");
 
     }
 

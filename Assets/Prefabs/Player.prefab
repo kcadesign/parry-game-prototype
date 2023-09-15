@@ -692,6 +692,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6965828184792922451}
   - component: {fileID: 1287981112224866565}
+  - component: {fileID: 8994902428115188767}
   - component: {fileID: 5022245223062909639}
   - component: {fileID: 3243560387596183032}
   - component: {fileID: 8254977020391799762}
@@ -759,6 +760,41 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!58 &8994902428115188767
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6715703871435085181}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.6
 --- !u!50 &5022245223062909639
 Rigidbody2D:
   serializedVersion: 4
@@ -824,6 +860,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe39bce75e43f5341aeff4594cfec336, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerCollider: {fileID: 1287981112224866565}
+  DefaultPlayerMaterial: {fileID: 6200000, guid: 40095fed4c952f24a97991e236324752, type: 2}
+  BouncyMaterial: {fileID: 6200000, guid: ffcc5a5fbbb838f4b8c81c74bc220c84, type: 2}
+  ForceMultiplier: 50
 --- !u!114 &4242945545593811527
 MonoBehaviour:
   m_ObjectHideFlags: 0
