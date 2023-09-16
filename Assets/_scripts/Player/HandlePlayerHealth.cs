@@ -14,7 +14,7 @@ public class HandlePlayerHealth : MonoBehaviour
     private bool _playerAlive = true;
 
     private float _autoHealTimer;
-    [SerializeField] private float _noDamageTime = 5f;
+    [SerializeField] private float _autoHealWaitTime = 5f;
     private bool _isCounting = false;
 
     private void Awake()
@@ -44,7 +44,7 @@ public class HandlePlayerHealth : MonoBehaviour
         if(_isCounting)
         {
             _autoHealTimer += Time.deltaTime;
-            if(_autoHealTimer >= _noDamageTime)
+            if(_autoHealTimer >= _autoHealWaitTime)
             {
                 PlayerHealth.ChangeHealth(_maxHealth);
                 _currentHealth = PlayerHealth.GetHealth();

@@ -12,6 +12,8 @@ public class PlayerJump : MonoBehaviour
     [SerializeField] private float _jumpPower = 5;
 
     private bool _canJump = false;
+    [SerializeField] private bool _restrictJumpCount;
+    private bool _isGrounded;
 
     private void Awake()
     {
@@ -27,6 +29,7 @@ public class PlayerJump : MonoBehaviour
         playerControls.Gameplay.Jump.canceled += Jump_canceled;
 
         PlayerBlock.OnBlock += PlayerBlock_OnBlock;
+        CheckPlayerGrounded.OnGrounded += CheckPlayerGrounded_OnGrounded;
     }
 
     private void OnDisable()
@@ -37,11 +40,17 @@ public class PlayerJump : MonoBehaviour
         playerControls.Gameplay.Jump.canceled -= Jump_canceled;
 
         PlayerBlock.OnBlock -= PlayerBlock_OnBlock;
+        CheckPlayerGrounded.OnGrounded -= CheckPlayerGrounded_OnGrounded;
     }
 
     private void PlayerBlock_OnBlock(bool isBlocking)
     {
         _canJump = isBlocking;
+    }
+
+    private void CheckPlayerGrounded_OnGrounded(bool grounded)
+    {
+        _isGrounded = grounded;
     }
 
     private void Jump_performed(InputAction.CallbackContext value)
@@ -52,6 +61,7 @@ public class PlayerJump : MonoBehaviour
     // On button release jump is performed
     private void Jump_canceled(InputAction.CallbackContext value)
     {
+
         if (_canJump)
         {
             HandleJump();
@@ -59,7 +69,6 @@ public class PlayerJump : MonoBehaviour
         else
         {
             _canJump = false;
-
         }
     }
 
@@ -70,7 +79,17 @@ public class PlayerJump : MonoBehaviour
             y = _jumpPower
         };
 
-        _rigidBody.AddForce(jumpForce, ForceMode2D.Impulse);
+        if (_restrictJumpCount)
+        {
+            if (_isGrounded)
+            {
+                _rigidBody.AddForce(jumpForce, ForceMode2D.Impulse);
+            }
+        }
+        else if (!_restrictJumpCount)
+        {
+            _rigidBody.AddForce(jumpForce, ForceMode2D.Impulse);
+        }
     }
 
 }

@@ -794,7 +794,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.6
+  m_Radius: 0.5
 --- !u!50 &5022245223062909639
 Rigidbody2D:
   serializedVersion: 4
@@ -863,7 +863,7 @@ MonoBehaviour:
   _playerCollider: {fileID: 1287981112224866565}
   DefaultPlayerMaterial: {fileID: 6200000, guid: 40095fed4c952f24a97991e236324752, type: 2}
   BouncyMaterial: {fileID: 6200000, guid: ffcc5a5fbbb838f4b8c81c74bc220c84, type: 2}
-  ForceMultiplier: 50
+  ParryForce: 85
 --- !u!114 &4242945545593811527
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -877,6 +877,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _jumpPower: 50
+  _restrictJumpCount: 1
 --- !u!114 &7987222072584019903
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -906,7 +907,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHealth: 100
-  _noDamageTime: 7
+  _autoHealWaitTime: 5
 --- !u!114 &7555413703909545340
 MonoBehaviour:
   m_ObjectHideFlags: 0

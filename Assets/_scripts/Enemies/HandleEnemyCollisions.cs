@@ -9,6 +9,7 @@ public class HandleEnemyCollisions : MonoBehaviour
 
     protected bool _isParrying;
     protected bool _isBlocking;
+    
     [HideInInspector] public bool EnemyHit = false;
 
     protected bool _damageConditionMet;
