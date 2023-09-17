@@ -6,15 +6,14 @@ using Cinemachine;
 public class ZoomToPlayerSpeed : MonoBehaviour
 {
     private CinemachineVirtualCamera _virtualCamera;
-    private Vector2 _playerVelocity;
 
     [SerializeField] private float _targetPlayerVelocity;
 
     [SerializeField] private float _zoomSpeed = 0.1f;
 
     private float _startingOrthoSize;
-    private float _targetOrthoSize;
     [SerializeField] private float _maxCameraOrthoSize;
+    private float _targetOrthoSize;
 
     private void Awake()
     {
@@ -34,13 +33,11 @@ public class ZoomToPlayerSpeed : MonoBehaviour
 
     private void PlayerMove_OnPlayerMoveInput(Vector2 playerVelocity)
     {
-        _playerVelocity = playerVelocity;
-
-        if (_playerVelocity.x > _targetPlayerVelocity)
+        if (playerVelocity.x >= _targetPlayerVelocity)
         {
             _targetOrthoSize = _maxCameraOrthoSize;
         }
-        else if (_playerVelocity.x < -_targetPlayerVelocity)
+        else if (playerVelocity.x <= -_targetPlayerVelocity)
         {
             _targetOrthoSize = _maxCameraOrthoSize;
         }
