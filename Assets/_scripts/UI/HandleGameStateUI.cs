@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class HandleGameStateUI : MonoBehaviour
 {
@@ -67,4 +68,9 @@ public class HandleGameStateUI : MonoBehaviour
         GameOverUI.SetActive(false);
     }
 
+    public void RestartLevel()
+    {
+        int currentSceneName = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(currentSceneName);
+    }
 }

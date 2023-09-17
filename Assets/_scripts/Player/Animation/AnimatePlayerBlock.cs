@@ -5,7 +5,6 @@ using UnityEngine;
 public class AnimatePlayerBlock : MonoBehaviour
 {
     private Animator _playerAnimator;
-    public SpriteRenderer SpriteRenderer;
 
     private void Awake()
     {

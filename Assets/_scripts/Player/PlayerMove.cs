@@ -42,7 +42,7 @@ public class PlayerMove : MonoBehaviour
     {
         HandleHorizontalMovement();
         OnPlayerMoveInput?.Invoke(_rigidBody.velocity);
-        Debug.Log($"Player current velocity magnitude is: {_rigidBody.velocity.magnitude}");
+        //Debug.Log($"Player current velocity magnitude is: {_rigidBody.velocity.magnitude}");
 
     }
 
