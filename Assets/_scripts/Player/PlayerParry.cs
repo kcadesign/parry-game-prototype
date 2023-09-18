@@ -11,12 +11,9 @@ public class PlayerParry : MonoBehaviour
     public static event ParryActive OnParryActive;
 
     //private Rigidbody2D _playerRigidbody;
-    public Collider2D _playerCollider;
-    public PhysicsMaterial2D DefaultPlayerMaterial;
-    public PhysicsMaterial2D BouncyMaterial;
 
     private bool _parryActive;
-    private bool _blockActive;
+    //private bool _blockActive;
     //public float ParryForce = 100;
 
     private void Awake()
@@ -56,48 +53,14 @@ public class PlayerParry : MonoBehaviour
     {
         //print("Parry button released");
         _parryActive = false;
-        _playerCollider.sharedMaterial = DefaultPlayerMaterial;
-
         OnParryActive?.Invoke(_parryActive);
     }
 
     private void PlayerBlock_OnBlock(bool isBlocking)
     {
-        _parryActive = false;
-        _blockActive = isBlocking;
-        OnParryActive?.Invoke(_parryActive);
         //print("Parry button released");
+        _parryActive = false;
+        OnParryActive?.Invoke(_parryActive);
     }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        //Debug.Log("Player trigger entered");
-        if (_parryActive)
-        {
-            _playerCollider.sharedMaterial = BouncyMaterial;
-            //_playerRigidbody.AddForce(Vector2.up * ParryForce, ForceMode2D.Impulse);
-            //_playerRigidbody.velocity = Vector2.ClampMagnitude(_playerRigidbody.velocity, 20);
-        }
-        else if (_blockActive)
-        {
-            _playerCollider.sharedMaterial = null;
-
-        }
-        else if (!_parryActive && !_blockActive)
-        {
-            _playerCollider.sharedMaterial = DefaultPlayerMaterial;
-        }
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        //Debug.Log($"Enter velocity magnitude is: {_playerRigidbody.velocity.magnitude}");
-
-    }
-
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        //Debug.Log($"Exit current velocity magnitude is: {_playerRigidbody.velocity.magnitude}");
-
-    }
+    
 }
