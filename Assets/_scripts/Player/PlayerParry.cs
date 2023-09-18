@@ -10,18 +10,19 @@ public class PlayerParry : MonoBehaviour
     public delegate void ParryActive(bool parryPressed);
     public static event ParryActive OnParryActive;
 
-    private Rigidbody2D _playerRigidbody;
+    //private Rigidbody2D _playerRigidbody;
     public Collider2D _playerCollider;
     public PhysicsMaterial2D DefaultPlayerMaterial;
     public PhysicsMaterial2D BouncyMaterial;
 
-    private bool _parryActive = false;
-    public float ParryForce = 1;
+    private bool _parryActive;
+    private bool _blockActive;
+    //public float ParryForce = 100;
 
     private void Awake()
     {
         playerControls = new PlayerControls();
-        _playerRigidbody = GetComponent<Rigidbody2D>();
+        //_playerRigidbody = GetComponent<Rigidbody2D>();
     }
 
     private void OnEnable()
@@ -63,6 +64,7 @@ public class PlayerParry : MonoBehaviour
     private void PlayerBlock_OnBlock(bool isBlocking)
     {
         _parryActive = false;
+        _blockActive = isBlocking;
         OnParryActive?.Invoke(_parryActive);
         //print("Parry button released");
     }
@@ -76,10 +78,14 @@ public class PlayerParry : MonoBehaviour
             //_playerRigidbody.AddForce(Vector2.up * ParryForce, ForceMode2D.Impulse);
             //_playerRigidbody.velocity = Vector2.ClampMagnitude(_playerRigidbody.velocity, 20);
         }
-        else if (!_parryActive)
+        else if (_blockActive)
+        {
+            _playerCollider.sharedMaterial = null;
+
+        }
+        else if (!_parryActive && !_blockActive)
         {
             _playerCollider.sharedMaterial = DefaultPlayerMaterial;
-            //return;
         }
     }
 

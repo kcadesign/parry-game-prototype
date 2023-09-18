@@ -33,11 +33,9 @@ public class HandlePlayerHealthBar : MonoBehaviour
         GetSetCurrentFill();
     }
 
-
     private void GetSetCurrentFill()
     {
         float currentFillPercentage = _currentFill / _maxFill;
         BarValueMask.fillAmount = currentFillPercentage;        
-        //print($"Current fill is: {currentFillPercentage}");
     }
 }
