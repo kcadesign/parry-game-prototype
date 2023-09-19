@@ -5,12 +5,11 @@ using UnityEngine;
 public class ProjectileEnemyController : EnemyControllerBase
 {
     [Header("Projectile Parameters")]
-    public GameObject ProjectileSpawner;
+    public SpawnProjectile ProjectileSpawner;
 
     protected override void PerformIdleActions()
     {
         base.PerformIdleActions();
-        ProjectileSpawner.SetActive(false);
     }
 
     protected override void PerformAttackActions()
@@ -18,7 +17,7 @@ public class ProjectileEnemyController : EnemyControllerBase
         base.PerformAttackActions();
     }
 
-    private void EnableProjectiles() => ProjectileSpawner.SetActive(true);
-    private void DisableProjectiles() => ProjectileSpawner.SetActive(false);
+    private void EnableProjectiles() => ProjectileSpawner.InvokeProjectile();
+    private void DisableProjectiles() => ProjectileSpawner.CancelInvokeProjectile();
 
 }

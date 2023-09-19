@@ -297,7 +297,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5906391850735681325, guid: 715772b3e9fa50342b2c3cbb6c67e910, type: 3}
       propertyPath: _damageForce
-      value: 50
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 5906391850735681325, guid: 715772b3e9fa50342b2c3cbb6c67e910, type: 3}
       propertyPath: _damageAmount
@@ -455,7 +455,7 @@ CircleCollider2D:
   m_GameObject: {fileID: 4085475802599378212}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: ffcc5a5fbbb838f4b8c81c74bc220c84, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0

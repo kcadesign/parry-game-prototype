@@ -10,24 +10,24 @@ public class HandleGameStateUI : MonoBehaviour
 
     public GameObject GameOverUI;
     public GameObject LevelFinishUI;
+    public GameObject PauseGameUI;
 
     private Vector3 _respawnPoint;
-    //private GameObject _player;
-
 
     private void OnEnable()
     {
         HandlePlayerHealth.OnHealthChange += HandlePlayerHealth_OnHealthChange;
         HandleEnterFinish.OnLevelFinish += HandleEnterFinish_OnLevelFinish;
         HandleLevelProgression.OnSendCurrentCheckpoint += HandleLevelProgression_OnSendCurrentCheckpoint;
+        GameStateManager.OnPlayerPause += GameStateManager_OnPlayerPause;
     }
-
 
     private void OnDisable()
     {
         HandlePlayerHealth.OnHealthChange -= HandlePlayerHealth_OnHealthChange;
         HandleEnterFinish.OnLevelFinish -= HandleEnterFinish_OnLevelFinish;
         HandleLevelProgression.OnSendCurrentCheckpoint -= HandleLevelProgression_OnSendCurrentCheckpoint;
+        GameStateManager.OnPlayerPause -= GameStateManager_OnPlayerPause;
     }
 
     private void HandlePlayerHealth_OnHealthChange(int currentHealth, bool playerAlive)
@@ -59,9 +59,20 @@ public class HandleGameStateUI : MonoBehaviour
     private void HandleLevelProgression_OnSendCurrentCheckpoint(Vector3 currentCheckpoint, GameObject checkpointActivator)
     {
         _respawnPoint = currentCheckpoint;
-        //_player = checkpointActivator;
     }
-
+    
+    private void GameStateManager_OnPlayerPause(bool playerPaused)
+    {
+        if (playerPaused)
+        {
+            PauseGameUI.SetActive(true);
+        }
+        else
+        {
+            PauseGameUI.SetActive(false);
+        }
+    }
+    
     public void RestartAtLatestCheckpoint()
     {
         OnGameRestart?.Invoke(_respawnPoint);
@@ -72,5 +83,6 @@ public class HandleGameStateUI : MonoBehaviour
     {
         int currentSceneName = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(currentSceneName);
-    }
+    }    
+
 }

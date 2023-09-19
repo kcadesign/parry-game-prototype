@@ -60,7 +60,7 @@ public class HandlePlayerCollisions : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy") && !_isParrying && !_isBlocking && !_playerStunned)
         {
-            Debug.Log($"Player hurt by {collision.gameObject.tag}");
+            //Debug.Log($"Player hurt by {collision.gameObject.tag}");
 
             StartCoroutine(StunActions());
         }
@@ -74,7 +74,7 @@ public class HandlePlayerCollisions : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("EnvironmentHazard"))
         {
-            Debug.Log($"Player hurt by {collision.gameObject.tag}");
+            //Debug.Log($"Player hurt by {collision.gameObject.tag}");
         }
     }
 

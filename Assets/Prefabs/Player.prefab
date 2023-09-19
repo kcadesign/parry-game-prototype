@@ -701,6 +701,7 @@ GameObject:
   - component: {fileID: 7987222072584019903}
   - component: {fileID: 6140860106109771891}
   - component: {fileID: 7555413703909545340}
+  - component: {fileID: 6207355261018228553}
   - component: {fileID: 6837420590063717220}
   m_Layer: 3
   m_Name: Collider
@@ -860,10 +861,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe39bce75e43f5341aeff4594cfec336, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerCollider: {fileID: 1287981112224866565}
-  DefaultPlayerMaterial: {fileID: 6200000, guid: 40095fed4c952f24a97991e236324752, type: 2}
-  BouncyMaterial: {fileID: 6200000, guid: ffcc5a5fbbb838f4b8c81c74bc220c84, type: 2}
-  ParryForce: 85
 --- !u!114 &4242945545593811527
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -922,7 +919,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hitStunMultiplier: 4
   _hitStunDuration: 3
-  _damageAmount: 1
+  _damageEnemyAmount: 1
+--- !u!114 &6207355261018228553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6715703871435085181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f95d13e2bde1ba4b92e50fa538fdc35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DefaultPlayerMaterial: {fileID: 6200000, guid: 40095fed4c952f24a97991e236324752, type: 2}
+  BouncyMaterial: {fileID: 6200000, guid: ffcc5a5fbbb838f4b8c81c74bc220c84, type: 2}
 --- !u!114 &6837420590063717220
 MonoBehaviour:
   m_ObjectHideFlags: 0

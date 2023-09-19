@@ -26,7 +26,6 @@ public class HandleEnemyHealth : MonoBehaviour
         HandleProjectileCollisions.OnDeflect -= HandleProjectileCollisions_OnDeflect;
     }
 
-    // This code is causing all subscribed enemies to take the same damage at the same time
     private void HandlePlayerCollisions_OnDamageEnemy(GameObject collisionObject, int damageAmount)
     {
         if(collisionObject == gameObject)
@@ -39,6 +38,7 @@ public class HandleEnemyHealth : MonoBehaviour
             CheckHealth();
         }
     }
+
     private void HandleProjectileCollisions_OnDeflect(GameObject collisionObject, int damageAmount)
     {
         if (collisionObject == gameObject)

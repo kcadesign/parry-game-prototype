@@ -45,5 +45,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Projectile: {fileID: 332823560691022870, guid: 28de881a8850cfb468c504e65a589b44, type: 3}
-  _spawnDelay: 0
-  _spawnRate: 2
+  SpawnPointTransform: {fileID: 0}

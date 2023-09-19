@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HandleEnemyCollisions : MonoBehaviour
 {
-    public delegate void DamagePlayer(bool damageConditionMet);
+    public delegate void DamagePlayer();
     public static event DamagePlayer OnDamagePlayer;
 
     protected bool _isParrying;
@@ -12,7 +12,6 @@ public class HandleEnemyCollisions : MonoBehaviour
     
     [HideInInspector] public bool EnemyHit = false;
 
-    protected bool _damageConditionMet;
     [SerializeField] private float _damageForce = 5;
 
     protected void OnEnable()
@@ -31,6 +30,7 @@ public class HandleEnemyCollisions : MonoBehaviour
     {
         _isParrying = parryPressed;
     }
+
     private void PlayerBlock_OnBlock(bool isBlocking)
     {
         _isBlocking = isBlocking;
@@ -51,23 +51,19 @@ public class HandleEnemyCollisions : MonoBehaviour
         if (collision.gameObject.CompareTag("Player") && !_isParrying && !_isBlocking)
         {
             EnemyHit = false;
-            _damageConditionMet = true;
 
             HandleKnockBack(collision);
+            OnDamagePlayer?.Invoke();
         }
         else if(collision.gameObject.CompareTag("Player") && !_isParrying && _isBlocking)
         {
             EnemyHit = false;
-            _damageConditionMet = false;
         }
         else if (collision.gameObject.CompareTag("Player") && _isParrying && !_isBlocking)
         {
             EnemyHit = true;
-            _damageConditionMet = false;
         }
-        OnDamagePlayer?.Invoke(_damageConditionMet);
-        Debug.Log($"Damage condition met: {_damageConditionMet}");
-
+        //Debug.Log($"Damage condition met: {_damageConditionMet}");
     }
 
     protected void HandleKnockBack(Collision2D collision)
