@@ -493,7 +493,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a46814dcb4fe9184694a63da56db36f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damageAmount: 15
+  _playerDamageAmount: 15
 --- !u!114 &7158609402752950163 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5906391850735681325, guid: 715772b3e9fa50342b2c3cbb6c67e910, type: 3}

@@ -12,8 +12,8 @@ public class HandleProjectileCollisions : MonoBehaviour
 
     private SpriteRenderer _projectileSpriteRenderer;
 
-    private bool _parryActive;
-    private bool _blockActive;
+    public bool _parryActive;
+    public bool _blockActive;
     private bool _deflected = false;
     [SerializeField] private int _enemyDamageAmount = 1;
 
@@ -49,7 +49,7 @@ public class HandleProjectileCollisions : MonoBehaviour
     {
         //Debug.Log($"Block active: {_blockActive}");
     }
-
+    
     protected void OnCollisionEnter2D(Collision2D collision)
     {
         //Debug.Log($"Block active: {_blockActive}");
@@ -58,7 +58,7 @@ public class HandleProjectileCollisions : MonoBehaviour
         {
             if (!_deflected)
             {
-                HandleCollisionPlayer(collision);
+                HandleCollisionPlayer();
             }
             else if (_deflected)
             {
@@ -79,7 +79,7 @@ public class HandleProjectileCollisions : MonoBehaviour
 
     }
 
-    private void HandleCollisionPlayer(Collision2D collision)
+    private void HandleCollisionPlayer()
     {
         if (_parryActive)
         {
