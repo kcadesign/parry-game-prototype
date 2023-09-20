@@ -32,12 +32,12 @@ public class PlayerBlock : MonoBehaviour
         playerControls.Gameplay.Block.performed -= Block_performed;
         playerControls.Gameplay.Block.canceled -= Block_canceled;
     }
-
+    /*
     private void Update()
     {
-        //Debug.Log($"Player is blocking: {_isBlocking}");
+        Debug.Log($"Player is blocking: {_isBlocking}");
     }
-
+    */
     private void Block_performed(InputAction.CallbackContext value)
     {
         _isBlocking = true;

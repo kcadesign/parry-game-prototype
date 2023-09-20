@@ -20,16 +20,17 @@ public class HandleEnemyDamageOutput : MonoBehaviour
         HandleEnemyCollisions.OnDamagePlayer -= EnemyCollisionWithPlayer_OnDamagePlayer;
         HandleProjectileCollisions.OnProjectileDamagePlayer -= HandleProjectileCollisions_OnProjectileDamagePlayer;
     }
-
+    
     private void EnemyCollisionWithPlayer_OnDamagePlayer()
     {
         SendDamage(_playerDamageAmount);
-        //Debug.Log($"Send {_damageAmount} damage");
+        Debug.Log($"{_playerDamageAmount} damage sent to player from enemy collision");
     }
-
+    
     private void HandleProjectileCollisions_OnProjectileDamagePlayer()
     {
         SendDamage(_playerDamageAmount);
+        Debug.Log($"{_playerDamageAmount} damage sent to player from projectile collision");
     }
 
     private void SendDamage(int damageAmount) => OnOutputDamage?.Invoke(damageAmount);

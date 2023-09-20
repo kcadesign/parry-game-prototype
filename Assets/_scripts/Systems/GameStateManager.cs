@@ -71,7 +71,6 @@ public class GameStateManager : MonoBehaviour
         {
             _pauseTime = false;
             _playerCanPause = true;
-
         }
         HandlePauseTime(_pauseTime);
     }

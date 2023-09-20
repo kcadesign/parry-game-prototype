@@ -45,23 +45,23 @@ public class HandleEnemyCollisions : MonoBehaviour
 
     protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
-        //Debug.Log($"Parrying on collision: {_isParrying}");
-        //Debug.Log($"Blocking on collision: {_isBlocking}");
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            if (!_isParrying && !_isBlocking)
+            {
+                EnemyHit = false;
 
-        if (collision.gameObject.CompareTag("Player") && !_isParrying && !_isBlocking)
-        {
-            EnemyHit = false;
-
-            HandleKnockBack(collision);
-            OnDamagePlayer?.Invoke();
-        }
-        else if(collision.gameObject.CompareTag("Player") && !_isParrying && _isBlocking)
-        {
-            EnemyHit = false;
-        }
-        else if (collision.gameObject.CompareTag("Player") && _isParrying && !_isBlocking)
-        {
-            EnemyHit = true;
+                HandleKnockBack(collision);
+                OnDamagePlayer?.Invoke();
+            }
+            else if (!_isParrying && _isBlocking)
+            {
+                EnemyHit = false;
+            }
+            else if (_isParrying && !_isBlocking)
+            {
+                EnemyHit = true;
+            }
         }
         //Debug.Log($"Damage condition met: {_damageConditionMet}");
     }

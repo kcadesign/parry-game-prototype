@@ -7,11 +7,27 @@ public class HandleEnterFinish : MonoBehaviour
     public delegate void FinishLevel(bool levelFinished);
     public static event FinishLevel OnLevelFinish;
 
+    private bool _parryActive;
     private bool _levelFinished;
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnEnable()
     {
-        if (collision.gameObject.CompareTag("Player"))
+        PlayerParry.OnParryActive += PlayerParry_OnParryActive;
+    }
+
+    private void OnDisable()
+    {
+        PlayerParry.OnParryActive -= PlayerParry_OnParryActive;
+    }
+
+    private void PlayerParry_OnParryActive(bool parryPressed)
+    {
+        _parryActive = parryPressed;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player") && _parryActive)
         {
             _levelFinished = true;
         }
@@ -20,5 +36,6 @@ public class HandleEnterFinish : MonoBehaviour
             _levelFinished = false;
         }
         OnLevelFinish?.Invoke(_levelFinished);
+
     }
 }

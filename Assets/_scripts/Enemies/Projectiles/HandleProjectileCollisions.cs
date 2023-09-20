@@ -44,12 +44,12 @@ public class HandleProjectileCollisions : MonoBehaviour
         _blockActive = isBlocking;
         Debug.Log($"Block active: {_blockActive}");
     }
-    
+    /*
     private void Update()
     {
-        //Debug.Log($"Block active: {_blockActive}");
+        Debug.Log($"Block active: {_blockActive}");
     }
-    
+    */
     protected void OnCollisionEnter2D(Collision2D collision)
     {
         //Debug.Log($"Block active: {_blockActive}");
@@ -76,7 +76,6 @@ public class HandleProjectileCollisions : MonoBehaviour
                 HandleCollisionEnemy(collision);
             }
         }
-
     }
 
     private void HandleCollisionPlayer()
@@ -91,7 +90,7 @@ public class HandleProjectileCollisions : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        else
+        else if(!_parryActive && !_blockActive)
         {
             OnProjectileDamagePlayer?.Invoke();
             Destroy(gameObject);
