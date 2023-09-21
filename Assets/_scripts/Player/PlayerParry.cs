@@ -29,7 +29,7 @@ public class PlayerParry : MonoBehaviour
         playerControls.Gameplay.Parry.performed += Parry_performed;
         playerControls.Gameplay.Parry.canceled += Parry_canceled;
 
-        PlayerBlock.OnBlock += PlayerBlock_OnBlock;
+        PlayerBlockJump.OnBlock += PlayerBlockJump_OnBlock;
     }
 
     private void OnDisable()
@@ -39,7 +39,7 @@ public class PlayerParry : MonoBehaviour
         playerControls.Gameplay.Parry.performed -= Parry_performed;
         playerControls.Gameplay.Parry.canceled -= Parry_canceled;
 
-        PlayerBlock.OnBlock -= PlayerBlock_OnBlock;
+        PlayerBlockJump.OnBlock -= PlayerBlockJump_OnBlock;
     }
 
     private void Parry_performed(InputAction.CallbackContext value)
@@ -56,7 +56,7 @@ public class PlayerParry : MonoBehaviour
         OnParryActive?.Invoke(_parryActive);
     }
 
-    private void PlayerBlock_OnBlock(bool isBlocking)
+    private void PlayerBlockJump_OnBlock(bool isBlocking)
     {
         //print("Parry button released");
         _parryActive = false;

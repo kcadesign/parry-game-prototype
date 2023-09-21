@@ -37,13 +37,13 @@ public class HandlePlayerCollisions : MonoBehaviour
     private void OnEnable()
     {
         PlayerParry.OnParryActive += PlayerParry_OnParryActive;
-        PlayerBlock.OnBlock += PlayerBlock_OnBlock;
+        PlayerBlockJump.OnBlock += PlayerBlockJump_OnBlock;
     }
 
     private void OnDisable()
     {
         PlayerParry.OnParryActive -= PlayerParry_OnParryActive;
-        PlayerBlock.OnBlock -= PlayerBlock_OnBlock;
+        PlayerBlockJump.OnBlock -= PlayerBlockJump_OnBlock;
     }
 
     private void PlayerParry_OnParryActive(bool parryPressed)
@@ -51,7 +51,7 @@ public class HandlePlayerCollisions : MonoBehaviour
         _isParrying = parryPressed;
     }
 
-    private void PlayerBlock_OnBlock(bool isBlocking)
+    private void PlayerBlockJump_OnBlock(bool isBlocking)
     {
         _isBlocking = isBlocking;
     }

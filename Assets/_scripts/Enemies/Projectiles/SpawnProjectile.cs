@@ -19,13 +19,13 @@ public class SpawnProjectile : MonoBehaviour
     protected void OnEnable()
     {
         PlayerParry.OnParryActive += PlayerParry_OnParryActive;
-        PlayerBlock.OnBlock += PlayerBlock_OnBlock;
+        PlayerBlockJump.OnBlock += PlayerBlockJump_OnBlock;
     }
 
     protected void OnDisable()
     {
         PlayerParry.OnParryActive -= PlayerParry_OnParryActive;
-        PlayerBlock.OnBlock -= PlayerBlock_OnBlock;
+        PlayerBlockJump.OnBlock -= PlayerBlockJump_OnBlock;
     }
 
     private void PlayerParry_OnParryActive(bool parryPressed)
@@ -33,10 +33,10 @@ public class SpawnProjectile : MonoBehaviour
         _parryActive = parryPressed;
     }
 
-    private void PlayerBlock_OnBlock(bool isBlocking)
+    private void PlayerBlockJump_OnBlock(bool isBlocking)
     {
         _blockActive = isBlocking;
-        Debug.Log($"Block active: {_blockActive}");
+        //Debug.Log($"Block active: {_blockActive}");
     }
 
     private void InstantiateProjectile()

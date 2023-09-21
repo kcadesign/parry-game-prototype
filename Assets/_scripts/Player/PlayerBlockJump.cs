@@ -4,14 +4,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerJump : MonoBehaviour
+public class PlayerBlockJump : MonoBehaviour
 {
+    public delegate void Block(bool isBlocking);
+    public static event Block OnBlock;
+
     protected PlayerControls playerControls;
     private Rigidbody2D _rigidBody;
 
     [SerializeField] private float _jumpPower = 5;
 
-    private bool _canJump = false;
+    private bool _blockActive;
+    private bool _canJump;
     [SerializeField] private bool _restrictJumpCount;
     private bool _isGrounded;
 
@@ -25,10 +29,9 @@ public class PlayerJump : MonoBehaviour
     {
         playerControls.Gameplay.Enable();
 
-        playerControls.Gameplay.Jump.performed += Jump_performed;
-        playerControls.Gameplay.Jump.canceled += Jump_canceled;
+        playerControls.Gameplay.BlockJump.performed += BlockJump_performed;
+        playerControls.Gameplay.BlockJump.canceled += BlockJump_canceled;
 
-        PlayerBlock.OnBlock += PlayerBlock_OnBlock;
         CheckPlayerGrounded.OnGrounded += CheckPlayerGrounded_OnGrounded;
     }
 
@@ -36,40 +39,37 @@ public class PlayerJump : MonoBehaviour
     {
         playerControls.Gameplay.Disable();
 
-        playerControls.Gameplay.Jump.performed -= Jump_performed;
-        playerControls.Gameplay.Jump.canceled -= Jump_canceled;
+        playerControls.Gameplay.BlockJump.performed -= BlockJump_performed;
+        playerControls.Gameplay.BlockJump.canceled -= BlockJump_canceled;
 
-        PlayerBlock.OnBlock -= PlayerBlock_OnBlock;
         CheckPlayerGrounded.OnGrounded -= CheckPlayerGrounded_OnGrounded;
     }
 
-    private void PlayerBlock_OnBlock(bool isBlocking)
+    private void BlockJump_performed(InputAction.CallbackContext value)
     {
-        _canJump = isBlocking;
+        _blockActive = true;
+        OnBlock?.Invoke(_blockActive);
+        if (_blockActive)
+        {
+            _canJump = true;
+        }
     }
 
-    private void CheckPlayerGrounded_OnGrounded(bool grounded)
+    private void BlockJump_canceled(InputAction.CallbackContext value)
     {
-        _isGrounded = grounded;
-    }
-
-    private void Jump_performed(InputAction.CallbackContext value)
-    {
-        return;
-    }
-
-    // On button release jump is performed
-    private void Jump_canceled(InputAction.CallbackContext value)
-    {
+        _blockActive = false;
+        OnBlock?.Invoke(_blockActive);
 
         if (_canJump)
         {
             HandleJump();
         }
-        else
-        {
-            _canJump = false;
-        }
+        _canJump = false;
+    }
+
+    private void CheckPlayerGrounded_OnGrounded(bool grounded)
+    {
+        _isGrounded = grounded;
     }
 
     private void HandleJump()

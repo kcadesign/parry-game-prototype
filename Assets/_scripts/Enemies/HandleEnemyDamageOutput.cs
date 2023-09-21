@@ -9,28 +9,39 @@ public class HandleEnemyDamageOutput : MonoBehaviour
 
     [SerializeField] private int _playerDamageAmount = 5;
 
+    private IEnemyCollisionHandler _collisionHandler;
+
+    private void Awake()
+    {
+        // Try to find the appropriate collision handler component at runtime
+        _collisionHandler = GetComponent<IEnemyCollisionHandler>();
+
+        if (_collisionHandler == null)
+        {
+            Debug.LogWarning("No collision handler component found on " + gameObject.name);
+        }
+    }
+
     private void OnEnable()
     {
-        HandleEnemyCollisions.OnDamagePlayer += EnemyCollisionWithPlayer_OnDamagePlayer;
-        HandleProjectileCollisions.OnProjectileDamagePlayer += HandleProjectileCollisions_OnProjectileDamagePlayer;
+        if (_collisionHandler != null)
+        {
+            _collisionHandler.OnDamagePlayer += HandleCollisionWithPlayer_OnDamagePlayer;
+        }
     }
 
     private void OnDisable()
     {
-        HandleEnemyCollisions.OnDamagePlayer -= EnemyCollisionWithPlayer_OnDamagePlayer;
-        HandleProjectileCollisions.OnProjectileDamagePlayer -= HandleProjectileCollisions_OnProjectileDamagePlayer;
+        if (_collisionHandler != null)
+        {
+            _collisionHandler.OnDamagePlayer -= HandleCollisionWithPlayer_OnDamagePlayer;
+        }
     }
-    
-    private void EnemyCollisionWithPlayer_OnDamagePlayer()
+
+    private void HandleCollisionWithPlayer_OnDamagePlayer()
     {
         SendDamage(_playerDamageAmount);
-        Debug.Log($"{_playerDamageAmount} damage sent to player from enemy collision");
-    }
-    
-    private void HandleProjectileCollisions_OnProjectileDamagePlayer()
-    {
-        SendDamage(_playerDamageAmount);
-        Debug.Log($"{_playerDamageAmount} damage sent to player from projectile collision");
+        Debug.Log($"{_playerDamageAmount} damage sent to player from {gameObject.name}");
     }
 
     private void SendDamage(int damageAmount) => OnOutputDamage?.Invoke(damageAmount);

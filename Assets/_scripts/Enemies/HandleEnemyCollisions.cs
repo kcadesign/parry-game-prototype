@@ -1,11 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HandleEnemyCollisions : MonoBehaviour
+public class HandleEnemyCollisions : MonoBehaviour, IEnemyCollisionHandler
 {
-    public delegate void DamagePlayer();
-    public static event DamagePlayer OnDamagePlayer;
+    public event Action OnDamagePlayer;
 
     protected bool _isParrying;
     protected bool _isBlocking;
@@ -17,13 +17,13 @@ public class HandleEnemyCollisions : MonoBehaviour
     protected void OnEnable()
     {
         PlayerParry.OnParryActive += PlayerParry_OnParryActive;
-        PlayerBlock.OnBlock += PlayerBlock_OnBlock;
+        PlayerBlockJump.OnBlock += PlayerBlockJump_OnBlock;
     }
 
     protected void OnDisable()
     {
         PlayerParry.OnParryActive -= PlayerParry_OnParryActive;
-        PlayerBlock.OnBlock -= PlayerBlock_OnBlock;
+        PlayerBlockJump.OnBlock -= PlayerBlockJump_OnBlock;
     }
 
     protected void PlayerParry_OnParryActive(bool parryPressed)
@@ -31,7 +31,7 @@ public class HandleEnemyCollisions : MonoBehaviour
         _isParrying = parryPressed;
     }
 
-    private void PlayerBlock_OnBlock(bool isBlocking)
+    private void PlayerBlockJump_OnBlock(bool isBlocking)
     {
         _isBlocking = isBlocking;
     }

@@ -1,14 +1,17 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HandleProjectileCollisions : MonoBehaviour
+public class HandleProjectileCollisions : MonoBehaviour, IEnemyCollisionHandler
 {
+    public event Action OnDamagePlayer;
+
     public delegate void Deflect(GameObject collisionObject, int damageAmount);
     public static event Deflect OnDeflect;
 
-    public delegate void ProjectileDamagePlayer();
-    public static event ProjectileDamagePlayer OnProjectileDamagePlayer;
+    //public delegate void ProjectileDamagePlayer();
+    //public event ProjectileDamagePlayer OnProjectileDamagePlayer;
 
     private SpriteRenderer _projectileSpriteRenderer;
 
@@ -25,13 +28,13 @@ public class HandleProjectileCollisions : MonoBehaviour
     protected void OnEnable()
     {
         PlayerParry.OnParryActive += PlayerParry_OnParryActive;
-        PlayerBlock.OnBlock += PlayerBlock_OnBlock;
+        PlayerBlockJump.OnBlock += PlayerBlockJump_OnBlock;
     }
 
     protected void OnDisable()
     {
         PlayerParry.OnParryActive -= PlayerParry_OnParryActive;
-        PlayerBlock.OnBlock -= PlayerBlock_OnBlock;
+        PlayerBlockJump.OnBlock -= PlayerBlockJump_OnBlock;
     }
 
     private void PlayerParry_OnParryActive(bool parryPressed)
@@ -39,7 +42,7 @@ public class HandleProjectileCollisions : MonoBehaviour
         _parryActive = parryPressed;
     }
 
-    private void PlayerBlock_OnBlock(bool isBlocking)
+    private void PlayerBlockJump_OnBlock(bool isBlocking)
     {
         _blockActive = isBlocking;
         Debug.Log($"Block active: {_blockActive}");
@@ -92,7 +95,7 @@ public class HandleProjectileCollisions : MonoBehaviour
         }
         else if(!_parryActive && !_blockActive)
         {
-            OnProjectileDamagePlayer?.Invoke();
+            OnDamagePlayer?.Invoke();
             Destroy(gameObject);
         }
     }
