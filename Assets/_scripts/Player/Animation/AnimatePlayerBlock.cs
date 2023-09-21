@@ -23,7 +23,7 @@ public class AnimatePlayerBlock : MonoBehaviour
 
     private void PlayerBlockJump_OnBlock(bool isBlocking)
     {
-        Debug.Log($"Animate block script reading block as: {isBlocking}");
+        //Debug.Log($"Animate block script reading block as: {isBlocking}");
         _playerAnimator.SetBool("Block", isBlocking);
     }
 

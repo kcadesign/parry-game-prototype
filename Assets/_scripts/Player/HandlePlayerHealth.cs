@@ -60,19 +60,21 @@ public class HandlePlayerHealth : MonoBehaviour
         }
     }
 
-    private void HandleEnemyDamageOutput_OnOutputDamage(int damageAmount)
+    private void HandleEnemyDamageOutput_OnOutputDamage(GameObject collisionObject, int damageAmount)
     {
         Debug.Log($"Damage player for {damageAmount}");
+        if(collisionObject == gameObject)
+        {
+            PlayerHealth.Damage(damageAmount);
 
-        PlayerHealth.Damage(damageAmount);
+            _currentHealth = PlayerHealth.GetHealth();
+            CheckPlayerAlive();
 
-        _currentHealth = PlayerHealth.GetHealth();
-        CheckPlayerAlive();
+            ResetHealTimer();
+            StartHealTimer();
 
-        ResetHealTimer();
-        StartHealTimer();
-
-        OnHealthChange?.Invoke(_currentHealth, _playerAlive);
+            OnHealthChange?.Invoke(_currentHealth, _playerAlive);
+        }
     }
 
     private void PlayerTriggerEnter_OnAreaDamagePlayer(int damageAmount)

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class HandleEnemyCollisions : MonoBehaviour, IDealDamage
 {
-    public event Action OnDamage;
+    public event Action<GameObject> OnDamage;
 
     protected bool _isParrying;
     protected bool _isBlocking;
@@ -52,7 +52,7 @@ public class HandleEnemyCollisions : MonoBehaviour, IDealDamage
                 EnemyHit = false;
 
                 HandleKnockBack(collision);
-                OnDamage?.Invoke();
+                OnDamage?.Invoke(collision.gameObject);
             }
             else if (!_isParrying && _isBlocking)
             {

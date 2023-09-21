@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class HandleProjectileCollisions : MonoBehaviour, IDealDamage
 {
-    public event Action OnDamage;
+    public event Action<GameObject> OnDamage;
 
     public delegate void Deflect(GameObject collisionObject, int damageAmount);
     public static event Deflect OnDeflect;
@@ -61,7 +61,7 @@ public class HandleProjectileCollisions : MonoBehaviour, IDealDamage
         {
             if (!_deflected)
             {
-                HandleCollisionPlayer();
+                HandleCollisionPlayer(collision);
             }
             else if (_deflected)
             {
@@ -81,7 +81,7 @@ public class HandleProjectileCollisions : MonoBehaviour, IDealDamage
         }
     }
 
-    private void HandleCollisionPlayer()
+    private void HandleCollisionPlayer(Collision2D collision)
     {
         if (_parryActive)
         {
@@ -95,7 +95,7 @@ public class HandleProjectileCollisions : MonoBehaviour, IDealDamage
         }
         else if(!_parryActive && !_blockActive)
         {
-            OnDamage?.Invoke();
+            OnDamage?.Invoke(collision.gameObject);
             Destroy(gameObject);
         }
     }

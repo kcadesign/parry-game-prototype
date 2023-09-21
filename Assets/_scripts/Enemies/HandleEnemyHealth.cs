@@ -16,17 +16,17 @@ public class HandleEnemyHealth : MonoBehaviour
 
     private void OnEnable()
     {
-        HandlePlayerCollisions.OnDamageEnemy += HandlePlayerCollisions_OnDamageEnemy;
+        HandleDamageOutput.OnOutputDamage += HandleEnemyDamageOutput_OnOutputDamage;
         HandleProjectileCollisions.OnDeflect += HandleProjectileCollisions_OnDeflect;
     }
 
     private void OnDisable()
     {
-        HandlePlayerCollisions.OnDamageEnemy -= HandlePlayerCollisions_OnDamageEnemy;
+        HandleDamageOutput.OnOutputDamage -= HandleEnemyDamageOutput_OnOutputDamage;
         HandleProjectileCollisions.OnDeflect -= HandleProjectileCollisions_OnDeflect;
     }
 
-    private void HandlePlayerCollisions_OnDamageEnemy(GameObject collisionObject, int damageAmount)
+    private void HandleEnemyDamageOutput_OnOutputDamage(GameObject collisionObject, int damageAmount)
     {
         if(collisionObject == gameObject)
         {

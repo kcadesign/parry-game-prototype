@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HandleDamageOutput : MonoBehaviour
 {
-    public delegate void OutputDamage(int damageAmount);
+    public delegate void OutputDamage(GameObject collisionObject, int damageAmount);
     public static event OutputDamage OnOutputDamage;
 
     [SerializeField] private int _damageAmount = 5;
@@ -37,11 +37,16 @@ public class HandleDamageOutput : MonoBehaviour
         }
     }
 
-    private void IDealDamage_OnDamage()
+    private void IDealDamage_OnDamage(GameObject collisionObject)
     {
-        SendDamage(_damageAmount);
-        Debug.Log($"{_damageAmount} damage sent to player from {gameObject.name}");
+        SendDamage(collisionObject, _damageAmount);
+        Debug.Log($"{_damageAmount} damage sent to {collisionObject.tag} from {gameObject.tag}");
     }
 
-    private void SendDamage(int damageAmount) => OnOutputDamage?.Invoke(damageAmount);
+    private void SendDamage(GameObject collisionObject, int damageAmount)
+    {
+        OnOutputDamage?.Invoke(collisionObject, damageAmount);
+
+    }
+
 }

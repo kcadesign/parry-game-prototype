@@ -1,15 +1,18 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HandlePlayerCollisions : MonoBehaviour
+public class HandlePlayerCollisions : MonoBehaviour, IDealDamage
 {
+    public event Action<GameObject> OnDamage;
+
     public delegate void Stunned(bool stunned);
     public static event Stunned OnStunned;
-
+    /*
     public delegate void DamageEnemy(GameObject collisionObject, int damageAmount);
     public static event DamageEnemy OnDamageEnemy;
-
+    */
     private Rigidbody2D _rigidBody;
 
     private bool _isParrying = false;
@@ -24,7 +27,7 @@ public class HandlePlayerCollisions : MonoBehaviour
     [SerializeField] private float _hitStunMultiplier = 2;
     [SerializeField] private float _hitStunDuration = 3;
 
-    [SerializeField] private int _damageEnemyAmount = 1;
+    //[SerializeField] private int _damageEnemyAmount = 1;
 
     private void Awake()
     {
@@ -66,7 +69,7 @@ public class HandlePlayerCollisions : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("Enemy") && _isParrying)
         {
-            OnDamageEnemy?.Invoke(collision.gameObject, _damageEnemyAmount);
+            OnDamage?.Invoke(collision.gameObject);
         }
     }
 
