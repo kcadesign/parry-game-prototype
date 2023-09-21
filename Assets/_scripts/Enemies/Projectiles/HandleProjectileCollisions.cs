@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HandleProjectileCollisions : MonoBehaviour, IEnemyCollisionHandler
+public class HandleProjectileCollisions : MonoBehaviour, IDealDamage
 {
-    public event Action OnDamagePlayer;
+    public event Action OnDamage;
 
     public delegate void Deflect(GameObject collisionObject, int damageAmount);
     public static event Deflect OnDeflect;
@@ -76,7 +76,7 @@ public class HandleProjectileCollisions : MonoBehaviour, IEnemyCollisionHandler
             }
             else if (_deflected)
             {
-                HandleCollisionEnemy(collision);
+                DamageEnemy(collision);
             }
         }
     }
@@ -95,12 +95,12 @@ public class HandleProjectileCollisions : MonoBehaviour, IEnemyCollisionHandler
         }
         else if(!_parryActive && !_blockActive)
         {
-            OnDamagePlayer?.Invoke();
+            OnDamage?.Invoke();
             Destroy(gameObject);
         }
     }
 
-    private void HandleCollisionEnemy(Collision2D collision)
+    private void DamageEnemy(Collision2D collision)
     {
         OnDeflect?.Invoke(collision.gameObject, _enemyDamageAmount);
     }

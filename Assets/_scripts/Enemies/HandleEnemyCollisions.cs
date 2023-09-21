@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HandleEnemyCollisions : MonoBehaviour, IEnemyCollisionHandler
+public class HandleEnemyCollisions : MonoBehaviour, IDealDamage
 {
-    public event Action OnDamagePlayer;
+    public event Action OnDamage;
 
     protected bool _isParrying;
     protected bool _isBlocking;
@@ -52,7 +52,7 @@ public class HandleEnemyCollisions : MonoBehaviour, IEnemyCollisionHandler
                 EnemyHit = false;
 
                 HandleKnockBack(collision);
-                OnDamagePlayer?.Invoke();
+                OnDamage?.Invoke();
             }
             else if (!_isParrying && _isBlocking)
             {

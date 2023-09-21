@@ -370,7 +370,7 @@ PrefabInstance:
       addedObject: {fileID: 7132317554342140690}
     - targetCorrespondingSourceObject: {fileID: 728813285803240858, guid: 715772b3e9fa50342b2c3cbb6c67e910, type: 3}
       insertIndex: 3
-      addedObject: {fileID: 7655233637999548204}
+      addedObject: {fileID: 1677615051980287917}
   m_SourcePrefab: {fileID: 100100000, guid: 715772b3e9fa50342b2c3cbb6c67e910, type: 3}
 --- !u!212 &893652776507120773 stripped
 SpriteRenderer:
@@ -481,7 +481,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.45
---- !u!114 &7655233637999548204
+--- !u!114 &1677615051980287917
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -490,12 +490,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4085475802599378212}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a46814dcb4fe9184694a63da56db36f4, type: 3}
+  m_Script: {fileID: 11500000, guid: ca414c34265684f4db9ebd355b4c6e8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyCollisions: {fileID: 7158609402752950163}
-  _projectileCollisions: {fileID: 0}
-  _playerDamageAmount: 15
+  _damageAmount: 15
 --- !u!114 &7158609402752950163 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5906391850735681325, guid: 715772b3e9fa50342b2c3cbb6c67e910, type: 3}
