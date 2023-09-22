@@ -62,7 +62,6 @@ public class HandlePlayerHealth : MonoBehaviour
 
     private void HandleEnemyDamageOutput_OnOutputDamage(GameObject collisionObject, int damageAmount)
     {
-        Debug.Log($"Damage player for {damageAmount}");
         if(collisionObject == gameObject)
         {
             PlayerHealth.Damage(damageAmount);

@@ -178,7 +178,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _parryActive: 0
   _blockActive: 0
-  _enemyDamageAmount: 1
 --- !u!114 &1684678674623154846
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -191,4 +190,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca414c34265684f4db9ebd355b4c6e8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damageAmount: 20
+  _damageAmount: 25

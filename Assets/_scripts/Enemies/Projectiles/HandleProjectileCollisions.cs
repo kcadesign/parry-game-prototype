@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class HandleProjectileCollisions : MonoBehaviour, IDealDamage
 {
-    public event Action<GameObject> OnDamage;
-
+    public event Action<GameObject> OnDamageCollision;
+    /*
     public delegate void Deflect(GameObject collisionObject, int damageAmount);
     public static event Deflect OnDeflect;
-
+    */
     //public delegate void ProjectileDamagePlayer();
     //public event ProjectileDamagePlayer OnProjectileDamagePlayer;
 
@@ -18,7 +18,7 @@ public class HandleProjectileCollisions : MonoBehaviour, IDealDamage
     public bool _parryActive;
     public bool _blockActive;
     private bool _deflected = false;
-    [SerializeField] private int _enemyDamageAmount = 1;
+    //[SerializeField] private int _enemyDamageAmount = 1;
 
     private void Awake()
     {
@@ -45,7 +45,7 @@ public class HandleProjectileCollisions : MonoBehaviour, IDealDamage
     private void PlayerBlockJump_OnBlock(bool isBlocking)
     {
         _blockActive = isBlocking;
-        Debug.Log($"Block active: {_blockActive}");
+        //Debug.Log($"Block active: {_blockActive}");
     }
     /*
     private void Update()
@@ -59,49 +59,50 @@ public class HandleProjectileCollisions : MonoBehaviour, IDealDamage
 
         if (collision.gameObject.CompareTag("Player"))
         {
-            if (!_deflected)
-            {
-                HandleCollisionPlayer(collision);
-            }
-            else if (_deflected)
-            {
-                return;
-            }
+            HandleCollisionPlayer(collision);
+
         }
         else if (collision.gameObject.CompareTag("Enemy"))
         {
-            if (!_deflected)
-            {
-                return;
-            }
-            else if (_deflected)
-            {
-                DamageEnemy(collision);
-            }
+            HandleCollisionEnemy(collision);
         }
     }
 
     private void HandleCollisionPlayer(Collision2D collision)
     {
-        if (_parryActive)
+        if (!_deflected)
         {
-            _projectileSpriteRenderer.color = Color.blue;
-            _deflected = true;
-            Destroy(gameObject, 3f);
+            if (_parryActive)
+            {
+                _projectileSpriteRenderer.color = Color.blue;
+                _deflected = true;
+                Destroy(gameObject, 3f);
+            }
+            else if (_blockActive)
+            {
+                Destroy(gameObject);
+            }
+            else if (!_parryActive && !_blockActive)
+            {
+                OnDamageCollision?.Invoke(collision.gameObject);
+                Destroy(gameObject);
+            }
         }
-        else if (_blockActive)
+        else if (_deflected)
         {
-            Destroy(gameObject);
-        }
-        else if(!_parryActive && !_blockActive)
-        {
-            OnDamage?.Invoke(collision.gameObject);
-            Destroy(gameObject);
+            return;
         }
     }
 
-    private void DamageEnemy(Collision2D collision)
+    private void HandleCollisionEnemy(Collision2D collision)
     {
-        OnDeflect?.Invoke(collision.gameObject, _enemyDamageAmount);
+        if (!_deflected)
+        {
+            return;
+        }
+        else if (_deflected)
+        {
+            OnDamageCollision?.Invoke(collision.gameObject);
+        }
     }
 }

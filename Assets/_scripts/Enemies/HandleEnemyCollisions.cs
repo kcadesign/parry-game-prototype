@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class HandleEnemyCollisions : MonoBehaviour, IDealDamage
 {
-    public event Action<GameObject> OnDamage;
+    public event Action<GameObject> OnDamageCollision;
 
     protected bool _isParrying;
     protected bool _isBlocking;
@@ -39,8 +39,6 @@ public class HandleEnemyCollisions : MonoBehaviour, IDealDamage
     protected void Update()
     {
         EnemyHit = false;
-        //Debug.Log($"Player is blocking: {_isBlocking}");
-
     }
 
     protected virtual void OnCollisionEnter2D(Collision2D collision)
@@ -52,7 +50,7 @@ public class HandleEnemyCollisions : MonoBehaviour, IDealDamage
                 EnemyHit = false;
 
                 HandleKnockBack(collision);
-                OnDamage?.Invoke(collision.gameObject);
+                OnDamageCollision?.Invoke(collision.gameObject);
             }
             else if (!_isParrying && _isBlocking)
             {
@@ -63,7 +61,6 @@ public class HandleEnemyCollisions : MonoBehaviour, IDealDamage
                 EnemyHit = true;
             }
         }
-        //Debug.Log($"Damage condition met: {_damageConditionMet}");
     }
 
     protected void HandleKnockBack(Collision2D collision)

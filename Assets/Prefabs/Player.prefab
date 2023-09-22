@@ -700,6 +700,7 @@ GameObject:
   - component: {fileID: 7987222072584019903}
   - component: {fileID: 6140860106109771891}
   - component: {fileID: 7555413703909545340}
+  - component: {fileID: 4227497607361563907}
   - component: {fileID: 6207355261018228553}
   - component: {fileID: 6837420590063717220}
   m_Layer: 3
@@ -906,7 +907,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hitStunMultiplier: 4
   _hitStunDuration: 3
-  _damageEnemyAmount: 1
+--- !u!114 &4227497607361563907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6715703871435085181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca414c34265684f4db9ebd355b4c6e8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _damageAmount: 25
 --- !u!114 &6207355261018228553
 MonoBehaviour:
   m_ObjectHideFlags: 0

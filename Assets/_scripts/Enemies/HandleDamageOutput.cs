@@ -25,7 +25,7 @@ public class HandleDamageOutput : MonoBehaviour
     {
         if (_damageDealer != null)
         {
-            _damageDealer.OnDamage += IDealDamage_OnDamage;
+            _damageDealer.OnDamageCollision += IDealDamage_OnDamage;
         }
     }
 
@@ -33,7 +33,7 @@ public class HandleDamageOutput : MonoBehaviour
     {
         if (_damageDealer != null)
         {
-            _damageDealer.OnDamage -= IDealDamage_OnDamage;
+            _damageDealer.OnDamageCollision -= IDealDamage_OnDamage;
         }
     }
 
@@ -46,7 +46,5 @@ public class HandleDamageOutput : MonoBehaviour
     private void SendDamage(GameObject collisionObject, int damageAmount)
     {
         OnOutputDamage?.Invoke(collisionObject, damageAmount);
-
     }
-
 }

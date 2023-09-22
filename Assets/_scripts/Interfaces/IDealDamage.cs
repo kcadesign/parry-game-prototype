@@ -5,7 +5,7 @@ using UnityEngine;
 
 public interface IDealDamage
 {
-    public event Action<GameObject> OnDamage; 
+    public event Action<GameObject> OnDamageCollision; 
 
     
 }
