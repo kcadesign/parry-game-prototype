@@ -7,8 +7,9 @@ public class HandleEnemyCollisions : MonoBehaviour, IDealDamage
 {
     public event Action<GameObject> OnDamageCollision;
 
-    protected bool _isParrying;
-    protected bool _isBlocking;
+    protected bool _parryActive;
+    protected bool _blockActive;
+    //private bool _deflected;
     
     [HideInInspector] public bool EnemyHit = false;
 
@@ -18,49 +19,87 @@ public class HandleEnemyCollisions : MonoBehaviour, IDealDamage
     {
         PlayerParry.OnParryActive += PlayerParry_OnParryActive;
         PlayerBlockJump.OnBlock += PlayerBlockJump_OnBlock;
+        //HandleProjectileCollisions.OnDeflect += HandleProjectileCollisions_OnDeflect;
+        //HandleDamageOutput.OnOutputDamage += HandleDamageOutput_OnOutputDamage;
     }
 
     protected void OnDisable()
     {
         PlayerParry.OnParryActive -= PlayerParry_OnParryActive;
         PlayerBlockJump.OnBlock -= PlayerBlockJump_OnBlock;
+        //HandleProjectileCollisions.OnDeflect -= HandleProjectileCollisions_OnDeflect;
+        //HandleDamageOutput.OnOutputDamage -= HandleDamageOutput_OnOutputDamage;
     }
 
     protected void PlayerParry_OnParryActive(bool parryPressed)
     {
-        _isParrying = parryPressed;
+        _parryActive = parryPressed;
     }
 
-    private void PlayerBlockJump_OnBlock(bool isBlocking)
+    protected void PlayerBlockJump_OnBlock(bool isBlocking)
     {
-        _isBlocking = isBlocking;
+        _blockActive = isBlocking;
+    }
+    /*
+    protected void HandleProjectileCollisions_OnDeflect(GameObject projectile, bool deflected)
+    {
+        Debug.Log($"Projectile is deflcted: {deflected}");
+        _deflected = deflected;
+    }
+    
+    private void HandleDamageOutput_OnOutputDamage(GameObject collisionObject, int damageAmount)
+    {
+        if (collisionObject == gameObject)
+        {
+            if (_deflected)
+            {
+                EnemyHit = true;
+            }
+            else
+            {
+                EnemyHit = false;
+            }
+        }
     }
 
+    
     protected void Update()
     {
         EnemyHit = false;
     }
-
+    */
     protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            if (!_isParrying && !_isBlocking)
+            if (!_parryActive && !_blockActive)
             {
                 EnemyHit = false;
 
                 HandleKnockBack(collision);
                 OnDamageCollision?.Invoke(collision.gameObject);
             }
-            else if (!_isParrying && _isBlocking)
+            else if (!_parryActive && _blockActive)
             {
                 EnemyHit = false;
             }
-            else if (_isParrying && !_isBlocking)
+            else if (_parryActive && !_blockActive)
             {
                 EnemyHit = true;
             }
         }
+        /*
+        if (collision.gameObject.CompareTag("Projectile"))
+        {
+            if (_deflected)
+            {
+                EnemyHit = true;
+            }
+            else
+            {
+                EnemyHit = false;
+            }
+        }*/
     }
 
     protected void HandleKnockBack(Collision2D collision)

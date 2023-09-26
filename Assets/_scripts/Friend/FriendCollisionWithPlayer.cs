@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BouncePadCollisionWithPlayer : MonoBehaviour
+public class FriendCollisionWithPlayer : MonoBehaviour
 {
     public CircleCollider2D BouncyCollider;
     public CircleCollider2D DefaultCollider;

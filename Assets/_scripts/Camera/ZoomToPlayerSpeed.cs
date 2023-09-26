@@ -11,14 +11,14 @@ public class ZoomToPlayerSpeed : MonoBehaviour
 
     [SerializeField] private float _zoomSpeed = 0.1f;
 
-    private float _startingOrthoSize;
+    [SerializeField] private float _startingOrthoSize;
     [SerializeField] private float _maxCameraOrthoSize;
     private float _targetOrthoSize;
 
     private void Awake()
     {
         _virtualCamera = GetComponent<CinemachineVirtualCamera>();
-        _startingOrthoSize = _virtualCamera.m_Lens.OrthographicSize;
+        _virtualCamera.m_Lens.OrthographicSize = _startingOrthoSize;
     }
 
     private void OnEnable()

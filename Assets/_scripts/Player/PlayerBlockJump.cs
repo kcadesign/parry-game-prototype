@@ -9,6 +9,8 @@ public class PlayerBlockJump : MonoBehaviour
     public delegate void Block(bool isBlocking);
     public static event Block OnBlock;
 
+    public static event Action OnJump;
+
     protected PlayerControls playerControls;
     private Rigidbody2D _rigidBody;
 
@@ -59,7 +61,7 @@ public class PlayerBlockJump : MonoBehaviour
     {
         _blockActive = false;
         OnBlock?.Invoke(_blockActive);
-
+        OnJump?.Invoke();
         if (_canJump)
         {
             HandleJump();

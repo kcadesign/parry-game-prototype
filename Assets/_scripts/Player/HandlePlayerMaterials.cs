@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class HandlePlayerMaterials : MonoBehaviour
 {
+    private Rigidbody2D _rigidbody;
     private Collider2D _playerCollider;
     public PhysicsMaterial2D DefaultPlayerMaterial;
     public PhysicsMaterial2D BouncyMaterial;
@@ -11,10 +12,17 @@ public class HandlePlayerMaterials : MonoBehaviour
     private bool _parryActive;
     private bool _blockActive;
     private bool _stunned;
+    private bool _grounded;
+
+    private bool _forceApplied;
+    //[SerializeField] private float _reboundForce = 5;
+    private bool _isBouncing;
+    //private int _bounceCount = 0;
 
     private void Awake()
     {
         _playerCollider = GetComponent<Collider2D>();
+        _rigidbody = GetComponent<Rigidbody2D>();
     }
 
     private void OnEnable()
@@ -22,13 +30,16 @@ public class HandlePlayerMaterials : MonoBehaviour
         PlayerParry.OnParryActive += PlayerParry_OnParryActive;
         PlayerBlockJump.OnBlock += PlayerBlockJump_OnBlock;
         HandlePlayerCollisions.OnStunned += HandlePlayerCollisions_OnStunned;
+        CheckPlayerGrounded.OnGrounded += CheckPlayerGrounded_OnGrounded;
     }
+
 
     private void OnDisable()
     {
         PlayerParry.OnParryActive -= PlayerParry_OnParryActive;
         PlayerBlockJump.OnBlock -= PlayerBlockJump_OnBlock;
         HandlePlayerCollisions.OnStunned -= HandlePlayerCollisions_OnStunned;
+        CheckPlayerGrounded.OnGrounded -= CheckPlayerGrounded_OnGrounded;
     }
 
     private void PlayerParry_OnParryActive(bool parryPressed)
@@ -49,10 +60,15 @@ public class HandlePlayerMaterials : MonoBehaviour
         {
             _playerCollider.sharedMaterial = null;
         }
-        else if(!_stunned)
+        else if (!_stunned)
         {
             _playerCollider.sharedMaterial = DefaultPlayerMaterial;
         }
+    }
+
+    private void CheckPlayerGrounded_OnGrounded(bool grounded)
+    {
+        _grounded = grounded;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -61,7 +77,7 @@ public class HandlePlayerMaterials : MonoBehaviour
         {
             _playerCollider.sharedMaterial = BouncyMaterial;
         }
-        else if (!_parryActive && (_blockActive || _stunned)) 
+        else if (!_parryActive && (_blockActive || _stunned))
         {
             _playerCollider.sharedMaterial = null;
         }
@@ -69,5 +85,7 @@ public class HandlePlayerMaterials : MonoBehaviour
         {
             _playerCollider.sharedMaterial = DefaultPlayerMaterial;
         }
+
     }
+
 }

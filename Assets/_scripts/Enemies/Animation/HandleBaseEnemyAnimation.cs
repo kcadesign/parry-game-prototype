@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class HandleBaseEnemyAnimation : MonoBehaviour
-{    
+{
     public SpriteRenderer[] BodySprites;
     public HandleEnemyCollisions CollisionHandler;
 
@@ -20,16 +20,30 @@ public class HandleBaseEnemyAnimation : MonoBehaviour
     private void OnEnable()
     {
         _enemyController.OnEnemyStateChange += _enemyController_OnEnemyStateChange;
+        HandleDamageOutput.OnOutputDamage += HandleDamageOutput_OnOutputDamage;
     }
 
     private void OnDisable()
     {
         _enemyController.OnEnemyStateChange -= _enemyController_OnEnemyStateChange;
+        HandleDamageOutput.OnOutputDamage -= HandleDamageOutput_OnOutputDamage;
+
     }
 
     private void _enemyController_OnEnemyStateChange(bool inSightRange, bool inAttackRange)
     {
         HandleSightAttackAnimation(inSightRange, inAttackRange);
+    }
+
+    private void HandleDamageOutput_OnOutputDamage(GameObject collisionObject, int damageAmount)
+    {
+        if (collisionObject.transform.IsChildOf(transform))
+        {
+            foreach (SpriteRenderer spriteRenderer in BodySprites)
+            {
+                StartCoroutine(FlashEnemy(spriteRenderer));
+            }
+        }
     }
 
     private void HandleSightAttackAnimation(bool inSightRange, bool inAttackRange)
@@ -61,21 +75,6 @@ public class HandleBaseEnemyAnimation : MonoBehaviour
             _enemyStateAnimator.SetBool("Idle", true);
             _enemyStateAnimator.SetBool("Transform", false);
             _enemyStateAnimator.SetBool("Attack", false);
-        }
-    }
-
-    protected virtual void Update()
-    {
-        if (CollisionHandler.EnemyHit)
-        {
-            foreach (SpriteRenderer spriteRenderer in BodySprites)
-            {
-                StartCoroutine(FlashEnemy(spriteRenderer));
-            }
-        }
-        else
-        {
-            return;
         }
     }
 

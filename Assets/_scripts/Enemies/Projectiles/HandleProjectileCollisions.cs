@@ -6,19 +6,15 @@ using UnityEngine;
 public class HandleProjectileCollisions : MonoBehaviour, IDealDamage
 {
     public event Action<GameObject> OnDamageCollision;
-    /*
-    public delegate void Deflect(GameObject collisionObject, int damageAmount);
+    
+    public delegate void Deflect(GameObject projectile, bool deflected);
     public static event Deflect OnDeflect;
-    */
-    //public delegate void ProjectileDamagePlayer();
-    //public event ProjectileDamagePlayer OnProjectileDamagePlayer;
-
+    
     private SpriteRenderer _projectileSpriteRenderer;
 
     public bool _parryActive;
     public bool _blockActive;
     private bool _deflected = false;
-    //[SerializeField] private int _enemyDamageAmount = 1;
 
     private void Awake()
     {
@@ -76,6 +72,8 @@ public class HandleProjectileCollisions : MonoBehaviour, IDealDamage
             {
                 _projectileSpriteRenderer.color = Color.blue;
                 _deflected = true;
+                OnDeflect?.Invoke(gameObject, _deflected);
+
                 Destroy(gameObject, 3f);
             }
             else if (_blockActive)
@@ -90,7 +88,7 @@ public class HandleProjectileCollisions : MonoBehaviour, IDealDamage
         }
         else if (_deflected)
         {
-            return;
+            OnDeflect?.Invoke(gameObject, _deflected);
         }
     }
 
@@ -103,6 +101,8 @@ public class HandleProjectileCollisions : MonoBehaviour, IDealDamage
         else if (_deflected)
         {
             OnDamageCollision?.Invoke(collision.gameObject);
+            Destroy(gameObject);
+
         }
     }
 }
