@@ -7,17 +7,21 @@ public class PlayerJump : MonoBehaviour
 {
     protected PlayerControls playerControls;
 
-    private Rigidbody2D _rigidBody;
+    public delegate void Jump(bool jumping);
+    public static event Jump OnJump;
+
+    private Rigidbody2D _rigidbody;
 
     [SerializeField] private float _jumpPower = 5;
 
     [SerializeField] private bool _restrictJumpCount;
+    private bool _isJumping;
     private bool _isGrounded;
 
     private void Awake()
     {
         playerControls = new PlayerControls();
-        _rigidBody = GetComponent<Rigidbody2D>();
+        _rigidbody = GetComponent<Rigidbody2D>();
     }
 
     private void OnEnable()
@@ -42,14 +46,18 @@ public class PlayerJump : MonoBehaviour
 
     private void Jump_performed(InputAction.CallbackContext obj)
     {
-        Debug.Log("Jump pressed");
+        //Debug.Log("Jump pressed");
+        _isJumping = true;
         HandleJump();
-    }    
-    
+        OnJump?.Invoke(_isJumping);
+        _isJumping = false;
+    }
+
     private void Jump_canceled(InputAction.CallbackContext obj)
     {
-        Debug.Log("Jump released");
-        return;
+        //Debug.Log("Jump released");
+        _isJumping = false;
+        OnJump?.Invoke(_isJumping);
     }
 
     private void CheckPlayerGrounded_OnGrounded(bool grounded)
@@ -68,12 +76,14 @@ public class PlayerJump : MonoBehaviour
         {
             if (_isGrounded)
             {
-                _rigidBody.AddForce(jumpForce, ForceMode2D.Impulse);
+                _rigidbody.velocity = new(_rigidbody.velocity.x, 0);
+                _rigidbody.AddForce(jumpForce, ForceMode2D.Impulse);
             }
         }
         else if (!_restrictJumpCount)
         {
-            _rigidBody.AddForce(jumpForce, ForceMode2D.Impulse);
+            _rigidbody.velocity = new(_rigidbody.velocity.x, 0);
+            _rigidbody.AddForce(jumpForce, ForceMode2D.Impulse);
         }
     }
 

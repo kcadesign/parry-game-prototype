@@ -62,7 +62,6 @@ public class HandleGameStateUI : MonoBehaviour
         {
             LevelFinishUI.SetActive(true);
             OnGameStateChange?.Invoke(LevelFinishFirstSelectedButton);
-
         }
         else
         {
@@ -81,7 +80,6 @@ public class HandleGameStateUI : MonoBehaviour
         {
             PauseGameUI.SetActive(true);
             OnGameStateChange?.Invoke(PauseFirstSelectedButton);
-
         }
         else
         {

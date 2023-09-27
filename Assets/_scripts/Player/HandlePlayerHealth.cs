@@ -27,7 +27,6 @@ public class HandlePlayerHealth : MonoBehaviour
         }
     }
 
-
     private void OnEnable()
     {
         HandleDamageOutput.OnOutputDamage += HandleEnemyDamageOutput_OnOutputDamage;
