@@ -13,12 +13,12 @@ public class AnimatePlayerBlock : MonoBehaviour
 
     private void OnEnable()
     {
-        PlayerBlockJump.OnBlock += PlayerBlockJump_OnBlock;
+        PlayerBlock.OnBlock += PlayerBlockJump_OnBlock;
     }
 
     private void OnDisable()
     {
-        PlayerBlockJump.OnBlock -= PlayerBlockJump_OnBlock;
+        PlayerBlock.OnBlock -= PlayerBlockJump_OnBlock;
     }
 
     private void PlayerBlockJump_OnBlock(bool isBlocking)

@@ -46,12 +46,21 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""BlockJump"",
+                    ""name"": ""Block"",
                     ""type"": ""Button"",
                     ""id"": ""a2a02bab-e4c8-4184-b8dd-0da074379564"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": ""Hold"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Jump"",
+                    ""type"": ""Button"",
+                    ""id"": ""2f66ea4d-1e3a-44fb-95c9-6781000d06c2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
                     ""initialStateCheck"": false
                 },
                 {
@@ -188,8 +197,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""2b97a406-3307-4c31-8fde-bafdae71c24b"",
-                    ""path"": ""<Keyboard>/space"",
+                    ""id"": ""e6947b77-8e90-47bf-9186-a097147f8f86"",
+                    ""path"": ""<Gamepad>/buttonWest"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -199,8 +208,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""e6947b77-8e90-47bf-9186-a097147f8f86"",
-                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""id"": ""2b97a406-3307-4c31-8fde-bafdae71c24b"",
+                    ""path"": ""<Keyboard>/ctrl"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -211,7 +220,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""e4487b11-7dad-4906-9aa0-89f106be3947"",
-                    ""path"": ""<Keyboard>/shift"",
+                    ""path"": ""<Keyboard>/downArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -222,7 +231,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""cb4a2589-c931-4b0b-81ed-069423db3a19"",
-                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""path"": ""<Gamepad>/dpad/down"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -232,23 +241,45 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""de358faa-5c05-4c8d-aee2-83687f25e136"",
-                    ""path"": ""<Keyboard>/space"",
+                    ""id"": ""010f2e7d-98a8-4ea8-8268-00166e28e2d8"",
+                    ""path"": ""<Gamepad>/buttonWest"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""BlockJump"",
+                    ""action"": ""Block"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""010f2e7d-98a8-4ea8-8268-00166e28e2d8"",
+                    ""id"": ""de358faa-5c05-4c8d-aee2-83687f25e136"",
+                    ""path"": ""<Keyboard>/ctrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Block"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0fdbdbd8-9e9c-4913-b3b0-ebe2a2944b72"",
                     ""path"": ""<Gamepad>/buttonSouth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""BlockJump"",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""03c577e4-7caf-4145-afbf-70cda920bf07"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -300,7 +331,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Gameplay = asset.FindActionMap("Gameplay", throwIfNotFound: true);
         m_Gameplay_Rolling = m_Gameplay.FindAction("Rolling", throwIfNotFound: true);
         m_Gameplay_Parry = m_Gameplay.FindAction("Parry", throwIfNotFound: true);
-        m_Gameplay_BlockJump = m_Gameplay.FindAction("BlockJump", throwIfNotFound: true);
+        m_Gameplay_Block = m_Gameplay.FindAction("Block", throwIfNotFound: true);
+        m_Gameplay_Jump = m_Gameplay.FindAction("Jump", throwIfNotFound: true);
         m_Gameplay_ActivateFriend = m_Gameplay.FindAction("ActivateFriend", throwIfNotFound: true);
         // Menus
         m_Menus = asset.FindActionMap("Menus", throwIfNotFound: true);
@@ -368,7 +400,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private List<IGameplayActions> m_GameplayActionsCallbackInterfaces = new List<IGameplayActions>();
     private readonly InputAction m_Gameplay_Rolling;
     private readonly InputAction m_Gameplay_Parry;
-    private readonly InputAction m_Gameplay_BlockJump;
+    private readonly InputAction m_Gameplay_Block;
+    private readonly InputAction m_Gameplay_Jump;
     private readonly InputAction m_Gameplay_ActivateFriend;
     public struct GameplayActions
     {
@@ -376,7 +409,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public GameplayActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Rolling => m_Wrapper.m_Gameplay_Rolling;
         public InputAction @Parry => m_Wrapper.m_Gameplay_Parry;
-        public InputAction @BlockJump => m_Wrapper.m_Gameplay_BlockJump;
+        public InputAction @Block => m_Wrapper.m_Gameplay_Block;
+        public InputAction @Jump => m_Wrapper.m_Gameplay_Jump;
         public InputAction @ActivateFriend => m_Wrapper.m_Gameplay_ActivateFriend;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
@@ -393,9 +427,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Parry.started += instance.OnParry;
             @Parry.performed += instance.OnParry;
             @Parry.canceled += instance.OnParry;
-            @BlockJump.started += instance.OnBlockJump;
-            @BlockJump.performed += instance.OnBlockJump;
-            @BlockJump.canceled += instance.OnBlockJump;
+            @Block.started += instance.OnBlock;
+            @Block.performed += instance.OnBlock;
+            @Block.canceled += instance.OnBlock;
+            @Jump.started += instance.OnJump;
+            @Jump.performed += instance.OnJump;
+            @Jump.canceled += instance.OnJump;
             @ActivateFriend.started += instance.OnActivateFriend;
             @ActivateFriend.performed += instance.OnActivateFriend;
             @ActivateFriend.canceled += instance.OnActivateFriend;
@@ -409,9 +446,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Parry.started -= instance.OnParry;
             @Parry.performed -= instance.OnParry;
             @Parry.canceled -= instance.OnParry;
-            @BlockJump.started -= instance.OnBlockJump;
-            @BlockJump.performed -= instance.OnBlockJump;
-            @BlockJump.canceled -= instance.OnBlockJump;
+            @Block.started -= instance.OnBlock;
+            @Block.performed -= instance.OnBlock;
+            @Block.canceled -= instance.OnBlock;
+            @Jump.started -= instance.OnJump;
+            @Jump.performed -= instance.OnJump;
+            @Jump.canceled -= instance.OnJump;
             @ActivateFriend.started -= instance.OnActivateFriend;
             @ActivateFriend.performed -= instance.OnActivateFriend;
             @ActivateFriend.canceled -= instance.OnActivateFriend;
@@ -482,7 +522,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     {
         void OnRolling(InputAction.CallbackContext context);
         void OnParry(InputAction.CallbackContext context);
-        void OnBlockJump(InputAction.CallbackContext context);
+        void OnBlock(InputAction.CallbackContext context);
+        void OnJump(InputAction.CallbackContext context);
         void OnActivateFriend(InputAction.CallbackContext context);
     }
     public interface IMenusActions

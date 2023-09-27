@@ -34,7 +34,7 @@ public class PlayerParry : MonoBehaviour
         playerControls.Gameplay.Parry.performed += Parry_performed;
         playerControls.Gameplay.Parry.canceled += Parry_canceled;
 
-        PlayerBlockJump.OnBlock += PlayerBlockJump_OnBlock;
+        PlayerBlock.OnBlock += PlayerBlockJump_OnBlock;
         CheckPlayerGrounded.OnGrounded += CheckPlayerGrounded_OnGrounded;
     }
 
@@ -45,7 +45,7 @@ public class PlayerParry : MonoBehaviour
         playerControls.Gameplay.Parry.performed -= Parry_performed;
         playerControls.Gameplay.Parry.canceled -= Parry_canceled;
 
-        PlayerBlockJump.OnBlock -= PlayerBlockJump_OnBlock;
+        PlayerBlock.OnBlock -= PlayerBlockJump_OnBlock;
         CheckPlayerGrounded.OnGrounded -= CheckPlayerGrounded_OnGrounded;
     }
 

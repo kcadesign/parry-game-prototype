@@ -35,13 +35,13 @@ public class HandlePlayerCollisions : MonoBehaviour, IDealDamage
     private void OnEnable()
     {
         PlayerParry.OnParryActive += PlayerParry_OnParryActive;
-        PlayerBlockJump.OnBlock += PlayerBlockJump_OnBlock;
+        PlayerBlock.OnBlock += PlayerBlockJump_OnBlock;
     }
 
     private void OnDisable()
     {
         PlayerParry.OnParryActive -= PlayerParry_OnParryActive;
-        PlayerBlockJump.OnBlock -= PlayerBlockJump_OnBlock;
+        PlayerBlock.OnBlock -= PlayerBlockJump_OnBlock;
     }
 
     private void PlayerParry_OnParryActive(bool parryPressed)

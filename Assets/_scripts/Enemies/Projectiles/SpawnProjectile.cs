@@ -19,13 +19,13 @@ public class SpawnProjectile : MonoBehaviour
     protected void OnEnable()
     {
         PlayerParry.OnParryActive += PlayerParry_OnParryActive;
-        PlayerBlockJump.OnBlock += PlayerBlockJump_OnBlock;
+        PlayerBlock.OnBlock += PlayerBlockJump_OnBlock;
     }
 
     protected void OnDisable()
     {
         PlayerParry.OnParryActive -= PlayerParry_OnParryActive;
-        PlayerBlockJump.OnBlock -= PlayerBlockJump_OnBlock;
+        PlayerBlock.OnBlock -= PlayerBlockJump_OnBlock;
     }
 
     private void PlayerParry_OnParryActive(bool parryPressed)
