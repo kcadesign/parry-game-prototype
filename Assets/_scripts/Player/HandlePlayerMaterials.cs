@@ -28,7 +28,7 @@ public class HandlePlayerMaterials : MonoBehaviour
     private void OnEnable()
     {
         PlayerParry.OnParryActive += PlayerParry_OnParryActive;
-        PlayerBlockJump.OnBlock += PlayerBlockJump_OnBlock;
+        PlayerBlock.OnBlock += PlayerBlockJump_OnBlock;
         HandlePlayerCollisions.OnStunned += HandlePlayerCollisions_OnStunned;
         CheckPlayerGrounded.OnGrounded += CheckPlayerGrounded_OnGrounded;
     }
@@ -37,7 +37,7 @@ public class HandlePlayerMaterials : MonoBehaviour
     private void OnDisable()
     {
         PlayerParry.OnParryActive -= PlayerParry_OnParryActive;
-        PlayerBlockJump.OnBlock -= PlayerBlockJump_OnBlock;
+        PlayerBlock.OnBlock -= PlayerBlockJump_OnBlock;
         HandlePlayerCollisions.OnStunned -= HandlePlayerCollisions_OnStunned;
         CheckPlayerGrounded.OnGrounded -= CheckPlayerGrounded_OnGrounded;
     }

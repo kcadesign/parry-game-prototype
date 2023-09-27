@@ -4,76 +4,79 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerBlockJump : MonoBehaviour
+public class PlayerBlock : MonoBehaviour
 {
     public delegate void Block(bool isBlocking);
     public static event Block OnBlock;
 
-    public static event Action OnJump;
+    //public static event Action OnJump;
 
     protected PlayerControls playerControls;
-    private Rigidbody2D _rigidBody;
+    //private Rigidbody2D _rigidBody;
 
-    [SerializeField] private float _jumpPower = 5;
+    //[SerializeField] private float _jumpPower = 5;
 
     private bool _blockActive;
-    private bool _canJump;
-    [SerializeField] private bool _restrictJumpCount;
-    private bool _isGrounded;
+    //private bool _canJump;
+    //[SerializeField] private bool _restrictJumpCount;
+    //private bool _isGrounded;
 
     private void Awake()
     {
         playerControls = new PlayerControls();
-        _rigidBody = GetComponent<Rigidbody2D>();
+        //_rigidBody = GetComponent<Rigidbody2D>();
     }
 
     private void OnEnable()
     {
         playerControls.Gameplay.Enable();
 
-        playerControls.Gameplay.BlockJump.performed += BlockJump_performed;
-        playerControls.Gameplay.BlockJump.canceled += BlockJump_canceled;
+        playerControls.Gameplay.Block.performed += Block_performed;
+        playerControls.Gameplay.Block.canceled += Block_canceled;
 
-        CheckPlayerGrounded.OnGrounded += CheckPlayerGrounded_OnGrounded;
+        //CheckPlayerGrounded.OnGrounded += CheckPlayerGrounded_OnGrounded;
     }
 
     private void OnDisable()
     {
         playerControls.Gameplay.Disable();
 
-        playerControls.Gameplay.BlockJump.performed -= BlockJump_performed;
-        playerControls.Gameplay.BlockJump.canceled -= BlockJump_canceled;
+        playerControls.Gameplay.Block.performed -= Block_performed;
+        playerControls.Gameplay.Block.canceled -= Block_canceled;
 
-        CheckPlayerGrounded.OnGrounded -= CheckPlayerGrounded_OnGrounded;
+        //CheckPlayerGrounded.OnGrounded -= CheckPlayerGrounded_OnGrounded;
     }
 
-    private void BlockJump_performed(InputAction.CallbackContext value)
+    private void Block_performed(InputAction.CallbackContext value)
     {
         _blockActive = true;
         OnBlock?.Invoke(_blockActive);
+        /*
         if (_blockActive)
         {
             _canJump = true;
-        }
+        }*/
     }
 
-    private void BlockJump_canceled(InputAction.CallbackContext value)
+    private void Block_canceled(InputAction.CallbackContext value)
     {
         _blockActive = false;
         OnBlock?.Invoke(_blockActive);
+        /*
         OnJump?.Invoke();
         if (_canJump)
         {
             HandleJump();
         }
         _canJump = false;
+        */
     }
-
+    /*
     private void CheckPlayerGrounded_OnGrounded(bool grounded)
     {
         _isGrounded = grounded;
     }
-
+    
     private void HandleJump()
     {
         Vector2 jumpForce = new(0, 0)
@@ -93,5 +96,5 @@ public class PlayerBlockJump : MonoBehaviour
             _rigidBody.AddForce(jumpForce, ForceMode2D.Impulse);
         }
     }
-
+    */
 }

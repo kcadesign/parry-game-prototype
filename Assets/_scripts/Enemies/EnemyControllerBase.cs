@@ -1,11 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyControllerBase : MonoBehaviour
+public class EnemyControllerBase : MonoBehaviour, IEnemyController
 {
-    public delegate void EnemyStateChange(bool inSightRange, bool inAttackRange);
-    public event EnemyStateChange OnEnemyStateChange; 
+    public event Action<bool, bool> OnHandleState;
 
     [Header("Layer Mask")]
     public LayerMask TargetLayer;
@@ -59,23 +59,23 @@ public class EnemyControllerBase : MonoBehaviour
         {
             case _enemyState.Idle:
                 PerformIdleActions();
-                OnEnemyStateChange?.Invoke(_targetInSightRange, _targetInAttackRange);
+                OnHandleState?.Invoke(_targetInSightRange, _targetInAttackRange);
                 break;
             case _enemyState.Transform:
                 PerformTransformActions();
-                OnEnemyStateChange?.Invoke(_targetInSightRange, _targetInAttackRange);
+                OnHandleState?.Invoke(_targetInSightRange, _targetInAttackRange);
                 break;
             case _enemyState.TransformIdle:
                 PerformTransformIdleActions();
-                OnEnemyStateChange?.Invoke(_targetInSightRange, _targetInAttackRange);
+                OnHandleState?.Invoke(_targetInSightRange, _targetInAttackRange);
                 break;
             case _enemyState.Attack:
                 PerformAttackActions();
-                OnEnemyStateChange?.Invoke(_targetInSightRange, _targetInAttackRange);
+                OnHandleState?.Invoke(_targetInSightRange, _targetInAttackRange);
                 break;
             default:
                 PerformIdleActions();
-                OnEnemyStateChange?.Invoke(_targetInSightRange, _targetInAttackRange);
+                OnHandleState?.Invoke(_targetInSightRange, _targetInAttackRange);
                 break;
         }
     }

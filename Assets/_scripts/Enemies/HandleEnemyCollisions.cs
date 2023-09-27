@@ -18,7 +18,7 @@ public class HandleEnemyCollisions : MonoBehaviour, IDealDamage
     protected void OnEnable()
     {
         PlayerParry.OnParryActive += PlayerParry_OnParryActive;
-        PlayerBlockJump.OnBlock += PlayerBlockJump_OnBlock;
+        PlayerBlock.OnBlock += PlayerBlockJump_OnBlock;
         //HandleProjectileCollisions.OnDeflect += HandleProjectileCollisions_OnDeflect;
         //HandleDamageOutput.OnOutputDamage += HandleDamageOutput_OnOutputDamage;
     }
@@ -26,7 +26,7 @@ public class HandleEnemyCollisions : MonoBehaviour, IDealDamage
     protected void OnDisable()
     {
         PlayerParry.OnParryActive -= PlayerParry_OnParryActive;
-        PlayerBlockJump.OnBlock -= PlayerBlockJump_OnBlock;
+        PlayerBlock.OnBlock -= PlayerBlockJump_OnBlock;
         //HandleProjectileCollisions.OnDeflect -= HandleProjectileCollisions_OnDeflect;
         //HandleDamageOutput.OnOutputDamage -= HandleDamageOutput_OnOutputDamage;
     }

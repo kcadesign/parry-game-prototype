@@ -8,9 +8,20 @@ public class HandleGameStateUI : MonoBehaviour
     public delegate void GameRestart(Vector3 respawnPosition);
     public static event GameRestart OnGameRestart;
 
+    public delegate void GameStateChange(GameObject firstSelectedButton);
+    public static event GameStateChange OnGameStateChange;
+
+    [Header("Game Over References")]
     public GameObject GameOverUI;
+    public GameObject GameOverFirstSelectedButton;
+
+    [Header("Level Finish References")]
     public GameObject LevelFinishUI;
+    public GameObject LevelFinishFirstSelectedButton;
+
+    [Header("Pause References")]
     public GameObject PauseGameUI;
+    public GameObject PauseFirstSelectedButton;
 
     private Vector3 _respawnPoint;
 
@@ -37,6 +48,7 @@ public class HandleGameStateUI : MonoBehaviour
         if(!playerAlive)
         {
             GameOverUI.SetActive(true);
+            OnGameStateChange?.Invoke(GameOverFirstSelectedButton);
         }
         else
         {
@@ -49,6 +61,7 @@ public class HandleGameStateUI : MonoBehaviour
         if (levelFinished)
         {
             LevelFinishUI.SetActive(true);
+            OnGameStateChange?.Invoke(LevelFinishFirstSelectedButton);
         }
         else
         {
@@ -66,6 +79,7 @@ public class HandleGameStateUI : MonoBehaviour
         if (playerPaused)
         {
             PauseGameUI.SetActive(true);
+            OnGameStateChange?.Invoke(PauseFirstSelectedButton);
         }
         else
         {

@@ -8,24 +8,27 @@ public class HandleBaseEnemyAnimation : MonoBehaviour
     public HandleEnemyCollisions CollisionHandler;
 
     private Animator _enemyStateAnimator;
-    [SerializeField] private EnemyControllerBase _enemyController;
 
     public ParticleSystem DestructionParticle;
+
+    private IEnemyController _enemyController;
+
 
     protected virtual void Awake()
     {
         _enemyStateAnimator = GetComponent<Animator>();
+        _enemyController = GetComponent<IEnemyController>();
     }
 
     private void OnEnable()
     {
-        _enemyController.OnEnemyStateChange += _enemyController_OnEnemyStateChange;
+        _enemyController.OnHandleState += _enemyController_OnEnemyStateChange;
         HandleDamageOutput.OnOutputDamage += HandleDamageOutput_OnOutputDamage;
     }
 
     private void OnDisable()
     {
-        _enemyController.OnEnemyStateChange -= _enemyController_OnEnemyStateChange;
+        _enemyController.OnHandleState -= _enemyController_OnEnemyStateChange;
         HandleDamageOutput.OnOutputDamage -= HandleDamageOutput_OnOutputDamage;
 
     }

@@ -19,10 +19,12 @@ public class HandlePlayerHealth : MonoBehaviour
 
     private void Awake()
     {
-        PlayerHealth = new HealthSystem(_maxHealth);
-        _currentHealth = PlayerHealth.GetHealth();
-
-        OnHealthChange?.Invoke(_currentHealth, _playerAlive);
+        if (PlayerHealth == null)
+        {
+            PlayerHealth = new HealthSystem(_maxHealth);
+            _currentHealth = PlayerHealth.GetHealth();
+            OnHealthChange?.Invoke(_currentHealth, _playerAlive);
+        }
     }
 
     private void OnEnable()
@@ -34,7 +36,7 @@ public class HandlePlayerHealth : MonoBehaviour
 
     private void OnDisable()
     {
-        HandleDamageOutput.OnOutputDamage += HandleEnemyDamageOutput_OnOutputDamage;
+        HandleDamageOutput.OnOutputDamage -= HandleEnemyDamageOutput_OnOutputDamage;
         PlayerTriggerEnter.OnAreaDamagePlayer -= PlayerTriggerEnter_OnAreaDamagePlayer;
         HandleGameStateUI.OnGameRestart -= HandleGameStateUI_OnGameRestart;
     }
