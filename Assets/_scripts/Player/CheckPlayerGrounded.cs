@@ -7,31 +7,70 @@ public class CheckPlayerGrounded : MonoBehaviour
     public delegate void Grounded(bool grounded);
     public static event Grounded OnGrounded;
 
+    /*
     public float raycastDistance = 0.1f;
+    public int numberOfRays = 5; // Number of rays to cast
     public LayerMask groundLayer;
-
+    */
+    public LayerMask CollisionLayer;
     private bool _isGrounded = false;
-
+    /*
     private void Update()
     {
-        // Cast a ray downward from the player's position in 2D
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, raycastDistance, groundLayer);
+        float raySpacing = GetComponent<Collider2D>().bounds.size.x / (numberOfRays - 1);
 
-        if (hit.collider != null)
+        for (int i = 0; i < numberOfRays; i++)
         {
-            // Draw the raycast in the Scene view
-            Debug.DrawRay(transform.position, Vector2.down * raycastDistance, Color.green);
+            Vector2 rayOrigin = new Vector2(transform.position.x - GetComponent<Collider2D>().bounds.extents.x + i * raySpacing, transform.position.y);
+            RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.down, raycastDistance, groundLayer);
 
+            // Visualize the rays in the Scene view
+            Debug.DrawRay(rayOrigin, Vector2.down * raycastDistance, hit.collider != null ? Color.green : Color.red);
+
+            if (hit.collider != null)
+            {
+                _isGrounded = true;
+                Debug.Log($"Player grounded: {_isGrounded}");
+            }
+            else
+            {
+                _isGrounded = false;
+            }
+        }
+        OnGrounded?.Invoke(_isGrounded);
+    }
+    */
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if ((CollisionLayer.value & (1 << collision.gameObject.layer)) != 0)
+        {
             _isGrounded = true;
             OnGrounded?.Invoke(_isGrounded);
-        }
-        else
-        {
-            // Draw the raycast in the Scene view
-            Debug.DrawRay(transform.position, Vector2.down * raycastDistance, Color.red);
 
-            _isGrounded = false;
-            OnGrounded?.Invoke(_isGrounded);
         }
+        //Debug.Log($"Is grounded: {_isGrounded}");
+
     }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if ((CollisionLayer.value & (1 << collision.gameObject.layer)) != 0)
+        {
+            _isGrounded = true;
+            OnGrounded?.Invoke(_isGrounded);
+
+        }
+        //Debug.Log($"Is grounded: {_isGrounded}");
+
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        _isGrounded = false;
+        OnGrounded?.Invoke(_isGrounded);
+        //Debug.Log($"Is grounded: {_isGrounded}");
+
+    }
+
 }

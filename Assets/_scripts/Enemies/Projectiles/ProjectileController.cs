@@ -43,7 +43,7 @@ public class ProjectileController : MonoBehaviour
         {
             _rigidBody.velocity = Vector2.zero;
 
-            _originDirection = _originPosition - (Vector2)transform.position;
+            _originDirection = (_originPosition - (Vector2)transform.position).normalized;
             _rigidBody.AddForce(_originDirection * _deflectForce, ForceMode2D.Impulse);
         }
     }

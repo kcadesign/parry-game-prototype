@@ -697,6 +697,7 @@ GameObject:
   - component: {fileID: 3243560387596183032}
   - component: {fileID: 36215996473939614}
   - component: {fileID: 4242945545593811527}
+  - component: {fileID: 3615665328296214772}
   - component: {fileID: 7987222072584019903}
   - component: {fileID: 6140860106109771891}
   - component: {fileID: 7555413703909545340}
@@ -849,6 +850,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe39bce75e43f5341aeff4594cfec336, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _parryForce: 45
+  GroundLayer:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!114 &4242945545593811527
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -861,7 +866,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e57b2389f3bfc24fb774791d19fb3eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _jumpPower: 50
+--- !u!114 &3615665328296214772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6715703871435085181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 968e69f36e5ee20418e6cb2bb46af0f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _jumpPower: 35
   _restrictJumpCount: 1
 --- !u!114 &7987222072584019903
 MonoBehaviour:

@@ -14,12 +14,13 @@ public class PlayerParry : MonoBehaviour
 
     private bool _parryActive;
     //private bool _blockActive;
-    private bool _grounded;
+    //private bool _grounded;
 
+    private bool _canParryBounce;
     private bool _forceApplied;
     [SerializeField] private float _parryForce = 50;
 
-    public LayerMask GroundLayer;
+    //public LayerMask GroundLayer;
 
     private void Awake()
     {
@@ -51,47 +52,85 @@ public class PlayerParry : MonoBehaviour
 
     private void Parry_performed(InputAction.CallbackContext value)
     {
-        //print("Parry button pressed");
         _parryActive = true;
         OnParryActive?.Invoke(_parryActive);
     }
 
     private void Parry_canceled(InputAction.CallbackContext value)
     {
-        //print("Parry button released");
         _parryActive = false;
         OnParryActive?.Invoke(_parryActive);
     }
-
+    
     private void PlayerBlockJump_OnBlock(bool isBlocking)
     {
-        //print("Parry button released");
-        _parryActive = false;
+        if (isBlocking)
+        {
+            _parryActive = false;
+        }
         OnParryActive?.Invoke(_parryActive);
     }
+    
     private void CheckPlayerGrounded_OnGrounded(bool grounded)
     {
-        _grounded = grounded;
+        //Debug.Log($"Is grounded: {grounded}");
+        if (grounded)
+        {
+            if (_parryActive && _canParryBounce && !_forceApplied)
+            {
+                _playerRigidbody.velocity = new(_playerRigidbody.velocity.x, 0);
+                _playerRigidbody.AddForce(Vector2.up * _parryForce, ForceMode2D.Impulse);
+
+                _forceApplied = true;
+                _canParryBounce = true;
+
+            }
+
+            _canParryBounce = false;
+            _forceApplied = false;
+
+        }
+        else if (!grounded)
+        {
+            _canParryBounce = true;
+            _forceApplied = false;
+
+        }
+        Debug.Log($"Force applied: {_canParryBounce}");
+
+    }
+    /*
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        HandleParryBounce(collision);
+    }
+    
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        HandleParryBounce(collision);
+    }
+    */
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        Debug.Log($"Force applied: {_canParryBounce}");
+
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    /*
+    private void HandleParryBounce(Collision2D collision)
     {
         if ((GroundLayer.value & (1 << collision.gameObject.layer)) != 0)
         {
+            //Debug.Log($"Player is grounded: {_grounded}");
             if (_parryActive && !_forceApplied && _grounded)
             {
                 _playerRigidbody.velocity = new(_playerRigidbody.velocity.x, 0);
                 _playerRigidbody.AddForce(Vector2.up * _parryForce, ForceMode2D.Impulse);
-                //Debug.Log("Force applied");
+                Debug.Log("Force applied");
 
                 _forceApplied = true;
             }
-
         }
-    }
+    }*/
 
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        _forceApplied = false;
-    }
 }
