@@ -33,7 +33,7 @@ public class HandleEnemyHealth : MonoBehaviour
             _enemyHealth.Damage(damageAmount);
 
             currentHealth = _enemyHealth.GetHealth();
-            Debug.Log($"{gameObject.transform.parent.gameObject.transform.parent.name}'s health: {currentHealth}");
+            Debug.Log($"{gameObject.transform.parent.name}'s health: {currentHealth}");
 
             CheckHealth();
         }

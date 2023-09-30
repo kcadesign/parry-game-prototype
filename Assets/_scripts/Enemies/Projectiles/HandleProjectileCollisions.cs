@@ -3,12 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HandleProjectileCollisions : MonoBehaviour, IDealDamage
+public class HandleProjectileCollisions : MonoBehaviour, IDealDamage, IParryable
 {
     public event Action<GameObject> OnDamageCollision;
-    
-    public delegate void Deflect(GameObject projectile, bool deflected);
-    public static event Deflect OnDeflect;
+    public event Action<GameObject, bool> OnDeflect;
     
     private SpriteRenderer _projectileSpriteRenderer;
 
@@ -61,6 +59,10 @@ public class HandleProjectileCollisions : MonoBehaviour, IDealDamage
         else if (collision.gameObject.CompareTag("Enemy"))
         {
             HandleCollisionEnemy(collision);
+        }
+        else
+        {
+            Destroy(gameObject);
         }
     }
 

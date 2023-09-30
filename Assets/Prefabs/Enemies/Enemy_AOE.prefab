@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8066322717319864389}
   - component: {fileID: 4624318348785348545}
   - component: {fileID: 8056391855080528950}
+  - component: {fileID: 3724756519468954395}
   m_Layer: 0
   m_Name: AttackCircle
   m_TagString: Enemy
@@ -136,6 +137,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyHit: 0
   _damageForce: 30
+--- !u!114 &3724756519468954395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 331857377044040761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80b67322e8f970444bf590a502990ed0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6923480787049829576
 GameObject:
   m_ObjectHideFlags: 0

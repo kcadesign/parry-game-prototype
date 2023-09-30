@@ -11,13 +11,12 @@ public class HandleBaseEnemyAnimation : MonoBehaviour
 
     public ParticleSystem DestructionParticle;
 
-    private IEnemyController _enemyController;
-
+    private IHandleState _enemyController;
 
     protected virtual void Awake()
     {
         _enemyStateAnimator = GetComponent<Animator>();
-        _enemyController = GetComponent<IEnemyController>();
+        _enemyController = GetComponent<IHandleState>();
     }
 
     private void OnEnable()
@@ -30,12 +29,43 @@ public class HandleBaseEnemyAnimation : MonoBehaviour
     {
         _enemyController.OnHandleState -= _enemyController_OnEnemyStateChange;
         HandleDamageOutput.OnOutputDamage -= HandleDamageOutput_OnOutputDamage;
-
     }
 
-    private void _enemyController_OnEnemyStateChange(bool inSightRange, bool inAttackRange)
+    private void _enemyController_OnEnemyStateChange(System.Enum enemyState)
     {
-        HandleSightAttackAnimation(inSightRange, inAttackRange);
+        Debug.Log($"Current enemy state: {enemyState}");
+
+        // Cast the enum to the correct type (EnemyState)
+        HandleBaseEnemyState.EnemyState state = (HandleBaseEnemyState.EnemyState)enemyState;
+
+        switch (state)
+        {
+            case HandleBaseEnemyState.EnemyState.Idle:
+                _enemyStateAnimator.SetBool("Idle", true);
+                _enemyStateAnimator.SetBool("Transform", false);
+                _enemyStateAnimator.SetBool("Attack", false);
+                break;
+            case HandleBaseEnemyState.EnemyState.Transform:
+                _enemyStateAnimator.SetBool("Idle", false);
+                _enemyStateAnimator.SetBool("Transform", true);
+                _enemyStateAnimator.SetBool("Attack", false);
+                break;
+            case HandleBaseEnemyState.EnemyState.TransformIdle:
+                _enemyStateAnimator.SetBool("Idle", false);
+                _enemyStateAnimator.SetBool("Transform", true);
+                _enemyStateAnimator.SetBool("Attack", false);
+                break;
+            case HandleBaseEnemyState.EnemyState.Attack:
+                _enemyStateAnimator.SetBool("Idle", false);
+                _enemyStateAnimator.SetBool("Transform", false);
+                _enemyStateAnimator.SetBool("Attack", true);
+                break;
+            default:
+                _enemyStateAnimator.SetBool("Idle", true);
+                _enemyStateAnimator.SetBool("Transform", false);
+                _enemyStateAnimator.SetBool("Attack", false);
+                break;
+        }
     }
 
     private void HandleDamageOutput_OnOutputDamage(GameObject collisionObject, int damageAmount)
@@ -48,44 +78,11 @@ public class HandleBaseEnemyAnimation : MonoBehaviour
             }
         }
     }
-
-    private void HandleSightAttackAnimation(bool inSightRange, bool inAttackRange)
-    {
-        // No target - Idle animation
-        if (!inSightRange && !inAttackRange)
-        {
-            _enemyStateAnimator.SetBool("Idle", true);
-            _enemyStateAnimator.SetBool("Transform", false);
-            _enemyStateAnimator.SetBool("Attack", false);
-        }
-        // Target aquired but cant attack - Transform animation
-        else if (inSightRange && !inAttackRange)
-        {
-            _enemyStateAnimator.SetBool("Idle", false);
-            _enemyStateAnimator.SetBool("Transform", true);
-            _enemyStateAnimator.SetBool("Attack", false);
-        }
-        // Target in attack range - Attack animation
-        else if (inSightRange && inAttackRange)
-        {
-            _enemyStateAnimator.SetBool("Idle", false);
-            _enemyStateAnimator.SetBool("Transform", false);
-            _enemyStateAnimator.SetBool("Attack", true);
-        }
-        // Else revert to idle
-        else
-        {
-            _enemyStateAnimator.SetBool("Idle", true);
-            _enemyStateAnimator.SetBool("Transform", false);
-            _enemyStateAnimator.SetBool("Attack", false);
-        }
-    }
-
+    
     protected virtual void OnDestroy()
     {
         if (DestructionParticle != null)
         {
-            // Instantiate and play the Particle System at the position of the destroyed object
             Instantiate(DestructionParticle, transform.position, Quaternion.identity).Play();
         }
     }

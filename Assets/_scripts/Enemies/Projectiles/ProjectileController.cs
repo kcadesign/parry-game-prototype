@@ -12,22 +12,31 @@ public class ProjectileController : MonoBehaviour
     [SerializeField] private float _deflectForce;
 
     private Vector2 _originPosition;
-    private Vector2 _originDirection;
+    private Vector2 _directionToOrigin;
+
+    private IParryable _parryable;
 
     private void Awake()
     {
         _rigidBody = GetComponent<Rigidbody2D>();
+        _parryable = GetComponent<IParryable>();
         _originPosition = gameObject.transform.position;
     }
 
     private void OnEnable()
     {
-        HandleProjectileCollisions.OnDeflect += HandleProjectileCollisions_OnDeflect;
+        if (_parryable != null)
+        {
+            _parryable.OnDeflect += _parryable_OnDeflect;
+        }
     }
 
     private void OnDisable()
     {
-        HandleProjectileCollisions.OnDeflect -= HandleProjectileCollisions_OnDeflect;
+        if (_parryable != null)
+        {
+            _parryable.OnDeflect -= _parryable_OnDeflect;
+        }
 
     }
 
@@ -35,8 +44,20 @@ public class ProjectileController : MonoBehaviour
     {
         _rigidBody.AddForce(_movementDirection * _speed, ForceMode2D.Impulse);
         Destroy(gameObject, 5f);
+    }    
+    
+    private void _parryable_OnDeflect(GameObject parriedObject, bool deflected)
+    {
+        if (parriedObject == gameObject && deflected)
+        {
+            _rigidBody.velocity = Vector2.zero;
+
+            _directionToOrigin = (_originPosition - (Vector2)transform.position).normalized;
+            _rigidBody.AddForce(_directionToOrigin * _deflectForce, ForceMode2D.Impulse);
+        }
     }
 
+    /*
     private void HandleProjectileCollisions_OnDeflect(GameObject projectile, bool deflected)
     {
         if (projectile == gameObject && deflected)
@@ -47,5 +68,5 @@ public class ProjectileController : MonoBehaviour
             _rigidBody.AddForce(_originDirection * _deflectForce, ForceMode2D.Impulse);
         }
     }
-
+    */
 }

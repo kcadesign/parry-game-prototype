@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IEnemyController
+public interface IHandleState
 {
-    public event Action<bool, bool> OnHandleState;
+    public event Action<Enum> OnHandleState;
 }

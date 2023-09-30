@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProjectileEnemyController : EnemyControllerBase
+public class ProjectileEnemyController : HandleBaseEnemyState
 {
     [Header("Projectile Parameters")]
     public SpawnProjectile ProjectileSpawner;
-
+    /*
     protected override void PerformIdleActions()
     {
         base.PerformIdleActions();
@@ -16,7 +16,7 @@ public class ProjectileEnemyController : EnemyControllerBase
     {
         base.PerformAttackActions();
     }
-
+    */
     private void EnableProjectiles() => ProjectileSpawner.InvokeProjectile();
     private void DisableProjectiles() => ProjectileSpawner.CancelInvokeProjectile();
 

@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyControllerBase : MonoBehaviour, IEnemyController
+public class HandleBaseEnemyState : MonoBehaviour, IHandleState
 {
-    public event Action<bool, bool> OnHandleState;
+    public event Action<Enum> OnHandleState;
 
     [Header("Layer Mask")]
     public LayerMask TargetLayer;
@@ -19,7 +19,7 @@ public class EnemyControllerBase : MonoBehaviour, IEnemyController
     public float AttackRange;
     protected bool _targetInAttackRange = false;
 
-    protected enum _enemyState
+    public enum EnemyState
     {
         Idle,
         Transform,
@@ -27,11 +27,11 @@ public class EnemyControllerBase : MonoBehaviour, IEnemyController
         Attack
     }
 
-    protected _enemyState _currentState;
+    protected EnemyState _currentState;
 
     protected void Start()
     {
-        ChangeState(_enemyState.Idle);
+        ChangeState(EnemyState.Idle);
     }
 
     protected void Update()
@@ -40,7 +40,7 @@ public class EnemyControllerBase : MonoBehaviour, IEnemyController
         //Debug.Log(_currentState);
     }
 
-    protected void ChangeState(_enemyState newState)
+    protected void ChangeState(EnemyState newState)
     {
         _currentState = newState;
     }
@@ -50,36 +50,36 @@ public class EnemyControllerBase : MonoBehaviour, IEnemyController
         _targetInSightRange = Physics2D.OverlapCircle(SightCentre.position, SightRange, TargetLayer) != null;
         _targetInAttackRange = Physics2D.OverlapCircle(AttackCentre.position, AttackRange, TargetLayer) != null;
 
-        if (!_targetInSightRange && !_targetInAttackRange) ChangeState(_enemyState.Idle);
-        else if (_targetInSightRange && !_targetInAttackRange) ChangeState(_enemyState.TransformIdle);
-        else if (_targetInSightRange && _targetInAttackRange) ChangeState(_enemyState.Attack);
-        else ChangeState(_enemyState.Idle);
+        if (!_targetInSightRange && !_targetInAttackRange) ChangeState(EnemyState.Idle);
+        else if (_targetInSightRange && !_targetInAttackRange) ChangeState(EnemyState.TransformIdle);
+        else if (_targetInSightRange && _targetInAttackRange) ChangeState(EnemyState.Attack);
+        else ChangeState(EnemyState.Idle);
 
         switch (_currentState)
         {
-            case _enemyState.Idle:
+            case EnemyState.Idle:
                 PerformIdleActions();
-                OnHandleState?.Invoke(_targetInSightRange, _targetInAttackRange);
+                OnHandleState?.Invoke(_currentState);
                 break;
-            case _enemyState.Transform:
+            case EnemyState.Transform:
                 PerformTransformActions();
-                OnHandleState?.Invoke(_targetInSightRange, _targetInAttackRange);
+                OnHandleState?.Invoke(_currentState);
                 break;
-            case _enemyState.TransformIdle:
+            case EnemyState.TransformIdle:
                 PerformTransformIdleActions();
-                OnHandleState?.Invoke(_targetInSightRange, _targetInAttackRange);
+                OnHandleState?.Invoke(_currentState);
                 break;
-            case _enemyState.Attack:
+            case EnemyState.Attack:
                 PerformAttackActions();
-                OnHandleState?.Invoke(_targetInSightRange, _targetInAttackRange);
+                OnHandleState?.Invoke(_currentState);
                 break;
             default:
                 PerformIdleActions();
-                OnHandleState?.Invoke(_targetInSightRange, _targetInAttackRange);
+                OnHandleState?.Invoke(_currentState);
                 break;
         }
     }
-
+    
     protected virtual void PerformIdleActions()
     {
         
@@ -99,7 +99,7 @@ public class EnemyControllerBase : MonoBehaviour, IEnemyController
     {
 
     }
-
+    
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;

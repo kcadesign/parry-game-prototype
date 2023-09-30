@@ -96,7 +96,7 @@ public class PlayerParry : MonoBehaviour
             _forceApplied = false;
 
         }
-        Debug.Log($"Force applied: {_canParryBounce}");
+        //Debug.Log($"Can parry bounce: {_canParryBounce}");
 
     }
     /*
@@ -109,14 +109,14 @@ public class PlayerParry : MonoBehaviour
     {
         HandleParryBounce(collision);
     }
-    */
+    
     private void OnCollisionExit2D(Collision2D collision)
     {
         Debug.Log($"Force applied: {_canParryBounce}");
 
     }
 
-    /*
+    
     private void HandleParryBounce(Collision2D collision)
     {
         if ((GroundLayer.value & (1 << collision.gameObject.layer)) != 0)

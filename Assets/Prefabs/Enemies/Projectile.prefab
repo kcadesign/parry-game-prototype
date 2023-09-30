@@ -164,7 +164,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 7
-  _deflectForce: 2
+  _deflectForce: 7
 --- !u!114 &3597333723733397090
 MonoBehaviour:
   m_ObjectHideFlags: 0
