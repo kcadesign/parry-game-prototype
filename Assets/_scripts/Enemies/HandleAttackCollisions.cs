@@ -3,12 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HandleAttackCollisions : MonoBehaviour, IDamager
+public class HandleAttackCollisions : HandleCollisions, IDamager
 {
     public event Action<GameObject, bool> OnDeflect;
     public event Action<GameObject> OnDamageCollision;
 
-    public HandleEnemyHealth EnemyHealth;
+    //public HandleEnemyHealth EnemyHealth;
 
     private bool _parryActive;
     private bool _attackDeflected;
@@ -28,13 +28,29 @@ public class HandleAttackCollisions : MonoBehaviour, IDamager
         _parryActive = parryPressed;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    protected override void HandleCollisionWithDamager(Collision2D collision)
     {
-        if (_parryActive)
+        base.HandleCollisionWithDamager(collision);
+        if (collision.gameObject.CompareTag("Player"))
         {
-            // Attack deflected
-            _attackDeflected = true;
-            OnDeflect?.Invoke(collision.gameObject, _attackDeflected);
+            if (_parryActive)
+            {
+                _attackDeflected = true;
+                OnDeflect?.Invoke(collision.gameObject, _attackDeflected);
+            }
+        }
+    }
+
+    protected override void HandleCollisionWithDamageable(Collision2D collision)
+    {
+        base.HandleCollisionWithDamageable(collision);
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            if (!_parryActive)
+            {
+                _attackDeflected = false;
+                OnDamageCollision?.Invoke(collision.gameObject);
+            }
         }
     }
 }

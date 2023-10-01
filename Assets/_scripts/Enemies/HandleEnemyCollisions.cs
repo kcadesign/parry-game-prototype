@@ -3,32 +3,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HandleEnemyCollisions : MonoBehaviour, IDamager, IDamageable
+public class HandleEnemyCollisions : HandleCollisions, IDamager, IDamageable
 {
     public event Action<GameObject> OnDamageCollision;
 
     protected bool _parryActive;
     protected bool _blockActive;
-    //private bool _deflected;
     
     [HideInInspector] public bool EnemyHit = false;
 
-    [SerializeField] private float _damageForce = 5;
+    //[SerializeField] private float _damageForce = 5;
 
     protected void OnEnable()
     {
         PlayerParry.OnParryActive += PlayerParry_OnParryActive;
         PlayerBlock.OnBlock += PlayerBlockJump_OnBlock;
-        //HandleProjectileCollisions.OnDeflect += HandleProjectileCollisions_OnDeflect;
-        //HandleDamageOutput.OnOutputDamage += HandleDamageOutput_OnOutputDamage;
     }
 
     protected void OnDisable()
     {
         PlayerParry.OnParryActive -= PlayerParry_OnParryActive;
         PlayerBlock.OnBlock -= PlayerBlockJump_OnBlock;
-        //HandleProjectileCollisions.OnDeflect -= HandleProjectileCollisions_OnDeflect;
-        //HandleDamageOutput.OnOutputDamage -= HandleDamageOutput_OnOutputDamage;
     }
 
     protected void PlayerParry_OnParryActive(bool parryPressed)
@@ -40,34 +35,34 @@ public class HandleEnemyCollisions : MonoBehaviour, IDamager, IDamageable
     {
         _blockActive = isBlocking;
     }
-    /*
-    protected void HandleProjectileCollisions_OnDeflect(GameObject projectile, bool deflected)
+
+    protected override void HandleCollisionWithDamager(Collision2D collision)
     {
-        Debug.Log($"Projectile is deflcted: {deflected}");
-        _deflected = deflected;
-    }
-    
-    private void HandleDamageOutput_OnOutputDamage(GameObject collisionObject, int damageAmount)
-    {
-        if (collisionObject == gameObject)
+        base.HandleCollisionWithDamager(collision);
+        if (collision.gameObject.CompareTag("Player"))
         {
-            if (_deflected)
+            if (_parryActive && !_blockActive)
             {
                 EnemyHit = true;
-            }
-            else
-            {
-                EnemyHit = false;
             }
         }
     }
 
-    
-    protected void Update()
+    protected override void HandleCollisionWithDamageable(Collision2D collision)
     {
-        EnemyHit = false;
+        base.HandleCollisionWithDamageable(collision);
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            if (!_parryActive && !_blockActive)
+            {
+                EnemyHit = false;
+
+                //HandleKnockBack(collision);
+                OnDamageCollision?.Invoke(collision.gameObject);
+            }
+        }
     }
-    */
+    /*
     protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
@@ -76,7 +71,7 @@ public class HandleEnemyCollisions : MonoBehaviour, IDamager, IDamageable
             {
                 EnemyHit = false;
 
-                HandleKnockBack(collision);
+                //HandleKnockBack(collision);
                 OnDamageCollision?.Invoke(collision.gameObject);
             }
             else if (!_parryActive && _blockActive)
@@ -88,20 +83,8 @@ public class HandleEnemyCollisions : MonoBehaviour, IDamager, IDamageable
                 EnemyHit = true;
             }
         }
-        /*
-        if (collision.gameObject.CompareTag("Projectile"))
-        {
-            if (_deflected)
-            {
-                EnemyHit = true;
-            }
-            else
-            {
-                EnemyHit = false;
-            }
-        }*/
     }
-
+    
     protected void HandleKnockBack(Collision2D collision)
     {
         // Determine the direction to apply force based on player's relative position to enemy
@@ -117,5 +100,5 @@ public class HandleEnemyCollisions : MonoBehaviour, IDamager, IDamageable
         {
             collision.rigidbody.AddForce(new Vector2(-1, 1) * _damageForce, ForceMode2D.Impulse);
         }
-    }
+    }*/
 }

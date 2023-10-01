@@ -21,7 +21,6 @@ public class HandleCollisions : MonoBehaviour
         if (damager != null)
         {
             //Debug.Log("Collision with IDamager detected");
-
             HandleCollisionWithDamager(collision);
         }
 
@@ -74,14 +73,10 @@ public class HandleCollisions : MonoBehaviour
     }
 
     protected virtual void HandleCollisionWithStandard(Collision2D collision) { }
-
     protected virtual void HandleCollisionWithDamageable(Collision2D collision) { }
-
     protected virtual void HandleCollisionWithDamager(Collision2D collision) { }
 
     protected virtual void HandleTriggerEnterStandard(Collider2D collision) { }
-
     protected virtual void HandleTriggerEnterDamageable(Collider2D collision) { }
-
     protected virtual void HandleTriggerEnterDamager(Collider2D collision) { }
 }
