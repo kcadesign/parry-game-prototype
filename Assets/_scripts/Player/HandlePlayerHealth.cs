@@ -29,14 +29,14 @@ public class HandlePlayerHealth : MonoBehaviour
 
     private void OnEnable()
     {
-        HandleDamageOutput.OnOutputDamage += HandleEnemyDamageOutput_OnOutputDamage;
+        HandleDamageOut.OnOutputDamage += HandleEnemyDamageOutput_OnOutputDamage;
         PlayerTriggerEnter.OnAreaDamagePlayer += PlayerTriggerEnter_OnAreaDamagePlayer;
         HandleGameStateUI.OnGameRestart += HandleGameStateUI_OnGameRestart;
     }
 
     private void OnDisable()
     {
-        HandleDamageOutput.OnOutputDamage -= HandleEnemyDamageOutput_OnOutputDamage;
+        HandleDamageOut.OnOutputDamage -= HandleEnemyDamageOutput_OnOutputDamage;
         PlayerTriggerEnter.OnAreaDamagePlayer -= PlayerTriggerEnter_OnAreaDamagePlayer;
         HandleGameStateUI.OnGameRestart -= HandleGameStateUI_OnGameRestart;
     }

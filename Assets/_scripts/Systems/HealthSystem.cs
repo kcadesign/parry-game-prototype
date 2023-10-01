@@ -4,42 +4,42 @@ using UnityEngine;
 
 public class HealthSystem
 {
-    private int _health;
+    private int _currentHealth;
     private int _healthMax;
 
     public HealthSystem(int healthMax)
     {
-        this._health = healthMax;
-        _health = healthMax;
+        this._currentHealth = healthMax;
+        _currentHealth = healthMax;
     }
 
     public int GetHealth()
     {
-        return _health;
+        return _currentHealth;
     }
 
     public void Damage(int damageAmount)
     {
-        _health -= damageAmount;
+        _currentHealth -= damageAmount;
         
-        if (_health < 0)
+        if (_currentHealth < 0)
         {
-            _health = 0;
+            _currentHealth = 0;
         }
     }
 
     public void Heal(int healAmount)
     {
-        _health += healAmount;
+        _currentHealth += healAmount;
 
-        if (_health > _healthMax)
+        if (_currentHealth > _healthMax)
         {
-            _health = _healthMax;
+            _currentHealth = _healthMax;
         }
     }
 
     public void ChangeHealth(int healthAmount)
     {
-        _health = healthAmount;
+        _currentHealth = healthAmount;
     }
 }

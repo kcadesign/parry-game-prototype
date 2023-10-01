@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IDealDamage
+public interface IDamager
 {
     public event Action<GameObject> OnDamageCollision; 
 

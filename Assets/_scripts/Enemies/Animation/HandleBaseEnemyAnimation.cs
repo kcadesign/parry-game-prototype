@@ -22,18 +22,18 @@ public class HandleBaseEnemyAnimation : MonoBehaviour
     private void OnEnable()
     {
         _enemyController.OnHandleState += _enemyController_OnEnemyStateChange;
-        HandleDamageOutput.OnOutputDamage += HandleDamageOutput_OnOutputDamage;
+        HandleDamageOut.OnOutputDamage += HandleDamageOutput_OnOutputDamage;
     }
 
     private void OnDisable()
     {
         _enemyController.OnHandleState -= _enemyController_OnEnemyStateChange;
-        HandleDamageOutput.OnOutputDamage -= HandleDamageOutput_OnOutputDamage;
+        HandleDamageOut.OnOutputDamage -= HandleDamageOutput_OnOutputDamage;
     }
 
     private void _enemyController_OnEnemyStateChange(System.Enum enemyState)
     {
-        Debug.Log($"Current enemy state: {enemyState}");
+        //Debug.Log($"Current enemy state: {enemyState}");
 
         // Cast the enum to the correct type (EnemyState)
         HandleBaseEnemyState.EnemyState state = (HandleBaseEnemyState.EnemyState)enemyState;

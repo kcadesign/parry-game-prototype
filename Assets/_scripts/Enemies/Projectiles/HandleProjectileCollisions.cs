@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HandleProjectileCollisions : MonoBehaviour, IDealDamage, IParryable
+public class HandleProjectileCollisions : MonoBehaviour, IDamager, IParryable
 {
     public event Action<GameObject> OnDamageCollision;
     public event Action<GameObject, bool> OnDeflect;

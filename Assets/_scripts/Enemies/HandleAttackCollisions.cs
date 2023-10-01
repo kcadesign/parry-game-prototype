@@ -3,9 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HandleAttackCollisions : MonoBehaviour, IParryable
+public class HandleAttackCollisions : MonoBehaviour, IDamager
 {
     public event Action<GameObject, bool> OnDeflect;
+    public event Action<GameObject> OnDamageCollision;
 
     public HandleEnemyHealth EnemyHealth;
 

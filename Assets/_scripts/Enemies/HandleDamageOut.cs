@@ -1,19 +1,21 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HandleDamageOutput : MonoBehaviour
+public class HandleDamageOut : MonoBehaviour
 {
     public delegate void OutputDamage(GameObject collisionObject, int damageAmount);
     public static event OutputDamage OnOutputDamage;
+    //public event Action<GameObject, int> OnOutputDamage;
 
     [SerializeField] private int _damageAmount = 5;
 
-    private IDealDamage _damageDealer;
+    private IDamager _damageDealer;
 
     private void Awake()
     {
-        _damageDealer = GetComponent<IDealDamage>();
+        _damageDealer = GetComponent<IDamager>();
 
         if (_damageDealer == null)
         {
