@@ -3,15 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HandleProjectileCollisions : MonoBehaviour, IDamager, IParryable
+public class HandleProjectileCollisions : HandleCollisions, IParryable
 {
-    public event Action<GameObject> OnDamageCollision;
     public event Action<GameObject, bool> OnDeflect;
-    
+    public event Action<GameObject> OnDamageCollision;
+
     private SpriteRenderer _projectileSpriteRenderer;
 
-    public bool _parryActive;
-    public bool _blockActive;
+    private bool _parryActive;
+    private bool _blockActive;
     private bool _deflected = false;
 
     private void Awake()
@@ -31,42 +31,10 @@ public class HandleProjectileCollisions : MonoBehaviour, IDamager, IParryable
         PlayerBlock.OnBlock -= PlayerBlockJump_OnBlock;
     }
 
-    private void PlayerParry_OnParryActive(bool parryPressed)
-    {
-        _parryActive = parryPressed;
-    }
+    private void PlayerParry_OnParryActive(bool parryPressed) => _parryActive = parryPressed;
+    private void PlayerBlockJump_OnBlock(bool isBlocking) => _blockActive = isBlocking;
 
-    private void PlayerBlockJump_OnBlock(bool isBlocking)
-    {
-        _blockActive = isBlocking;
-        //Debug.Log($"Block active: {_blockActive}");
-    }
-    /*
-    private void Update()
-    {
-        Debug.Log($"Block active: {_blockActive}");
-    }
-    */
-    protected void OnCollisionEnter2D(Collision2D collision)
-    {
-        //Debug.Log($"Block active: {_blockActive}");
-
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            HandleCollisionPlayer(collision);
-
-        }
-        else if (collision.gameObject.CompareTag("Enemy"))
-        {
-            HandleCollisionEnemy(collision);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
-
-    private void HandleCollisionPlayer(Collision2D collision)
+    protected override void HandleCollisionWithPlayer(GameObject collidedObject)
     {
         if (!_deflected)
         {
@@ -84,17 +52,19 @@ public class HandleProjectileCollisions : MonoBehaviour, IDamager, IParryable
             }
             else if (!_parryActive && !_blockActive)
             {
-                OnDamageCollision?.Invoke(collision.gameObject);
+                _deflected = false;
+
+                if (!_collisionRequired)
+                {
+                    OnDamageCollision?.Invoke(collidedObject);
+                }
+                OnDamageCollision?.Invoke(collidedObject);
                 Destroy(gameObject);
             }
         }
-        else if (_deflected)
-        {
-            OnDeflect?.Invoke(gameObject, _deflected);
-        }
     }
 
-    private void HandleCollisionEnemy(Collision2D collision)
+    protected override void HandleCollisionWithEnemyBody(GameObject collidedObject)
     {
         if (!_deflected)
         {
@@ -102,9 +72,18 @@ public class HandleProjectileCollisions : MonoBehaviour, IDamager, IParryable
         }
         else if (_deflected)
         {
-            OnDamageCollision?.Invoke(collision.gameObject);
+            if (!_collisionRequired)
+            {
+                return;
+            }
+            OnDamageCollision?.Invoke(collidedObject);
             Destroy(gameObject);
-
         }
     }
+
+    protected override void HandleCollisionWithEnvironment(GameObject collidedObject)
+    {
+        Destroy(gameObject);
+    }
+    
 }

@@ -5,24 +5,23 @@ using UnityEngine;
 
 public class HandleDamageOut : MonoBehaviour
 {
-    public delegate void OutputDamage(GameObject collisionObject, int damageAmount);
+    public delegate void OutputDamage(GameObject targetObject, int damageAmount);
     public static event OutputDamage OnOutputDamage;
-    //public event Action<GameObject, int> OnOutputDamage;
 
     [SerializeField] private int _damageAmount = 5;
-
-    private IDamager _damageDealer;
+    
+    private IParryable _damageDealer;
 
     private void Awake()
     {
-        _damageDealer = GetComponent<IDamager>();
-
+        _damageDealer = GetComponent<IParryable>();
+        //Debug.Log(_damageDealer);
         if (_damageDealer == null)
         {
-            Debug.LogWarning("No collision handler component found on " + gameObject.name);
+            Debug.LogWarning("No collision handler component found on " + gameObject);
         }
     }
-
+    
     private void OnEnable()
     {
         if (_damageDealer != null)
@@ -39,14 +38,14 @@ public class HandleDamageOut : MonoBehaviour
         }
     }
 
-    private void IDealDamage_OnDamage(GameObject collisionObject)
+    private void IDealDamage_OnDamage(GameObject targetObject)
     {
-        SendDamage(collisionObject, _damageAmount);
-        Debug.Log($"{_damageAmount} damage sent to {collisionObject.tag} from {gameObject.tag}");
+        SendDamage(targetObject, _damageAmount);
+        Debug.Log($"{_damageAmount} damage sent to {targetObject.tag} from {gameObject.tag}");
     }
 
-    private void SendDamage(GameObject collisionObject, int damageAmount)
+    private void SendDamage(GameObject targetObject, int damageAmount)
     {
-        OnOutputDamage?.Invoke(collisionObject, damageAmount);
+        OnOutputDamage?.Invoke(targetObject, damageAmount);
     }
 }

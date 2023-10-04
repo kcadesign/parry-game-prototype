@@ -69,10 +69,7 @@ public class HandlePlayerMaterials : MonoBehaviour
     private void CheckPlayerGrounded_OnGrounded(bool grounded)
     {
         _grounded = grounded;
-    }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
         if (_parryActive && !_blockActive && !_stunned)
         {
             _playerCollider.sharedMaterial = BouncyMaterial;
@@ -85,7 +82,6 @@ public class HandlePlayerMaterials : MonoBehaviour
         {
             _playerCollider.sharedMaterial = DefaultPlayerMaterial;
         }
-
     }
 
 }

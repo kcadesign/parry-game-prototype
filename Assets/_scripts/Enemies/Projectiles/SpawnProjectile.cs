@@ -8,14 +8,14 @@ public class SpawnProjectile : MonoBehaviour
     public Transform SpawnPointTransform;
     private Vector2 SpawnPointPosition;
 
-    private bool _parryActive;
-    private bool _blockActive;
+    //private bool _parryActive;
+    //private bool _blockActive;
 
     private void Awake()
     {
         SpawnPointPosition = SpawnPointTransform.position;
     }
-
+    /*
     protected void OnEnable()
     {
         PlayerParry.OnParryActive += PlayerParry_OnParryActive;
@@ -27,7 +27,7 @@ public class SpawnProjectile : MonoBehaviour
         PlayerParry.OnParryActive -= PlayerParry_OnParryActive;
         PlayerBlock.OnBlock -= PlayerBlockJump_OnBlock;
     }
-
+    
     private void PlayerParry_OnParryActive(bool parryPressed)
     {
         _parryActive = parryPressed;
@@ -38,18 +38,18 @@ public class SpawnProjectile : MonoBehaviour
         _blockActive = isBlocking;
         //Debug.Log($"Block active: {_blockActive}");
     }
-
+    */
     private void InstantiateProjectile()
     {
         GameObject projectile = Instantiate(Projectile, SpawnPointPosition, transform.rotation);
-
+        /*
         HandleProjectileCollisions projectileScript = projectile.GetComponent<HandleProjectileCollisions>();
 
         if (projectileScript != null)
         {
             projectileScript._blockActive = _blockActive;
             projectileScript._parryActive = _parryActive;
-        }
+        }*/
     }
 
     public void InvokeProjectile()

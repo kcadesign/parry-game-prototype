@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AOEEnemyController : HandleBaseEnemyState
 {
-    public GameObject AttackCircle;
+    public Collider2D AttackCircleCollider;
 
     protected override void PerformAttackActions()
     {
@@ -12,7 +12,7 @@ public class AOEEnemyController : HandleBaseEnemyState
 
     }
 
-    private void EnableAttackCircle() => AttackCircle.SetActive(true);
-    private void DisableAttackCircle() => AttackCircle.SetActive(false);
+    private void EnableAttackCircle() => AttackCircleCollider.enabled = true;
+    private void DisableAttackCircle() => AttackCircleCollider.enabled = false;
 
 }

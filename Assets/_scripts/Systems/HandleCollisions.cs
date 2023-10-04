@@ -1,39 +1,26 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class HandleCollisions : MonoBehaviour
 {
-    /*
-    public delegate void CollisionWithDamager(GameObject collidedObject);
-    public static event CollisionWithDamager OnCollisionWithDamager;
+    [SerializeField] protected bool _collisionRequired;
 
-    public delegate void CollisionWithDamageable(GameObject collidedObject);
-    public static event CollisionWithDamageable OnCollisionWithDamageable;
+    public enum CollisionType
+    {
+        Player,
+        EnemyBody,
+        Projectile,
+        HurtBox,
+        Environment
+    }
 
-    public delegate void CollisionWithObject(GameObject collidedObject);
-    public static event CollisionWithObject OnCollisionWithObject;
-    */
+    protected CollisionType _currentCollision;
+
     protected void OnCollisionEnter2D(Collision2D collision)
     {
-        //Debug.Log("Collision detected");
-        IDamager damager = collision.gameObject.GetComponent<IDamager>();
-        if (damager != null)
-        {
-            //Debug.Log("Collision with IDamager detected");
-            HandleCollisionWithDamager(collision);
-        }
-
-        IDamageable damageable = collision.gameObject.GetComponent<IDamageable>();
-        if (damageable != null)
-        {
-            HandleCollisionWithDamageable(collision);
-        }
-
-        if (damager == null && damageable == null)
-        {
-            HandleCollisionWithStandard(collision);
-        }
+        DefineCollidedObject(collision.gameObject);
     }
 
     protected void OnCollisionStay2D(Collision2D collision)
@@ -48,18 +35,7 @@ public class HandleCollisions : MonoBehaviour
 
     protected void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.GetComponent<IDamager>() != null)
-        {
-            HandleTriggerEnterDamager(collision);
-        }
-        if (collision.gameObject.GetComponent<IDamageable>() != null)
-        {
-            HandleTriggerEnterDamageable(collision);
-        }
-        if (collision.gameObject.GetComponent<IDamager>() == null && collision.gameObject.GetComponent<IDamageable>() == null)
-        {
-            HandleTriggerEnterStandard(collision);
-        }
+        DefineCollidedObject(collision.gameObject);
     }
 
     protected void OnTriggerStay2D(Collider2D collision)
@@ -72,11 +48,42 @@ public class HandleCollisions : MonoBehaviour
 
     }
 
-    protected virtual void HandleCollisionWithStandard(Collision2D collision) { }
-    protected virtual void HandleCollisionWithDamageable(Collision2D collision) { }
-    protected virtual void HandleCollisionWithDamager(Collision2D collision) { }
+    protected void DefineCollidedObject(GameObject collidedObject)
+    {
+        if (collidedObject.CompareTag("Player")) _currentCollision = CollisionType.Player;
+        else if (collidedObject.CompareTag("Enemy")) _currentCollision = CollisionType.EnemyBody;
+        else if (collidedObject.CompareTag("Projectile")) _currentCollision = CollisionType.HurtBox;
+        else if (collidedObject.CompareTag("HurtBox")) _currentCollision = CollisionType.Projectile;
+        else _currentCollision = CollisionType.Environment;
 
-    protected virtual void HandleTriggerEnterStandard(Collider2D collision) { }
-    protected virtual void HandleTriggerEnterDamageable(Collider2D collision) { }
-    protected virtual void HandleTriggerEnterDamager(Collider2D collision) { }
+        switch (_currentCollision)
+        {
+            case CollisionType.Player:
+                HandleCollisionWithPlayer(collidedObject);
+                break;
+            case CollisionType.EnemyBody:
+                HandleCollisionWithEnemyBody(collidedObject);
+                break;
+            case CollisionType.Projectile:
+                HandleCollisionWithProjectile(collidedObject);
+                break;
+            case CollisionType.HurtBox:
+                HandleCollisionWithHurtBox(collidedObject);
+                break;
+            case CollisionType.Environment:
+                HandleCollisionWithEnvironment(collidedObject);
+                break;
+            default:
+                HandleCollisionWithEnvironment(collidedObject);
+                break;
+        }
+        //Debug.Log($"{gameObject.tag} collided with {collidedObject.tag}");
+    }
+
+    protected virtual void HandleCollisionWithPlayer(GameObject collidedObject) { }
+    protected virtual void HandleCollisionWithEnemyBody(GameObject collidedObject) { }
+    protected virtual void HandleCollisionWithProjectile(GameObject collidedObject) { }
+    protected virtual void HandleCollisionWithHurtBox(GameObject collidedObject) { }
+    protected virtual void HandleCollisionWithEnvironment(GameObject collidedObject) { }
+
 }

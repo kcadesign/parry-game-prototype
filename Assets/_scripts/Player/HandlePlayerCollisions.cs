@@ -3,8 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HandlePlayerCollisions : HandleCollisions, IDamager, IDamageable
-{
+public class HandlePlayerCollisions : HandleCollisions, IParryable
+{    
+    public event Action<GameObject, bool> OnDeflect;
     public event Action<GameObject> OnDamageCollision;
 
     public delegate void Stunned(bool stunned);
@@ -47,46 +48,39 @@ public class HandlePlayerCollisions : HandleCollisions, IDamager, IDamageable
     }
 
     private void PlayerParry_OnParryActive(bool parryPressed) => _parryActive = parryPressed;
-
     private void PlayerBlockJump_OnBlock(bool isBlocking) => _blockActive = isBlocking;
-    
-    
-    protected override void HandleCollisionWithDamager(Collision2D collision)
+
+    protected override void HandleCollisionWithEnemyBody(GameObject collidedObject)
     {
-        //Debug.Log(collision);
-        base.HandleCollisionWithDamager(collision);
+        base.HandleCollisionWithEnemyBody(collidedObject);
+
         if (!_parryActive && !_blockActive && !_playerStunned)
         {
-            HandleKnockBack(collision);
-            StartCoroutine(StunActions());
+            VulnerableCollisionActions(collidedObject);
         }
     }
 
-    protected override void HandleCollisionWithDamageable(Collision2D collision)
+    protected override void HandleCollisionWithProjectile(GameObject collidedObject)
     {
-        //Debug.Log(collision);
-        base.HandleCollisionWithDamageable(collision);
-        if (_parryActive)
+        base.HandleCollisionWithProjectile(collidedObject);
+
+        if (!_parryActive && !_blockActive && !_playerStunned)
         {
-            OnDamageCollision?.Invoke(collision.gameObject);
+            VulnerableCollisionActions(collidedObject);
         }
     }
 
-    protected override void HandleCollisionWithStandard(Collision2D collision)
+    protected override void HandleCollisionWithEnvironment(GameObject collidedObject)
     {
-        //Debug.Log(collision);
-        base.HandleCollisionWithStandard(collision);
+        base.HandleCollisionWithEnvironment(collidedObject);
     }
 
-    /*
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void VulnerableCollisionActions(GameObject collidedObject)
     {
-        if (collision.gameObject.CompareTag("EnvironmentHazard"))
-        {
-            //Debug.Log($"Player hurt by {collision.gameObject.tag}");
-        }
+        HandleKnockBack(collidedObject);
+        StartCoroutine(StunActions());
     }
-    */
+
     private IEnumerator StunActions()
     {
         _playerStunned = true;
@@ -106,7 +100,7 @@ public class HandlePlayerCollisions : HandleCollisions, IDamager, IDamageable
         _rigidbody.gravityScale = _originalGravity;
     }
 
-    protected void HandleKnockBack(Collision2D collision)
+    protected void HandleKnockBack(GameObject collision)
     {
         // Determine the direction to apply force based on player's relative position to enemy
         float enemyCenterX = collision.transform.position.x;

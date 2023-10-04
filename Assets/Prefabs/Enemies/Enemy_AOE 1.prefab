@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 564772086731253592}
   m_Layer: 0
   m_Name: Circle
-  m_TagString: Untagged
+  m_TagString: HurtBox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -178,7 +178,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7817857661502502961}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -200,7 +200,7 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -218,7 +218,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80b67322e8f970444bf590a502990ed0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnemyHealth: {fileID: 0}
+  _collisionRequired: 0
+  HealthHandlerObject: {fileID: 4678160177667030753}
 --- !u!114 &564772086731253592
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -231,7 +232,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca414c34265684f4db9ebd355b4c6e8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damageAmount: 40
+  _damageAmount: 25
 --- !u!1001 &5400214213318382459
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -246,11 +247,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 894887688545714950, guid: 033d711d75361e441b1fd89cf0622f53, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -34.611916
+      value: -34.51888
       objectReference: {fileID: 0}
     - target: {fileID: 894887688545714950, guid: 033d711d75361e441b1fd89cf0622f53, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.7847213
+      value: -1.7843305
       objectReference: {fileID: 0}
     - target: {fileID: 894887688545714950, guid: 033d711d75361e441b1fd89cf0622f53, type: 3}
       propertyPath: m_LocalPosition.z
@@ -308,6 +309,14 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5906391850735681325, guid: 033d711d75361e441b1fd89cf0622f53, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5929483320299406205, guid: 033d711d75361e441b1fd89cf0622f53, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6136258636924724209, guid: 033d711d75361e441b1fd89cf0622f53, type: 3}
       propertyPath: ObjectToFollow
       value: 
@@ -337,7 +346,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5906391850735681325, guid: 033d711d75361e441b1fd89cf0622f53, type: 3}
   m_PrefabInstance: {fileID: 5400214213318382459}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 4678160177667030753}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 697fe9d43113de544a6cf8e5d698d57c, type: 3}
@@ -386,10 +395,15 @@ MonoBehaviour:
   SightRange: 5
   AttackCentre: {fileID: 3797476501322614433}
   AttackRange: 4
-  AttackCircle: {fileID: 7817857661502502961}
+  AttackCircleCollider: {fileID: 594173679328417615}
 --- !u!4 &3797476501322614433 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9097890226027746778, guid: 033d711d75361e441b1fd89cf0622f53, type: 3}
+  m_PrefabInstance: {fileID: 5400214213318382459}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4678160177667030753 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 728813285803240858, guid: 033d711d75361e441b1fd89cf0622f53, type: 3}
   m_PrefabInstance: {fileID: 5400214213318382459}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &5087428944256880765 stripped

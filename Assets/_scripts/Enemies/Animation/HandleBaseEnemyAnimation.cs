@@ -5,7 +5,7 @@ using UnityEngine;
 public class HandleBaseEnemyAnimation : MonoBehaviour
 {
     public SpriteRenderer[] BodySprites;
-    public HandleEnemyCollisions CollisionHandler;
+    public HandleEnemyBodyCollisions CollisionHandler;
 
     private Animator _enemyStateAnimator;
 
