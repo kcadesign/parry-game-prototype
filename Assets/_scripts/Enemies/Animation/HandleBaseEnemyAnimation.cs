@@ -72,10 +72,13 @@ public class HandleBaseEnemyAnimation : MonoBehaviour
     {
         if (collisionObject.transform.IsChildOf(transform))
         {
+            //Animate take damage here
+            _enemyStateAnimator.SetTrigger("TakeDamage");
+            /*
             foreach (SpriteRenderer spriteRenderer in BodySprites)
             {
                 StartCoroutine(FlashEnemy(spriteRenderer));
-            }
+            }*/
         }
     }
     

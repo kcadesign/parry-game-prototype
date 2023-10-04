@@ -22,21 +22,21 @@ public class HandleProjectileCollisions : HandleCollisions, IParryable
     protected void OnEnable()
     {
         PlayerParry.OnParryActive += PlayerParry_OnParryActive;
-        PlayerBlock.OnBlock += PlayerBlockJump_OnBlock;
+        PlayerBlock.OnBlock += PlayerBlock_OnBlock;
     }
 
     protected void OnDisable()
     {
         PlayerParry.OnParryActive -= PlayerParry_OnParryActive;
-        PlayerBlock.OnBlock -= PlayerBlockJump_OnBlock;
+        PlayerBlock.OnBlock -= PlayerBlock_OnBlock;
     }
 
     private void PlayerParry_OnParryActive(bool parryPressed) => _parryActive = parryPressed;
-    private void PlayerBlockJump_OnBlock(bool isBlocking) => _blockActive = isBlocking;
+    private void PlayerBlock_OnBlock(bool isBlocking) => _blockActive = isBlocking;
 
     protected override void HandleCollisionWithPlayer(GameObject collidedObject)
     {
-        Debug.Log($"Projectile collided with {collidedObject.tag}");
+        //Debug.Log($"Projectile collided with {collidedObject.tag}");
         if (!_deflected)
         {
             if (_parryActive && !_blockActive)
@@ -59,6 +59,7 @@ public class HandleProjectileCollisions : HandleCollisions, IParryable
                 Destroy(gameObject);
             }
         }
+
     }
 
     protected override void HandleCollisionWithEnemyBody(GameObject collidedObject)

@@ -56,12 +56,5 @@ public class HandleEnemyBodyCollisions : HandleCollisions, IParryable
         }
     }
 
-    protected override void HandleCollisionWithProjectile(GameObject collidedObject)
-    {
-        Debug.Log($"Enemy collided with {collidedObject.tag}");
-
-        // if deflected - damage enemy
-        // else - ignore
-    }
 
 }
