@@ -12,8 +12,7 @@ public class HandleEnemyBodyCollisions : HandleCollisions, IParryable
     protected bool _blockActive;
     private bool _deflected;
 
-    [HideInInspector] public bool EnemyHit = false;
-
+    //[HideInInspector] public bool EnemyHit = false;
     //[SerializeField] private float _damageForce = 5;
 
     protected void OnEnable()

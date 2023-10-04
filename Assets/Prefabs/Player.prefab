@@ -978,9 +978,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 387900a09b1b81646a84ce32b5a0b1cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _collisionRequired: 0
   _hitStunMultiplier: 4
-  _hitStunDuration: 3
+  _hitStunDuration: 2
   _knockbackForce: 30
 --- !u!114 &5858114657563188475
 MonoBehaviour:

@@ -7,7 +7,7 @@ public class ZoomToPlayerSpeed : MonoBehaviour
 {
     private CinemachineVirtualCamera _virtualCamera;
 
-    [SerializeField] private float _targetPlayerVelocity;
+    [SerializeField] private float _velocityToZoomOut;
 
     [SerializeField] private float _zoomSpeed = 0.1f;
 
@@ -33,11 +33,11 @@ public class ZoomToPlayerSpeed : MonoBehaviour
 
     private void PlayerMove_OnPlayerMoveInput(Vector2 playerVelocity)
     {
-        if (playerVelocity.x >= _targetPlayerVelocity)
+        if (playerVelocity.x >= _velocityToZoomOut)
         {
             _targetOrthoSize = _maxCameraOrthoSize;
         }
-        else if (playerVelocity.x <= -_targetPlayerVelocity)
+        else if (playerVelocity.x <= -_velocityToZoomOut)
         {
             _targetOrthoSize = _maxCameraOrthoSize;
         }

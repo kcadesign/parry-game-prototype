@@ -38,26 +38,31 @@ public class HandleHurtBoxCollisions : HandleCollisions, IParryable
 
     protected override void HandleCollisionWithPlayer(GameObject collidedObject)
     {
+        Debug.Log($"{gameObject} collided with {collidedObject}");
+        Debug.Log($"Block active: {_blockActive}");
         if (!_deflected)
         {
-            if (_parryActive && !_blockActive)
+            if (_parryActive)
             {
+                // Damage enemy
                 _deflected = true;
                 OnDeflect?.Invoke(gameObject, _deflected);
                 // damage enemy health component
                 OnDamageCollision?.Invoke(HealthHandlerObject);
             }
-            else if (!_parryActive && _blockActive)
+            else if (_blockActive)
             {
                 return;
             }
             else if (!_parryActive && !_blockActive)
             {
+                // Damage player
                 _deflected = false;
                 OnDamageCollision?.Invoke(collidedObject);
             }
             _deflected = false;
         }
+
     }
 
 }
