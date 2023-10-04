@@ -247,11 +247,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 894887688545714950, guid: 033d711d75361e441b1fd89cf0622f53, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -34.51888
+      value: -34.473442
       objectReference: {fileID: 0}
     - target: {fileID: 894887688545714950, guid: 033d711d75361e441b1fd89cf0622f53, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.7843305
+      value: -1.8146211
       objectReference: {fileID: 0}
     - target: {fileID: 894887688545714950, guid: 033d711d75361e441b1fd89cf0622f53, type: 3}
       propertyPath: m_LocalPosition.z
@@ -320,7 +320,7 @@ PrefabInstance:
     - target: {fileID: 6136258636924724209, guid: 033d711d75361e441b1fd89cf0622f53, type: 3}
       propertyPath: ObjectToFollow
       value: 
-      objectReference: {fileID: 2612354344797068096}
+      objectReference: {fileID: 4678160177667030753}
     - target: {fileID: 7976323921639655483, guid: 033d711d75361e441b1fd89cf0622f53, type: 3}
       propertyPath: m_Name
       value: Enemy_AOE 1

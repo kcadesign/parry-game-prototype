@@ -36,28 +36,25 @@ public class HandleProjectileCollisions : HandleCollisions, IParryable
 
     protected override void HandleCollisionWithPlayer(GameObject collidedObject)
     {
+        Debug.Log($"Projectile collided with {collidedObject.tag}");
         if (!_deflected)
         {
-            if (_parryActive)
+            if (_parryActive && !_blockActive)
             {
-                _projectileSpriteRenderer.color = Color.blue;
+                _projectileSpriteRenderer.color = Color.white;
                 _deflected = true;
                 OnDeflect?.Invoke(gameObject, _deflected);
 
                 Destroy(gameObject, 3f);
             }
-            else if (_blockActive)
+            else if (!_parryActive && _blockActive)
             {
                 Destroy(gameObject);
             }
             else if (!_parryActive && !_blockActive)
             {
                 _deflected = false;
-
-                if (!_collisionRequired)
-                {
-                    OnDamageCollision?.Invoke(collidedObject);
-                }
+                
                 OnDamageCollision?.Invoke(collidedObject);
                 Destroy(gameObject);
             }
@@ -72,10 +69,6 @@ public class HandleProjectileCollisions : HandleCollisions, IParryable
         }
         else if (_deflected)
         {
-            if (!_collisionRequired)
-            {
-                return;
-            }
             OnDamageCollision?.Invoke(collidedObject);
             Destroy(gameObject);
         }

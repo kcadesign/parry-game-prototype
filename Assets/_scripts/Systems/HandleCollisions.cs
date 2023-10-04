@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class HandleCollisions : MonoBehaviour
 {
-    [SerializeField] protected bool _collisionRequired;
-
     public enum CollisionType
     {
         Player,
@@ -52,8 +50,8 @@ public class HandleCollisions : MonoBehaviour
     {
         if (collidedObject.CompareTag("Player")) _currentCollision = CollisionType.Player;
         else if (collidedObject.CompareTag("Enemy")) _currentCollision = CollisionType.EnemyBody;
-        else if (collidedObject.CompareTag("Projectile")) _currentCollision = CollisionType.HurtBox;
-        else if (collidedObject.CompareTag("HurtBox")) _currentCollision = CollisionType.Projectile;
+        else if (collidedObject.CompareTag("Projectile")) _currentCollision = CollisionType.Projectile;
+        else if (collidedObject.CompareTag("HurtBox")) _currentCollision = CollisionType.HurtBox;
         else _currentCollision = CollisionType.Environment;
 
         switch (_currentCollision)

@@ -52,7 +52,7 @@ public class HandlePlayerCollisions : HandleCollisions, IParryable
 
     protected override void HandleCollisionWithEnemyBody(GameObject collidedObject)
     {
-        base.HandleCollisionWithEnemyBody(collidedObject);
+        //Debug.Log($"Enemy correctly collided with player");
 
         if (!_parryActive && !_blockActive && !_playerStunned)
         {
@@ -62,17 +62,18 @@ public class HandlePlayerCollisions : HandleCollisions, IParryable
 
     protected override void HandleCollisionWithProjectile(GameObject collidedObject)
     {
-        base.HandleCollisionWithProjectile(collidedObject);
-
         if (!_parryActive && !_blockActive && !_playerStunned)
         {
             VulnerableCollisionActions(collidedObject);
         }
     }
 
-    protected override void HandleCollisionWithEnvironment(GameObject collidedObject)
+    protected override void HandleCollisionWithHurtBox(GameObject collidedObject)
     {
-        base.HandleCollisionWithEnvironment(collidedObject);
+        if (!_parryActive && !_blockActive && !_playerStunned)
+        {
+            VulnerableCollisionActions(collidedObject);
+        }
     }
 
     private void VulnerableCollisionActions(GameObject collidedObject)

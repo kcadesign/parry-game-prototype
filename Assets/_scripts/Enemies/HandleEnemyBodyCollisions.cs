@@ -40,7 +40,6 @@ public class HandleEnemyBodyCollisions : HandleCollisions, IParryable
 
     protected override void HandleCollisionWithPlayer(GameObject collidedObject)
     {
-        base.HandleCollisionWithPlayer(collidedObject);
         if (_parryActive)
         {
             //EnemyHit = true;
@@ -53,14 +52,15 @@ public class HandleEnemyBodyCollisions : HandleCollisions, IParryable
         else if (!_parryActive && !_blockActive)
         {
             //EnemyHit = false;
-            Debug.Log($"Enemy collided with: {collidedObject}");
+            //Debug.Log($"Enemy collided with: {collidedObject}");
             OnDamageCollision?.Invoke(collidedObject);
         }
     }
 
     protected override void HandleCollisionWithProjectile(GameObject collidedObject)
     {
-        base.HandleCollisionWithProjectile(collidedObject);
+        Debug.Log($"Enemy collided with {collidedObject.tag}");
+
         // if deflected - damage enemy
         // else - ignore
     }

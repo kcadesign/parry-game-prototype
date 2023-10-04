@@ -37,7 +37,6 @@ public class ProjectileController : MonoBehaviour
         {
             _parryable.OnDeflect -= _parryable_OnDeflect;
         }
-
     }
 
     void Start()
@@ -57,16 +56,4 @@ public class ProjectileController : MonoBehaviour
         }
     }
 
-    /*
-    private void HandleProjectileCollisions_OnDeflect(GameObject projectile, bool deflected)
-    {
-        if (projectile == gameObject && deflected)
-        {
-            _rigidBody.velocity = Vector2.zero;
-
-            _originDirection = (_originPosition - (Vector2)transform.position).normalized;
-            _rigidBody.AddForce(_originDirection * _deflectForce, ForceMode2D.Impulse);
-        }
-    }
-    */
 }
