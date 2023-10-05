@@ -7,14 +7,14 @@ public class CheckPlayerGrounded : MonoBehaviour
     public delegate void Grounded(bool grounded);
     public static event Grounded OnGrounded;
 
-    /*
+    
     public float raycastDistance = 0.1f;
     public int numberOfRays = 5; // Number of rays to cast
     public LayerMask groundLayer;
-    */
-    public LayerMask CollisionLayer;
+    
+    //public LayerMask CollisionLayer;
     private bool _isGrounded = false;
-    /*
+    
     private void Update()
     {
         float raySpacing = GetComponent<Collider2D>().bounds.size.x / (numberOfRays - 1);
@@ -30,7 +30,7 @@ public class CheckPlayerGrounded : MonoBehaviour
             if (hit.collider != null)
             {
                 _isGrounded = true;
-                Debug.Log($"Player grounded: {_isGrounded}");
+                //Debug.Log($"Player grounded: {_isGrounded}");
             }
             else
             {
@@ -39,8 +39,8 @@ public class CheckPlayerGrounded : MonoBehaviour
         }
         OnGrounded?.Invoke(_isGrounded);
     }
-    */
-
+    
+    /*
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if ((CollisionLayer.value & (1 << collision.gameObject.layer)) != 0)
@@ -72,5 +72,5 @@ public class CheckPlayerGrounded : MonoBehaviour
         //Debug.Log($"Is grounded: {_isGrounded}");
 
     }
-
+    */
 }
