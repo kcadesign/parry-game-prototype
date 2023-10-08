@@ -35,8 +35,9 @@ public class PlayerParry : MonoBehaviour
         playerControls.Gameplay.Parry.performed += Parry_performed;
         playerControls.Gameplay.Parry.canceled += Parry_canceled;
 
-        PlayerBlock.OnBlock += PlayerBlockJump_OnBlock;
+        PlayerBlock.OnBlock += PlayerBlock_OnBlock;
         CheckPlayerGrounded.OnGrounded += CheckPlayerGrounded_OnGrounded;
+        HandlePlayerCollisions.OnCollision += HandlePlayerCollisions_OnCollision;
     }
 
     private void OnDisable()
@@ -46,8 +47,10 @@ public class PlayerParry : MonoBehaviour
         playerControls.Gameplay.Parry.performed -= Parry_performed;
         playerControls.Gameplay.Parry.canceled -= Parry_canceled;
 
-        PlayerBlock.OnBlock -= PlayerBlockJump_OnBlock;
+        PlayerBlock.OnBlock -= PlayerBlock_OnBlock;
         CheckPlayerGrounded.OnGrounded -= CheckPlayerGrounded_OnGrounded;
+        HandlePlayerCollisions.OnCollision -= HandlePlayerCollisions_OnCollision;
+
     }
 
     private void Parry_performed(InputAction.CallbackContext value)
@@ -62,7 +65,7 @@ public class PlayerParry : MonoBehaviour
         OnParryActive?.Invoke(_parryActive);
     }
     
-    private void PlayerBlockJump_OnBlock(bool isBlocking)
+    private void PlayerBlock_OnBlock(bool isBlocking)
     {
         if (isBlocking)
         {
@@ -76,29 +79,37 @@ public class PlayerParry : MonoBehaviour
         //Debug.Log($"Is grounded: {grounded}");
         if (grounded)
         {
-            if (_parryActive && _canParryBounce && !_forceApplied)
-            {
-                _playerRigidbody.velocity = new(_playerRigidbody.velocity.x, 0);
-                _playerRigidbody.AddForce(Vector2.up * _parryForce, ForceMode2D.Impulse);
-
-                _forceApplied = true;
-                _canParryBounce = true;
-
-            }
-
-            _canParryBounce = false;
-            _forceApplied = false;
-
+            HandleParryBounce();
         }
         else if (!grounded)
         {
             _canParryBounce = true;
             _forceApplied = false;
-
         }
         //Debug.Log($"Can parry bounce: {_canParryBounce}");
 
     }
+
+    private void HandlePlayerCollisions_OnCollision()
+    {
+        HandleParryBounce();
+    }
+
+    private void HandleParryBounce()
+    {
+        if (_parryActive && _canParryBounce && !_forceApplied)
+        {
+            _playerRigidbody.velocity = new(_playerRigidbody.velocity.x, 0);
+            _playerRigidbody.AddForce(Vector2.up * _parryForce, ForceMode2D.Impulse);
+
+            _forceApplied = true;
+            _canParryBounce = true;
+        }
+        _canParryBounce = false;
+        _forceApplied = false;
+    }
+
+
     /*
     private void OnCollisionEnter2D(Collision2D collision)
     {

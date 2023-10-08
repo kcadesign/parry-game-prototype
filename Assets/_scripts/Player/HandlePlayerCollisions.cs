@@ -8,6 +8,8 @@ public class HandlePlayerCollisions : HandleCollisions, IParryable
     public event Action<GameObject, bool> OnDeflect;
     public event Action<GameObject> OnDamageCollision;
 
+    public static event Action OnCollision;
+
     public delegate void Stunned(bool stunned);
     public static event Stunned OnStunned;
 
@@ -58,6 +60,7 @@ public class HandlePlayerCollisions : HandleCollisions, IParryable
         {
             VulnerableCollisionActions(collidedObject);
         }
+        OnCollision?.Invoke();
     }
 
     protected override void HandleCollisionWithProjectile(GameObject collidedObject)
@@ -66,6 +69,8 @@ public class HandlePlayerCollisions : HandleCollisions, IParryable
         {
             VulnerableCollisionActions(collidedObject);
         }
+        OnCollision?.Invoke();
+
     }
 
     protected override void HandleCollisionWithHurtBox(GameObject collidedObject)
@@ -74,6 +79,8 @@ public class HandlePlayerCollisions : HandleCollisions, IParryable
         {
             VulnerableCollisionActions(collidedObject);
         }
+        OnCollision?.Invoke();
+
     }
 
     private void VulnerableCollisionActions(GameObject collidedObject)

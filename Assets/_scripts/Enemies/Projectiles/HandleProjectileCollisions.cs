@@ -74,10 +74,10 @@ public class HandleProjectileCollisions : HandleCollisions, IParryable
             Destroy(gameObject);
         }
     }
-
+    /*
     protected override void HandleCollisionWithEnvironment(GameObject collidedObject)
     {
         Destroy(gameObject);
     }
-    
+    */
 }
