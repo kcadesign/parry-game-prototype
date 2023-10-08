@@ -91,9 +91,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d5e110f959e93943a70ee08495c3cf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CollisionLayer:
+  raycastDistance: 0.1
+  numberOfRays: 5
+  groundLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 0
 --- !u!114 &6058390372796569298
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -912,7 +914,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b69cc5722d8ec854480520cfcacf5215, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rollSpeed: 35
+  _rollSpeed: 24
   _maxVelocity: 10
 --- !u!114 &36215996473939614
 MonoBehaviour:

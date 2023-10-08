@@ -131,7 +131,6 @@ GameObject:
   m_Component:
   - component: {fileID: 9097890226027746778}
   - component: {fileID: 3119735341885209127}
-  - component: {fileID: 1904103203242105375}
   - component: {fileID: 5906391850735681325}
   - component: {fileID: 5874068999174111517}
   - component: {fileID: 5929483320299406205}
@@ -195,25 +194,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.4
---- !u!114 &1904103203242105375
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 728813285803240858}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f18ed973c78bbed4988758efb416f030, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TargetLayer:
-    serializedVersion: 2
-    m_Bits: 8
-  SightCentre: {fileID: 9097890226027746778}
-  SightRange: 6
-  AttackCentre: {fileID: 9097890226027746778}
-  AttackRange: 1.5
 --- !u!114 &5906391850735681325
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -226,8 +206,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 697fe9d43113de544a6cf8e5d698d57c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnemyHit: 0
-  _damageForce: 50
 --- !u!114 &5874068999174111517
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -931,8 +909,9 @@ GameObject:
   - component: {fileID: 894887688545714950}
   - component: {fileID: 1402889283625708479}
   - component: {fileID: 1941318829957251631}
+  - component: {fileID: 6786192819353122480}
   m_Layer: 0
-  m_Name: Enemy_Base
+  m_Name: Enemy_lv1_Base
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -995,6 +974,25 @@ MonoBehaviour:
   - {fileID: 2327520610296954774}
   CollisionHandler: {fileID: 0}
   DestructionParticle: {fileID: 6780298739901135007, guid: 95491e46a87789d41bafa511792b1e9c, type: 3}
+--- !u!114 &6786192819353122480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7976323921639655483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f18ed973c78bbed4988758efb416f030, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TargetLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  SightCentre: {fileID: 9097890226027746778}
+  SightRange: 6
+  AttackCentre: {fileID: 9097890226027746778}
+  AttackRange: 1.5
 --- !u!1 &8845792006319111637
 GameObject:
   m_ObjectHideFlags: 0

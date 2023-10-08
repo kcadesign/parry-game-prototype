@@ -14,10 +14,11 @@ public class CheckPlayerGrounded : MonoBehaviour
     
     //public LayerMask CollisionLayer;
     private bool _isGrounded = false;
-    
+
     private void Update()
     {
         float raySpacing = GetComponent<Collider2D>().bounds.size.x / (numberOfRays - 1);
+        bool isAnyRayGrounded = false; // Track if any ray hits the ground
 
         for (int i = 0; i < numberOfRays; i++)
         {
@@ -29,17 +30,16 @@ public class CheckPlayerGrounded : MonoBehaviour
 
             if (hit.collider != null)
             {
-                _isGrounded = true;
-                //Debug.Log($"Player grounded: {_isGrounded}");
-            }
-            else
-            {
-                _isGrounded = false;
+                isAnyRayGrounded = true; // At least one ray hit the ground
             }
         }
+
+        // Update _isGrounded based on whether any ray hit the ground
+        _isGrounded = isAnyRayGrounded;
+
         OnGrounded?.Invoke(_isGrounded);
     }
-    
+
     /*
     private void OnTriggerEnter2D(Collider2D collision)
     {

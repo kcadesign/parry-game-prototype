@@ -17,13 +17,11 @@ public class HandleEnemyHealth : MonoBehaviour
     private void OnEnable()
     {
         HandleDamageOut.OnOutputDamage += HandleEnemyDamageOutput_OnOutputDamage;
-        //HandleProjectileCollisions.OnDeflect += HandleProjectileCollisions_OnDeflect;
     }
 
     private void OnDisable()
     {
         HandleDamageOut.OnOutputDamage -= HandleEnemyDamageOutput_OnOutputDamage;
-        //HandleProjectileCollisions.OnDeflect -= HandleProjectileCollisions_OnDeflect;
     }
 
     private void HandleEnemyDamageOutput_OnOutputDamage(GameObject collisionObject, int damageAmount)
@@ -38,20 +36,7 @@ public class HandleEnemyHealth : MonoBehaviour
             CheckHealth();
         }
     }
-    /*
-    private void HandleProjectileCollisions_OnDeflect(GameObject collisionObject, int damageAmount)
-    {
-        if (collisionObject == gameObject)
-        {
-            _enemyHealth.Damage(damageAmount);
-
-            currentHealth = _enemyHealth.GetHealth();
-            Debug.Log($"{gameObject.transform.parent.gameObject.transform.parent.name}'s health: {currentHealth}");
-
-            CheckHealth();
-        }
-    }
-    */
+    
     private void CheckHealth()
     {
         if (currentHealth <= 0)
