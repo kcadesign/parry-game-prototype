@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,12 +24,14 @@ public class HandleBaseEnemyAnimation : MonoBehaviour
     {
         _enemyController.OnHandleState += _enemyController_OnEnemyStateChange;
         HandleDamageOut.OnOutputDamage += HandleDamageOutput_OnOutputDamage;
+        HandleEnemyHealth.OnEnemyDeath += AnimateEnemyDeath;
     }
 
     private void OnDisable()
     {
         _enemyController.OnHandleState -= _enemyController_OnEnemyStateChange;
         HandleDamageOut.OnOutputDamage -= HandleDamageOutput_OnOutputDamage;
+        HandleEnemyHealth.OnEnemyDeath -= AnimateEnemyDeath;
     }
 
     private void _enemyController_OnEnemyStateChange(System.Enum enemyState)
@@ -71,7 +74,7 @@ public class HandleBaseEnemyAnimation : MonoBehaviour
     private void HandleDamageOutput_OnOutputDamage(GameObject collisionObject, int damageAmount)
     {
         if (collisionObject.transform.IsChildOf(transform))
-        {
+        {/*
             //Animate take damage here
             _enemyStateAnimator.SetTrigger("TakeDamage");
             /*
@@ -95,5 +98,12 @@ public class HandleBaseEnemyAnimation : MonoBehaviour
         spriteRenderer.color = new Color(0, 0, 100, 0);
         yield return new WaitForSeconds(0.15f);
         spriteRenderer.color = new Color(0, 0, 100, 100);
+    }
+
+    private void AnimateEnemyDeath(GameObject gameObject)
+    {
+        Debug.Log($"Enemy death message recieved by animator script");
+
+        _enemyStateAnimator.SetTrigger("Dead");
     }
 }

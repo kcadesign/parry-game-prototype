@@ -1,9 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class HandleEnemyHealth : MonoBehaviour
 {
+    public static Action<GameObject> OnEnemyDeath;
+
     private HealthSystem _enemyHealth;
     [SerializeField] private int maxHealth = 2;
     private int currentHealth;
@@ -41,7 +44,9 @@ public class HandleEnemyHealth : MonoBehaviour
     {
         if (currentHealth <= 0)
         {
-            Destroy(gameObject.transform.parent.gameObject);
+            // Instead of destroy signal enemy death
+            //Destroy(gameObject.transform.parent.gameObject);
+            OnEnemyDeath?.Invoke(gameObject);
         }
     }
 }
