@@ -50,7 +50,6 @@ public class PlayerParry : MonoBehaviour
         PlayerBlock.OnBlock -= PlayerBlock_OnBlock;
         CheckPlayerGrounded.OnGrounded -= CheckPlayerGrounded_OnGrounded;
         HandlePlayerCollisions.OnCollision -= HandlePlayerCollisions_OnCollision;
-
     }
 
     private void Parry_performed(InputAction.CallbackContext value)

@@ -981,9 +981,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 387900a09b1b81646a84ce32b5a0b1cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hitStunMultiplier: 4
-  _hitStunDuration: 2
-  _knockbackForce: 30
+  _hitStunMultiplier: 3
+  _hitStunDuration: 1
+  _knockbackForce: 50
 --- !u!114 &5858114657563188475
 MonoBehaviour:
   m_ObjectHideFlags: 0
