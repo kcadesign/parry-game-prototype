@@ -5,12 +5,12 @@ using UnityEngine;
 
 public class HandleBaseEnemyAnimation : MonoBehaviour
 {
-    public SpriteRenderer[] BodySprites;
+    //public SpriteRenderer[] BodySprites;
     public HandleEnemyBodyCollisions CollisionHandler;
 
     private Animator _enemyStateAnimator;
 
-    public ParticleSystem DestructionParticle;
+    //public ParticleSystem DestructionParticle;
 
     private IHandleState _enemyController;
 
@@ -23,15 +23,15 @@ public class HandleBaseEnemyAnimation : MonoBehaviour
     private void OnEnable()
     {
         _enemyController.OnHandleState += _enemyController_OnEnemyStateChange;
-        HandleDamageOut.OnOutputDamage += HandleDamageOutput_OnOutputDamage;
-        HandleEnemyHealth.OnEnemyDeath += AnimateEnemyDeath;
+        //HandleDamageOut.OnOutputDamage += HandleDamageOutput_OnOutputDamage;
+        HandleEnemyHealth.OnEnemyDeath += HandleEnemyHealth_OnEnemyDeath;
     }
 
     private void OnDisable()
     {
         _enemyController.OnHandleState -= _enemyController_OnEnemyStateChange;
-        HandleDamageOut.OnOutputDamage -= HandleDamageOutput_OnOutputDamage;
-        HandleEnemyHealth.OnEnemyDeath -= AnimateEnemyDeath;
+        //HandleDamageOut.OnOutputDamage -= HandleDamageOutput_OnOutputDamage;
+        HandleEnemyHealth.OnEnemyDeath -= HandleEnemyHealth_OnEnemyDeath;
     }
 
     private void _enemyController_OnEnemyStateChange(System.Enum enemyState)
@@ -70,18 +70,18 @@ public class HandleBaseEnemyAnimation : MonoBehaviour
                 break;
         }
     }
-
+    /*
     private void HandleDamageOutput_OnOutputDamage(GameObject collisionObject, int damageAmount)
     {
         if (collisionObject.transform.IsChildOf(transform))
         {/*
             //Animate take damage here
             _enemyStateAnimator.SetTrigger("TakeDamage");
-            /*
+            
             foreach (SpriteRenderer spriteRenderer in BodySprites)
             {
                 StartCoroutine(FlashEnemy(spriteRenderer));
-            }*/
+            }
         }
     }
     
@@ -92,18 +92,21 @@ public class HandleBaseEnemyAnimation : MonoBehaviour
             Instantiate(DestructionParticle, transform.position, Quaternion.identity).Play();
         }
     }
-
+    
     private IEnumerator FlashEnemy(SpriteRenderer spriteRenderer)
     {
         spriteRenderer.color = new Color(0, 0, 100, 0);
         yield return new WaitForSeconds(0.15f);
         spriteRenderer.color = new Color(0, 0, 100, 100);
     }
-
-    private void AnimateEnemyDeath(GameObject gameObject)
+    */
+    private void HandleEnemyHealth_OnEnemyDeath(GameObject deadEnemy)
     {
-        Debug.Log($"Enemy death message recieved by animator script");
+        if(deadEnemy == gameObject)
+        {
+            Debug.Log($"Enemy death message recieved by animator script");
 
-        _enemyStateAnimator.SetTrigger("Dead");
+            _enemyStateAnimator.SetTrigger("Dead");
+        }
     }
 }

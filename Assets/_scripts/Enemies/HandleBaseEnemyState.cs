@@ -99,6 +99,11 @@ public class HandleBaseEnemyState : MonoBehaviour, IHandleState
     {
 
     }
+
+    protected virtual void DestroySelf()
+    {
+        Destroy(gameObject);
+    }
     
     private void OnDrawGizmosSelected()
     {

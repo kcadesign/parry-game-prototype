@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class HandlePlayerRespawn : MonoBehaviour
 {
+    private Rigidbody2D _rigidbody;
+
+    private void Awake()
+    {
+        _rigidbody = GetComponent<Rigidbody2D>();
+    }
     private void OnEnable()
     {
         HandleGameStateUI.OnGameRestart += HandleGameStateUI_OnGameRestart;
@@ -16,6 +22,8 @@ public class HandlePlayerRespawn : MonoBehaviour
 
     private void HandleGameStateUI_OnGameRestart(Vector3 respawnPosition)
     {
+        _rigidbody.velocity = Vector2.zero;
+
         gameObject.transform.position = respawnPosition;
     }
 }
