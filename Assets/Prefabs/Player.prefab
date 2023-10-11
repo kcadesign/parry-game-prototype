@@ -914,8 +914,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b69cc5722d8ec854480520cfcacf5215, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rollSpeed: 23
-  _maxVelocity: 10
+  _rollSpeed: 45
+  _maxVelocity: 8
 --- !u!114 &36215996473939614
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -982,8 +982,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hitStunMultiplier: 3
-  _hitStunDuration: 1
-  _knockbackForce: 50
+  _hitStunDuration: 1.5
+  _knockbackForce: 40
 --- !u!114 &5858114657563188475
 MonoBehaviour:
   m_ObjectHideFlags: 0

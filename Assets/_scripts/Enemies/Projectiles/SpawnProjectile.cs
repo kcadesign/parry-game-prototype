@@ -7,58 +7,26 @@ public class SpawnProjectile : MonoBehaviour
     public GameObject Projectile;
     public Transform SpawnPointTransform;
     private Vector2 SpawnPointPosition;
-
-    //private bool _parryActive;
-    //private bool _blockActive;
+    [SerializeField] private Vector2 _projectileMovementDirection;
+    [SerializeField] private float _speed = 5;
 
     private void Awake()
     {
         SpawnPointPosition = SpawnPointTransform.position;
     }
-    /*
-    protected void OnEnable()
-    {
-        PlayerParry.OnParryActive += PlayerParry_OnParryActive;
-        PlayerBlock.OnBlock += PlayerBlockJump_OnBlock;
-    }
 
-    protected void OnDisable()
-    {
-        PlayerParry.OnParryActive -= PlayerParry_OnParryActive;
-        PlayerBlock.OnBlock -= PlayerBlockJump_OnBlock;
-    }
-    
-    private void PlayerParry_OnParryActive(bool parryPressed)
-    {
-        _parryActive = parryPressed;
-    }
-
-    private void PlayerBlockJump_OnBlock(bool isBlocking)
-    {
-        _blockActive = isBlocking;
-        //Debug.Log($"Block active: {_blockActive}");
-    }
-    */
     private void InstantiateProjectile()
     {
         GameObject projectile = Instantiate(Projectile, SpawnPointPosition, transform.rotation);
-        /*
-        HandleProjectileCollisions projectileScript = projectile.GetComponent<HandleProjectileCollisions>();
+        Rigidbody2D projectileRigidbody = projectile.GetComponent<Rigidbody2D>();
 
-        if (projectileScript != null)
+        if(projectileRigidbody != null)
         {
-            projectileScript._blockActive = _blockActive;
-            projectileScript._parryActive = _parryActive;
-        }*/
+            projectileRigidbody.AddForce(_projectileMovementDirection * _speed, ForceMode2D.Impulse);
+        }
     }
 
-    public void InvokeProjectile()
-    {
-        Invoke(nameof(InstantiateProjectile), 0);
-    }
-
-    public void CancelInvokeProjectile()
-    {
-        CancelInvoke(nameof(InstantiateProjectile));
-    }
+    public void InvokeProjectile() => Invoke(nameof(InstantiateProjectile), 0);
+    public void CancelInvokeProjectile() => CancelInvoke(nameof(InstantiateProjectile));
+    
 }

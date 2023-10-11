@@ -6,8 +6,8 @@ public class ProjectileController : MonoBehaviour
 {
     private Rigidbody2D _rigidBody;
 
-    [SerializeField] private float _speed = 5;
-    private Vector2 _movementDirection = Vector2.left;
+    //[SerializeField] private float _speed = 5;
+    //private Vector2 _movementDirection = Vector2.left;
 
     [SerializeField] private float _deflectForce;
 
@@ -41,7 +41,7 @@ public class ProjectileController : MonoBehaviour
 
     void Start()
     {
-        _rigidBody.AddForce(_movementDirection * _speed, ForceMode2D.Impulse);
+        //_rigidBody.AddForce(_movementDirection * _speed, ForceMode2D.Impulse);
         Destroy(gameObject, 5f);
     }    
     

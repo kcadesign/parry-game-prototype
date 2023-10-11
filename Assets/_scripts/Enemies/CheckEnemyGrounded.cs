@@ -8,6 +8,7 @@ public class CheckEnemyGrounded : MonoBehaviour
     public LayerMask groundLayer;
 
     private static bool _isGrounded;
+
     public static bool IsGrounded
     {
         get { return _isGrounded; }
