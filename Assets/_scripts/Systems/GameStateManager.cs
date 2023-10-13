@@ -16,6 +16,7 @@ public class GameStateManager : MonoBehaviour
     private void Awake()
     {
         playerControls = new PlayerControls();
+        HandlePauseTime(_pauseTime);
     }
 
     private void OnEnable()

@@ -6,9 +6,6 @@ public class ProjectileController : MonoBehaviour
 {
     private Rigidbody2D _rigidBody;
 
-    //[SerializeField] private float _speed = 5;
-    //private Vector2 _movementDirection = Vector2.left;
-
     [SerializeField] private float _deflectForce;
 
     private Vector2 _originPosition;

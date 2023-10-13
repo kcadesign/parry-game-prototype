@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class HandleCheckpoint : MonoBehaviour
 {
-    private HandleLevelProgression levelProgression;
+    public HandleLevelProgression levelProgression;
 
     private SpriteRenderer _spriteRenderer;
     public Color CheckpointSavedColor;
 
     private void Awake()
     {
-        levelProgression = transform.parent.GetComponent<HandleLevelProgression>();
         _spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

@@ -8,37 +8,26 @@ public class HandleLevelProgression : MonoBehaviour
     public static event SendCurrentCheckpoint OnSendCurrentCheckpoint;
 
     private Transform currentCheckpoint;
-    public GameObject[] CheckpointArray;
+    public Transform LevelStart;
 
-    // Initialize the current checkpoint to the starting position
     void Awake()
     {
-        currentCheckpoint = transform.GetChild(0);
+        currentCheckpoint = LevelStart;
     }
 
-    void Start()
+    private void OnEnable()
     {
-        PopulateCheckpointArray();
+        RespawnTrigger.OnPlayerLedgeFall += RespawnTrigger_OnPlayerLedgeFall;
     }
 
-    private void PopulateCheckpointArray()
+    private void OnDisable()
     {
-        Transform parentTransform = gameObject.transform;
+        RespawnTrigger.OnPlayerLedgeFall -= RespawnTrigger_OnPlayerLedgeFall;
+    }
 
-        CheckpointArray = new GameObject[parentTransform.childCount];
-
-        int checkpointIndex = 0;
-        foreach (Transform childTransform in parentTransform)
-        {
-            CheckpointArray[checkpointIndex] = childTransform.gameObject;
-            checkpointIndex++;
-        }
-        /*
-        foreach (GameObject child in CheckpointArray)
-        {
-            Debug.Log("Child Name: " + child.name);
-        }
-        */
+    private void RespawnTrigger_OnPlayerLedgeFall(GameObject player)
+    {
+        player.transform.position = currentCheckpoint.position;
     }
 
     public void SetCurrentCheckpoint(Transform checkpoint, GameObject checkpointActivator)

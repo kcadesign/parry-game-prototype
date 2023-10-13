@@ -97,6 +97,20 @@ public class HandleGameStateUI : MonoBehaviour
     {
         int currentSceneName = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(currentSceneName);
-    }    
+    }
+
+    public void NextLevel()
+    {
+        int currentSceneName = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(currentSceneName +1);
+    }
+
+    public void ExitGame()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#endif
+        Application.Quit();
+    }
 
 }
