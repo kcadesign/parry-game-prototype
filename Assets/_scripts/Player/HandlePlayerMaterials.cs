@@ -29,7 +29,7 @@ public class HandlePlayerMaterials : MonoBehaviour
     {
         PlayerParry.OnParryActive += PlayerParry_OnParryActive;
         PlayerBlock.OnBlock += PlayerBlockJump_OnBlock;
-        HandlePlayerCollisions.OnStunned += HandlePlayerCollisions_OnStunned;
+        HandlePlayerStun.OnStunned += HandlePlayerStun_OnStunned;
         CheckPlayerGrounded.OnGrounded += CheckPlayerGrounded_OnGrounded;
     }
 
@@ -38,7 +38,7 @@ public class HandlePlayerMaterials : MonoBehaviour
     {
         PlayerParry.OnParryActive -= PlayerParry_OnParryActive;
         PlayerBlock.OnBlock -= PlayerBlockJump_OnBlock;
-        HandlePlayerCollisions.OnStunned -= HandlePlayerCollisions_OnStunned;
+        HandlePlayerStun.OnStunned -= HandlePlayerStun_OnStunned;
         CheckPlayerGrounded.OnGrounded -= CheckPlayerGrounded_OnGrounded;
     }
 
@@ -52,7 +52,7 @@ public class HandlePlayerMaterials : MonoBehaviour
         _blockActive = isBlocking;
     }
 
-    private void HandlePlayerCollisions_OnStunned(bool stunned)
+    private void HandlePlayerStun_OnStunned(bool stunned)
     {
         //Debug.Log($"Player stunned: {stunned}");
         _stunned = stunned;

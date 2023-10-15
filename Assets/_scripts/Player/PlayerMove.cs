@@ -43,7 +43,6 @@ public class PlayerMove : MonoBehaviour
         HandleHorizontalMovement();
         OnPlayerMoveInput?.Invoke(_rigidBody.velocity);
         //Debug.Log($"Player current velocity magnitude is: {_rigidBody.velocity.magnitude}");
-
     }
 
     private void Rolling_performed(InputAction.CallbackContext value)
@@ -72,7 +71,6 @@ public class PlayerMove : MonoBehaviour
         
         if(_rigidBody.velocity.magnitude > _maxVelocity)
         {
-            //_rigidBody.velocity = Vector2.ClampMagnitude(_rigidBody.velocity, _maxVelocity);
             _rigidBody.AddForce(Vector2.zero);
         }
     }

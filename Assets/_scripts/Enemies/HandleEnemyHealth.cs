@@ -27,7 +27,7 @@ public class HandleEnemyHealth : MonoBehaviour
         HandleDamageOut.OnOutputDamage -= HandleEnemyDamageOutput_OnOutputDamage;
     }
 
-    private void HandleEnemyDamageOutput_OnOutputDamage(GameObject collisionObject, int damageAmount)
+    private void HandleEnemyDamageOutput_OnOutputDamage(GameObject objectDamager, GameObject collisionObject, int damageAmount)
     {
         if(collisionObject == gameObject)
         {

@@ -14,7 +14,7 @@ public class HandleDamage : MonoBehaviour
         HandleDamageOut.OnOutputDamage -= HandleDamageOut_OnOutputDamage;
     }
 
-    private void HandleDamageOut_OnOutputDamage(GameObject collisionObject, int damageAmount)
+    private void HandleDamageOut_OnOutputDamage(GameObject damager, GameObject collisionObject, int damageAmount)
     {
         if(collisionObject == gameObject)
         {

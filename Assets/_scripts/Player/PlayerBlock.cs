@@ -10,7 +10,7 @@ public class PlayerBlock : MonoBehaviour
     public static event Block OnBlock;
     protected PlayerControls playerControls;
 
-    private bool _blockActive;
+    public bool _blockActive;
 
     private void Awake()
     {

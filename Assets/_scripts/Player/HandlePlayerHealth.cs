@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,8 @@ public class HandlePlayerHealth : MonoBehaviour
 {
     public delegate void PlayerHealthChange(int currentHealth, bool playerAlive);
     public static event PlayerHealthChange OnHealthChange;
+
+    public static event Action<GameObject> OnDamageRecieved;
 
     public HealthSystem PlayerHealth;
 
@@ -31,18 +34,19 @@ public class HandlePlayerHealth : MonoBehaviour
 
     private void OnEnable()
     {
-        HandleDamageOut.OnOutputDamage += HandleEnemyDamageOutput_OnOutputDamage;
+        HandleDamageOut.OnOutputDamage += HandleDamageOutput_OnOutputDamage;
         PlayerTriggerEnter.OnAreaDamagePlayer += PlayerTriggerEnter_OnAreaDamagePlayer;
         HandleGameStateUI.OnGameRestart += HandleGameStateUI_OnGameRestart;
-        HandlePlayerCollisions.OnStunned += HandlePlayerCollisions_OnStunned;
+        HandlePlayerStun.OnStunned += HandlePlayerStun_OnStunned;
     }
 
     private void OnDisable()
     {
-        HandleDamageOut.OnOutputDamage -= HandleEnemyDamageOutput_OnOutputDamage;
+        HandleDamageOut.OnOutputDamage -= HandleDamageOutput_OnOutputDamage;
         PlayerTriggerEnter.OnAreaDamagePlayer -= PlayerTriggerEnter_OnAreaDamagePlayer;
         HandleGameStateUI.OnGameRestart -= HandleGameStateUI_OnGameRestart;
-        HandlePlayerCollisions.OnStunned -= HandlePlayerCollisions_OnStunned;
+        HandlePlayerStun.OnStunned -= HandlePlayerStun_OnStunned;
+
     }
 
     private void Update()
@@ -66,8 +70,11 @@ public class HandlePlayerHealth : MonoBehaviour
         }
     }
 
-    private void HandleEnemyDamageOutput_OnOutputDamage(GameObject collisionObject, int damageAmount)
+    private void HandleDamageOutput_OnOutputDamage(GameObject objectDamager, GameObject collisionObject, int damageAmount)
     {
+        Debug.Log($"Damage recieved by player");
+        Debug.Log($"SUBSCRIBER - Can be damaged: {_canBeDamaged}");
+
         if (_canBeDamaged)
         {
             if (collisionObject == gameObject)
@@ -80,7 +87,9 @@ public class HandlePlayerHealth : MonoBehaviour
                 ResetHealTimer();
                 StartHealTimer();
 
+                OnDamageRecieved?.Invoke(objectDamager);
                 OnHealthChange?.Invoke(_currentHealth, _playerAlive);
+                
             }
         }
     }
@@ -123,8 +132,9 @@ public class HandlePlayerHealth : MonoBehaviour
         OnHealthChange?.Invoke(_currentHealth, _playerAlive);
     }
 
-    private void HandlePlayerCollisions_OnStunned(bool stunned)
+    private void HandlePlayerStun_OnStunned(bool stunned)
     {
+        Debug.Log($"Player stunned: {stunned}");
         if (stunned)
         {
             _canBeDamaged = false;
@@ -134,6 +144,7 @@ public class HandlePlayerHealth : MonoBehaviour
             _canBeDamaged = true;
         }
     }
+
 
     public void StartHealTimer() => _isCounting = true;
     public void StopHealTimer() => _isCounting = false;

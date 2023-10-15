@@ -89,7 +89,7 @@ public class PlayerParry : MonoBehaviour
 
     }
 
-    private void HandlePlayerCollisions_OnCollision()
+    private void HandlePlayerCollisions_OnCollision(GameObject collidedObject)
     {
         HandleParryBounce();
     }

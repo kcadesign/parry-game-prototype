@@ -13,15 +13,15 @@ public class AnimatePlayerHitStun : MonoBehaviour
 
     private void OnEnable()
     {
-        HandlePlayerCollisions.OnStunned += HandlePlayerCollisions_OnStunned;
+        HandlePlayerStun.OnStunned += HandlePlayerStun_OnStunned;
     }
 
     private void OnDisable()
     {
-        HandlePlayerCollisions.OnStunned -= HandlePlayerCollisions_OnStunned;
+        HandlePlayerStun.OnStunned -= HandlePlayerStun_OnStunned;
     }
 
-    private void HandlePlayerCollisions_OnStunned(bool stunned)
+    private void HandlePlayerStun_OnStunned(bool stunned)
     {
         _playerAnimator.SetBool("Stunned", stunned);
     }

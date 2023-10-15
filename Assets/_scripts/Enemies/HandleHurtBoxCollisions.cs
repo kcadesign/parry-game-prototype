@@ -40,6 +40,7 @@ public class HandleHurtBoxCollisions : HandleCollisions, IParryable
     {
         //Debug.Log($"{gameObject} collided with {collidedObject}");
         //Debug.Log($"Block active: {_blockActive}");
+
         if (!_deflected)
         {
             if (_parryActive)

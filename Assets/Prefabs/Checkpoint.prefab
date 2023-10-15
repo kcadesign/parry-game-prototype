@@ -143,4 +143,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce09f225dd0b98546884ca1bb93afa15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelProgression: {fileID: 2472998391290530038, guid: 35cbf832939b4104db8f1243c761cc46, type: 3}
   CheckpointSavedColor: {r: 0.01669991, g: 1, b: 0, a: 0.101960786}
