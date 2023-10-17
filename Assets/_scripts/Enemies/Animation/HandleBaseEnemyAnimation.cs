@@ -104,7 +104,7 @@ public class HandleBaseEnemyAnimation : MonoBehaviour
     {
         if(deadEnemy == gameObject)
         {
-            Debug.Log($"Enemy death message recieved by animator script");
+            //Debug.Log($"Enemy death message recieved by animator script");
 
             _enemyStateAnimator.SetTrigger("Dead");
         }

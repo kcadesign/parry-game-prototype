@@ -20,7 +20,7 @@ public class HandlePlayerStun : MonoBehaviour
 
     [SerializeField] private float _knockbackForce = 30;
 
-    private GameObject _collidedObject;
+    //private GameObject _collidedObject;
 
     private void Awake()
     {
@@ -33,24 +33,22 @@ public class HandlePlayerStun : MonoBehaviour
     private void OnEnable()
     {
         HandlePlayerHealth.OnDamageRecieved += HandlePlayerHealth_OnDamageRecieved;
-
     }
 
     private void OnDisable()
     {
         HandlePlayerHealth.OnDamageRecieved -= HandlePlayerHealth_OnDamageRecieved;
-
     }
 
     private void HandlePlayerHealth_OnDamageRecieved(GameObject objectDamager)
     {
-        Debug.Log($"DAMAGED");
+        //Debug.Log($"DAMAGED");
         VulnerableCollisionActions(objectDamager);
     }
 
     private void VulnerableCollisionActions(GameObject collidedObject)
     {
-        Debug.Log($"Collided object: {collidedObject.tag}");
+        //Debug.Log($"Collided object: {collidedObject.tag}");
         HandleKnockBack(collidedObject);
         StartCoroutine(StunActions());
     }
@@ -81,13 +79,14 @@ public class HandlePlayerStun : MonoBehaviour
         float playerCenterX = transform.position.x;
         float approachDirectionX = (playerCenterX - enemyCenterX);
 
-        Debug.Log($"Approach direction: {approachDirectionX}");
         if (approachDirectionX > 0)
         {
+            _rigidbody.velocity = new(_rigidbody.velocity.x, 0);
             _rigidbody.AddForce(new Vector2(1, 1) * _knockbackForce, ForceMode2D.Impulse);
         }
         else if (approachDirectionX < 0)
         {
+            _rigidbody.velocity = new(_rigidbody.velocity.x, 0);
             _rigidbody.AddForce(new Vector2(-1, 1) * _knockbackForce, ForceMode2D.Impulse);
         }
     }

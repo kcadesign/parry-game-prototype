@@ -6,8 +6,8 @@ public class CycleColors : MonoBehaviour
 {
     private SpriteRenderer _spriteRenderer;
 
-    private IParryable _deflect;
-    private bool _deflected;
+    //private IParryable _deflect;
+    //private bool _deflected;
 
     public Color[] Colors;
     public float CycleDuration = 1.0f;
@@ -17,41 +17,41 @@ public class CycleColors : MonoBehaviour
     void Awake()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
-        _deflect = GetComponent<IParryable>();
-
+        //_deflect = GetComponent<IParryable>();
+        /*
         if (_deflect == null)
         {
             Debug.LogWarning("No collision handler component found on " + gameObject);
-        }
+        }*/
     }
 
     private void OnEnable()
-    {
+    {/*
         if (_deflect != null)
         {
             _deflect.OnDeflect += _deflect_OnDeflect;
-        }
+        }*/
     }
 
     private void OnDisable()
-    {
+    {/*
         if (_deflect != null)
         {
             _deflect.OnDeflect -= _deflect_OnDeflect;
-        }
+        }*/
     }
-
+    /*
     private void _deflect_OnDeflect(GameObject arg1, bool deflected)
     {
         _deflected = deflected;
-    }
+    }*/
 
     private void Update()
     {
-        if (!_deflected)
-        {
+        //if (!_deflected)
+        //{
             HandleCycleColors();
-        }
+        //}
     }
 
     private void HandleCycleColors()

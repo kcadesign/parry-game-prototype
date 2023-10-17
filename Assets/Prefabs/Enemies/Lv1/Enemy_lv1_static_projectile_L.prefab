@@ -133,6 +133,10 @@ PrefabInstance:
       propertyPath: CollisionHandler
       value: 
       objectReference: {fileID: 2906861317020210255}
+    - target: {fileID: 5874068999174111517, guid: 033d711d75361e441b1fd89cf0622f53, type: 3}
+      propertyPath: maxHealth
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 6136258636924724209, guid: 033d711d75361e441b1fd89cf0622f53, type: 3}
       propertyPath: ObjectToFollow
       value: 

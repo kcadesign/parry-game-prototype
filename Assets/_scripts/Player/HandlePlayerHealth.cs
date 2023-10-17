@@ -72,8 +72,8 @@ public class HandlePlayerHealth : MonoBehaviour
 
     private void HandleDamageOutput_OnOutputDamage(GameObject objectDamager, GameObject collisionObject, int damageAmount)
     {
-        Debug.Log($"Damage recieved by player");
-        Debug.Log($"SUBSCRIBER - Can be damaged: {_canBeDamaged}");
+        //Debug.Log($"Damage recieved by player");
+        //Debug.Log($"SUBSCRIBER - Can be damaged: {_canBeDamaged}");
 
         if (_canBeDamaged)
         {
@@ -134,7 +134,7 @@ public class HandlePlayerHealth : MonoBehaviour
 
     private void HandlePlayerStun_OnStunned(bool stunned)
     {
-        Debug.Log($"Player stunned: {stunned}");
+        //Debug.Log($"Player stunned: {stunned}");
         if (stunned)
         {
             _canBeDamaged = false;

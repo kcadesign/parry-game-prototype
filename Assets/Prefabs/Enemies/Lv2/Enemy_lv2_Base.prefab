@@ -218,7 +218,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9097890226027746778}
-  - component: {fileID: 3119735341885209127}
+  - component: {fileID: 6867181985195932917}
   - component: {fileID: 5906391850735681325}
   - component: {fileID: 5874068999174111517}
   - component: {fileID: 5929483320299406205}
@@ -247,8 +247,8 @@ Transform:
   - {fileID: 3529323070714938390}
   m_Father: {fileID: 894887688545714950}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &3119735341885209127
-CircleCollider2D:
+--- !u!70 &6867181985195932917
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -280,8 +280,8 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.45
+  m_Size: {x: 0.9, y: 0.5}
+  m_Direction: 0
 --- !u!114 &5906391850735681325
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1223,17 +1223,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2db01915c88697c43a1061493e3e84d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BodySprites:
-  - {fileID: 3891403870916161104}
-  - {fileID: 4524183848824568891}
-  - {fileID: 8727214327171279996}
-  - {fileID: 2088321527222235818}
-  - {fileID: 5662376793920034488}
-  - {fileID: 2745217726467711404}
-  - {fileID: 7586612743681049356}
-  - {fileID: 2327520610296954774}
   CollisionHandler: {fileID: 5906391850735681325}
-  DestructionParticle: {fileID: 6780298739901135007, guid: 95491e46a87789d41bafa511792b1e9c, type: 3}
 --- !u!114 &3844080735361459315
 MonoBehaviour:
   m_ObjectHideFlags: 0
