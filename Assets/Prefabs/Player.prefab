@@ -1502,9 +1502,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ObjectToFollow: {fileID: 6715703871435085181}
   _offset: {x: 0, y: 0, z: 0}
-  ConstrainXRotation: 1
-  ConstrainYRotation: 1
-  ConstrainZRotation: 1
+  ConstrainXRotation: 0
+  ConstrainYRotation: 0
+  ConstrainZRotation: 0
 --- !u!1 &8811865887671714382
 GameObject:
   m_ObjectHideFlags: 0

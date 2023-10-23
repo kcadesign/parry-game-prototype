@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class TrackEnemyCount : MonoBehaviour
+public class TrackEnemyTallyUI : MonoBehaviour
 {
-    private string _enemyTag = "Enemy";
     private GameObject[] _taggedObjectArray;
     private int _initialNumberOfTaggedObjects;
     private int _currentNumberOfTaggedObjects;
@@ -15,13 +14,22 @@ public class TrackEnemyCount : MonoBehaviour
 
     private void OnEnable()
     {
-        
+        TrackEnemies.OnGetEnemyCount += TrackKills_OnGetEnemyCount;
+    }
+
+    private void OnDisable()
+    {
+        TrackEnemies.OnGetEnemyCount -= TrackKills_OnGetEnemyCount;
+    }
+
+    private void TrackKills_OnGetEnemyCount(GameObject[] obj)
+    {
+        _taggedObjectArray = obj;
+
     }
 
     void Start()
     {
-        GetTaggedObjectsInScene(_enemyTag);
-
         _initialNumberOfTaggedObjects = _taggedObjectArray.Length;
 
         /*
@@ -36,16 +44,10 @@ public class TrackEnemyCount : MonoBehaviour
 
     private void Update()
     {
-        GetTaggedObjectsInScene(_enemyTag);
         _currentNumberOfTaggedObjects = _taggedObjectArray.Length;
         _numberOfEnemiesDestroyed = _initialNumberOfTaggedObjects - _currentNumberOfTaggedObjects;
 
         EnemyCounterText.text = $"{_numberOfEnemiesDestroyed} / {_initialNumberOfTaggedObjects}";
-    }
-
-    private void GetTaggedObjectsInScene(string tag)
-    {
-        _taggedObjectArray = GameObject.FindGameObjectsWithTag(tag);
     }
 
 }

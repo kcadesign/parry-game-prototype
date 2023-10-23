@@ -29,7 +29,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: BodySprite
+    path: Collider/BodySprite
   m_PositionCurves:
   - curve:
       serializedVersion: 2
@@ -64,7 +64,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: FaceSprites
+    path: Collider/BodySprite/FaceSprites
   m_ScaleCurves: []
   m_FloatCurves:
   - serializedVersion: 2
@@ -84,7 +84,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Color.r
-    path: BodySprite
+    path: Collider/BodySprite
     classID: 212
     script: {fileID: 0}
     flags: 0
@@ -105,7 +105,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Color.g
-    path: BodySprite
+    path: Collider/BodySprite
     classID: 212
     script: {fileID: 0}
     flags: 0
@@ -126,7 +126,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Color.b
-    path: BodySprite
+    path: Collider/BodySprite
     classID: 212
     script: {fileID: 0}
     flags: 0
@@ -147,7 +147,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Color.a
-    path: BodySprite
+    path: Collider/BodySprite
     classID: 212
     script: {fileID: 0}
     flags: 0
@@ -160,7 +160,7 @@ AnimationClip:
   m_ClipBindingConstant:
     genericBindings:
     - serializedVersion: 2
-      path: 3370620053
+      path: 3614446192
       attribute: 1
       script: {fileID: 0}
       typeID: 4
@@ -169,7 +169,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 1413341484
+      path: 2235529237
       attribute: 4
       script: {fileID: 0}
       typeID: 4
@@ -178,7 +178,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 1413341484
+      path: 2235529237
       attribute: 2526845255
       script: {fileID: 0}
       typeID: 212
@@ -187,7 +187,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 1413341484
+      path: 2235529237
       attribute: 4215373228
       script: {fileID: 0}
       typeID: 212
@@ -196,7 +196,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 1413341484
+      path: 2235529237
       attribute: 2334886179
       script: {fileID: 0}
       typeID: 212
@@ -205,7 +205,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 1413341484
+      path: 2235529237
       attribute: 304273561
       script: {fileID: 0}
       typeID: 212
@@ -241,6 +241,69 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: localEulerAnglesRaw.x
+    path: Collider/BodySprite
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: localEulerAnglesRaw.y
+    path: Collider/BodySprite
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: localEulerAnglesRaw.z
+    path: Collider/BodySprite
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
         value: 1
         inSlope: 0
         outSlope: 0
@@ -252,7 +315,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Color.r
-    path: BodySprite
+    path: Collider/BodySprite
     classID: 212
     script: {fileID: 0}
     flags: 0
@@ -273,7 +336,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Color.g
-    path: BodySprite
+    path: Collider/BodySprite
     classID: 212
     script: {fileID: 0}
     flags: 0
@@ -294,7 +357,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Color.b
-    path: BodySprite
+    path: Collider/BodySprite
     classID: 212
     script: {fileID: 0}
     flags: 0
@@ -315,7 +378,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Color.a
-    path: BodySprite
+    path: Collider/BodySprite
     classID: 212
     script: {fileID: 0}
     flags: 0
@@ -354,7 +417,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.x
-    path: FaceSprites
+    path: Collider/BodySprite/FaceSprites
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -393,7 +456,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.y
-    path: FaceSprites
+    path: Collider/BodySprite/FaceSprites
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -432,73 +495,10 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.z
-    path: FaceSprites
+    path: Collider/BodySprite/FaceSprites
     classID: 4
     script: {fileID: 0}
     flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: localEulerAnglesRaw.x
-    path: BodySprite
-    classID: 4
-    script: {fileID: 0}
-    flags: 16
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: localEulerAnglesRaw.y
-    path: BodySprite
-    classID: 4
-    script: {fileID: 0}
-    flags: 16
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: localEulerAnglesRaw.z
-    path: BodySprite
-    classID: 4
-    script: {fileID: 0}
-    flags: 16
   m_EulerEditorCurves:
   - serializedVersion: 2
     curve:
@@ -508,7 +508,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: BodySprite
+    path: Collider/BodySprite
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -520,7 +520,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: BodySprite
+    path: Collider/BodySprite
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -532,7 +532,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: BodySprite
+    path: Collider/BodySprite
     classID: 4
     script: {fileID: 0}
     flags: 0
