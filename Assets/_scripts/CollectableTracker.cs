@@ -7,26 +7,47 @@ using UnityEngine.SceneManagement;
 public class CollectableTracker : ScriptableObject
 {
     public string StoredSceneName;
+    public bool NewScene;
 
     public int CurrentLevelEnemyCount;
     public int CurrentLevelEnemies_destroyed;
     public int TotalEnemies;
     public int TotalEnemiesDestroyed;
 
-    public void StoreCurrentScene(string currentSceneName)
+    public void CheckSceneNew(string currentSceneName)
+    {
+        if (currentSceneName != StoredSceneName)
+        {
+            NewScene = true;
+        }
+        else if(currentSceneName == StoredSceneName)
+        {
+            NewScene = false;
+        }
+    }
+
+    public void StoreScene(string currentSceneName)
     {
         Debug.Log($"Stored scene name: {StoredSceneName}");
         Debug.Log($"Sent scene name: {currentSceneName}");
 
-        if (currentSceneName != StoredSceneName)
+        if (NewScene)
         {
             StoredSceneName = currentSceneName;
             Debug.Log($"Scene changed to {StoredSceneName}");
-
         }
-        else if(currentSceneName == StoredSceneName)
+        else if (!NewScene)
         {
             Debug.Log($"Current scene: {currentSceneName}");
+        }
+    }
+
+    public void AddToTotals()
+    {
+        if (NewScene)
+        {
+            TotalEnemies += CurrentLevelEnemyCount;
+            TotalEnemiesDestroyed += CurrentLevelEnemies_destroyed;
         }
     }
 
@@ -43,8 +64,20 @@ public class CollectableTracker : ScriptableObject
 
     public void AddCurrentEnemiesToTotal()
     {
-        TotalEnemies += CurrentLevelEnemyCount;
+        if (NewScene)
+        {
+            TotalEnemies += CurrentLevelEnemyCount;
+        }
     }
+
+    public void AddCurrentDestroyedEnemiesToTotal()
+    {
+        if (NewScene)
+        {
+            TotalEnemiesDestroyed += CurrentLevelEnemies_destroyed;
+        }
+    }
+
 
 
 }

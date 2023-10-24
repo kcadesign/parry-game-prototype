@@ -20,12 +20,14 @@ public class TrackEnemies : MonoBehaviour
 
     private void Awake()
     {
-        CollectableTracker.StoreCurrentScene(SceneManager.GetActiveScene().name);
+        CollectableTracker.CheckSceneNew(SceneManager.GetActiveScene().name);
+        CollectableTracker.StoreScene(SceneManager.GetActiveScene().name);
 
-        CollectableTracker.ResetCurrentLevelEnemyCount();
         CollectableTracker.ResetCurrentLevelEnemiesDestroyed();
         _initialEnemyCount = CountTaggedObjectsInScene(_enemyTag);
         CollectableTracker.CurrentLevelEnemyCount = _initialEnemyCount;
+        CollectableTracker.AddCurrentEnemiesToTotal();
+
     }
 
     private void OnEnable()
@@ -33,23 +35,20 @@ public class TrackEnemies : MonoBehaviour
         SceneManager.sceneLoaded += SceneManager_onSceneLoaded;
     }
 
+
     private void OnDisable()
     {
         //CollectableTracker.ResetTracker();
         SceneManager.sceneLoaded -= SceneManager_onSceneLoaded;
+
+        CollectableTracker.AddCurrentDestroyedEnemiesToTotal();
     }
 
     private void SceneManager_onSceneLoaded(Scene scene, LoadSceneMode mode)
-    {/*
-        Debug.Log($"Scene loaded: {scene.name}");
+    {
 
-        if (_currentScene != SceneManager.GetActiveScene())
-        {
-            CollectableTracker.AddCurrentEnemiesToTotal();
-        }
-        */
     }
-
+    
     private void Update()
     {
         _currentLevelEnemyCount = CountTaggedObjectsInScene(_enemyTag);
