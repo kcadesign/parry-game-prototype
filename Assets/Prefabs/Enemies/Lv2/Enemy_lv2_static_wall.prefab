@@ -8,6 +8,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 319049058383545221, guid: cc27a6a0ec6bf1a4da16f9bc0ea8d10f, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 510685736195808007, guid: cc27a6a0ec6bf1a4da16f9bc0ea8d10f, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 708269722293992959, guid: cc27a6a0ec6bf1a4da16f9bc0ea8d10f, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 894887688545714950, guid: cc27a6a0ec6bf1a4da16f9bc0ea8d10f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -52,6 +64,14 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 5f0a18eb7cbeed2469ac5ef8bb360422, type: 2}
+    - target: {fileID: 1427366281849500424, guid: cc27a6a0ec6bf1a4da16f9bc0ea8d10f, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 1792582295900474637, guid: cc27a6a0ec6bf1a4da16f9bc0ea8d10f, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 2357946658025953943, guid: cc27a6a0ec6bf1a4da16f9bc0ea8d10f, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0.02185787
@@ -67,6 +87,14 @@ PrefabInstance:
     - target: {fileID: 3652329054607117335, guid: cc27a6a0ec6bf1a4da16f9bc0ea8d10f, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0.02185787
+      objectReference: {fileID: 0}
+    - target: {fileID: 4580741294625846966, guid: cc27a6a0ec6bf1a4da16f9bc0ea8d10f, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 5126391192697346410, guid: cc27a6a0ec6bf1a4da16f9bc0ea8d10f, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 5145098259338825459, guid: cc27a6a0ec6bf1a4da16f9bc0ea8d10f, type: 3}
       propertyPath: m_LocalRotation.w
@@ -84,13 +112,41 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0.02185787
       objectReference: {fileID: 0}
+    - target: {fileID: 6305583013592948391, guid: cc27a6a0ec6bf1a4da16f9bc0ea8d10f, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 7030914905204984399, guid: cc27a6a0ec6bf1a4da16f9bc0ea8d10f, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 7163741700348250463, guid: cc27a6a0ec6bf1a4da16f9bc0ea8d10f, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 7356141294683934277, guid: cc27a6a0ec6bf1a4da16f9bc0ea8d10f, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 7976323921639655483, guid: cc27a6a0ec6bf1a4da16f9bc0ea8d10f, type: 3}
       propertyPath: m_Name
-      value: Enemy_lv2_Base Variant
+      value: Enemy_lv2_static_wall
+      objectReference: {fileID: 0}
+    - target: {fileID: 7976323921639655483, guid: cc27a6a0ec6bf1a4da16f9bc0ea8d10f, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 8189051595209934430, guid: cc27a6a0ec6bf1a4da16f9bc0ea8d10f, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0.02185787
+      objectReference: {fileID: 0}
+    - target: {fileID: 8192296618781879965, guid: cc27a6a0ec6bf1a4da16f9bc0ea8d10f, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 8845792006319111637, guid: cc27a6a0ec6bf1a4da16f9bc0ea8d10f, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

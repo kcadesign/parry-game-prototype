@@ -95,11 +95,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 894887688545714950, guid: 033d711d75361e441b1fd89cf0622f53, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 260.38123
+      value: 36.085182
       objectReference: {fileID: 0}
     - target: {fileID: 894887688545714950, guid: 033d711d75361e441b1fd89cf0622f53, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -6.908318
+      value: 3.2129622
       objectReference: {fileID: 0}
     - target: {fileID: 894887688545714950, guid: 033d711d75361e441b1fd89cf0622f53, type: 3}
       propertyPath: m_LocalPosition.z
@@ -218,7 +218,7 @@ MonoBehaviour:
   SightCentre: {fileID: 568214526846910136}
   SightRange: 7
   AttackCentre: {fileID: 568214526846910136}
-  AttackRange: 5
+  AttackRange: 6
   ProjectileSpawner: {fileID: 8077344410639229024}
 --- !u!114 &2906861317020210255 stripped
 MonoBehaviour:

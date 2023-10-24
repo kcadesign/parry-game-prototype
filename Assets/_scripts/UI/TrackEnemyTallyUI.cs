@@ -5,11 +5,10 @@ using TMPro;
 
 public class TrackEnemyTallyUI : MonoBehaviour
 {
-    private GameObject[] _taggedObjectArray;
     private int _initialNumberOfTaggedObjects;
     private int _currentNumberOfTaggedObjects;
     private int _numberOfEnemiesDestroyed;
-
+    
     public TextMeshProUGUI EnemyCounterText;
 
     private void OnEnable()
@@ -22,20 +21,20 @@ public class TrackEnemyTallyUI : MonoBehaviour
         TrackEnemies.OnGetEnemyCount -= TrackKills_OnGetEnemyCount;
     }
 
-    private void TrackKills_OnGetEnemyCount(GameObject[] obj)
+    private void TrackKills_OnGetEnemyCount(int obj)
     {
-        _taggedObjectArray = obj;
+        _currentNumberOfTaggedObjects = obj;
 
     }
 
     void Start()
     {
-        _initialNumberOfTaggedObjects = _taggedObjectArray.Length;
+        _initialNumberOfTaggedObjects = _currentNumberOfTaggedObjects;
 
-        /*
+        
         // Output the count.
-        Debug.Log($"{_numberOfTaggedObjects} objects with {_enemyTag} tag in scene");
-
+        //Debug.Log($"{_initialNumberOfTaggedObjects} objects with enemy tag in scene");
+        /*
         foreach (GameObject enemyObject in _taggedObjectArray)
         {
             Debug.Log("Found enemy: " + enemyObject.name);
@@ -44,7 +43,6 @@ public class TrackEnemyTallyUI : MonoBehaviour
 
     private void Update()
     {
-        _currentNumberOfTaggedObjects = _taggedObjectArray.Length;
         _numberOfEnemiesDestroyed = _initialNumberOfTaggedObjects - _currentNumberOfTaggedObjects;
 
         EnemyCounterText.text = $"{_numberOfEnemiesDestroyed} / {_initialNumberOfTaggedObjects}";
