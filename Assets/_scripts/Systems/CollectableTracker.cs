@@ -10,7 +10,7 @@ public class CollectableTracker : ScriptableObject
     public bool NewScene;
 
     public int CurrentLevelEnemyCount;
-    public int CurrentLevelEnemies_destroyed;
+    public int CurrentLevelEnemiesDestroyed;
     public int TotalEnemies;
     public int TotalEnemiesDestroyed;
 
@@ -28,17 +28,17 @@ public class CollectableTracker : ScriptableObject
 
     public void StoreScene(string currentSceneName)
     {
-        Debug.Log($"Stored scene name: {StoredSceneName}");
-        Debug.Log($"Sent scene name: {currentSceneName}");
+        //Debug.Log($"Stored scene name: {StoredSceneName}");
+        //Debug.Log($"Sent scene name: {currentSceneName}");
 
         if (NewScene)
         {
             StoredSceneName = currentSceneName;
-            Debug.Log($"Scene changed to {StoredSceneName}");
+            Debug.Log($"New scene: {StoredSceneName}");
         }
         else if (!NewScene)
         {
-            Debug.Log($"Current scene: {currentSceneName}");
+            Debug.Log($"Same scene: {currentSceneName}");
         }
     }
 
@@ -47,20 +47,20 @@ public class CollectableTracker : ScriptableObject
         if (NewScene)
         {
             TotalEnemies += CurrentLevelEnemyCount;
-            TotalEnemiesDestroyed += CurrentLevelEnemies_destroyed;
+            TotalEnemiesDestroyed += CurrentLevelEnemiesDestroyed;
         }
     }
 
     public void ResetAllTrackers()
     {
         CurrentLevelEnemyCount = 0;
-        CurrentLevelEnemies_destroyed = 0;
+        CurrentLevelEnemiesDestroyed = 0;
         TotalEnemies = 0;
         TotalEnemiesDestroyed = 0;
     }
 
     public void ResetCurrentLevelEnemyCount() => CurrentLevelEnemyCount = 0;
-    public void ResetCurrentLevelEnemiesDestroyed() => CurrentLevelEnemies_destroyed = 0;
+    public void ResetCurrentLevelEnemiesDestroyed() => CurrentLevelEnemiesDestroyed = 0;
 
     public void AddCurrentEnemiesToTotal()
     {
@@ -74,7 +74,7 @@ public class CollectableTracker : ScriptableObject
     {
         if (NewScene)
         {
-            TotalEnemiesDestroyed += CurrentLevelEnemies_destroyed;
+            TotalEnemiesDestroyed += CurrentLevelEnemiesDestroyed;
         }
     }
 

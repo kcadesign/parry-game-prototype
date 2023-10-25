@@ -5,7 +5,7 @@ using TMPro;
 
 public class TrackEnemyTallyUI : MonoBehaviour
 {
-    private int _initialNumberOfTaggedObjects;
+    private int _totalEnemies;
     private int _currentNumberOfTaggedObjects;
     private int _numberOfEnemiesDestroyed;
     
@@ -21,17 +21,14 @@ public class TrackEnemyTallyUI : MonoBehaviour
         TrackEnemies.OnGetEnemyCount -= TrackKills_OnGetEnemyCount;
     }
 
-    private void TrackKills_OnGetEnemyCount(int obj)
+    private void TrackKills_OnGetEnemyCount(int enemiesDestroyed, int totalEnemies)
     {
-        _currentNumberOfTaggedObjects = obj;
-
+        _numberOfEnemiesDestroyed = enemiesDestroyed;
+        _totalEnemies = totalEnemies;
     }
 
     void Start()
     {
-        _initialNumberOfTaggedObjects = _currentNumberOfTaggedObjects;
-
-        
         // Output the count.
         //Debug.Log($"{_initialNumberOfTaggedObjects} objects with enemy tag in scene");
         /*
@@ -43,9 +40,8 @@ public class TrackEnemyTallyUI : MonoBehaviour
 
     private void Update()
     {
-        _numberOfEnemiesDestroyed = _initialNumberOfTaggedObjects - _currentNumberOfTaggedObjects;
 
-        EnemyCounterText.text = $"{_numberOfEnemiesDestroyed} / {_initialNumberOfTaggedObjects}";
+        EnemyCounterText.text = $"{_numberOfEnemiesDestroyed} / {_totalEnemies}";
     }
 
 }
