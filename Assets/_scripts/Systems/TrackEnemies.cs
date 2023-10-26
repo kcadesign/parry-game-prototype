@@ -35,7 +35,7 @@ public class TrackEnemies : MonoBehaviour
 
     private void SceneManager_onSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        CollectableTracker.CheckSceneNew(scene.name);
+        CollectableTracker.CheckIfSceneChanged(scene.name);
         CollectableTracker.StoreScene(scene.name);
 
         _initialEnemyCount = CountTaggedObjectsInScene(_enemyTag);

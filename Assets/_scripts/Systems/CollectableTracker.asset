@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: CollectableTracker
   m_EditorClassIdentifier: 
   StoredSceneName: TestLevel2
-  NewScene: 0
+  NewScene: 1
   CurrentLevelEnemyCount: 8
-  CurrentLevelEnemiesDestroyed: 0
-  TotalEnemies: 13
-  TotalEnemiesDestroyed: 5
+  CurrentLevelEnemiesDestroyed: 6
+  TotalEnemies: 26
+  TotalEnemiesDestroyed: 17

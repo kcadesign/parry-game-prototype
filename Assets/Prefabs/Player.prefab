@@ -921,7 +921,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe39bce75e43f5341aeff4594cfec336, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _parryForce: 45
+  _parryForce: 55
 --- !u!114 &4242945545593811527
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -934,7 +934,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e57b2389f3bfc24fb774791d19fb3eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _blockActive: 0
 --- !u!114 &3615665328296214772
 MonoBehaviour:
   m_ObjectHideFlags: 0

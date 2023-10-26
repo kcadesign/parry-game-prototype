@@ -14,7 +14,7 @@ public class CollectableTracker : ScriptableObject
     public int TotalEnemies;
     public int TotalEnemiesDestroyed;
 
-    public void CheckSceneNew(string currentSceneName)
+    public void CheckIfSceneChanged(string currentSceneName)
     {
         if (currentSceneName != StoredSceneName)
         {
