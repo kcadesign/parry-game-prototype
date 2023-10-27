@@ -3,8 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HandleHurtBoxCollisions : HandleCollisions, IParryable
-{    
+public class HandleKeyCollisions : HandleCollisions, IParryable
+{
     public event Action<GameObject, bool> OnDeflect;
     public event Action<GameObject> OnDamageCollision;
 
@@ -50,7 +50,7 @@ public class HandleHurtBoxCollisions : HandleCollisions, IParryable
                 OnDeflect?.Invoke(gameObject, _deflected);
                 // damage enemy health component
                 OnDamageCollision?.Invoke(HealthHandlerObject);
-                //Destroy(gameObject);
+                Destroy(gameObject);
             }
             else if (_blockActive)
             {
@@ -66,5 +66,4 @@ public class HandleHurtBoxCollisions : HandleCollisions, IParryable
         }
 
     }
-
 }

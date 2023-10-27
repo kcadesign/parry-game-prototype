@@ -8,12 +8,12 @@ public class HandleEnemyHealth : MonoBehaviour
     public static Action<GameObject> OnEnemyDeath;
 
     private HealthSystem _enemyHealth;
-    [SerializeField] private int maxHealth = 2;
+    public int MaxHealth = 2;
     private int currentHealth;
 
     private void Awake()
     {
-        _enemyHealth = new HealthSystem(maxHealth);
+        _enemyHealth = new HealthSystem(MaxHealth);
         currentHealth = _enemyHealth.GetHealth();
     }
 

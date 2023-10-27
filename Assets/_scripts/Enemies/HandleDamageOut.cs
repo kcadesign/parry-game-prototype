@@ -8,7 +8,7 @@ public class HandleDamageOut : MonoBehaviour
     public delegate void OutputDamage(GameObject damagerObject, GameObject objectToDamage, int damageAmount);
     public static event OutputDamage OnOutputDamage;
 
-    [SerializeField] private int _damageAmount = 5;
+    public int _damageAmount = 5;
     
     private IParryable _damageDealer;
 

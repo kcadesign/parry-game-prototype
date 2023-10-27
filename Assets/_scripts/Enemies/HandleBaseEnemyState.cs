@@ -100,7 +100,7 @@ public class HandleBaseEnemyState : MonoBehaviour, IHandleState
 
     }
 
-    protected virtual void DestroySelf()
+    public virtual void DestroySelf()
     {
         Destroy(gameObject);
     }
