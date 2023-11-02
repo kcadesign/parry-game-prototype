@@ -9,10 +9,14 @@ public class CollectableTracker : ScriptableObject
     public string StoredSceneName;
     public bool NewScene;
 
+    [Header("Enemies")]
     public int CurrentLevelEnemyCount;
     public int CurrentLevelEnemiesDestroyed;
     public int TotalEnemies;
     public int TotalEnemiesDestroyed;
+
+    [Header("Hostages")]
+    public int TotalHostagesSaved;
 
     public void CheckIfSceneChanged(string currentSceneName)
     {
@@ -53,10 +57,14 @@ public class CollectableTracker : ScriptableObject
 
     public void ResetAllTrackers()
     {
+        StoredSceneName = null;
+
         CurrentLevelEnemyCount = 0;
         CurrentLevelEnemiesDestroyed = 0;
         TotalEnemies = 0;
         TotalEnemiesDestroyed = 0;
+
+        TotalHostagesSaved = 0;
     }
 
     public void ResetCurrentLevelEnemyCount() => CurrentLevelEnemyCount = 0;
@@ -78,6 +86,9 @@ public class CollectableTracker : ScriptableObject
         }
     }
 
-
+    public void IncrementHostagesSaved()
+    {
+        TotalHostagesSaved++;
+    }
 
 }

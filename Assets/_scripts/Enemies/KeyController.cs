@@ -4,21 +4,21 @@ using UnityEngine;
 
 public class KeyController : MonoBehaviour
 {
-    private Transform[] childTransforms;
+    private Transform[] childTransformArray;
     public HandleEnemyHealth EnemyHealth;
 
     private void Start()
     {
-        childTransforms = GetComponentsInChildren<Transform>();
+        childTransformArray = GetComponentsInChildren<Transform>();
 
-        if (childTransforms.Length > 1)
+        if (childTransformArray.Length > 1)
         {
-            int totalChildren = childTransforms.Length - 1; // Exclude the parent.
+            int totalChildren = childTransformArray.Length - 1; // Exclude the parent.
             int totalDamage = EnemyHealth.MaxHealth;
 
             int damagePerChild = (totalDamage + totalChildren - 1) / totalChildren;
 
-            foreach (Transform childTransform in childTransforms)
+            foreach (Transform childTransform in childTransformArray)
             {
                 if (childTransform != transform) // Exclude the parent.
                 {

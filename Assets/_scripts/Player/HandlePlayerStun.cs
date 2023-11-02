@@ -42,7 +42,7 @@ public class HandlePlayerStun : MonoBehaviour
 
     private void HandlePlayerHealth_OnDamageRecieved(GameObject objectDamager)
     {
-        Debug.Log($"DAMAGED");
+        //Debug.Log($"DAMAGED");
         VulnerableCollisionActions(objectDamager);
     }
 
@@ -74,7 +74,7 @@ public class HandlePlayerStun : MonoBehaviour
 
     protected void HandleKnockBack(GameObject collision)
     {
-        Debug.Log($"Handle knockback against {collision.tag}");
+        //Debug.Log($"Handle knockback against {collision.tag}");
 
         // Determine the direction to apply force based on player's relative position to enemy
         float enemyCenterX = collision.transform.position.x;

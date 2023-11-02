@@ -1,9 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class FollowOnTriggerEnter : MonoBehaviour
 {
+    public static event Action<bool> OnFollow;
+
     [Header("Position Parameters")]
     private GameObject _objectToFollow;
     public Vector3 Offset;
@@ -27,10 +30,6 @@ public class FollowOnTriggerEnter : MonoBehaviour
 
     private Vector3 targetPosition;
 
-    private void Awake()
-    {
-    }
-
     private void OnEnable()
     {
         PlayerMove.OnPlayerMoveInput += PlayerMove_OnPlayerMoveInput;
@@ -41,10 +40,8 @@ public class FollowOnTriggerEnter : MonoBehaviour
         PlayerMove.OnPlayerMoveInput -= PlayerMove_OnPlayerMoveInput;
     }
 
-
     private void PlayerMove_OnPlayerMoveInput(Vector2 playerVelocity)
     {
-        // change this to be based on velocity
         if (playerVelocity.x > 0)
         {
             _onPlayerLeft = true;
@@ -59,6 +56,11 @@ public class FollowOnTriggerEnter : MonoBehaviour
 
     void FixedUpdate()
     {
+        if(_objectToFollow == null)
+        {
+            _isFollowing = false;
+        }
+
         if (_isFollowing)
         {
             SetPosition();
@@ -71,12 +73,14 @@ public class FollowOnTriggerEnter : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        _isFollowing = true;
-        _objectToFollow = collision.gameObject;
-        SetRotationConstraint();
-        SetPosition();
-
-
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            _isFollowing = true;
+            _objectToFollow = collision.gameObject;
+            SetRotationConstraint();
+            SetPosition();
+            OnFollow?.Invoke(_isFollowing);
+        }
     }
 
     private void SetPosition()
@@ -143,6 +147,5 @@ public class FollowOnTriggerEnter : MonoBehaviour
         {
             Offset = new Vector3(1, 0.2f, 0);
         }
-
     }
 }
