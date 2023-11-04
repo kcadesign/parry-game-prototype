@@ -6,8 +6,11 @@ using UnityEngine.SceneManagement;
 [CreateAssetMenu]
 public class CollectableTracker : ScriptableObject
 {
+    [Header("Scene Management")]
     public string StoredSceneName;
     public bool NewScene;
+    public Dictionary<string, bool> CollectiblesDictionary;
+    public bool DictionaryIsInitialised;
 
     [Header("Enemies")]
     public int CurrentLevelEnemyCount;
@@ -65,6 +68,8 @@ public class CollectableTracker : ScriptableObject
         TotalEnemiesDestroyed = 0;
 
         TotalHostagesSaved = 0;
+
+        ResetCollectiblesDictionary();
     }
 
     public void ResetCurrentLevelEnemyCount() => CurrentLevelEnemyCount = 0;
@@ -89,6 +94,48 @@ public class CollectableTracker : ScriptableObject
     public void IncrementHostagesSaved()
     {
         TotalHostagesSaved++;
+    }
+
+    public Dictionary<string, bool> InitializeCollectiblesDictionary()
+    {
+        if (!DictionaryIsInitialised)
+        {
+            CollectiblesDictionary = new Dictionary<string, bool>();
+
+            // Get the total number of scenes in the build index
+            int sceneCount = SceneManager.sceneCountInBuildSettings;
+
+            // Iterate through the scenes in the build index and add their names to the Dictionary with values initialized to false
+            for (int i = 0; i < sceneCount; i++)
+            {
+                string scenePath = SceneUtility.GetScenePathByBuildIndex(i);
+                string sceneName = System.IO.Path.GetFileNameWithoutExtension(scenePath);
+
+                // Use the scene name as the key and initialize the value to false
+                CollectiblesDictionary[sceneName] = false;
+            }
+
+            DictionaryIsInitialised = true;
+        }
+
+        // Print both keys and values to the console
+        foreach (var keyValuePair in CollectiblesDictionary)
+        {
+            Debug.Log("Key: " + keyValuePair.Key + ", Value: " + keyValuePair.Value);
+        }
+
+        // You now have a Dictionary with keys for each scene name and values initialized to false
+        return CollectiblesDictionary;
+    }
+
+    public void ResetCollectiblesDictionary()
+    {
+        DictionaryIsInitialised = false;
+
+        foreach (var key in CollectiblesDictionary.Keys)
+        {
+            CollectiblesDictionary[key] = false;
+        }
     }
 
 }
