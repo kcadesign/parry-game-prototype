@@ -8,7 +8,8 @@ public class TrackEnemies : MonoBehaviour
 {
     public static event Action<int, int> OnGetEnemyCount;
 
-    public CollectableTracker CollectableTracker;
+    public CollectableTrackerTest CollectableTrackerTest;
+    public TrackScene SceneTracker;
 
     private string _enemyTag = "Enemy";
 
@@ -16,12 +17,6 @@ public class TrackEnemies : MonoBehaviour
     private int _currentEnemyCount;
 
     private int _currentEnemiesDestroyed;
-
-    private void Awake()
-    {
-        CollectableTracker.NewScene = false;
-        //CollectableTracker.StoredSceneName = "NOT SET";
-    }
 
     private void OnEnable()
     {
@@ -35,26 +30,25 @@ public class TrackEnemies : MonoBehaviour
 
     private void SceneManager_onSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        CollectableTracker.CheckIfSceneChanged(scene.name);
-        CollectableTracker.StoreScene(scene.name);
-
         _initialEnemyCount = CountTaggedObjectsInScene(_enemyTag);
-        CollectableTracker.CurrentLevelEnemyCount = _initialEnemyCount;
+        CollectableTrackerTest.CurrentLevelEnemyCount = _initialEnemyCount;
 
-        if (CollectableTracker.NewScene)
-        {
-            CollectableTracker.AddCurrentEnemiesToTotal();
-            CollectableTracker.AddCurrentDestroyedEnemiesToTotal();
-        }
+        CollectableTrackerTest.AddCurrentEnemiesToTotal();
+        CollectableTrackerTest.AddCurrentDestroyedEnemiesToTotal();
     }
 
     private void Update()
     {
+        if (SceneTracker.SceneChecked)
+        {
+
+        }
+
         _currentEnemyCount = CountTaggedObjectsInScene(_enemyTag);
 
         CalculateEnemiesDestroyed();
 
-        CollectableTracker.CurrentLevelEnemiesDestroyed = _currentEnemiesDestroyed;
+        CollectableTrackerTest.CurrentLevelEnemiesDestroyed = _currentEnemiesDestroyed;
 
         OnGetEnemyCount?.Invoke(_currentEnemiesDestroyed, _initialEnemyCount);
 
@@ -74,7 +68,7 @@ public class TrackEnemies : MonoBehaviour
     private void CalculateEnemiesDestroyed()
     {
         //Debug.Log($"Initial enemies: {_initialEnemyCount} / Current enemies: {_currentEnemyCount}");
-        if(_initialEnemyCount != _currentEnemyCount)
+        if (_initialEnemyCount != _currentEnemyCount)
         {
             _currentEnemiesDestroyed = _initialEnemyCount - _currentEnemyCount;
         }

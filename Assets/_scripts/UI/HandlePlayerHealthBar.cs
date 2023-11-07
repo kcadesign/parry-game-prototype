@@ -8,7 +8,7 @@ public class HandlePlayerHealthBar : MonoBehaviour
     public Image BarValueMask;
     private float _currentFill;
     private float _maxFill = 100;
-    [SerializeField] private float _fillSpeed = 1.0f; // Adjust this to control the animation speed
+    [SerializeField] private float _fillSpeed = 1.0f;
 
     private void Awake()
     {
@@ -28,7 +28,7 @@ public class HandlePlayerHealthBar : MonoBehaviour
 
     private void HandlePlayerHealth_OnHealthChange(int currentHealth, bool playerAlive)
     {
-        Debug.Log($"Current health is: {currentHealth}");
+        //Debug.Log($"Current health is: {currentHealth}");
 
         // Use a coroutine to smoothly update the fill amount
         StartCoroutine(ChangeFillOverTime(currentHealth));
