@@ -4,12 +4,8 @@ using UnityEngine;
 
 public class DestroySelf : MonoBehaviour
 {
-    [SerializeField] private float _deathTimer = 1;
-
-    void Start()
+    public void SelfDestruct()
     {
-        Destroy(gameObject, _deathTimer);
+        Destroy(gameObject);
     }
-
-    
 }
