@@ -312,6 +312,14 @@ PrefabInstance:
       propertyPath: m_IsCustomRangeActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4343720833011831734, guid: 033d711d75361e441b1fd89cf0622f53, type: 3}
+      propertyPath: DeathEffect
+      value: 
+      objectReference: {fileID: 1386364919094566383, guid: 287c3b8639b650c4ca1ec69bb34db608, type: 3}
+    - target: {fileID: 4343720833011831734, guid: 033d711d75361e441b1fd89cf0622f53, type: 3}
+      propertyPath: DeathExplosion
+      value: 
+      objectReference: {fileID: 1386364919094566383, guid: 287c3b8639b650c4ca1ec69bb34db608, type: 3}
     - target: {fileID: 4580741294625846966, guid: 033d711d75361e441b1fd89cf0622f53, type: 3}
       propertyPath: m_TagString
       value: Untagged

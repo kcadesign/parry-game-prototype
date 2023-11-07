@@ -96,8 +96,9 @@ public class CollectableTracker : ScriptableObject
         TotalHostagesSaved++;
     }
 
-    public Dictionary<string, bool> InitializeCollectiblesDictionary()
+    public void InitializeCollectiblesDictionary()
     {
+        // Check for initialisation so it can only be done once
         if (!DictionaryIsInitialised)
         {
             CollectiblesDictionary = new Dictionary<string, bool>();
@@ -124,8 +125,6 @@ public class CollectableTracker : ScriptableObject
             Debug.Log("Key: " + keyValuePair.Key + ", Value: " + keyValuePair.Value);
         }
 
-        // You now have a Dictionary with keys for each scene name and values initialized to false
-        return CollectiblesDictionary;
     }
 
     public void ResetCollectiblesDictionary()

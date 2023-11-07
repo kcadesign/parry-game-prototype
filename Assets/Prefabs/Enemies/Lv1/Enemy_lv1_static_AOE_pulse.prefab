@@ -304,6 +304,10 @@ PrefabInstance:
       propertyPath: m_IsCustomRangeActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4343720833011831734, guid: 033d711d75361e441b1fd89cf0622f53, type: 3}
+      propertyPath: DeathExplosion
+      value: 
+      objectReference: {fileID: 1386364919094566383, guid: 287c3b8639b650c4ca1ec69bb34db608, type: 3}
     - target: {fileID: 5092373360796722284, guid: 033d711d75361e441b1fd89cf0622f53, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
@@ -326,7 +330,7 @@ PrefabInstance:
       objectReference: {fileID: 4678160177667030753}
     - target: {fileID: 7976323921639655483, guid: 033d711d75361e441b1fd89cf0622f53, type: 3}
       propertyPath: m_Name
-      value: Enemy_lv1_static_AOE
+      value: Enemy_lv1_static_AOE_pulse
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1904103203242105375, guid: 033d711d75361e441b1fd89cf0622f53, type: 3}
@@ -373,13 +377,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53c83f9871f536445ad3f541e3635e38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BodySprites:
-  - {fileID: 8374526016108162880}
-  - {fileID: 6199872747799732689}
-  - {fileID: 7847965235354612439}
-  - {fileID: 7691138395128327405}
   CollisionHandler: {fileID: 1947474989809085526}
-  DestructionParticle: {fileID: 6780298739901135007, guid: 95491e46a87789d41bafa511792b1e9c, type: 3}
 --- !u!114 &547471322406087371
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -413,25 +411,5 @@ GameObject:
 --- !u!4 &5087428944256880765 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 894887688545714950, guid: 033d711d75361e441b1fd89cf0622f53, type: 3}
-  m_PrefabInstance: {fileID: 5400214213318382459}
-  m_PrefabAsset: {fileID: 0}
---- !u!212 &6199872747799732689 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 2088321527222235818, guid: 033d711d75361e441b1fd89cf0622f53, type: 3}
-  m_PrefabInstance: {fileID: 5400214213318382459}
-  m_PrefabAsset: {fileID: 0}
---- !u!212 &7691138395128327405 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 2327520610296954774, guid: 033d711d75361e441b1fd89cf0622f53, type: 3}
-  m_PrefabInstance: {fileID: 5400214213318382459}
-  m_PrefabAsset: {fileID: 0}
---- !u!212 &7847965235354612439 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 2745217726467711404, guid: 033d711d75361e441b1fd89cf0622f53, type: 3}
-  m_PrefabInstance: {fileID: 5400214213318382459}
-  m_PrefabAsset: {fileID: 0}
---- !u!212 &8374526016108162880 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 4524183848824568891, guid: 033d711d75361e441b1fd89cf0622f53, type: 3}
   m_PrefabInstance: {fileID: 5400214213318382459}
   m_PrefabAsset: {fileID: 0}

@@ -52,7 +52,7 @@ public class TrackHostages : MonoBehaviour
 
     private void HandleEnterFinish_OnLevelFinish(bool levelFinished)
     {
-        Debug.Log("Level finished");
+        Debug.Log($"Level finished: {levelFinished}");
         _levelFinished = levelFinished;
 
         CheckHostageRescue();

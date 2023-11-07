@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76479d9413fa80f449a157cc3baeb293, type: 3}
   m_Name: CollectableTracker
   m_EditorClassIdentifier: 
-  StoredSceneName: TestLevel2
-  NewScene: 1
-  CurrentLevelEnemyCount: 8
-  CurrentLevelEnemiesDestroyed: 6
-  TotalEnemies: 26
-  TotalEnemiesDestroyed: 17
+  StoredSceneName: TestLevel1
+  NewScene: 0
+  DictionaryIsInitialised: 1
+  CurrentLevelEnemyCount: 5
+  CurrentLevelEnemiesDestroyed: 0
+  TotalEnemies: 27
+  TotalEnemiesDestroyed: 15
+  TotalHostagesSaved: 3

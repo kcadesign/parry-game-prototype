@@ -44,10 +44,10 @@ public class HandleEnemyHealth : MonoBehaviour
     {
         if (currentHealth <= 0)
         {
-            // Instead of destroy signal enemy death
-            //Destroy(gameObject.transform.parent.gameObject);
-
             OnEnemyDeath?.Invoke(gameObject.transform.parent.gameObject);
+
+            Destroy(gameObject.transform.parent.gameObject);
+
         }
     }
 }
