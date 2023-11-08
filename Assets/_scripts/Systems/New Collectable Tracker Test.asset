@@ -12,15 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2df05acc783a1142a9baa99eb571694, type: 3}
   m_Name: New Collectable Tracker Test
   m_EditorClassIdentifier: 
-  sceneNames:
+  GameplayLevelsList:
   - TestLevel1
-  - TestLevel2
-  - TestLevel3
-  DictionaryIsInitialised: 1
   CurrentSceneName: TestLevel1
-  NewScene: 0
-  CurrentLevelEnemyCount: 5
-  CurrentLevelEnemiesDestroyed: 0
-  TotalEnemies: 5
+  NewScene: 1
+  LevelFinished: 0
+  HostagePresent: 0
+  CurrentLevelEnemyCount: 0
+  TotalEnemies: 0
   TotalEnemiesDestroyed: 0
+  TotalHostages: 0
   TotalHostagesSaved: 0

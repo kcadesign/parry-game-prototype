@@ -1,52 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 [CreateAssetMenu]
 public class CollectableTrackerTest : ScriptableObject
 {
-    [Header("Dictionaries")]
-    public List<string> sceneNames = new();
-    public Dictionary<string, int> EnemiesDestroyed = new();
-    public Dictionary<string, bool> HostagesRescued = new();
-    public bool DictionaryIsInitialised;
+    [Header("Lists")]
+    public List<string> GameplayLevelsList = new();
+    public Dictionary<string, int> EnemiesDestroyedDictionary = new();
+    public Dictionary<string, bool> HostagesRescuedDictionary = new();
 
     [Header("Scene Management")]
     public string CurrentSceneName;
     public bool NewScene;
-
+    //public bool LevelFinished;
+    public bool HostagePresent;
 
     [Header("Enemies")]
     public int CurrentLevelEnemyCount;
-    public int CurrentLevelEnemiesDestroyed;
     public int TotalEnemies;
     public int TotalEnemiesDestroyed;
 
     [Header("Hostages")]
+    public int TotalHostages;
     public int TotalHostagesSaved;
-
-
-    public void PopulateAndInitialiseDictionaries()
-    {
-        if (!DictionaryIsInitialised)
-        {
-            PopulateSceneNameList();
-            InitialiseDictionaries();
-
-            PrintDictionaries();
-
-            DictionaryIsInitialised = true;
-        }
-        else
-        {
-            PrintDictionaries();
-
-            return;
-        }
-        Debug.Log("Dictionaries initialised");
-
-    }
 
     public void CheckIfSceneChanged(string currentSceneName)
     {
@@ -60,42 +37,19 @@ public class CollectableTrackerTest : ScriptableObject
         }
     }
 
-    public void StoreScene(string currentSceneName)
-    {
-        //Debug.Log($"Stored scene name: {StoredSceneName}");
-        //Debug.Log($"Sent scene name: {currentSceneName}");
+    public void StoreCurrentSceneName(string currentSceneName) => CurrentSceneName = currentSceneName;
 
-        if (NewScene)
+    public void AddSceneNameToList(string currentSceneName)
+    {
+        Debug.Log($"Enemies present: {CurrentLevelEnemyCount}");
+        Debug.Log($"Scene name exists in list: {GameplayLevelsList.Contains(currentSceneName)}");
+
+        if ((CurrentLevelEnemyCount > 0 || HostagePresent) && !GameplayLevelsList.Contains(currentSceneName))
         {
-            CurrentSceneName = currentSceneName;
-            Debug.Log($"New scene: {CurrentSceneName}");
-        }
-        else if (!NewScene)
-        {
-            Debug.Log($"Same scene: {currentSceneName}");
+            GameplayLevelsList.Add(currentSceneName);
         }
     }
-
-
-    public void PopulateSceneNameList()
-    {
-        for (int i = 0; i < SceneManager.sceneCountInBuildSettings; i++)
-        {
-            string sceneName = System.IO.Path.GetFileNameWithoutExtension(SceneUtility.GetScenePathByBuildIndex(i));
-            sceneNames.Add(sceneName);
-        }
-    }
-
-    public void InitialiseDictionaries()
-    {
-        foreach (string sceneName in sceneNames)
-        {
-            EnemiesDestroyed[sceneName] = 0; // Default to 0 enemies destroyed
-            HostagesRescued[sceneName] = false; // Default to no hostage rescued
-        }
-
-    }
-
+    
     public void AddCurrentEnemiesToTotal()
     {
         if (NewScene)
@@ -104,42 +58,55 @@ public class CollectableTrackerTest : ScriptableObject
         }
     }
 
-    public void AddCurrentDestroyedEnemiesToTotal()
+    public void AddCurrentDestroyedEnemiesToTotal(int currentLevelEnemiesDestroyed)
     {
         if (NewScene)
         {
-            TotalEnemiesDestroyed += CurrentLevelEnemiesDestroyed;
+            TotalEnemiesDestroyed += currentLevelEnemiesDestroyed;
         }
     }
 
-
-    public void UpdateEnemiesDestroyed(string sceneName, int count)
+    public void AddHostageToTotal()
     {
-        if (EnemiesDestroyed.ContainsKey(sceneName))
+        if (NewScene)
         {
-            EnemiesDestroyed[sceneName] = count;
+            TotalHostages++;
         }
     }
 
-    public void UpdateHostageRescued(string sceneName, bool rescued)
+    public void AddSavedHostageToTotal()
     {
-        if (HostagesRescued.ContainsKey(sceneName))
+        if (NewScene)
         {
-            HostagesRescued[sceneName] = rescued;
+            TotalHostagesSaved++;
         }
     }
 
-    public void PrintDictionaries()
+    public void UpdateEnemiesDestroyedDictionary(int count)
     {
-        // Print both keys and values to the console
-        foreach (var keyValuePair in EnemiesDestroyed)
-        {
-            Debug.Log($"Key: {keyValuePair.Key}, Value: {keyValuePair.Value}");
-        }
+        EnemiesDestroyedDictionary[CurrentSceneName] = count;
+        PrintEnemiesDestroyedDictionary();
+    }
 
-        foreach (var keyValuePair in HostagesRescued)
+    public void UpdateHostageRescuedDictionary(bool rescued)
+    {
+        HostagesRescuedDictionary[CurrentSceneName] = rescued;
+        PrintHostagesSavedDisctionary();
+    }
+
+    public void PrintEnemiesDestroyedDictionary()
+    {
+        foreach (var keyValuePair in EnemiesDestroyedDictionary)
         {
-            Debug.Log($"Key: {keyValuePair.Key}, Value: {keyValuePair.Value}");
+            Debug.Log($"Key: {keyValuePair.Key}, Enemies destroyed: {keyValuePair.Value}");
+        }
+    }
+
+    private void PrintHostagesSavedDisctionary()
+    {
+        foreach (var keyValuePair in HostagesRescuedDictionary)
+        {
+            Debug.Log($"Key: {keyValuePair.Key}, Hostage saved: {keyValuePair.Value}");
         }
     }
 }

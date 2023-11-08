@@ -6,14 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class TrackScene : MonoBehaviour
 {
+    public static event Action OnSceneChecked;
+
     public CollectableTrackerTest CollectableTrackerTest;
-
-    public bool SceneChecked = false;
-
-    private void Awake()
-    {
-        SceneChecked = false;
-    }
 
     private void OnEnable()
     {
@@ -27,12 +22,10 @@ public class TrackScene : MonoBehaviour
 
     private void SceneManager_onSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (!SceneChecked)
-        {
-            CollectableTrackerTest.CheckIfSceneChanged(scene.name);
-            CollectableTrackerTest.StoreScene(scene.name);
-            SceneChecked = true;
-        }
+        CollectableTrackerTest.CheckIfSceneChanged(scene.name);
+        CollectableTrackerTest.StoreCurrentSceneName(scene.name);
+        OnSceneChecked?.Invoke();
+        CollectableTrackerTest.AddSceneNameToList(scene.name);
     }
 
 }

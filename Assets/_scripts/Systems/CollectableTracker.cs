@@ -19,6 +19,7 @@ public class CollectableTracker : ScriptableObject
     public int TotalEnemiesDestroyed;
 
     [Header("Hostages")]
+    public int TotalHostages;
     public int TotalHostagesSaved;
 
     public void CheckIfSceneChanged(string currentSceneName)

@@ -44,4 +44,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3899bae6518a8664a83e153040cd538c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CollectableTracker: {fileID: 11400000, guid: 73208a491a7dec84f8e24609c60b1cc3, type: 2}
+  CollectableTrackerTest: {fileID: 11400000, guid: 9e8e828f23fb9734b99bea271b6f4329, type: 2}

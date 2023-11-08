@@ -9,46 +9,54 @@ public class TrackEnemies : MonoBehaviour
     public static event Action<int, int> OnGetEnemyCount;
 
     public CollectableTrackerTest CollectableTrackerTest;
-    public TrackScene SceneTracker;
 
     private string _enemyTag = "Enemy";
 
     private int _initialEnemyCount;
     private int _currentEnemyCount;
-
     private int _currentEnemiesDestroyed;
 
     private void OnEnable()
     {
-        SceneManager.sceneLoaded += SceneManager_onSceneLoaded;
+        TrackScene.OnSceneChecked += TrackScene_OnSceneChecked;
+        HandleEnterFinish.OnLevelFinish += HandleEnterFinish_OnLevelFinish;
+
     }
 
     private void OnDisable()
     {
-        SceneManager.sceneLoaded -= SceneManager_onSceneLoaded;
+        TrackScene.OnSceneChecked -= TrackScene_OnSceneChecked;
+        HandleEnterFinish.OnLevelFinish -= HandleEnterFinish_OnLevelFinish;
+
     }
 
-    private void SceneManager_onSceneLoaded(Scene scene, LoadSceneMode mode)
+    private void TrackScene_OnSceneChecked()
     {
         _initialEnemyCount = CountTaggedObjectsInScene(_enemyTag);
         CollectableTrackerTest.CurrentLevelEnemyCount = _initialEnemyCount;
 
         CollectableTrackerTest.AddCurrentEnemiesToTotal();
-        CollectableTrackerTest.AddCurrentDestroyedEnemiesToTotal();
+
+
+    }
+
+    private void HandleEnterFinish_OnLevelFinish(bool levelFinished)
+    {
+        Debug.Log($"Level finished: {levelFinished}");
+        if (levelFinished)
+        {
+            CollectableTrackerTest.UpdateEnemiesDestroyedDictionary(_currentEnemiesDestroyed);
+            CollectableTrackerTest.AddCurrentDestroyedEnemiesToTotal(_currentEnemiesDestroyed);
+        }
     }
 
     private void Update()
     {
-        if (SceneTracker.SceneChecked)
-        {
-
-        }
-
         _currentEnemyCount = CountTaggedObjectsInScene(_enemyTag);
 
         CalculateEnemiesDestroyed();
 
-        CollectableTrackerTest.CurrentLevelEnemiesDestroyed = _currentEnemiesDestroyed;
+        //CollectableTrackerTest.CurrentLevelEnemiesDestroyed = _currentEnemiesDestroyed;
 
         OnGetEnemyCount?.Invoke(_currentEnemiesDestroyed, _initialEnemyCount);
 
