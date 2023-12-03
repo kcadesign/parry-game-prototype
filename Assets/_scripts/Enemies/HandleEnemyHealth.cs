@@ -9,12 +9,12 @@ public class HandleEnemyHealth : MonoBehaviour
 
     private HealthSystem _enemyHealth;
     public int MaxHealth = 25;
-    private int currentHealth;
+    public int CurrentHealth;
 
     private void Awake()
     {
         _enemyHealth = new HealthSystem(MaxHealth);
-        currentHealth = _enemyHealth.GetHealth();
+        CurrentHealth = _enemyHealth.GetHealth();
     }
 
     private void OnEnable()
@@ -33,8 +33,8 @@ public class HandleEnemyHealth : MonoBehaviour
         {
             _enemyHealth.Damage(damageAmount);
 
-            currentHealth = _enemyHealth.GetHealth();
-            Debug.Log($"{gameObject.transform.parent.name}'s health: {currentHealth}");
+            CurrentHealth = _enemyHealth.GetHealth();
+            Debug.Log($"{gameObject.transform.parent.name}'s health: {CurrentHealth}");
 
             CheckHealth();
         }
@@ -42,7 +42,7 @@ public class HandleEnemyHealth : MonoBehaviour
     
     private void CheckHealth()
     {
-        if (currentHealth <= 0)
+        if (CurrentHealth <= 0)
         {
             OnEnemyDeath?.Invoke(gameObject.transform.parent.gameObject);
 
