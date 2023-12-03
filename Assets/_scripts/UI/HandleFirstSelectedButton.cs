@@ -14,12 +14,12 @@ public class HandleFirstSelectedButton : MonoBehaviour
 
     private void OnEnable()
     {
-        HandleGameStateUI.OnGameStateChange += HandleGameStateUI_OnGameStateChange;
+        HandleGameStateUI.OnGameUIActivate += HandleGameStateUI_OnGameStateChange;
     }
 
     private void OnDisable()
     {
-        HandleGameStateUI.OnGameStateChange -= HandleGameStateUI_OnGameStateChange;
+        HandleGameStateUI.OnGameUIActivate -= HandleGameStateUI_OnGameStateChange;
     }
 
     private void HandleGameStateUI_OnGameStateChange(GameObject firstSelectedButton)

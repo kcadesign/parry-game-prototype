@@ -71,6 +71,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DropDown"",
+                    ""type"": ""Button"",
+                    ""id"": ""a1e99f69-349a-4c54-9548-b7c53e629670"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -282,6 +291,39 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f05a70e3-b763-4a5f-bce3-0f5783cb5eb1"",
+                    ""path"": ""<Gamepad>/dpad/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DropDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2af3c01d-de24-4dd9-98c9-0fb1d53a3f8e"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DropDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ef6b9731-f57e-4e08-be84-43e6514a6ed2"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DropDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -334,6 +376,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Gameplay_Block = m_Gameplay.FindAction("Block", throwIfNotFound: true);
         m_Gameplay_Jump = m_Gameplay.FindAction("Jump", throwIfNotFound: true);
         m_Gameplay_ActivateFriend = m_Gameplay.FindAction("ActivateFriend", throwIfNotFound: true);
+        m_Gameplay_DropDown = m_Gameplay.FindAction("DropDown", throwIfNotFound: true);
         // Menus
         m_Menus = asset.FindActionMap("Menus", throwIfNotFound: true);
         m_Menus_Pause = m_Menus.FindAction("Pause", throwIfNotFound: true);
@@ -403,6 +446,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_Block;
     private readonly InputAction m_Gameplay_Jump;
     private readonly InputAction m_Gameplay_ActivateFriend;
+    private readonly InputAction m_Gameplay_DropDown;
     public struct GameplayActions
     {
         private @PlayerControls m_Wrapper;
@@ -412,6 +456,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Block => m_Wrapper.m_Gameplay_Block;
         public InputAction @Jump => m_Wrapper.m_Gameplay_Jump;
         public InputAction @ActivateFriend => m_Wrapper.m_Gameplay_ActivateFriend;
+        public InputAction @DropDown => m_Wrapper.m_Gameplay_DropDown;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -436,6 +481,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @ActivateFriend.started += instance.OnActivateFriend;
             @ActivateFriend.performed += instance.OnActivateFriend;
             @ActivateFriend.canceled += instance.OnActivateFriend;
+            @DropDown.started += instance.OnDropDown;
+            @DropDown.performed += instance.OnDropDown;
+            @DropDown.canceled += instance.OnDropDown;
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
@@ -455,6 +503,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @ActivateFriend.started -= instance.OnActivateFriend;
             @ActivateFriend.performed -= instance.OnActivateFriend;
             @ActivateFriend.canceled -= instance.OnActivateFriend;
+            @DropDown.started -= instance.OnDropDown;
+            @DropDown.performed -= instance.OnDropDown;
+            @DropDown.canceled -= instance.OnDropDown;
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -525,6 +576,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnBlock(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnActivateFriend(InputAction.CallbackContext context);
+        void OnDropDown(InputAction.CallbackContext context);
     }
     public interface IMenusActions
     {

@@ -30,12 +30,12 @@ public class HandleEnterFinish : MonoBehaviour
         if (collision.gameObject.CompareTag("Player") && _parryActive)
         {
             _levelFinished = true;
+            OnLevelFinish?.Invoke(_levelFinished);
         }
         else
         {
             _levelFinished = false;
         }
-        OnLevelFinish?.Invoke(_levelFinished);
 
     }
 }

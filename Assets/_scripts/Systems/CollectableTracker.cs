@@ -1,20 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 [CreateAssetMenu]
 public class CollectableTracker : ScriptableObject
 {
+    [Header("Lists")]
+    public List<string> GameplayLevelsList = new();
+    public Dictionary<string, int> EnemiesDestroyedDictionary = new();
+    public Dictionary<string, bool> HostagesRescuedDictionary = new();
+
     [Header("Scene Management")]
-    public string StoredSceneName;
+    public string CurrentSceneName;
     public bool NewScene;
-    public Dictionary<string, bool> CollectiblesDictionary;
-    public bool DictionaryIsInitialised;
+    //public bool LevelFinished;
+    public bool HostagePresent;
 
     [Header("Enemies")]
     public int CurrentLevelEnemyCount;
-    public int CurrentLevelEnemiesDestroyed;
     public int TotalEnemies;
     public int TotalEnemiesDestroyed;
 
@@ -24,57 +27,28 @@ public class CollectableTracker : ScriptableObject
 
     public void CheckIfSceneChanged(string currentSceneName)
     {
-        if (currentSceneName != StoredSceneName)
+        if (currentSceneName != CurrentSceneName)
         {
             NewScene = true;
         }
-        else if(currentSceneName == StoredSceneName)
+        else if (currentSceneName == CurrentSceneName)
         {
             NewScene = false;
         }
     }
 
-    public void StoreScene(string currentSceneName)
-    {
-        //Debug.Log($"Stored scene name: {StoredSceneName}");
-        //Debug.Log($"Sent scene name: {currentSceneName}");
+    public void StoreCurrentSceneName(string currentSceneName) => CurrentSceneName = currentSceneName;
 
-        if (NewScene)
+    public void AddSceneNameToList(string currentSceneName)
+    {
+        Debug.Log($"Enemies present: {CurrentLevelEnemyCount}");
+        Debug.Log($"Scene name exists in list: {GameplayLevelsList.Contains(currentSceneName)}");
+
+        if ((CurrentLevelEnemyCount > 0 || HostagePresent) && !GameplayLevelsList.Contains(currentSceneName))
         {
-            StoredSceneName = currentSceneName;
-            Debug.Log($"New scene: {StoredSceneName}");
-        }
-        else if (!NewScene)
-        {
-            Debug.Log($"Same scene: {currentSceneName}");
+            GameplayLevelsList.Add(currentSceneName);
         }
     }
-
-    public void AddToTotals()
-    {
-        if (NewScene)
-        {
-            TotalEnemies += CurrentLevelEnemyCount;
-            TotalEnemiesDestroyed += CurrentLevelEnemiesDestroyed;
-        }
-    }
-
-    public void ResetAllTrackers()
-    {
-        StoredSceneName = null;
-
-        CurrentLevelEnemyCount = 0;
-        CurrentLevelEnemiesDestroyed = 0;
-        TotalEnemies = 0;
-        TotalEnemiesDestroyed = 0;
-
-        TotalHostagesSaved = 0;
-
-        ResetCollectiblesDictionary();
-    }
-
-    public void ResetCurrentLevelEnemyCount() => CurrentLevelEnemyCount = 0;
-    public void ResetCurrentLevelEnemiesDestroyed() => CurrentLevelEnemiesDestroyed = 0;
 
     public void AddCurrentEnemiesToTotal()
     {
@@ -84,58 +58,75 @@ public class CollectableTracker : ScriptableObject
         }
     }
 
-    public void AddCurrentDestroyedEnemiesToTotal()
+    public void AddCurrentDestroyedEnemiesToTotal(int currentLevelEnemiesDestroyed)
     {
         if (NewScene)
         {
-            TotalEnemiesDestroyed += CurrentLevelEnemiesDestroyed;
+            TotalEnemiesDestroyed += currentLevelEnemiesDestroyed;
         }
     }
 
-    public void IncrementHostagesSaved()
+    public void AddHostageToTotal()
     {
-        TotalHostagesSaved++;
+        if (NewScene)
+        {
+            TotalHostages++;
+        }
     }
 
-    public void InitializeCollectiblesDictionary()
+    public void AddSavedHostageToTotal()
     {
-        // Check for initialisation so it can only be done once
-        if (!DictionaryIsInitialised)
+        if (NewScene)
         {
-            CollectiblesDictionary = new Dictionary<string, bool>();
-
-            // Get the total number of scenes in the build index
-            int sceneCount = SceneManager.sceneCountInBuildSettings;
-
-            // Iterate through the scenes in the build index and add their names to the Dictionary with values initialized to false
-            for (int i = 0; i < sceneCount; i++)
-            {
-                string scenePath = SceneUtility.GetScenePathByBuildIndex(i);
-                string sceneName = System.IO.Path.GetFileNameWithoutExtension(scenePath);
-
-                // Use the scene name as the key and initialize the value to false
-                CollectiblesDictionary[sceneName] = false;
-            }
-
-            DictionaryIsInitialised = true;
+            TotalHostagesSaved++;
         }
-
-        // Print both keys and values to the console
-        foreach (var keyValuePair in CollectiblesDictionary)
-        {
-            Debug.Log("Key: " + keyValuePair.Key + ", Value: " + keyValuePair.Value);
-        }
-
     }
 
-    public void ResetCollectiblesDictionary()
+    public void UpdateEnemiesDestroyedDictionary(int count)
     {
-        DictionaryIsInitialised = false;
+        EnemiesDestroyedDictionary[CurrentSceneName] = count;
+        PrintEnemiesDestroyedDictionary();
+    }
 
-        foreach (var key in CollectiblesDictionary.Keys)
+    public void UpdateHostageRescuedDictionary(bool rescued)
+    {
+        HostagesRescuedDictionary[CurrentSceneName] = rescued;
+        PrintHostagesSavedDisctionary();
+    }
+
+    public void ClearAllFields()
+    {
+        GameplayLevelsList = null;
+        EnemiesDestroyedDictionary = null;
+        HostagesRescuedDictionary = null;
+
+        CurrentSceneName = null;
+        NewScene = false;
+        HostagePresent = false;
+
+        CurrentLevelEnemyCount = 0;
+        TotalEnemies = 0;
+        TotalEnemiesDestroyed = 0;
+
+        TotalHostages = 0;
+        TotalHostagesSaved = 0;
+    }
+
+    public void PrintEnemiesDestroyedDictionary()
+    {
+        foreach (var keyValuePair in EnemiesDestroyedDictionary)
         {
-            CollectiblesDictionary[key] = false;
+            Debug.Log($"Key: {keyValuePair.Key}, Enemies destroyed: {keyValuePair.Value}");
         }
     }
+
+    private void PrintHostagesSavedDisctionary()
+    {
+        foreach (var keyValuePair in HostagesRescuedDictionary)
+        {
+            Debug.Log($"Key: {keyValuePair.Key}, Hostage saved: {keyValuePair.Value}");
+        }
+    }
+
 
 }

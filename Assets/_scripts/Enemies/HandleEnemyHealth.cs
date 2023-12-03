@@ -8,7 +8,7 @@ public class HandleEnemyHealth : MonoBehaviour
     public static Action<GameObject> OnEnemyDeath;
 
     private HealthSystem _enemyHealth;
-    public int MaxHealth = 2;
+    public int MaxHealth = 25;
     private int currentHealth;
 
     private void Awake()
@@ -27,9 +27,9 @@ public class HandleEnemyHealth : MonoBehaviour
         HandleDamageOut.OnOutputDamage -= HandleEnemyDamageOutput_OnOutputDamage;
     }
 
-    private void HandleEnemyDamageOutput_OnOutputDamage(GameObject objectDamager, GameObject collisionObject, int damageAmount)
+    private void HandleEnemyDamageOutput_OnOutputDamage(GameObject objectDamager, GameObject damagedObject, int damageAmount)
     {
-        if(collisionObject == gameObject)
+        if(damagedObject == gameObject)
         {
             _enemyHealth.Damage(damageAmount);
 

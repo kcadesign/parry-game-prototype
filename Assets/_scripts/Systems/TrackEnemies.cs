@@ -8,7 +8,7 @@ public class TrackEnemies : MonoBehaviour
 {
     public static event Action<int, int> OnGetEnemyCount;
 
-    public CollectableTrackerTest CollectableTrackerTest;
+    public CollectableTracker CollectableTracker;
 
     private string _enemyTag = "Enemy";
 
@@ -33,9 +33,9 @@ public class TrackEnemies : MonoBehaviour
     private void TrackScene_OnSceneChecked()
     {
         _initialEnemyCount = CountTaggedObjectsInScene(_enemyTag);
-        CollectableTrackerTest.CurrentLevelEnemyCount = _initialEnemyCount;
+        CollectableTracker.CurrentLevelEnemyCount = _initialEnemyCount;
 
-        CollectableTrackerTest.AddCurrentEnemiesToTotal();
+        CollectableTracker.AddCurrentEnemiesToTotal();
 
 
     }
@@ -45,8 +45,8 @@ public class TrackEnemies : MonoBehaviour
         Debug.Log($"Level finished: {levelFinished}");
         if (levelFinished)
         {
-            CollectableTrackerTest.UpdateEnemiesDestroyedDictionary(_currentEnemiesDestroyed);
-            CollectableTrackerTest.AddCurrentDestroyedEnemiesToTotal(_currentEnemiesDestroyed);
+            CollectableTracker.UpdateEnemiesDestroyedDictionary(_currentEnemiesDestroyed);
+            CollectableTracker.AddCurrentDestroyedEnemiesToTotal(_currentEnemiesDestroyed);
         }
     }
 

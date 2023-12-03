@@ -9,6 +9,7 @@ TagManager:
   - EnvironmentHazard
   - HurtBox
   - Hostage
+  - Platform
   layers:
   - Default
   - TransparentFX

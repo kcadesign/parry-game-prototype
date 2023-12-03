@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,8 +9,12 @@ public class HandleGameStateUI : MonoBehaviour
     public delegate void GameRestart(Vector3 respawnPosition);
     public static event GameRestart OnGameRestart;
 
-    public delegate void GameStateChange(GameObject firstSelectedButton);
-    public static event GameStateChange OnGameStateChange;
+    public static event Action OnStartGame;
+    public static event Action OnResetGameProgress;
+    public static event Action OnExitGame;
+
+    public delegate void GameUIActivate(GameObject firstSelectedButton);
+    public static event GameUIActivate OnGameUIActivate;
 
     [Header("Game Over References")]
     public GameObject GameOverUI;
@@ -23,7 +28,20 @@ public class HandleGameStateUI : MonoBehaviour
     public GameObject PauseGameUI;
     public GameObject PauseFirstSelectedButton;
 
+    [Header("Start Game References")]
+    public GameObject StartGameUI;
+    public GameObject StartFirstSelectedButton;
+
     private Vector3 _respawnPoint;
+
+    private void Awake()
+    {
+        if(StartGameUI != null)
+        {
+            OnGameUIActivate?.Invoke(StartFirstSelectedButton);
+        }
+
+    }
 
     private void OnEnable()
     {
@@ -44,28 +62,33 @@ public class HandleGameStateUI : MonoBehaviour
     private void HandlePlayerHealth_OnHealthChange(int currentHealth, bool playerAlive)
     {
         //Debug.Log($"Player is alive: {playerAlive}");
-
-        if(!playerAlive)
+        if(GameOverUI != null)
         {
-            GameOverUI.SetActive(true);
-            OnGameStateChange?.Invoke(GameOverFirstSelectedButton);
-        }
-        else
-        {
-            GameOverUI.SetActive(false);
+            if (!playerAlive)
+            {
+                GameOverUI.SetActive(true);
+                OnGameUIActivate?.Invoke(GameOverFirstSelectedButton);
+            }
+            else
+            {
+                GameOverUI.SetActive(false);
+            }
         }
     }    
 
     private void HandleEnterFinish_OnLevelFinish(bool levelFinished)
     {
-        if (levelFinished)
+        if(LevelFinishUI != null)
         {
-            LevelFinishUI.SetActive(true);
-            OnGameStateChange?.Invoke(LevelFinishFirstSelectedButton);
-        }
-        else
-        {
-            LevelFinishUI.SetActive(false);
+            if (levelFinished)
+            {
+                LevelFinishUI.SetActive(true);
+                OnGameUIActivate?.Invoke(LevelFinishFirstSelectedButton);
+            }
+            else
+            {
+                LevelFinishUI.SetActive(false);
+            }
         }
     }
 
@@ -76,14 +99,17 @@ public class HandleGameStateUI : MonoBehaviour
     
     private void GameStateManager_OnPlayerPause(bool playerPaused)
     {
-        if (playerPaused)
+        if(PauseGameUI != null)
         {
-            PauseGameUI.SetActive(true);
-            OnGameStateChange?.Invoke(PauseFirstSelectedButton);
-        }
-        else
-        {
-            PauseGameUI.SetActive(false);
+            if (playerPaused)
+            {
+                PauseGameUI.SetActive(true);
+                OnGameUIActivate?.Invoke(PauseFirstSelectedButton);
+            }
+            else
+            {
+                PauseGameUI.SetActive(false);
+            }
         }
     }
     
@@ -105,8 +131,20 @@ public class HandleGameStateUI : MonoBehaviour
         SceneManager.LoadScene(currentSceneName +1);
     }
 
+    public void StartGame()
+    {
+        OnStartGame?.Invoke();
+    }
+
+    public void ResetGameProgress()
+    {
+        OnResetGameProgress?.Invoke();
+    }
+
     public void ExitGame()
     {
+        OnExitGame?.Invoke();
+
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #endif

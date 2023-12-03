@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class TrackHostages : MonoBehaviour
 {
-    public CollectableTrackerTest CollectableTrackerTest;
+    public CollectableTracker CollectableTracker;
 
     private bool _levelFinished = false;
     private bool _isFollowing = false;
@@ -34,7 +34,7 @@ public class TrackHostages : MonoBehaviour
         _levelFinished = levelFinished;
 
         CheckHostageRescue();
-        CollectableTrackerTest.UpdateHostageRescuedDictionary(_hostageRescued);
+        CollectableTracker.UpdateHostageRescuedDictionary(_hostageRescued);
     }
 
     private void FollowOnTriggerEnter_OnFollow(bool isFollowing)
@@ -48,7 +48,7 @@ public class TrackHostages : MonoBehaviour
         Debug.Log($"Hostage present in scene: {_hostagePresent}");
         if (_hostagePresent)
         {
-            CollectableTrackerTest.AddHostageToTotal();
+            CollectableTracker.AddHostageToTotal();
         }
     }
 
@@ -56,11 +56,14 @@ public class TrackHostages : MonoBehaviour
     {
         if (_levelFinished && _isFollowing)
         {
-            CollectableTrackerTest.AddSavedHostageToTotal();
-
             _hostageRescued = true;
+
+            CollectableTracker.AddSavedHostageToTotal();
         }
-        _hostageRescued = false;
+        else
+        {
+            _hostageRescued = false;
+        }
     }
 
     private bool CheckForTagInScene(string tag)
