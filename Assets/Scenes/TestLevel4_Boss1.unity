@@ -707,7 +707,6 @@ GameObject:
   - component: {fileID: 126043184}
   - component: {fileID: 126043185}
   - component: {fileID: 126043189}
-  - component: {fileID: 126043186}
   - component: {fileID: 126043190}
   - component: {fileID: 126043188}
   - component: {fileID: 126043187}
@@ -769,20 +768,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 1.1
---- !u!114 &126043186
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 126043183}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc0888fd15cdf42489471a26a25cf228, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MaxHealth: 50
-  CurrentHealth: 0
 --- !u!114 &126043187
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -830,9 +815,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 126043183}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12fc05e7407a5cb4bb40f36067ea047f, type: 3}
+  m_Script: {fileID: 11500000, guid: 3fb2519264263ec40ba00e5f8381ae1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MaxHealth: 50
+  CurrentHealth: 0
 --- !u!1 &163756036
 GameObject:
   m_ObjectHideFlags: 0
@@ -6413,7 +6400,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 1
+  m_FillAmount: 0.374
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0

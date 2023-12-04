@@ -10,28 +10,44 @@ public class HandleBossHealthBar : MonoBehaviour
     private float _maxFill;
     [SerializeField] private float _fillSpeed = 1.0f;
 
+    private void Awake()
+    {
+        Debug.Log("Awake");
+        _barValueMask = GetComponent<Image>();
+        SetInitialFill();
+    }
+    
     private void OnEnable()
     {
-        SendBossHealth.OnBossHealthChange += SendBossHealth_OnBossHealthChange;
+        Debug.Log("Enable");
+
+        HandleBossHealth.OnBossHealthChange += HandleBossHealth_OnBossHealthChange;
     }
 
     private void OnDisable()
     {
-        SendBossHealth.OnBossHealthChange -= SendBossHealth_OnBossHealthChange;
+        HandleBossHealth.OnBossHealthChange -= HandleBossHealth_OnBossHealthChange;
     }
 
-    private void SendBossHealth_OnBossHealthChange(int currentHealth, int maxHealth)
+    private void HandleBossHealth_OnBossHealthChange(int currentHealth, int maxHealth)
     {
-        _barValueMask = GetComponent<Image>();
+        Debug.Log("Boss health change");
+
         _maxFill = maxHealth;
         _currentFill = currentHealth;
-        GetSetInitialFill();
+
+        Debug.Log($"MAX boss health: {maxHealth}");
+        Debug.Log($"Current boss health: {currentHealth}");
+
+        _barValueMask.fillAmount = _currentFill / _maxFill;
 
         StartCoroutine(ChangeFillOverTime(currentHealth));
     }
-
+    
     private IEnumerator ChangeFillOverTime(float targetFill)
     {
+        Debug.Log("Change fill over time");
+
         float initialFill = _barValueMask.fillAmount;
         float timer = 0;
 
@@ -45,11 +61,8 @@ public class HandleBossHealthBar : MonoBehaviour
         // Ensure the fill amount is exactly the target value when the animation ends
         _barValueMask.fillAmount = targetFill / _maxFill;
     }
-
-    private void GetSetInitialFill()
-    {
-        float currentFillPercentage = _currentFill / _maxFill;
-        _barValueMask.fillAmount = currentFillPercentage;
-    }
+    
+    private void SetInitialFill() => _barValueMask.fillAmount = 1;
+    
 
 }
