@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Boss1Controller : MonoBehaviour
 {
-    public CheckTriggerEntered TriggerZoneLeft;
+    /*public CheckTriggerEntered TriggerZoneLeft;
     public CheckTriggerEntered TriggerZoneRight;
     public CheckTriggerEntered TriggerZoneBottom;
 
@@ -44,20 +44,27 @@ public class Boss1Controller : MonoBehaviour
         {
             case Boss1State.Idle:
                 // Boss performs idle actions
+                Debug.Log("Idle");
                 break;
             case Boss1State.AttackLeft:
                 //Boss performs attack left actions
+                Debug.Log("Attack Left");
                 break;
             case Boss1State.AttackRight:
                 //Boss performs attack right actions
+                Debug.Log("Attack Right");
                 break;
             case Boss1State.AttackBottom:
                 //Boss performs attack bottom actions
+                Debug.Log("Attack Bottom");
                 break;
             case Boss1State.SwitchAttackType:
+                //Boss switches to projectile mode
+                Debug.Log("Switch Attack Type");
                 break;
             default:
+                Debug.Log("Default");
                 break;
         }
-    }
+    }*/
 }
