@@ -14,9 +14,9 @@ public class Boss1StateManager : MonoBehaviour
     public CheckTriggerEntered TriggerZoneRight;
     public CheckTriggerEntered TriggerZoneBottom;
 
-    public bool CanAttackLeft = false;
-    public bool CanAttackRight = false;
-    public bool CanAttackBottom = false;
+    [HideInInspector] public bool CanAttackLeft = false;
+    [HideInInspector] public bool CanAttackRight = false;
+    [HideInInspector] public bool CanAttackBottom = false;
 
     public float AttackDelay = 2f;
 
