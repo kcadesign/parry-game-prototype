@@ -8,19 +8,25 @@ public class Boss1AttackLeftState : Boss1BaseState
     {
         Debug.Log($"Entered {this.GetType().Name}");
 
-        // Trigger single play of attack left animation
+        // Trigger attack left animation
+        boss._animator.SetTrigger("AttackLeft");
+
     }
 
     public override void UpdateState(Boss1StateManager boss)
     {
         Debug.Log($"In {this.GetType().Name} update");
 
-        // Check if attack animation has finished before deciding next state
+        // Check if attack animation has finished before moving back to idle
+        if(boss._animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1)
+        {
+            boss.SwitchState(boss._idleState);
+        }
 
-        if (boss.CanAttackRight) boss.SwitchState(boss._attackRightState);
+/*        if (boss.CanAttackRight) boss.SwitchState(boss._attackRightState);
         else if (boss.CanAttackBottom) boss.SwitchState(boss._attackBottomState);
         else if (!boss.CanAttackLeft && !boss.CanAttackRight && !boss.CanAttackBottom) boss.SwitchState(boss._idleState);
-    }
+*/    }
 
     public override void SwitchState(Boss1StateManager boss)
     {
