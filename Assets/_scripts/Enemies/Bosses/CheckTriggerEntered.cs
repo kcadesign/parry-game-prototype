@@ -66,5 +66,5 @@ public class CheckTriggerEntered : MonoBehaviour
         }
     }
 
-    public float SetAttackDelay(float attackDelay) => AttackDelay = attackDelay;
+    //public float SetAttackDelay(float attackDelay) => AttackDelay = attackDelay;
 }

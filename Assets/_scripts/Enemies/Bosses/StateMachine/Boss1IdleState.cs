@@ -7,7 +7,7 @@ public class Boss1IdleState : Boss1BaseState
     public override void EnterState(Boss1StateManager boss)
     {
         Debug.Log($"Entered {this.GetType().Name}");
-        boss._animator.SetTrigger("Idle");
+        boss.Animator.SetTrigger("Idle");
     }
 
     public override void UpdateState(Boss1StateManager boss)

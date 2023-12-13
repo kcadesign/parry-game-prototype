@@ -14,21 +14,25 @@ public class Boss1StateManager : MonoBehaviour
     public CheckTriggerEntered TriggerZoneRight;
     public CheckTriggerEntered TriggerZoneBottom;
 
-    public Animator _animator;
+    public Animator Animator;
 
-    [HideInInspector] public bool CanAttackLeft = false;
-    [HideInInspector] public bool CanAttackRight = false;
-    [HideInInspector] public bool CanAttackBottom = false;
+    /*[HideInInspector]*/ public bool CanAttackLeft = false;
+    /*[HideInInspector]*/ public bool CanAttackRight = false;
+    /*[HideInInspector]*/ public bool CanAttackBottom = false;
 
     public float AttackDelay = 2f;
 
     private void Awake()
     {
-        _animator = GetComponent<Animator>();
+        Animator = GetComponent<Animator>();
     }
 
     void Start()
     {
+        TriggerZoneLeft.AttackDelay = AttackDelay;
+        TriggerZoneRight.AttackDelay = AttackDelay;
+        TriggerZoneBottom.AttackDelay = AttackDelay;
+
         _currentState = _idleState;
 
         _currentState.EnterState(this);
