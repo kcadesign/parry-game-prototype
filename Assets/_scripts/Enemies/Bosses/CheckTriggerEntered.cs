@@ -10,9 +10,9 @@ public class CheckTriggerEntered : MonoBehaviour
     private Color _bossAttackTriggeredColor;
 
     private float _triggerStayDuration = 0f;
-    [HideInInspector] public float AttackDelay;
+    public float AttackDelay;
 
-    [HideInInspector] public bool CanAttack = false;
+    public bool CanAttack = false;
 
 
 

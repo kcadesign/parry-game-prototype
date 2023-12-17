@@ -808,6 +808,7 @@ GameObject:
   - component: {fileID: 5858114657563188475}
   - component: {fileID: 6207355261018228553}
   - component: {fileID: 6837420590063717220}
+  - component: {fileID: 6599310688010199419}
   m_Layer: 3
   m_Name: Collider
   m_TagString: Player
@@ -1026,6 +1027,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f46ca228f24498248a6562ba27577995, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6599310688010199419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6715703871435085181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e9f5372f84231f4aa21e9be3be7a739, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &7385957761161727684
