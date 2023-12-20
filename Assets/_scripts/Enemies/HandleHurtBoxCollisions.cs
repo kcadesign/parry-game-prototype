@@ -12,7 +12,7 @@ public class HandleHurtBoxCollisions : HandleCollisions, IParryable
 
     private bool _parryActive;
     private bool _blockActive;
-    private bool _deflected;
+    public bool Deflected = false;
 
     private void OnEnable()
     {
@@ -36,21 +36,25 @@ public class HandleHurtBoxCollisions : HandleCollisions, IParryable
         _blockActive = isBlocking;
     }
 
+    private void Update()
+    {
+        //Debug.Log($"Deflected: {Deflected}");
+
+        // Instantly reset deflected bool
+        if (Deflected) Deflected = false;
+    }
+
     protected override void HandleCollisionWithPlayer(GameObject collidedObject)
     {
-        //Debug.Log($"{gameObject} collided with {collidedObject}");
-        //Debug.Log($"Block active: {_blockActive}");
-
-        if (!_deflected)
+        if (!Deflected)
         {
             if (_parryActive)
             {
-                // Damage enemy
-                _deflected = true;
-                OnDeflect?.Invoke(gameObject, _deflected);
-                // damage enemy health component
+                Deflected = true;
+                OnDeflect?.Invoke(gameObject, Deflected);
+
+                // Damage enemy health component
                 OnDamageCollision?.Invoke(HealthHandlerObject);
-                //Destroy(gameObject);
             }
             else if (_blockActive)
             {
@@ -59,12 +63,9 @@ public class HandleHurtBoxCollisions : HandleCollisions, IParryable
             else if (!_parryActive && !_blockActive)
             {
                 // Damage player
-                _deflected = false;
                 OnDamageCollision?.Invoke(collidedObject);
             }
-            _deflected = false;
         }
-
     }
 
 }

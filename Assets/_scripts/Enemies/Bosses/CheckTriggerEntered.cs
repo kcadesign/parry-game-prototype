@@ -9,7 +9,7 @@ public class CheckTriggerEntered : MonoBehaviour
     private Color _enteredColor;
     private Color _bossAttackTriggeredColor;
 
-    private float _triggerStayDuration = 0f;
+    private float _triggerEnteredTimer = 0f;
     public float AttackDelay;
 
     public bool CanAttack = false;
@@ -38,12 +38,12 @@ public class CheckTriggerEntered : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             // Start timer
-            _triggerStayDuration += Time.deltaTime;
+            _triggerEnteredTimer += Time.deltaTime;
 
             //Debug.Log($"Player is in {gameObject.name}");
             _spriteRenderer.color = _enteredColor;
 
-            if(_triggerStayDuration >= AttackDelay)
+            if(_triggerEnteredTimer >= AttackDelay)
             {
                 //Debug.Log($"Player has been in {gameObject.name} for {_triggerEnteredDuration} seconds");
                 CanAttack = true;
@@ -57,7 +57,7 @@ public class CheckTriggerEntered : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             // Reset timer
-            _triggerStayDuration = 0f;
+            ResetTriggerEnteredTimer();
 
             CanAttack = false;
 
@@ -66,5 +66,7 @@ public class CheckTriggerEntered : MonoBehaviour
         }
     }
 
-    //public float SetAttackDelay(float attackDelay) => AttackDelay = attackDelay;
+    private void ResetTriggerEnteredTimer() => _triggerEnteredTimer = 0f;
+
+    public float SetAttackDelay(float attackDelay) => AttackDelay = attackDelay;
 }

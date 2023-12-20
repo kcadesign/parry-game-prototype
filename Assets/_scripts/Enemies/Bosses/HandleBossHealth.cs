@@ -24,12 +24,12 @@ public class HandleBossHealth : MonoBehaviour
 
     private void OnEnable()
     {
-        HandleDamageOut.OnOutputDamage += HandleEnemyDamageOutput_OnOutputDamage;
+        HandleDamageOut.OnOutputDamage += HandleDamageOut_OnOutputDamage;
     }
 
     private void OnDisable()
     {
-        HandleDamageOut.OnOutputDamage -= HandleEnemyDamageOutput_OnOutputDamage;
+        HandleDamageOut.OnOutputDamage -= HandleDamageOut_OnOutputDamage;
     }
 
 /*    private void Update()
@@ -37,7 +37,7 @@ public class HandleBossHealth : MonoBehaviour
         OnBossHealthChange?.Invoke(CurrentHealth, MaxHealth);
     }
 */
-    private void HandleEnemyDamageOutput_OnOutputDamage(GameObject objectDamager, GameObject damagedObject, int damageAmount)
+    private void HandleDamageOut_OnOutputDamage(GameObject objectDamager, GameObject damagedObject, int damageAmount)
     {
         if (damagedObject == gameObject)
         {

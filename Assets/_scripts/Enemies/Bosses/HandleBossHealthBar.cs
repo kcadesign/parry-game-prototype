@@ -12,14 +12,14 @@ public class HandleBossHealthBar : MonoBehaviour
 
     private void Awake()
     {
-        Debug.Log("Awake");
+        //Debug.Log("Awake");
         _barValueMask = GetComponent<Image>();
         SetInitialFill();
     }
     
     private void OnEnable()
     {
-        Debug.Log("Enable");
+        //Debug.Log("Enable");
 
         HandleBossHealth.OnBossHealthChange += HandleBossHealth_OnBossHealthChange;
     }
@@ -31,14 +31,14 @@ public class HandleBossHealthBar : MonoBehaviour
 
     private void HandleBossHealth_OnBossHealthChange(int currentHealth, int maxHealth)
     {
-        Debug.Log("Boss health change");
+        //Debug.Log("Boss health change");
 
         _maxFill = maxHealth;
         _currentFill = currentHealth;
 
-        Debug.Log($"MAX boss health: {maxHealth}");
+/*        Debug.Log($"MAX boss health: {maxHealth}");
         Debug.Log($"Current boss health: {currentHealth}");
-
+*/
         _barValueMask.fillAmount = _currentFill / _maxFill;
 
         StartCoroutine(ChangeFillOverTime(currentHealth));
@@ -46,7 +46,7 @@ public class HandleBossHealthBar : MonoBehaviour
     
     private IEnumerator ChangeFillOverTime(float targetFill)
     {
-        Debug.Log("Change fill over time");
+        //Debug.Log("Change fill over time");
 
         float initialFill = _barValueMask.fillAmount;
         float timer = 0;
