@@ -4103,6 +4103,7 @@ MonoBehaviour:
   CanAttackLeft: 0
   CanAttackRight: 0
   CanAttackBottom: 0
+  Idle: 0
   LeftHurtBoxCollisions: {fileID: 1013586962}
   Deflected: 0
   AttackDelay: 2
