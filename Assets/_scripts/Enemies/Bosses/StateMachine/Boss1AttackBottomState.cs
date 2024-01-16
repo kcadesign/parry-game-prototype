@@ -17,7 +17,12 @@ public class Boss1AttackBottomState : Boss1BaseState
     {
         //Debug.Log($"In {this.GetType().Name} update");
 
-        if (boss.Idle) { boss.SwitchState(boss.IdleState); }
+        if (boss.LeftHurtBoxCollisions.Deflected || boss.RightHurtBoxCollisions.Deflected) 
+        {
+            boss.SwitchState(boss.HitGeneric);
+        }
+
+        if (boss.Idle) boss.SwitchState(boss.IdleState);
 
     }
 

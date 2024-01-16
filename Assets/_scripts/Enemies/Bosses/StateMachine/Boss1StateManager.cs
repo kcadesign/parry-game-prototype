@@ -4,32 +4,58 @@ using UnityEngine;
 
 public class Boss1StateManager : MonoBehaviour
 {
+    [Header("States")]
     public Boss1BaseState CurrentState;
     public Boss1IdleState IdleState = new Boss1IdleState();
+
     public Boss1AttackLeftState AttackLeftState = new Boss1AttackLeftState();
     public Boss1HitFromLeftState HitFromLeftState = new Boss1HitFromLeftState();
-    public Boss1AttackRightState AttackRightState = new Boss1AttackRightState();
-    public Boss1AttackBottomState AttackBottomState = new Boss1AttackBottomState();
 
+    public Boss1AttackRightState AttackRightState = new Boss1AttackRightState();
+    public Boss1HitFromRightState HitFromRightState = new Boss1HitFromRightState();
+
+    public Boss1AttackBottomState AttackBottomState = new Boss1AttackBottomState();
+    public Boss1HitGenericState HitGeneric = new Boss1HitGenericState();
+
+    public Boss1FistsDeathState FistsDeathState = new Boss1FistsDeathState();
+
+    [HideInInspector] public Animator Animator;
+
+    [Header("Attack Zone Triggers")]
     public CheckTriggerEntered TriggerZoneLeft;
     public CheckTriggerEntered TriggerZoneRight;
     public CheckTriggerEntered TriggerZoneBottom;
-
-    public Animator Animator;
 
     /*[HideInInspector]*/ public bool CanAttackLeft = false;
     /*[HideInInspector]*/ public bool CanAttackRight = false;
     /*[HideInInspector]*/ public bool CanAttackBottom = false;
     /*[HideInInspector]*/ public bool Idle = false;
 
+    [Header("Hurt Box")]
+    public HandleHurtBoxCollisions RightHurtBoxCollisions;
     public HandleHurtBoxCollisions LeftHurtBoxCollisions;
-    public bool Deflected = false;
+    //public bool Deflected = false;
 
+    [Header("Attack")]
     public float AttackDelay = 2f;
+
+    [Header("Health")]
+    public bool BossDead = false;
+
 
     private void Awake()
     {
         Animator = GetComponent<Animator>();
+    }
+
+    private void OnEnable()
+    {
+        HandleBossHealth.OnBossDeath += HandleBossHealth_OnBossDeath;
+    }
+
+    private void OnDisable()
+    {
+        HandleBossHealth.OnBossDeath -= HandleBossHealth_OnBossDeath;
     }
 
     void Start()
@@ -44,12 +70,15 @@ public class Boss1StateManager : MonoBehaviour
 
     void Update()
     {
-        Deflected = LeftHurtBoxCollisions.Deflected;
-        //Debug.Log($"Deflected: {Deflected}");
+        //Deflected = LeftHurtBoxCollisions.Deflected;
 
-        ChooseAttackZone();
+        DecideAttackZone();
 
-        CurrentState.UpdateState(this);
+        CurrentState.UpdateState(this);        
+        
+        Debug.Log($"State manager Right Deflected: {RightHurtBoxCollisions.Deflected}");
+        Debug.Log($"State manager Left Deflected: {LeftHurtBoxCollisions.Deflected}");
+
     }
 
     public void SwitchState(Boss1BaseState state)
@@ -59,7 +88,7 @@ public class Boss1StateManager : MonoBehaviour
         state.EnterState(this);
     }
 
-    private void ChooseAttackZone()
+    private void DecideAttackZone()
     {
         if (TriggerZoneLeft.CanAttack)
         {
@@ -89,6 +118,11 @@ public class Boss1StateManager : MonoBehaviour
             CanAttackBottom = false;
             Idle = true;
         }
+    }
+
+    private void HandleBossHealth_OnBossDeath(GameObject bossParentObject)
+    {
+        BossDead = true;
     }
 
 }

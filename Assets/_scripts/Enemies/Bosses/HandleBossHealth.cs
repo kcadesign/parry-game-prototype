@@ -58,7 +58,7 @@ public class HandleBossHealth : MonoBehaviour
         {
             OnBossDeath?.Invoke(gameObject.transform.parent.gameObject);
 
-            Destroy(gameObject.transform.parent.gameObject);
+            //Destroy(gameObject.transform.parent.gameObject);
 
         }
     }
