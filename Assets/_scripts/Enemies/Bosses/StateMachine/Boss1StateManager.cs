@@ -26,21 +26,20 @@ public class Boss1StateManager : MonoBehaviour
     public CheckTriggerEntered TriggerZoneRight;
     public CheckTriggerEntered TriggerZoneBottom;
 
-    /*[HideInInspector]*/ public bool CanAttackLeft = false;
-    /*[HideInInspector]*/ public bool CanAttackRight = false;
-    /*[HideInInspector]*/ public bool CanAttackBottom = false;
-    /*[HideInInspector]*/ public bool Idle = false;
+    [HideInInspector] public bool CanAttackLeft = false;
+    [HideInInspector] public bool CanAttackRight = false;
+    [HideInInspector] public bool CanAttackBottom = false;
+    [HideInInspector] public bool Idle = false;
 
     [Header("Hurt Box")]
     public HandleHurtBoxCollisions RightHurtBoxCollisions;
     public HandleHurtBoxCollisions LeftHurtBoxCollisions;
-    //public bool Deflected = false;
 
     [Header("Attack")]
     public float AttackDelay = 2f;
 
     [Header("Health")]
-    public bool BossDead = false;
+    [HideInInspector] public bool BossDead = false;
 
 
     private void Awake()
@@ -70,14 +69,12 @@ public class Boss1StateManager : MonoBehaviour
 
     void Update()
     {
-        //Deflected = LeftHurtBoxCollisions.Deflected;
-
         DecideAttackZone();
 
         CurrentState.UpdateState(this);        
         
-        Debug.Log($"State manager Right Deflected: {RightHurtBoxCollisions.Deflected}");
-        Debug.Log($"State manager Left Deflected: {LeftHurtBoxCollisions.Deflected}");
+        //Debug.Log($"State manager Right Deflected: {RightHurtBoxCollisions.Deflected}");
+        //Debug.Log($"State manager Left Deflected: {LeftHurtBoxCollisions.Deflected}");
 
     }
 
@@ -120,9 +117,6 @@ public class Boss1StateManager : MonoBehaviour
         }
     }
 
-    private void HandleBossHealth_OnBossDeath(GameObject bossParentObject)
-    {
-        BossDead = true;
-    }
+    private void HandleBossHealth_OnBossDeath(GameObject bossParentObject) => BossDead = true;
 
 }

@@ -57,7 +57,7 @@ public class HandleBossHealth : MonoBehaviour
         if (CurrentHealth <= 0)
         {
             OnBossDeath?.Invoke(gameObject.transform.parent.gameObject);
-
+            Debug.Log($"{gameObject.transform.parent.name} is dead");
             //Destroy(gameObject.transform.parent.gameObject);
 
         }

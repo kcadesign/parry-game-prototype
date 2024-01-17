@@ -38,7 +38,7 @@ public class HandleHurtBoxCollisions : HandleCollisions, IParryable
 
     private void Update()
     {
-        Debug.Log($"{gameObject.name} deflected: {Deflected}");
+        //Debug.Log($"{gameObject.name} deflected: {Deflected}");
 
         // Instantly reset deflected bool
         if (Deflected) Deflected = false;
