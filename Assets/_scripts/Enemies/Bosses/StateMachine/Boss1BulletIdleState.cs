@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Boss1IdleState : Boss1BaseState
+public class Boss1BulletIdleState : Boss1BaseState
 {
     public override void EnterState(Boss1StateManager boss)
     {
         Debug.Log($"Entered {this.GetType().Name}");
-        boss.Animator.SetBool("Idle", true);
+        boss.Animator.SetBool("BulletIdle", true);
     }
 
     public override void UpdateState(Boss1StateManager boss)
@@ -17,26 +17,29 @@ public class Boss1IdleState : Boss1BaseState
         // If the boss can attack, switch to the appropriate attack state. If not, stay in idle state.
         if (boss.CanAttackLeft)
         {
-            boss.SwitchState(boss.AttackLeftState);
+            // switch to projectile attack left state
+            boss.SwitchState(boss.BulletAttackLeftState);
         }
         else if (boss.CanAttackRight)
         {
-            boss.SwitchState(boss.AttackRightState);
+            // switch to projectile attack right state
         }
         else if (boss.CanAttackBottom)
         {
-            boss.SwitchState(boss.AttackBottomState);
-        }
-        else if (boss.BulletIdle)
-        {
-            // switch to projectile idle phase
-            boss.SwitchState(boss.BulletIdleState);
+            // switch to projectile attack bottom state
         }
         else if (boss.FistsIdle)
         {
-            // stay in fists idle state
-            return;
+            // switch to fists idle state
+            boss.SwitchState(boss.IdleState);
         }
+        else if (boss.BulletIdle)
+        {
+            // stay in projectile idle state
+            boss.SwitchState(boss.BulletIdleState);
+        }
+        else  return;
+        
     }
 
     public override void SwitchState(Boss1StateManager boss)
@@ -44,7 +47,6 @@ public class Boss1IdleState : Boss1BaseState
         Debug.Log($"Switching from {this.GetType().Name}");
 
         //reset trigger for current animation
-        boss.Animator.SetBool("Idle", false);
+        boss.Animator.SetBool("BulletIdle", false);
     }
-
 }
