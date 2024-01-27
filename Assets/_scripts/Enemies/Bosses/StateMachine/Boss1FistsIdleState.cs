@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Boss1IdleState : Boss1BaseState
+public class Boss1FistsIdleState : Boss1BaseState
 {
     public override void EnterState(Boss1StateManager boss)
     {
         Debug.Log($"Entered {this.GetType().Name}");
-        boss.Animator.SetBool("Idle", true);
+        boss.Animator.SetBool("FistsIdle", true);
     }
 
     public override void UpdateState(Boss1StateManager boss)
@@ -15,7 +15,7 @@ public class Boss1IdleState : Boss1BaseState
         //Debug.Log($"In {this.GetType().Name} update");
 
         // If the boss can attack, switch to the appropriate attack state. If not, stay in idle state.
-        if (boss.CanAttackLeft)
+        /*if (boss.CanAttackLeft)
         {
             boss.SwitchState(boss.AttackLeftState);
         }
@@ -27,16 +27,17 @@ public class Boss1IdleState : Boss1BaseState
         {
             boss.SwitchState(boss.AttackBottomState);
         }
-        else if (boss.BulletIdle)
+        else if (boss.TrueIdle)
         {
             // switch to projectile idle phase
-            boss.SwitchState(boss.BulletIdleState);
-        }
-        else if (boss.FistsIdle)
+            boss.SwitchState(boss.TrueIdleState);
+        }*/
+
+        if (boss.BulletIdle)
         {
-            // stay in fists idle state
-            return;
+            boss.SwitchState(boss.TrueIdleState);
         }
+        
     }
 
     public override void SwitchState(Boss1StateManager boss)
@@ -44,7 +45,7 @@ public class Boss1IdleState : Boss1BaseState
         Debug.Log($"Switching from {this.GetType().Name}");
 
         //reset trigger for current animation
-        boss.Animator.SetBool("Idle", false);
+        boss.Animator.SetBool("FistsIdle", false);
     }
 
 }

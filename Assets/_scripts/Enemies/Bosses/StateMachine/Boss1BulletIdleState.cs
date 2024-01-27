@@ -15,7 +15,7 @@ public class Boss1BulletIdleState : Boss1BaseState
         //Debug.Log($"In {this.GetType().Name} update");
 
         // If the boss can attack, switch to the appropriate attack state. If not, stay in idle state.
-        if (boss.CanAttackLeft)
+        /*if (boss.CanAttackLeft)
         {
             // switch to projectile attack left state
             boss.SwitchState(boss.BulletAttackLeftState);
@@ -28,17 +28,17 @@ public class Boss1BulletIdleState : Boss1BaseState
         {
             // switch to projectile attack bottom state
         }
-        else if (boss.FistsIdle)
+        else if (boss.TrueIdle)
         {
             // switch to fists idle state
-            boss.SwitchState(boss.IdleState);
-        }
-        else if (boss.BulletIdle)
+            boss.SwitchState(boss.TrueIdleState);
+        }*/
+
+        if (boss.FistsIdle)
         {
-            // stay in projectile idle state
-            boss.SwitchState(boss.BulletIdleState);
+            boss.SwitchState(boss.TrueIdleState);
         }
-        else  return;
+        
         
     }
 

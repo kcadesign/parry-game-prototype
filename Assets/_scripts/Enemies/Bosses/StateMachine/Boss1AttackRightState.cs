@@ -18,7 +18,7 @@ public class Boss1AttackRightState : Boss1BaseState
 
         //Debug.Log($"Deflected: {boss.RightHurtBoxCollisions.Deflected}");
         if (boss.RightHurtBox.Deflected) boss.SwitchState(boss.HitFromRightState);
-        else if (boss.FistsIdle) boss.SwitchState(boss.IdleState);
+        else if (boss.FistsIdle) boss.SwitchState(boss.FistsIdleState);
     }
 
     public override void SwitchState(Boss1StateManager boss)

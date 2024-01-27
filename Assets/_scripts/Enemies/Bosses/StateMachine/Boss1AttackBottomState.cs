@@ -19,9 +19,9 @@ public class Boss1AttackBottomState : Boss1BaseState
 
         if (boss.LeftHurtBox.Deflected || boss.RightHurtBox.Deflected) 
         {
-            boss.SwitchState(boss.HitGeneric);
+            boss.SwitchState(boss.HitGenericState);
         }
-        else if (boss.FistsIdle) boss.SwitchState(boss.IdleState);
+        else if (boss.FistsIdle) boss.SwitchState(boss.FistsIdleState);
 
     }
 
