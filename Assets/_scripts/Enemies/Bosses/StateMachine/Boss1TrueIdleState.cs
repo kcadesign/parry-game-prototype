@@ -8,6 +8,7 @@ public class Boss1TrueIdleState : Boss1BaseState
     {
         Debug.Log($"Entered {this.GetType().Name}");
         boss.Animator.SetBool("TrueIdle", true);
+        boss.CanChangePhase = true;
     }
 
     public override void UpdateState(Boss1StateManager boss)
@@ -25,6 +26,8 @@ public class Boss1TrueIdleState : Boss1BaseState
             // switch to fists idle phase
             boss.SwitchState(boss.FistsIdleState);
         }
+
+
     }
 
     public override void SwitchState(Boss1StateManager boss)

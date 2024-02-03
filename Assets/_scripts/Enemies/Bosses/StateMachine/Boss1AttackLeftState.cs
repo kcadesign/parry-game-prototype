@@ -10,6 +10,7 @@ public class Boss1AttackLeftState : Boss1BaseState
 
         // Trigger attack left animation
         boss.Animator.SetTrigger("AttackLeft");
+        boss.CanChangePhase = false;
     }
 
     public override void UpdateState(Boss1StateManager boss)

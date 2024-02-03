@@ -4,67 +4,163 @@ using UnityEngine;
 
 public class Boss1Controller : MonoBehaviour
 {
-    /*public CheckTriggerEntered TriggerZoneLeft;
+    [HideInInspector] public Animator Animator;
+
+    [Header("Attack Zone Triggers")]
+    public CheckTriggerEntered TriggerZoneLeft;
     public CheckTriggerEntered TriggerZoneRight;
     public CheckTriggerEntered TriggerZoneBottom;
 
+    [HideInInspector] public bool CanAttackLeft = false;
+    [HideInInspector] public bool CanAttackRight = false;
+    [HideInInspector] public bool CanAttackBottom = false;
+
+    [HideInInspector] public bool IsAttacking = false;
+
+    /*[HideInInspector]*/
+    public bool FistsIdle = false;
+    /*[HideInInspector]*/
+    public bool BulletIdle = false;
+
+    [Header("Hurt Box")]
+    public HandleHurtBoxCollisions LeftHurtBox;
+    public HandleHurtBoxCollisions RightHurtBox;
+    public bool LeftFistDeflected = false;
+    public bool RightFistDeflected = false;
+
+    [Header("Projectiles")]
+    public SpawnProjectile NorthProjectileSpawner;
+    public SpawnProjectile EastProjectileSpawner;
+    public SpawnProjectile SouthProjectileSpawner;
+    public SpawnProjectile WestProjectileSpawner;
+
+    [Header("Attack Values")]
     public float AttackDelay = 2f;
 
-    public enum Boss1State
+    [Header("Phase Change")]
+    //public float PhaseChangeDelay = 5f;
+    public float MinPhaseLength = 5f;
+    public float MaxPhaseLength = 10f;
+    public float PhaseChangeCountdown = 0f;
+    //public bool CanChangePhase = false;
+
+    [Header("Health")]
+    [HideInInspector] public bool BossDead = false;
+
+    private void Awake()
     {
-        Idle,
-        AttackLeft,
-        AttackRight,
-        AttackBottom,
-        SwitchAttackType
+        Animator = GetComponent<Animator>();
     }
 
-    private Boss1State _currentState;
+    private void OnEnable()
+    {
+        HandleBossHealth.OnBossDeath += HandleBossHealth_OnBossDeath;
+    }
 
-    private void Start()
+    private void OnDisable()
+    {
+        HandleBossHealth.OnBossDeath -= HandleBossHealth_OnBossDeath;
+    }
+
+    void Start()
     {
         TriggerZoneLeft.SetAttackDelay(AttackDelay);
         TriggerZoneRight.SetAttackDelay(AttackDelay);
         TriggerZoneBottom.SetAttackDelay(AttackDelay);
+
+        FistsIdle = true;
     }
 
-    private void Update()
+    void Update()
     {
-        HandleState();
+        DecideAttackZone();
+        CountdownPhaseChange();
+        CheckDeflected();
+
+        //Debug.Log($"Right fist deflected: {RightHurtBox.Deflected}");
     }
 
-    private void HandleState()
+    private void DecideAttackZone()
     {
-        if (TriggerZoneLeft.CanAttack) _currentState = Boss1State.AttackLeft;
-        else if (TriggerZoneRight.CanAttack) _currentState = Boss1State.AttackRight;
-        else if (TriggerZoneBottom.CanAttack) _currentState = Boss1State.AttackBottom;
-        else _currentState = Boss1State.Idle;
-
-        switch (_currentState)
+        if (TriggerZoneLeft.CanAttack)
         {
-            case Boss1State.Idle:
-                // Boss performs idle actions
-                Debug.Log("Idle");
-                break;
-            case Boss1State.AttackLeft:
-                //Boss performs attack left actions
-                Debug.Log("Attack Left");
-                break;
-            case Boss1State.AttackRight:
-                //Boss performs attack right actions
-                Debug.Log("Attack Right");
-                break;
-            case Boss1State.AttackBottom:
-                //Boss performs attack bottom actions
-                Debug.Log("Attack Bottom");
-                break;
-            case Boss1State.SwitchAttackType:
-                //Boss switches to projectile mode
-                Debug.Log("Switch Attack Type");
-                break;
-            default:
-                Debug.Log("Default");
-                break;
+            CanAttackLeft = true;
+            CanAttackRight = false;
+            CanAttackBottom = false;
         }
-    }*/
+        else if (TriggerZoneRight.CanAttack)
+        {
+            CanAttackLeft = false;
+            CanAttackRight = true;
+            CanAttackBottom = false;
+        }
+        else if (TriggerZoneBottom.CanAttack)
+        {
+            CanAttackLeft = false;
+            CanAttackRight = false;
+            CanAttackBottom = true;
+        }
+        else
+        {
+            CanAttackLeft = false;
+            CanAttackRight = false;
+            CanAttackBottom = false;
+            DecideBossPhase();
+        }
+    }
+
+    private void HandleBossHealth_OnBossDeath(GameObject bossParentObject) => BossDead = true;
+
+    public void DecideBossPhase()
+    {
+        if (PhaseChangeCountdown <= 0 /*&& CanChangePhase*/)
+        {
+            Debug.Log("Deciding boss phase");
+
+            PhaseChange();
+
+            PhaseChangeCountdown = Random.Range(MinPhaseLength, MaxPhaseLength);
+        }
+    }
+
+    public void CountdownPhaseChange()
+    {
+        // Countdown phase change timer to zero in seconds
+        PhaseChangeCountdown -= Time.deltaTime;
+    }
+
+    public float RollForPhase()
+    {
+        return Random.Range(MinPhaseLength, MaxPhaseLength);
+    }
+
+    public void PhaseChange()
+    {
+        FistsIdle = !FistsIdle;
+        BulletIdle = !BulletIdle;
+    }
+
+    public void CheckBossAttacking()
+    {
+        if (CanAttackLeft || CanAttackRight || CanAttackBottom)
+        {
+            IsAttacking = true;
+        }
+        else
+        {
+            IsAttacking = false;
+        }
+    }
+
+    public void CheckDeflected()
+    {
+        LeftFistDeflected = LeftHurtBox.Deflected;
+        RightFistDeflected = RightHurtBox.Deflected;
+    }
+
+    private void EnableNorthProjectiles() => NorthProjectileSpawner.InvokeProjectile();
+    private void EnableEastProjectiles() => EastProjectileSpawner.InvokeProjectile();
+    private void EnableSouthProjectiles() => SouthProjectileSpawner.InvokeProjectile();
+    private void EnableWestProjectiles() => WestProjectileSpawner.InvokeProjectile();
+
 }

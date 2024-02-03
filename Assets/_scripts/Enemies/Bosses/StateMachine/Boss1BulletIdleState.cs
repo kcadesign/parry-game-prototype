@@ -8,6 +8,7 @@ public class Boss1BulletIdleState : Boss1BaseState
     {
         Debug.Log($"Entered {this.GetType().Name}");
         boss.Animator.SetBool("BulletIdle", true);
+        boss.CanChangePhase = true;
     }
 
     public override void UpdateState(Boss1StateManager boss)
@@ -39,7 +40,7 @@ public class Boss1BulletIdleState : Boss1BaseState
             boss.SwitchState(boss.TrueIdleState);
         }
         
-        
+
     }
 
     public override void SwitchState(Boss1StateManager boss)

@@ -4368,6 +4368,7 @@ GameObject:
   - component: {fileID: 450606654}
   - component: {fileID: 450606656}
   - component: {fileID: 450606657}
+  - component: {fileID: 450606658}
   m_Layer: 0
   m_Name: Boss1
   m_TagString: Enemy
@@ -4420,7 +4421,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 450606653}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4d32f3a4fff3f3b4c8a9038dda5941ea, type: 3}
   m_Name: 
@@ -4441,7 +4442,42 @@ MonoBehaviour:
   SouthProjectileSpawner: {fileID: 1990176931}
   WestProjectileSpawner: {fileID: 2009002101}
   AttackDelay: 1.5
-  PhaseChangeDelay: 5
+  MinPhaseLength: 5
+  MaxPhaseLength: 10
+  PhaseChangeCountdown: 0
+  CanChangePhase: 0
+  BossDead: 0
+--- !u!114 &450606658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 450606653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56e999539a368d341a3c128c671a8d98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Animator: {fileID: 0}
+  TriggerZoneLeft: {fileID: 69983412}
+  TriggerZoneRight: {fileID: 432178159}
+  TriggerZoneBottom: {fileID: 751396659}
+  CanAttackLeft: 0
+  CanAttackRight: 0
+  CanAttackBottom: 0
+  IsAttacking: 0
+  FistsIdle: 0
+  BulletIdle: 0
+  RightHurtBox: {fileID: 1792318123}
+  LeftHurtBox: {fileID: 1013586962}
+  NorthProjectileSpawner: {fileID: 1646842731}
+  EastProjectileSpawner: {fileID: 1394168798}
+  SouthProjectileSpawner: {fileID: 1990176931}
+  WestProjectileSpawner: {fileID: 2009002101}
+  AttackDelay: 1.5
+  MinPhaseLength: 5
+  MaxPhaseLength: 10
   PhaseChangeCountdown: 0
   BossDead: 0
 --- !u!1 &464039752

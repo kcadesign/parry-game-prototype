@@ -9,6 +9,7 @@ public class Boss1AttackRightState : Boss1BaseState
         Debug.Log($"Entered {this.GetType().Name}");
 
         boss.Animator.SetTrigger("AttackRight");
+        boss.CanChangePhase = false;
 
     }
 
@@ -23,7 +24,7 @@ public class Boss1AttackRightState : Boss1BaseState
 
     public override void SwitchState(Boss1StateManager boss)
     {
-        Debug.Log($"Switching from {this.GetType().Name}");
+        //Debug.Log($"Switching from {this.GetType().Name}");
 
         boss.Animator.ResetTrigger("AttackRight");
     }

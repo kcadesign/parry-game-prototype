@@ -15,9 +15,8 @@ public class Boss1HitFromLeftState : Boss1BaseState
     public override void UpdateState(Boss1StateManager boss)
     {
         if (boss.CanAttackLeft) boss.SwitchState(boss.AttackLeftState);
-        if (!boss.LeftHurtBox.Deflected) boss.SwitchState(boss.FistsIdleState);
-        if (boss.FistsIdle) boss.SwitchState(boss.FistsIdleState);
-        if (boss.BossDead) boss.SwitchState(boss.FistsDeathState);
+        else if (boss.BossDead) boss.SwitchState(boss.FistsDeathState);
+        else boss.SwitchState(boss.FistsIdleState);
     }
 
     public override void SwitchState(Boss1StateManager boss)

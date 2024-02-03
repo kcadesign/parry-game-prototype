@@ -37,7 +37,7 @@ public class Boss1StateManager : MonoBehaviour
     [HideInInspector] public bool CanAttackLeft = false;
     [HideInInspector] public bool CanAttackRight = false;
     [HideInInspector] public bool CanAttackBottom = false;
-    /*[HideInInspector]*/ public bool TrueIdle = false;
+
     /*[HideInInspector]*/ public bool FistsIdle = false;
     /*[HideInInspector]*/ public bool BulletIdle = false;
 
@@ -55,8 +55,11 @@ public class Boss1StateManager : MonoBehaviour
     public float AttackDelay = 2f;
 
     [Header("Phase Change")]
-    public float PhaseChangeDelay = 5f;
+    //public float PhaseChangeDelay = 5f;
+    public float MinPhaseLength = 5f;
+    public float MaxPhaseLength = 10f;
     public float PhaseChangeCountdown;
+    public bool CanChangePhase = false;
 
     [Header("Health")]
     [HideInInspector] public bool BossDead = false;
@@ -82,7 +85,7 @@ public class Boss1StateManager : MonoBehaviour
         TriggerZoneRight.SetAttackDelay(AttackDelay);
         TriggerZoneBottom.SetAttackDelay(AttackDelay);
 
-        PhaseChangeCountdown = PhaseChangeDelay;
+        PhaseChangeCountdown = Random.Range(MinPhaseLength, MaxPhaseLength);
 
         CurrentState = TrueIdleState;
         CurrentState.EnterState(this);
@@ -91,7 +94,7 @@ public class Boss1StateManager : MonoBehaviour
     void Update()
     {
         DecideAttackZone();
-        PhaseChangeCountdownTimer();
+        CountdownPhaseChange();
 
         CurrentState.UpdateState(this);
     }
@@ -110,37 +113,24 @@ public class Boss1StateManager : MonoBehaviour
             CanAttackLeft = true;
             CanAttackRight = false;
             CanAttackBottom = false;
-
-            /*TrueIdle = false;
-            FistsIdle = false;
-            BulletIdle = false;*/
         }
         else if (TriggerZoneRight.CanAttack)
         {
             CanAttackLeft = false;
             CanAttackRight = true;
             CanAttackBottom = false;
-
-            /*TrueIdle = false;
-            FistsIdle = false;
-            BulletIdle = false;*/
         }
         else if (TriggerZoneBottom.CanAttack)
         {
             CanAttackLeft = false;
             CanAttackRight = false;
             CanAttackBottom = true;
-
-            /*TrueIdle = false;
-            FistsIdle = false;
-            BulletIdle = false;*/
         }
         else
         {
             CanAttackLeft = false;
             CanAttackRight = false;
             CanAttackBottom = false;
-            /*TrueIdle = true;*/
             DecideBossPhase();
         }
     }
@@ -149,9 +139,10 @@ public class Boss1StateManager : MonoBehaviour
 
     public void DecideBossPhase()
     {
-        if (PhaseChangeCountdown <= 0)
+        if (PhaseChangeCountdown <= 0 && CanChangePhase)
         {
-            // roll for phase change only when timer hits zero, then reset timer
+            PhaseChange();
+            /*// roll for phase change only when timer hits zero, then reset timer
             int phase = RollForPhase();
             Debug.Log($"Random roll: {phase}");
 
@@ -161,29 +152,44 @@ public class Boss1StateManager : MonoBehaviour
                 FistsIdle = false;
                 BulletIdle = true;
             }
-            else // Assuming it's either 1 or 0, so no need to check again
+            else
             {
                 // switch to fists idle state
                 FistsIdle = true;
                 BulletIdle = false;
-            }
-
-            PhaseChangeCountdown = PhaseChangeDelay;
+            }*/
+            PhaseChangeCountdown = Random.Range(MinPhaseLength, MaxPhaseLength);
         }
     }
 
-
-    public void PhaseChangeCountdownTimer()
+    public void CountdownPhaseChange()
     {
         // Countdown phase change timer to zero in seconds
         PhaseChangeCountdown -= Time.deltaTime;
-        //Debug.Log($"Phase change countdown: {PhaseChangeCountdown}");
     }
 
-    public int RollForPhase()
+    public float RollForPhase()
     {
         // return a random integer of 0 or 1
-        return Random.Range(0, 2);
+        //return Random.Range(0, 2);
+        return Random.Range(MinPhaseLength, MaxPhaseLength);
+    }
+
+    public void PhaseChange()
+    {
+        if(FistsIdle && BulletIdle)
+        {
+            FistsIdle = !FistsIdle;
+        }
+        else if (!FistsIdle && !BulletIdle)
+        {
+            BulletIdle = !BulletIdle;
+        }
+        else
+        {
+            FistsIdle = !FistsIdle;
+            BulletIdle = !BulletIdle;
+        }
     }
 
     private void EnableNorthProjectiles() => NorthProjectileSpawner.InvokeProjectile();

@@ -10,6 +10,7 @@ public class Boss1AttackBottomState : Boss1BaseState
 
         // Trigger attack left animation
         boss.Animator.SetTrigger("AttackBottom");
+        boss.CanChangePhase = false;
 
     }
 
@@ -17,11 +18,12 @@ public class Boss1AttackBottomState : Boss1BaseState
     {
         //Debug.Log($"In {this.GetType().Name} update");
 
-        if (boss.LeftHurtBox.Deflected || boss.RightHurtBox.Deflected) 
+        if (boss.LeftHurtBox.Deflected || boss.RightHurtBox.Deflected)
         {
             boss.SwitchState(boss.HitGenericState);
         }
         else if (boss.FistsIdle) boss.SwitchState(boss.FistsIdleState);
+        
 
     }
 
