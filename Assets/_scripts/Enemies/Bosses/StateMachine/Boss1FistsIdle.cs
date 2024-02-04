@@ -15,7 +15,11 @@ public class Boss1FistsIdle : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (_boss1Controller.BulletIdle)
+        if (_boss1Controller.BossDead)
+        {
+            animator.SetTrigger("Death");
+        }
+        else if (_boss1Controller.BulletIdle)
         {
             animator.SetBool("BulletIdle", true);
         }

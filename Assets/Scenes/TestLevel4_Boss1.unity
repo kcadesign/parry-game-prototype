@@ -325,7 +325,7 @@ Transform:
   m_GameObject: {fileID: 55480302}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0.7071065, w: 0.7071071}
-  m_LocalPosition: {x: 0.24900156, y: -0.2470008, z: 0}
+  m_LocalPosition: {x: 0.2490016, y: -0.2470008, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -843,7 +843,7 @@ GameObject:
   - component: {fileID: 126043187}
   m_Layer: 0
   m_Name: BodyCollider
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1030,6 +1030,10 @@ PrefabInstance:
     - target: {fileID: 5500801225464334230, guid: 9cf4812ab2a4ff841b5a187847a162c6, type: 3}
       propertyPath: m_Name
       value: ProjectileSpawner
+      objectReference: {fileID: 0}
+    - target: {fileID: 6043871010316862249, guid: 9cf4812ab2a4ff841b5a187847a162c6, type: 3}
+      propertyPath: _projectileMovementDirection.x
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7118054031677090599, guid: 9cf4812ab2a4ff841b5a187847a162c6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3640,6 +3644,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ProjectileSpawner
       objectReference: {fileID: 0}
+    - target: {fileID: 6043871010316862249, guid: 9cf4812ab2a4ff841b5a187847a162c6, type: 3}
+      propertyPath: _projectileMovementDirection.x
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 7118054031677090599, guid: 9cf4812ab2a4ff841b5a187847a162c6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -4371,7 +4379,7 @@ GameObject:
   - component: {fileID: 450606658}
   m_Layer: 0
   m_Name: Boss1
-  m_TagString: Enemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4466,16 +4474,17 @@ MonoBehaviour:
   CanAttackLeft: 0
   CanAttackRight: 0
   CanAttackBottom: 0
-  IsAttacking: 0
   FistsIdle: 0
   BulletIdle: 0
-  RightHurtBox: {fileID: 1792318123}
   LeftHurtBox: {fileID: 1013586962}
+  RightHurtBox: {fileID: 1792318123}
+  LeftFistDeflected: 0
+  RightFistDeflected: 0
   NorthProjectileSpawner: {fileID: 1646842731}
   EastProjectileSpawner: {fileID: 1394168798}
   SouthProjectileSpawner: {fileID: 1990176931}
   WestProjectileSpawner: {fileID: 2009002101}
-  AttackDelay: 1.5
+  AttackDelay: 1
   MinPhaseLength: 5
   MaxPhaseLength: 10
   PhaseChangeCountdown: 0
@@ -10169,7 +10178,7 @@ Transform:
   m_GameObject: {fileID: 1219411941}
   serializedVersion: 2
   m_LocalRotation: {x: -0.00617134, y: 0.006171596, z: -0.7070818, w: -0.70707786}
-  m_LocalPosition: {x: -0.25100026, y: 0.2529601, z: 0.004363619}
+  m_LocalPosition: {x: -0.2510003, y: 0.2529601, z: 0.004363619}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -11715,7 +11724,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1442133337
 Transform:
   m_ObjectHideFlags: 0
@@ -16288,7 +16297,7 @@ Transform:
   m_GameObject: {fileID: 2015658226}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: -1, w: 0.000002846122}
-  m_LocalPosition: {x: -0.25099748, y: -0.2470014, z: 0}
+  m_LocalPosition: {x: -0.2509975, y: -0.2470014, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -10,13 +10,15 @@ public class SpawnProjectile : MonoBehaviour
     [SerializeField] private Vector2 _projectileMovementDirection;
     [SerializeField] private float _speed = 5;
 
-    private void Awake()
+/*    private void Awake()
     {
-        SpawnPointPosition = SpawnPointTransform.position;
-    }
 
+    }
+*/
     private void InstantiateProjectile()
     {
+        SpawnPointPosition = SpawnPointTransform.position;
+
         GameObject projectile = Instantiate(Projectile, SpawnPointPosition, transform.rotation);
         Rigidbody2D projectileRigidbody = projectile.GetComponent<Rigidbody2D>();
 

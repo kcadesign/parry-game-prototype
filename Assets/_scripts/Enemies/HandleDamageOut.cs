@@ -41,7 +41,15 @@ public class HandleDamageOut : MonoBehaviour
     private void IDealDamage_OnDamage(GameObject targetObject)
     {
         SendDamage(gameObject, targetObject, _damageAmount);
-        Debug.Log($"{_damageAmount} damage sent to {targetObject.tag} from {gameObject.transform.parent.gameObject.name} / {gameObject.transform.parent.gameObject.tag}");
+        // if the game object has a parent, debug the parents name to console
+        if (gameObject.transform.parent != null)
+        {
+            Debug.Log($"{_damageAmount} damage sent to {targetObject.tag} from {gameObject.transform.parent.name}");
+        }
+        else if (gameObject.transform.parent == null)
+        {
+            Debug.Log($"{_damageAmount} damage sent to {targetObject.tag} from {gameObject.name}");
+        }
     }
 
     private void SendDamage(GameObject damagerObject, GameObject targetObject, int damageAmount)

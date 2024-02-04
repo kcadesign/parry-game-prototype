@@ -6,7 +6,7 @@ public class Boss1Controller : MonoBehaviour
 {
     [HideInInspector] public Animator Animator;
 
-    [Header("Attack Zone Triggers")]
+    [Header("Attack Zone Triggers & State")]
     public CheckTriggerEntered TriggerZoneLeft;
     public CheckTriggerEntered TriggerZoneRight;
     public CheckTriggerEntered TriggerZoneBottom;
@@ -15,11 +15,9 @@ public class Boss1Controller : MonoBehaviour
     [HideInInspector] public bool CanAttackRight = false;
     [HideInInspector] public bool CanAttackBottom = false;
 
-    [HideInInspector] public bool IsAttacking = false;
+    //[HideInInspector] public bool IsAttacking = false;
 
-    /*[HideInInspector]*/
     public bool FistsIdle = false;
-    /*[HideInInspector]*/
     public bool BulletIdle = false;
 
     [Header("Hurt Box")]
@@ -38,11 +36,9 @@ public class Boss1Controller : MonoBehaviour
     public float AttackDelay = 2f;
 
     [Header("Phase Change")]
-    //public float PhaseChangeDelay = 5f;
     public float MinPhaseLength = 5f;
     public float MaxPhaseLength = 10f;
     public float PhaseChangeCountdown = 0f;
-    //public bool CanChangePhase = false;
 
     [Header("Health")]
     [HideInInspector] public bool BossDead = false;
@@ -76,8 +72,6 @@ public class Boss1Controller : MonoBehaviour
         DecideAttackZone();
         CountdownPhaseChange();
         CheckDeflected();
-
-        //Debug.Log($"Right fist deflected: {RightHurtBox.Deflected}");
     }
 
     private void DecideAttackZone()
@@ -109,47 +103,23 @@ public class Boss1Controller : MonoBehaviour
         }
     }
 
-    private void HandleBossHealth_OnBossDeath(GameObject bossParentObject) => BossDead = true;
-
     public void DecideBossPhase()
     {
-        if (PhaseChangeCountdown <= 0 /*&& CanChangePhase*/)
+        if (PhaseChangeCountdown <= 0)
         {
-            Debug.Log("Deciding boss phase");
-
             PhaseChange();
-
             PhaseChangeCountdown = Random.Range(MinPhaseLength, MaxPhaseLength);
         }
     }
 
-    public void CountdownPhaseChange()
-    {
-        // Countdown phase change timer to zero in seconds
-        PhaseChangeCountdown -= Time.deltaTime;
-    }
+    public void CountdownPhaseChange() => PhaseChangeCountdown -= Time.deltaTime;
 
-    public float RollForPhase()
-    {
-        return Random.Range(MinPhaseLength, MaxPhaseLength);
-    }
+    public float RollForPhase() => Random.Range(MinPhaseLength, MaxPhaseLength);
 
     public void PhaseChange()
     {
         FistsIdle = !FistsIdle;
         BulletIdle = !BulletIdle;
-    }
-
-    public void CheckBossAttacking()
-    {
-        if (CanAttackLeft || CanAttackRight || CanAttackBottom)
-        {
-            IsAttacking = true;
-        }
-        else
-        {
-            IsAttacking = false;
-        }
     }
 
     public void CheckDeflected()
@@ -162,5 +132,7 @@ public class Boss1Controller : MonoBehaviour
     private void EnableEastProjectiles() => EastProjectileSpawner.InvokeProjectile();
     private void EnableSouthProjectiles() => SouthProjectileSpawner.InvokeProjectile();
     private void EnableWestProjectiles() => WestProjectileSpawner.InvokeProjectile();
+
+    private void HandleBossHealth_OnBossDeath(GameObject bossParentObject) => BossDead = true;
 
 }
