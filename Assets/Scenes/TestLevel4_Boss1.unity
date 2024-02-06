@@ -952,7 +952,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fb2519264263ec40ba00e5f8381ae1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 120
+  MaxHealth: 500
   CurrentHealth: 0
 --- !u!1001 &151844814
 PrefabInstance:
@@ -3398,7 +3398,7 @@ Transform:
   m_GameObject: {fileID: 319023429}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0.24999982, y: -0.2500003, z: 0}
+  m_LocalPosition: {x: 0.2499998, y: -0.2500003, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3759,7 +3759,7 @@ Transform:
   m_GameObject: {fileID: 382602574}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0.24403048, y: -0.24896313, z: 0}
+  m_LocalPosition: {x: 0.2440305, y: -0.2489631, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4375,7 +4375,6 @@ GameObject:
   m_Component:
   - component: {fileID: 450606654}
   - component: {fileID: 450606656}
-  - component: {fileID: 450606657}
   - component: {fileID: 450606658}
   m_Layer: 0
   m_Name: Boss1
@@ -4422,39 +4421,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &450606657
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 450606653}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d32f3a4fff3f3b4c8a9038dda5941ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Animator: {fileID: 0}
-  TriggerZoneLeft: {fileID: 69983412}
-  TriggerZoneRight: {fileID: 432178159}
-  TriggerZoneBottom: {fileID: 751396659}
-  CanAttackLeft: 0
-  CanAttackRight: 0
-  CanAttackBottom: 0
-  FistsIdle: 0
-  BulletIdle: 0
-  RightHurtBox: {fileID: 1792318123}
-  LeftHurtBox: {fileID: 1013586962}
-  NorthProjectileSpawner: {fileID: 1646842731}
-  EastProjectileSpawner: {fileID: 1394168798}
-  SouthProjectileSpawner: {fileID: 1990176931}
-  WestProjectileSpawner: {fileID: 2009002101}
-  AttackDelay: 1.5
-  MinPhaseLength: 5
-  MaxPhaseLength: 10
-  PhaseChangeCountdown: 0
-  CanChangePhase: 0
-  BossDead: 0
 --- !u!114 &450606658
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4478,8 +4444,10 @@ MonoBehaviour:
   BulletIdle: 0
   LeftHurtBox: {fileID: 1013586962}
   RightHurtBox: {fileID: 1792318123}
+  BodyCollisions: {fileID: 126043189}
   LeftFistDeflected: 0
   RightFistDeflected: 0
+  ProjectileHit: 0
   NorthProjectileSpawner: {fileID: 1646842731}
   EastProjectileSpawner: {fileID: 1394168798}
   SouthProjectileSpawner: {fileID: 1990176931}
@@ -8574,6 +8542,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ProjectileSpawner
       objectReference: {fileID: 0}
+    - target: {fileID: 6043871010316862249, guid: 9cf4812ab2a4ff841b5a187847a162c6, type: 3}
+      propertyPath: _projectileMovementDirection.y
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 7118054031677090599, guid: 9cf4812ab2a4ff841b5a187847a162c6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -10962,7 +10934,7 @@ Transform:
   m_GameObject: {fileID: 1296248506}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -0.25596952, y: 0.25103736, z: 0}
+  m_LocalPosition: {x: -0.2559695, y: 0.2510374, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -14623,7 +14595,7 @@ Transform:
   m_GameObject: {fileID: 1806919045}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -1, w: 0.0000029206271}
-  m_LocalPosition: {x: -0.24999934, y: -0.2500015, z: 0}
+  m_LocalPosition: {x: -0.2499993, y: -0.2500015, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

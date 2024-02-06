@@ -4,13 +4,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class HandleEnemyBodyCollisions : HandleCollisions, IParryable
-{    
+{
     public event Action<GameObject, bool> OnDeflect;
     public event Action<GameObject> OnDamageCollision;
+    public static event Action OnProjectileHit;
 
     protected bool _parryActive;
     protected bool _blockActive;
     private bool _deflected;
+    //public bool ProjectileHit = false;
+
 
     //[HideInInspector] public bool EnemyHit = false;
     //[SerializeField] private float _damageForce = 5;
@@ -26,6 +29,15 @@ public class HandleEnemyBodyCollisions : HandleCollisions, IParryable
         PlayerParry.OnParryActive -= PlayerParry_OnParryActive;
         PlayerBlock.OnBlock -= PlayerBlockJump_OnBlock;
     }
+
+    private void Update()
+    {
+/*        if (ProjectileHit)
+        {
+            Debug.Log("Reset projectile hit");
+            ProjectileHit = false;
+        }
+*/    }
 
     protected void PlayerParry_OnParryActive(bool parryPressed)
     {
@@ -56,5 +68,15 @@ public class HandleEnemyBodyCollisions : HandleCollisions, IParryable
         }
     }
 
+    protected override void HandleCollisionWithProjectile(GameObject collidedObject)
+    {
+        if (collidedObject.GetComponent<HandleProjectileCollisions>().Deflected)
+        {
+/*            ProjectileHit = true;
 
+            Debug.Log("Projectile hit");
+*/            OnProjectileHit?.Invoke();
+        }
+
+    }
 }

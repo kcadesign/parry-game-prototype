@@ -192,9 +192,9 @@ public class Boss1StateManager : MonoBehaviour
         }
     }
 
-    private void EnableNorthProjectiles() => NorthProjectileSpawner.InvokeProjectile();
+/*    private void EnableNorthProjectiles() => NorthProjectileSpawner.InvokeProjectile();
     private void EnableEastProjectiles() => EastProjectileSpawner.InvokeProjectile();
     private void EnableSouthProjectiles() => SouthProjectileSpawner.InvokeProjectile();
     private void EnableWestProjectiles() => WestProjectileSpawner.InvokeProjectile();
-
+*/
 }

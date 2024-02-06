@@ -12,7 +12,7 @@ public class HandleProjectileCollisions : HandleCollisions, IParryable
 
     private bool _parryActive;
     private bool _blockActive;
-    private bool _deflected = false;
+    public bool Deflected = false;
 
     private void Awake()
     {
@@ -37,13 +37,13 @@ public class HandleProjectileCollisions : HandleCollisions, IParryable
     protected override void HandleCollisionWithPlayer(GameObject collidedObject)
     {
         //Debug.Log($"Projectile collided with {collidedObject.tag}");
-        if (!_deflected)
+        if (!Deflected)
         {
             if (_parryActive && !_blockActive)
             {
                 _projectileSpriteRenderer.color = Color.white;
-                _deflected = true;
-                OnDeflect?.Invoke(gameObject, _deflected);
+                Deflected = true;
+                OnDeflect?.Invoke(gameObject, Deflected);
 
                 Destroy(gameObject, 3f);
             }
@@ -53,7 +53,7 @@ public class HandleProjectileCollisions : HandleCollisions, IParryable
             }
             else if (!_parryActive && !_blockActive)
             {
-                _deflected = false;
+                Deflected = false;
                 
                 OnDamageCollision?.Invoke(collidedObject);
                 Destroy(gameObject);
@@ -64,11 +64,11 @@ public class HandleProjectileCollisions : HandleCollisions, IParryable
 
     protected override void HandleCollisionWithEnemyBody(GameObject collidedObject)
     {
-        if (!_deflected)
+        if (!Deflected)
         {
             return;
         }
-        else if (_deflected)
+        else if (Deflected)
         {
             OnDamageCollision?.Invoke(collidedObject);
             Destroy(gameObject);

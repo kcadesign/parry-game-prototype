@@ -19,7 +19,7 @@ public class SpawnProjectile : MonoBehaviour
     {
         SpawnPointPosition = SpawnPointTransform.position;
 
-        GameObject projectile = Instantiate(Projectile, SpawnPointPosition, transform.rotation);
+        GameObject projectile = Instantiate(Projectile, SpawnPointPosition, transform.rotation, gameObject.transform);
         Rigidbody2D projectileRigidbody = projectile.GetComponent<Rigidbody2D>();
 
         if(projectileRigidbody != null)

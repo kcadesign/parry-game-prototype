@@ -6,9 +6,11 @@ public class ProjectileController : MonoBehaviour
 {
     private Rigidbody2D _rigidBody;
 
+    private GameObject _parentObject;
+
     [SerializeField] private float _deflectForce;
 
-    private Vector2 _originPosition;
+    private Vector2 _deflectTargetPosition;
     private Vector2 _directionToOrigin;
 
     private IParryable _parryable;
@@ -17,7 +19,8 @@ public class ProjectileController : MonoBehaviour
     {
         _rigidBody = GetComponent<Rigidbody2D>();
         _parryable = GetComponent<IParryable>();
-        _originPosition = gameObject.transform.position;
+        _parentObject = gameObject.transform.parent.gameObject;
+        gameObject.transform.parent = null;
     }
 
     private void OnEnable()
@@ -36,6 +39,11 @@ public class ProjectileController : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        
+    }
+
     void Start()
     {
         //_rigidBody.AddForce(_movementDirection * _speed, ForceMode2D.Impulse);
@@ -46,9 +54,10 @@ public class ProjectileController : MonoBehaviour
     {
         if (parriedObject == gameObject && deflected)
         {
+            _deflectTargetPosition = _parentObject.transform.position;
             _rigidBody.velocity = Vector2.zero;
 
-            _directionToOrigin = (_originPosition - (Vector2)transform.position).normalized;
+            _directionToOrigin = (_deflectTargetPosition - (Vector2)transform.position).normalized;
             _rigidBody.AddForce(_directionToOrigin * _deflectForce, ForceMode2D.Impulse);
         }
     }

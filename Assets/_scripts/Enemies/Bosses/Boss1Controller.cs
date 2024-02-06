@@ -20,11 +20,13 @@ public class Boss1Controller : MonoBehaviour
     public bool FistsIdle = false;
     public bool BulletIdle = false;
 
-    [Header("Hurt Box")]
+    [Header("Damage")]
     public HandleHurtBoxCollisions LeftHurtBox;
     public HandleHurtBoxCollisions RightHurtBox;
+    public HandleEnemyBodyCollisions BodyCollisions;
     public bool LeftFistDeflected = false;
     public bool RightFistDeflected = false;
+    public bool ProjectileHit = false;
 
     [Header("Projectiles")]
     public SpawnProjectile NorthProjectileSpawner;
@@ -51,11 +53,13 @@ public class Boss1Controller : MonoBehaviour
     private void OnEnable()
     {
         HandleBossHealth.OnBossDeath += HandleBossHealth_OnBossDeath;
+        HandleEnemyBodyCollisions.OnProjectileHit += HandleEnemyBodyCollisions_OnProjectileHit;
     }
 
     private void OnDisable()
     {
         HandleBossHealth.OnBossDeath -= HandleBossHealth_OnBossDeath;
+        HandleEnemyBodyCollisions.OnProjectileHit -= HandleEnemyBodyCollisions_OnProjectileHit;
     }
 
     void Start()
@@ -65,6 +69,8 @@ public class Boss1Controller : MonoBehaviour
         TriggerZoneBottom.SetAttackDelay(AttackDelay);
 
         FistsIdle = true;
+        //ProjectileHit = BodyCollisions.ProjectileHit;
+        //Time.timeScale = 0.25f;
     }
 
     void Update()
@@ -72,6 +78,7 @@ public class Boss1Controller : MonoBehaviour
         DecideAttackZone();
         CountdownPhaseChange();
         CheckDeflected();
+        //CheckBulletHit();
     }
 
     private void DecideAttackZone()
@@ -128,10 +135,32 @@ public class Boss1Controller : MonoBehaviour
         RightFistDeflected = RightHurtBox.Deflected;
     }
 
+/*    public void CheckBulletHit()
+    {
+        //Debug.Log($"ProjectileHit: {ProjectileHit}");
+        ProjectileHit = BodyCollisions.ProjectileHit;
+        // after projectile hit is checked, reset the value
+        //BodyCollisions.ProjectileHit = false;
+    }
+*/
     private void EnableNorthProjectiles() => NorthProjectileSpawner.InvokeProjectile();
     private void EnableEastProjectiles() => EastProjectileSpawner.InvokeProjectile();
     private void EnableSouthProjectiles() => SouthProjectileSpawner.InvokeProjectile();
     private void EnableWestProjectiles() => WestProjectileSpawner.InvokeProjectile();
+
+    private void HandleEnemyBodyCollisions_OnProjectileHit()
+    {
+        ProjectileHit = true;
+        Debug.Log("Projectile hit message recieved");
+        StartCoroutine(ResetProjectileHit());
+        //ResetProjectileHit();
+    }
+
+    private IEnumerator ResetProjectileHit()
+    {
+        yield return new WaitForSeconds(0.5f);
+        ProjectileHit = false;
+    }
 
     private void HandleBossHealth_OnBossDeath(GameObject bossParentObject) => BossDead = true;
 
