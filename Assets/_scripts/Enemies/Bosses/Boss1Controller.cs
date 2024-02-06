@@ -69,7 +69,6 @@ public class Boss1Controller : MonoBehaviour
         TriggerZoneBottom.SetAttackDelay(AttackDelay);
 
         FistsIdle = true;
-        //ProjectileHit = BodyCollisions.ProjectileHit;
         //Time.timeScale = 0.25f;
     }
 
