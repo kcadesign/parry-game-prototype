@@ -23,6 +23,10 @@ public class Boss1BulletIdle : StateMachineBehaviour
         {
             animator.SetBool("FistsIdle", true);
         }
+        else if (_boss1Controller.ProjectileHit)
+        {
+            animator.SetTrigger("BulletHitGeneric");
+        }
         else if (_boss1Controller.CanAttackLeft)
         {
             animator.SetBool("BulletIdle", false);
@@ -38,7 +42,6 @@ public class Boss1BulletIdle : StateMachineBehaviour
             animator.SetBool("BulletIdle", false);
             animator.SetTrigger("BulletAttackBottom");
         }
-
 
     }
 

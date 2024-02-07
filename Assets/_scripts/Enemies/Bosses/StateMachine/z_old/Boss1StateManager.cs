@@ -135,7 +135,7 @@ public class Boss1StateManager : MonoBehaviour
         }
     }
 
-    private void HandleBossHealth_OnBossDeath(GameObject bossParentObject) => BossDead = true;
+    private void HandleBossHealth_OnBossDeath() => BossDead = true;
 
     public void DecideBossPhase()
     {

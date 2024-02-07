@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -25,8 +26,8 @@ public class GameStateManager : MonoBehaviour
 
         playerControls.Menus.Pause.performed += Pause_performed;
         playerControls.Menus.Pause.canceled += Pause_canceled;
-
         HandlePlayerHealth.OnHealthChange += HandlePlayerHealth_OnHealthChange;
+        HandleBossDeath.OnBossDeathAnimEnd += HandleBossDeath_OnBossDeathAnimEnd;
         HandleEnterFinish.OnLevelFinish += HandleEnterFinish_OnLevelFinish;
         HandleGameStateUI.OnGameRestart += HandleGameStateUI_OnGameRestart;
     }
@@ -37,8 +38,8 @@ public class GameStateManager : MonoBehaviour
 
         playerControls.Menus.Pause.performed -= Pause_performed;
         playerControls.Menus.Pause.canceled -= Pause_canceled;
-
         HandlePlayerHealth.OnHealthChange -= HandlePlayerHealth_OnHealthChange;
+        HandleBossDeath.OnBossDeathAnimEnd -= HandleBossDeath_OnBossDeathAnimEnd;
         HandleEnterFinish.OnLevelFinish -= HandleEnterFinish_OnLevelFinish;
         HandleGameStateUI.OnGameRestart -= HandleGameStateUI_OnGameRestart;
     }
@@ -75,6 +76,14 @@ public class GameStateManager : MonoBehaviour
         }
         HandlePauseTime(_pauseTime);
     }
+
+    private void HandleBossDeath_OnBossDeathAnimEnd()
+    {
+        _pauseTime = true;
+        _playerCanPause = false;
+        HandlePauseTime(_pauseTime);
+    }
+
 
     private void HandleEnterFinish_OnLevelFinish(bool levelFinished)
     {

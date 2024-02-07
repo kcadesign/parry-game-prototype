@@ -46,14 +46,21 @@ public class HandleGameStateUI : MonoBehaviour
     private void OnEnable()
     {
         HandlePlayerHealth.OnHealthChange += HandlePlayerHealth_OnHealthChange;
+        HandleBossDeath.OnBossDeathAnimEnd += HandleBossDeath_OnBossDeathAnimEnd;
         HandleEnterFinish.OnLevelFinish += HandleEnterFinish_OnLevelFinish;
         HandleLevelProgression.OnSendCurrentCheckpoint += HandleLevelProgression_OnSendCurrentCheckpoint;
         GameStateManager.OnPlayerPause += GameStateManager_OnPlayerPause;
     }
 
+    private void HandleBossDeath_OnBossDeathAnimEnd()
+    {
+        Debug.Log("Boss death anim finished, show game end menu");
+    }
+
     private void OnDisable()
     {
         HandlePlayerHealth.OnHealthChange -= HandlePlayerHealth_OnHealthChange;
+        HandleBossDeath.OnBossDeathAnimEnd -= HandleBossDeath_OnBossDeathAnimEnd;
         HandleEnterFinish.OnLevelFinish -= HandleEnterFinish_OnLevelFinish;
         HandleLevelProgression.OnSendCurrentCheckpoint -= HandleLevelProgression_OnSendCurrentCheckpoint;
         GameStateManager.OnPlayerPause -= GameStateManager_OnPlayerPause;
@@ -74,7 +81,7 @@ public class HandleGameStateUI : MonoBehaviour
                 GameOverUI.SetActive(false);
             }
         }
-    }    
+    }
 
     private void HandleEnterFinish_OnLevelFinish(bool levelFinished)
     {

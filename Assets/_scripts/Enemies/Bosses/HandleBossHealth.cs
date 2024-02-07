@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class HandleBossHealth : MonoBehaviour
 {
-    public static Action<GameObject> OnBossDeath;
+    public static Action OnBossDeath;
     public static Action<int, int> OnBossHealthChange;
 
     private HealthSystem _bossHealth;
@@ -56,7 +56,7 @@ public class HandleBossHealth : MonoBehaviour
     {
         if (CurrentHealth <= 0)
         {
-            OnBossDeath?.Invoke(gameObject.transform.parent.gameObject);
+            OnBossDeath?.Invoke();
             Debug.Log($"{gameObject.transform.parent.name} is dead");
             //Destroy(gameObject.transform.parent.gameObject);
 

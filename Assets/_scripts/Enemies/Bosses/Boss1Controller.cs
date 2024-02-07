@@ -150,7 +150,7 @@ public class Boss1Controller : MonoBehaviour
     private void HandleEnemyBodyCollisions_OnProjectileHit()
     {
         ProjectileHit = true;
-        Debug.Log("Projectile hit message recieved");
+        //Debug.Log("Projectile hit message recieved");
         StartCoroutine(ResetProjectileHit());
         //ResetProjectileHit();
     }
@@ -161,6 +161,6 @@ public class Boss1Controller : MonoBehaviour
         ProjectileHit = false;
     }
 
-    private void HandleBossHealth_OnBossDeath(GameObject bossParentObject) => BossDead = true;
+    private void HandleBossHealth_OnBossDeath() => BossDead = true;
 
 }
