@@ -952,7 +952,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fb2519264263ec40ba00e5f8381ae1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 20
+  MaxHealth: 500
   CurrentHealth: 0
 --- !u!1001 &151844814
 PrefabInstance:
@@ -17309,6 +17309,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1908540448}
     m_Modifications:
+    - target: {fileID: 6140860106109771891, guid: 9b60d9937a2653a4fa996b5d49e6adbe, type: 3}
+      propertyPath: _autoHealWaitTime
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 7021646279443362266, guid: 9b60d9937a2653a4fa996b5d49e6adbe, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.7
