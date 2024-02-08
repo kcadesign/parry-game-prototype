@@ -24,6 +24,10 @@ public class HandleGameStateUI : MonoBehaviour
     public GameObject LevelFinishUI;
     public GameObject LevelFinishFirstSelectedButton;
 
+    [Header("Game Finish References")]
+    public GameObject GameFinishUI;
+    public GameObject GameFinishFirstSelectedButton;
+
     [Header("Pause References")]
     public GameObject PauseGameUI;
     public GameObject PauseFirstSelectedButton;
@@ -36,7 +40,7 @@ public class HandleGameStateUI : MonoBehaviour
 
     private void Awake()
     {
-        if(StartGameUI != null)
+        if (StartGameUI != null)
         {
             OnGameUIActivate?.Invoke(StartFirstSelectedButton);
         }
@@ -52,11 +56,6 @@ public class HandleGameStateUI : MonoBehaviour
         GameStateManager.OnPlayerPause += GameStateManager_OnPlayerPause;
     }
 
-    private void HandleBossDeath_OnBossDeathAnimEnd()
-    {
-        Debug.Log("Boss death anim finished, show game end menu");
-    }
-
     private void OnDisable()
     {
         HandlePlayerHealth.OnHealthChange -= HandlePlayerHealth_OnHealthChange;
@@ -66,10 +65,22 @@ public class HandleGameStateUI : MonoBehaviour
         GameStateManager.OnPlayerPause -= GameStateManager_OnPlayerPause;
     }
 
+    private void Update()
+    {
+        // check if StartGameUi is active. If active, set the first selected button
+        if (StartGameUI != null)
+        {
+            if (StartGameUI.activeSelf)
+            {
+                OnGameUIActivate?.Invoke(StartFirstSelectedButton);
+            }
+        }
+    }
+
     private void HandlePlayerHealth_OnHealthChange(int currentHealth, bool playerAlive)
     {
         //Debug.Log($"Player is alive: {playerAlive}");
-        if(GameOverUI != null)
+        if (GameOverUI != null)
         {
             if (!playerAlive)
             {
@@ -85,7 +96,7 @@ public class HandleGameStateUI : MonoBehaviour
 
     private void HandleEnterFinish_OnLevelFinish(bool levelFinished)
     {
-        if(LevelFinishUI != null)
+        if (LevelFinishUI != null)
         {
             if (levelFinished)
             {
@@ -99,14 +110,24 @@ public class HandleGameStateUI : MonoBehaviour
         }
     }
 
+    private void HandleBossDeath_OnBossDeathAnimEnd()
+    {
+        Debug.Log("Boss death anim finished, show game end menu");
+        if (GameFinishUI != null)
+        {
+            GameFinishUI.SetActive(true);
+            OnGameUIActivate?.Invoke(GameFinishFirstSelectedButton);
+        }
+    }
+
     private void HandleLevelProgression_OnSendCurrentCheckpoint(Vector3 currentCheckpoint, GameObject checkpointActivator)
     {
         _respawnPoint = currentCheckpoint;
     }
-    
+
     private void GameStateManager_OnPlayerPause(bool playerPaused)
     {
-        if(PauseGameUI != null)
+        if (PauseGameUI != null)
         {
             if (playerPaused)
             {
@@ -119,7 +140,7 @@ public class HandleGameStateUI : MonoBehaviour
             }
         }
     }
-    
+
     public void RestartAtLatestCheckpoint()
     {
         OnGameRestart?.Invoke(_respawnPoint);
@@ -135,12 +156,17 @@ public class HandleGameStateUI : MonoBehaviour
     public void NextLevel()
     {
         int currentSceneName = SceneManager.GetActiveScene().buildIndex;
-        SceneManager.LoadScene(currentSceneName +1);
+        SceneManager.LoadScene(currentSceneName + 1);
     }
 
     public void StartGame()
     {
         OnStartGame?.Invoke();
+    }
+
+    public void GoToMainMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 
     public void ResetGameProgress()
