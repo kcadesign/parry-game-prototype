@@ -23,7 +23,14 @@ public class AnimatePlayerHitStun : MonoBehaviour
 
     private void HandlePlayerStun_OnStunned(bool stunned)
     {
-        _playerAnimator.SetBool("Stunned", stunned);
+        if (stunned)
+        {
+            _playerAnimator.SetTrigger("Stunned");
+        }
+        else if (!stunned)
+        {
+            _playerAnimator.ResetTrigger("Stunned");
+        }
     }
 
 }
