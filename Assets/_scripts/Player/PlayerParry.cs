@@ -13,6 +13,7 @@ public class PlayerParry : MonoBehaviour
     private Rigidbody2D _playerRigidbody;
 
     private bool _parryActive;
+    [SerializeField] private float _parryActiveLength = 0.5f;
     //private bool _blockActive;
     //private bool _grounded;
 
@@ -54,8 +55,8 @@ public class PlayerParry : MonoBehaviour
 
     private void Parry_performed(InputAction.CallbackContext value)
     {
-        _parryActive = true;
-        OnParryActive?.Invoke(_parryActive);
+        // If the parry is active for longer than 0.5f, set it to false
+        StartCoroutine(ParryActiveTimer());
     }
 
     private void Parry_canceled(InputAction.CallbackContext value)
@@ -143,4 +144,14 @@ public class PlayerParry : MonoBehaviour
         }
     }*/
 
+    private IEnumerator ParryActiveTimer()
+    {
+        _parryActive = true;
+        OnParryActive?.Invoke(_parryActive);
+        Debug.Log($"Parry active: {_parryActive}");
+        yield return new WaitForSeconds(_parryActiveLength);
+        _parryActive = false;
+        OnParryActive?.Invoke(_parryActive);
+        Debug.Log($"Parry active: {_parryActive}");
+    }
 }
