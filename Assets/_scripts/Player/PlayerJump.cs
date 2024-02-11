@@ -51,6 +51,7 @@ public class PlayerJump : MonoBehaviour
         HandleJump();
         OnJump?.Invoke(_isJumping);
         _isJumping = false;
+        //OnJump?.Invoke(_isJumping);
     }
 
     private void Jump_canceled(InputAction.CallbackContext obj)
