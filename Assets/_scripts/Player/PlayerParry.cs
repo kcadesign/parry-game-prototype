@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,6 +17,7 @@ public class PlayerParry : MonoBehaviour
     [SerializeField] private float _parryActiveLength = 0.5f;
     //private bool _blockActive;
     //private bool _grounded;
+    private bool _stunned;
 
     private bool _canParryBounce;
     private bool _forceApplied;
@@ -38,7 +40,20 @@ public class PlayerParry : MonoBehaviour
 
         PlayerBlock.OnBlock += PlayerBlock_OnBlock;
         CheckPlayerGrounded.OnGrounded += CheckPlayerGrounded_OnGrounded;
+        HandlePlayerStun.OnStunned += HandlePlayerStun_OnStunned;
         HandlePlayerCollisions.OnCollision += HandlePlayerCollisions_OnCollision;
+    }
+
+    private void HandlePlayerStun_OnStunned(bool stunned)
+    {
+        if (stunned)
+        {
+            _stunned = true;
+        }
+        else
+        {
+            _stunned = false;
+        }
     }
 
     private void OnDisable()
@@ -50,11 +65,18 @@ public class PlayerParry : MonoBehaviour
 
         PlayerBlock.OnBlock -= PlayerBlock_OnBlock;
         CheckPlayerGrounded.OnGrounded -= CheckPlayerGrounded_OnGrounded;
+        HandlePlayerStun.OnStunned -= HandlePlayerStun_OnStunned;
         HandlePlayerCollisions.OnCollision -= HandlePlayerCollisions_OnCollision;
     }
 
     private void Parry_performed(InputAction.CallbackContext value)
     {
+        // if _stunned is true, the player cannot parry
+        if (_stunned)
+        {
+            return;
+        }
+
         // If the parry is active for longer than 0.5f, set it to false
         StartCoroutine(ParryActiveTimer());
     }
@@ -108,41 +130,6 @@ public class PlayerParry : MonoBehaviour
         _canParryBounce = false;
         _forceApplied = false;
     }
-
-
-    /*
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        HandleParryBounce(collision);
-    }
-    
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        HandleParryBounce(collision);
-    }
-    
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        Debug.Log($"Force applied: {_canParryBounce}");
-
-    }
-
-    
-    private void HandleParryBounce(Collision2D collision)
-    {
-        if ((GroundLayer.value & (1 << collision.gameObject.layer)) != 0)
-        {
-            //Debug.Log($"Player is grounded: {_grounded}");
-            if (_parryActive && !_forceApplied && _grounded)
-            {
-                _playerRigidbody.velocity = new(_playerRigidbody.velocity.x, 0);
-                _playerRigidbody.AddForce(Vector2.up * _parryForce, ForceMode2D.Impulse);
-                Debug.Log("Force applied");
-
-                _forceApplied = true;
-            }
-        }
-    }*/
 
     private IEnumerator ParryActiveTimer()
     {
