@@ -135,10 +135,10 @@ public class PlayerParry : MonoBehaviour
     {
         _parryActive = true;
         OnParryActive?.Invoke(_parryActive);
-        Debug.Log($"Parry active: {_parryActive}");
+        //Debug.Log($"Parry active: {_parryActive}");
         yield return new WaitForSeconds(_parryActiveLength);
         _parryActive = false;
         OnParryActive?.Invoke(_parryActive);
-        Debug.Log($"Parry active: {_parryActive}");
+        //Debug.Log($"Parry active: {_parryActive}");
     }
 }

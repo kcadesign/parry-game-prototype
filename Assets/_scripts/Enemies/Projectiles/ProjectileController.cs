@@ -46,6 +46,8 @@ public class ProjectileController : MonoBehaviour
 
     void Start()
     {
+        _deflectTargetPosition = _parentObject.transform.position;
+
         //_rigidBody.AddForce(_movementDirection * _speed, ForceMode2D.Impulse);
         Destroy(gameObject, 5f);
     }    
@@ -54,11 +56,20 @@ public class ProjectileController : MonoBehaviour
     {
         if (parriedObject == gameObject && deflected)
         {
-            _deflectTargetPosition = _parentObject.transform.position;
-            _rigidBody.velocity = Vector2.zero;
+            // if the deflect target position isnt null, register new target position and deflect towards it
+            if (_parentObject != null)
+            {
+                _deflectTargetPosition = _parentObject.transform.position;
+                _rigidBody.velocity = Vector2.zero;
 
-            _directionToOrigin = (_deflectTargetPosition - (Vector2)transform.position).normalized;
-            _rigidBody.AddForce(_directionToOrigin * _deflectForce, ForceMode2D.Impulse);
+                _directionToOrigin = (_deflectTargetPosition - (Vector2)transform.position).normalized;
+                _rigidBody.AddForce(_directionToOrigin * _deflectForce, ForceMode2D.Impulse);
+            }
+            else // Use position set in Start
+            {
+                _rigidBody.velocity = Vector2.zero;
+                _rigidBody.AddForce(_directionToOrigin * _deflectForce, ForceMode2D.Impulse);
+            }
         }
     }
 
