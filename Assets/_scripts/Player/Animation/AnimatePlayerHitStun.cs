@@ -25,11 +25,13 @@ public class AnimatePlayerHitStun : MonoBehaviour
     {
         if (stunned)
         {
-            _playerAnimator.SetTrigger("Stunned");
+            _playerAnimator.SetBool("Stunned", true);
+            _playerAnimator.SetTrigger("StunnedTrigger");
         }
         else if (!stunned)
         {
-            _playerAnimator.ResetTrigger("Stunned");
+            _playerAnimator.SetBool("Stunned", false);
+            _playerAnimator.ResetTrigger("StunnedTrigger");
         }
     }
 

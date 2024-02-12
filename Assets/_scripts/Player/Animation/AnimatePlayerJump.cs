@@ -8,6 +8,7 @@ public class AnimatePlayerJump : MonoBehaviour
     private Animator _playerAnimator;
 
     private bool _grounded;
+    private bool _stunned;
 
     private void Awake()
     {
@@ -18,13 +19,27 @@ public class AnimatePlayerJump : MonoBehaviour
     {
         PlayerJump.OnJump += PlayerJump_OnJump;
         CheckPlayerGrounded.OnGrounded += CheckPlayerGrounded_OnGrounded;
+        HandlePlayerStun.OnStunned += HandlePlayerStun_OnStunned;
 
+    }
+
+    private void HandlePlayerStun_OnStunned(bool stunned)
+    {
+        if (stunned)
+        {
+            _stunned = true;
+        }
+        else
+        {
+            _stunned = false;
+        }
     }
 
     private void OnDisable()
     {
         PlayerJump.OnJump -= PlayerJump_OnJump;
         CheckPlayerGrounded.OnGrounded -= CheckPlayerGrounded_OnGrounded;
+        HandlePlayerStun.OnStunned -= HandlePlayerStun_OnStunned;
 
     }
 
@@ -35,14 +50,10 @@ public class AnimatePlayerJump : MonoBehaviour
 
     private void PlayerJump_OnJump(bool jumping)
     {
-        if (_grounded)
+        if (_grounded && !_stunned)
         {
             _playerAnimator.SetTrigger("Jumping");
         }
-/*        if (jumping)
-        {
-            _playerAnimator.SetTrigger("Jumping");
-        }
-*/    }
+    }
 
 }

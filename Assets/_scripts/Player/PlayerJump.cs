@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,6 +18,7 @@ public class PlayerJump : MonoBehaviour
     [SerializeField] private bool _restrictJumpCount;
     private bool _isJumping;
     private bool _isGrounded;
+    private bool _canJump = true;
 
     private void Awake()
     {
@@ -32,7 +34,9 @@ public class PlayerJump : MonoBehaviour
         playerControls.Gameplay.Jump.canceled += Jump_canceled;
 
         CheckPlayerGrounded.OnGrounded += CheckPlayerGrounded_OnGrounded;
+        HandlePlayerStun.OnStunned += HandlePlayerStun_OnStunned;
     }
+
 
     private void OnDisable()
     {
@@ -42,16 +46,19 @@ public class PlayerJump : MonoBehaviour
         playerControls.Gameplay.Jump.canceled -= Jump_canceled;
 
         CheckPlayerGrounded.OnGrounded -= CheckPlayerGrounded_OnGrounded;
+        HandlePlayerStun.OnStunned -= HandlePlayerStun_OnStunned;
     }
 
     private void Jump_performed(InputAction.CallbackContext obj)
     {
-        //Debug.Log("Jump pressed");
-        _isJumping = true;
-        HandleJump();
-        OnJump?.Invoke(_isJumping);
-        _isJumping = false;
-        //OnJump?.Invoke(_isJumping);
+        if (_canJump)
+        {
+            _isJumping = true;
+            HandleJump();
+            OnJump?.Invoke(_isJumping);
+            _isJumping = false;
+            OnJump?.Invoke(_isJumping);
+        }
     }
 
     private void Jump_canceled(InputAction.CallbackContext obj)
@@ -64,6 +71,19 @@ public class PlayerJump : MonoBehaviour
     private void CheckPlayerGrounded_OnGrounded(bool grounded)
     {
         _isGrounded = grounded;
+    }
+
+    private void HandlePlayerStun_OnStunned(bool stunned)
+    {
+        // when the player is stunned, they cannot jump
+        if (stunned)
+        {
+            _canJump = false;
+        }
+        else
+        {
+            _canJump = true;
+        }
     }
 
     private void HandleJump()
