@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2824276550084e048b1528aba54d6ab3, type: 3}
+  m_Name: PlayerSounds
+  m_EditorClassIdentifier: 
+  Sounds:
+  - Name: Jump
+    AudioClips:
+    - {fileID: 8300000, guid: 3586ccca3867e454e88dd437ee6d1572, type: 3}
+    - {fileID: 8300000, guid: 7e7a2be8da058384fb5d82e55b1b0cb7, type: 3}
+    - {fileID: 8300000, guid: 5b4cb9e070d6c774285b9612f4904254, type: 3}
+    Volume: 1
+    Pitch: 1
+    SpatialBlend: 0
+  - Name: ParryBounce
+    AudioClips:
+    - {fileID: 8300000, guid: cc4aa21600b1a3e4c9976da656d544b1, type: 3}
+    Volume: 1
+    Pitch: 1
+    SpatialBlend: 0
+  - Name: ParryAttack
+    AudioClips:
+    - {fileID: 8300000, guid: c4503e40a3874aa479bceea8c2ca11b4, type: 3}
+    Volume: 1
+    Pitch: 1
+    SpatialBlend: 0

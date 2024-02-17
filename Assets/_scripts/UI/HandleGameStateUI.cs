@@ -9,6 +9,7 @@ public class HandleGameStateUI : MonoBehaviour
     public delegate void GameRestart(Vector3 respawnPosition);
     public static event GameRestart OnGameRestart;
 
+    public static event Action OnStartButtonPressed;
     public static event Action OnStartGame;
     public static event Action OnResetGameProgress;
     public static event Action OnExitGame;
@@ -35,6 +36,7 @@ public class HandleGameStateUI : MonoBehaviour
     [Header("Start Game References")]
     public GameObject StartGameUI;
     public GameObject StartFirstSelectedButton;
+    public float GameStartDelay = 2f;
 
     private Vector3 _respawnPoint;
 
@@ -44,7 +46,6 @@ public class HandleGameStateUI : MonoBehaviour
         {
             OnGameUIActivate?.Invoke(StartFirstSelectedButton);
         }
-
     }
 
     private void OnEnable()
@@ -161,6 +162,14 @@ public class HandleGameStateUI : MonoBehaviour
 
     public void StartGame()
     {
+        OnStartButtonPressed?.Invoke();
+        // Delay the start of the game to allow for scene transitions
+        StartCoroutine(DelayStartGame(GameStartDelay));
+    }
+
+    private IEnumerator DelayStartGame(float gameStartDelay)
+    {
+        yield return new WaitForSeconds(gameStartDelay);
         OnStartGame?.Invoke();
     }
 

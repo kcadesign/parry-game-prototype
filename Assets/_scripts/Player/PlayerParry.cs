@@ -11,6 +11,8 @@ public class PlayerParry : MonoBehaviour
     public delegate void ParryActive(bool parryPressed);
     public static event ParryActive OnParryActive;
 
+    public static event Action<bool> OnParryBounce;
+
     private Rigidbody2D _playerRigidbody;
 
     private bool _parryActive;
@@ -23,6 +25,10 @@ public class PlayerParry : MonoBehaviour
     private bool _forceApplied;
     [SerializeField] private float _parryForce = 50;
 
+/*    [Header("Audio")]
+    [SerializeField] private AudioClip parryAttackSound;
+    [SerializeField] private AudioClip parryBounceSound;
+*/
     //public LayerMask GroundLayer;
 
     private void Awake()
@@ -124,9 +130,12 @@ public class PlayerParry : MonoBehaviour
             _playerRigidbody.velocity = new(_playerRigidbody.velocity.x, 0);
             _playerRigidbody.AddForce(Vector2.up * _parryForce, ForceMode2D.Impulse);
 
+            OnParryBounce?.Invoke(true);
+
             _forceApplied = true;
             _canParryBounce = true;
         }
+        OnParryBounce?.Invoke(false);
         _canParryBounce = false;
         _forceApplied = false;
     }
@@ -141,4 +150,14 @@ public class PlayerParry : MonoBehaviour
         OnParryActive?.Invoke(_parryActive);
         //Debug.Log($"Parry active: {_parryActive}");
     }
-}
+
+/*    private void PlayParryAttackSound()
+    {
+        SoundManager.Instance.PlaySFX(parryAttackSound, transform, 1f);
+    }
+
+    private void PlayParryBounceSound()
+    {
+        SoundManager.Instance.PlaySFX(parryBounceSound, transform, 1f);
+    }
+*/}

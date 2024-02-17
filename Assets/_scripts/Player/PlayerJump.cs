@@ -20,6 +20,9 @@ public class PlayerJump : MonoBehaviour
     private bool _isGrounded;
     private bool _canJump = true;
 
+    //[Header("Audio")]
+    //[SerializeField] private AudioClip[] jumpSounds;
+
     private void Awake()
     {
         playerControls = new PlayerControls();
@@ -55,7 +58,6 @@ public class PlayerJump : MonoBehaviour
         {
             _isJumping = true;
             HandleJump();
-            OnJump?.Invoke(_isJumping);
             _isJumping = false;
             OnJump?.Invoke(_isJumping);
         }
@@ -99,6 +101,7 @@ public class PlayerJump : MonoBehaviour
             {
                 _rigidbody.velocity = new(_rigidbody.velocity.x, 0);
                 _rigidbody.AddForce(jumpForce, ForceMode2D.Impulse);
+                OnJump?.Invoke(_isJumping);
             }
         }
         else if (!_restrictJumpCount)
@@ -108,4 +111,8 @@ public class PlayerJump : MonoBehaviour
         }
     }
 
-}
+/*    private void PlayJumpSound()
+    {
+        SoundManager.Instance.PlayRandomSFX(jumpSounds, transform, 1);
+    }
+*/}
