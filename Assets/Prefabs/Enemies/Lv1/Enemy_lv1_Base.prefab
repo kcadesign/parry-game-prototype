@@ -220,6 +220,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHealth: 25
+  CurrentHealth: 0
 --- !u!114 &5929483320299406205
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -261,6 +262,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c627a505530b73d46a58038d52fdb03b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DeathExplosion: {fileID: 0}
 --- !u!1 &1427366281849500424
 GameObject:
   m_ObjectHideFlags: 0
@@ -923,6 +925,7 @@ GameObject:
   - component: {fileID: 1402889283625708479}
   - component: {fileID: 1941318829957251631}
   - component: {fileID: 6786192819353122480}
+  - component: {fileID: 1122241472570354471}
   m_Layer: 0
   m_Name: Enemy_lv1_Base
   m_TagString: Enemy
@@ -1000,6 +1003,19 @@ MonoBehaviour:
   SightRange: 6
   AttackCentre: {fileID: 9097890226027746778}
   AttackRange: 1.5
+--- !u!114 &1122241472570354471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7976323921639655483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47ada164be944c24bb6d2963f6a5aa9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemySounds: {fileID: 11400000, guid: fc748760042d233439146dcfa62e6669, type: 2}
 --- !u!1 &8845792006319111637
 GameObject:
   m_ObjectHideFlags: 0

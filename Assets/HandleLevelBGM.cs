@@ -5,6 +5,7 @@ using UnityEngine;
 public class HandleLevelBGM : MonoBehaviour
 {
     [SerializeField] private AudioSource _levelBGM;
+    [SerializeField] private float _desiredVolume = 0.5f;
     [SerializeField] private float _fadeInSpeed = 0.5f;
     [SerializeField] private float _fadeOutSpeed = 0.5f;
 
@@ -38,7 +39,7 @@ public class HandleLevelBGM : MonoBehaviour
 */
     private IEnumerator FadeInMainMenuBGM()
     {
-        while (_levelBGM.volume < 1)
+        while (_levelBGM.volume < _desiredVolume)
         {
             _levelBGM.volume += Time.deltaTime * _fadeInSpeed;
             yield return null;

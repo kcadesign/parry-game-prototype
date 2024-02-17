@@ -9,6 +9,8 @@ public class HandlePlayerHealth : MonoBehaviour
     public static event PlayerHealthChange OnHealthChange;
 
     public static event Action<GameObject> OnDamageRecieved;
+    public static event Action<bool> OnPlayerHurtBig;
+    public static event Action<bool> OnPlayerHurtSmall;
 
     public HealthSystem PlayerHealth;
 
@@ -80,6 +82,7 @@ public class HandlePlayerHealth : MonoBehaviour
             if (collisionObject == gameObject)
             {
                 PlayerHealth.Damage(damageAmount);
+                OnPlayerHurtBig?.Invoke(true);
 
                 _currentHealth = PlayerHealth.GetHealth();
                 CheckPlayerAlive();
@@ -90,6 +93,7 @@ public class HandlePlayerHealth : MonoBehaviour
                 OnDamageRecieved?.Invoke(objectDamager);
                 OnHealthChange?.Invoke(_currentHealth, _playerAlive);
                 
+                OnPlayerHurtBig?.Invoke(false);
             }
         }
     }
@@ -101,6 +105,7 @@ public class HandlePlayerHealth : MonoBehaviour
             Debug.Log($"Area damage for {damageAmount}");
 
             PlayerHealth.Damage(damageAmount);
+            OnPlayerHurtSmall?.Invoke(true);
 
             _currentHealth = PlayerHealth.GetHealth();
             CheckPlayerAlive();
@@ -109,6 +114,8 @@ public class HandlePlayerHealth : MonoBehaviour
             StartHealTimer();
 
             OnHealthChange?.Invoke(_currentHealth, _playerAlive);
+
+            OnPlayerHurtSmall?.Invoke(false);
         }
     }
 

@@ -33,3 +33,16 @@ MonoBehaviour:
     Volume: 1
     Pitch: 1
     SpatialBlend: 0
+  - Name: HurtBig
+    AudioClips:
+    - {fileID: 8300000, guid: 40999c77efe386540a31e66780593b74, type: 3}
+    Volume: 1
+    Pitch: 1
+    SpatialBlend: 0
+  - Name: HurtSmall
+    AudioClips:
+    - {fileID: 8300000, guid: ac670b00af720bf4ca1feb1e57ebd419, type: 3}
+    Volume: 1
+    Pitch: 1
+    SpatialBlend: 0
+  SFXObject: {fileID: 4049137333977391548, guid: 340b3cc7adb89b044895be01b0bd3ea5, type: 3}
