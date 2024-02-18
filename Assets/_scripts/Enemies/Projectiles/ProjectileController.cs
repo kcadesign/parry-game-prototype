@@ -66,8 +66,9 @@ public class ProjectileController : MonoBehaviour
                 _directionToOrigin = (_deflectTargetPosition - (Vector2)transform.position).normalized;
                 _rigidBody.AddForce(_directionToOrigin * _deflectForce, ForceMode2D.Impulse);
             }
-            else // Use position set in Start
+            else 
             {
+                // Use position set in Start if no parent object is found
                 _directionToOrigin = (_deflectTargetPosition - (Vector2)transform.position).normalized;
 
                 _rigidBody.velocity = Vector2.zero;

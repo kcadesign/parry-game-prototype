@@ -12,6 +12,7 @@ public class HandlePlayerSounds : MonoBehaviour
         PlayerParry.OnParryBounce += PlayerParry_OnParryBounce;
         HandlePlayerHealth.OnPlayerHurtBig += HandlePlayerHealth_OnPlayerHurtBig;
         HandlePlayerHealth.OnPlayerHurtSmall += HandlePlayerHealth_OnPlayerHurtSmall;
+        HandlePlayerHealth.OnPlayerHealthReplenish += HandlePlayerHealth_OnPlayerHealthReplenish;
     }
 
     private void OnDisable()
@@ -20,6 +21,7 @@ public class HandlePlayerSounds : MonoBehaviour
         PlayerParry.OnParryBounce -= PlayerParry_OnParryBounce;
         HandlePlayerHealth.OnPlayerHurtBig -= HandlePlayerHealth_OnPlayerHurtBig;
         HandlePlayerHealth.OnPlayerHurtSmall -= HandlePlayerHealth_OnPlayerHurtSmall;
+        HandlePlayerHealth.OnPlayerHealthReplenish -= HandlePlayerHealth_OnPlayerHealthReplenish;
     }
 
     private void PlayerJump_OnJump(bool jumping)
@@ -53,4 +55,14 @@ public class HandlePlayerSounds : MonoBehaviour
             _playerSounds.PlaySound("HurtSmall", transform);
         }
     }
+
+    private void HandlePlayerHealth_OnPlayerHealthReplenish()
+    {
+        if (_playerSounds != null && _playerSounds.Sounds.Length > 0)
+        {
+            _playerSounds.PlaySound("HealthReplenish", transform);
+        }
+    }
+
+
 }

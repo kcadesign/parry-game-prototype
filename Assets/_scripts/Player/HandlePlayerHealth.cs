@@ -7,6 +7,7 @@ public class HandlePlayerHealth : MonoBehaviour
 {
     public delegate void PlayerHealthChange(int currentHealth, bool playerAlive);
     public static event PlayerHealthChange OnHealthChange;
+    public static event Action OnPlayerHealthReplenish;
 
     public static event Action<GameObject> OnDamageRecieved;
     public static event Action<bool> OnPlayerHurtBig;
@@ -61,6 +62,7 @@ public class HandlePlayerHealth : MonoBehaviour
                 PlayerHealth.ChangeHealth(_maxHealth);
                 _currentHealth = PlayerHealth.GetHealth();
                 OnHealthChange?.Invoke(_currentHealth, _playerAlive);
+                OnPlayerHealthReplenish?.Invoke();
 
                 StopHealTimer();
                 ResetHealTimer();
