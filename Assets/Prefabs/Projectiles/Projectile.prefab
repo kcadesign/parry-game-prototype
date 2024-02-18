@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 4754975319171033880}
   - component: {fileID: 3597333723733397090}
   - component: {fileID: 1684678674623154846}
+  - component: {fileID: 8297726143735277553}
   m_Layer: 0
   m_Name: Projectile
   m_TagString: Projectile
@@ -183,7 +184,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfca09a571c834945add8b2d7359da4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpawnerTransform: {fileID: 7118054031677090599, guid: 9cf4812ab2a4ff841b5a187847a162c6, type: 3}
   _deflectForce: 7
 --- !u!114 &3597333723733397090
 MonoBehaviour:
@@ -211,3 +211,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damageAmount: 25
+--- !u!114 &8297726143735277553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 332823560691022870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f0d3f6bf5eedc94ea6a955214da2713, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _projectileSounds: {fileID: 11400000, guid: f8fd86cf2f6d9ac4cb05a1086641f73e, type: 2}

@@ -1,9 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ProjectileController : MonoBehaviour
 {
+    public static event Action<GameObject> OnProjectileShoot;
+    public static event Action<GameObject> OnProjectileDeflect;
     private Rigidbody2D _rigidBody;
 
     private GameObject _parentObject;
@@ -49,6 +52,8 @@ public class ProjectileController : MonoBehaviour
     {
         _deflectTargetPosition = _parentObject.transform.position;
 
+        OnProjectileShoot?.Invoke(gameObject);
+
         //_rigidBody.AddForce(_movementDirection * _speed, ForceMode2D.Impulse);
         Destroy(gameObject, 5f);
     }    
@@ -57,6 +62,8 @@ public class ProjectileController : MonoBehaviour
     {
         if (parriedObject == gameObject && deflected)
         {
+            OnProjectileDeflect?.Invoke(gameObject);
+
             // if the deflect target position isnt null, register new target position and deflect towards it
             if (_parentObject != null)
             {

@@ -5,16 +5,6 @@ using UnityEngine;
 public class HandleEnemySounds : MonoBehaviour
 {
     public SoundCollection _enemySounds;
-    private AudioSource audioSource;
-
-    private void Awake()
-    {
-        // Ensure there is an AudioSource component attached to this GameObject
-        if (!TryGetComponent<AudioSource>(out audioSource))
-        {
-            audioSource = gameObject.AddComponent<AudioSource>();
-        }
-    }
 
     private void OnEnable()
     {

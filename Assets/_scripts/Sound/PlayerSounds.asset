@@ -46,7 +46,8 @@ MonoBehaviour:
     Pitch: 1
     SpatialBlend: 0
   - Name: HealthReplenish
-    AudioClips: []
-    Volume: 1
+    AudioClips:
+    - {fileID: 8300000, guid: aeebc271847ad2a48a6276b409dd4d33, type: 3}
+    Volume: 0.8
     Pitch: 1
     SpatialBlend: 0
