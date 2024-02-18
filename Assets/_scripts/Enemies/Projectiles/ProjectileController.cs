@@ -20,6 +20,7 @@ public class ProjectileController : MonoBehaviour
         _rigidBody = GetComponent<Rigidbody2D>();
         _parryable = GetComponent<IParryable>();
         _parentObject = gameObject.transform.parent.gameObject;
+
         gameObject.transform.parent = null;
     }
 
@@ -27,7 +28,7 @@ public class ProjectileController : MonoBehaviour
     {
         if (_parryable != null)
         {
-            _parryable.OnDeflect += _parryable_OnDeflect;
+            _parryable.OnDeflect += Parryable_OnDeflect;
         }
     }
 
@@ -35,7 +36,7 @@ public class ProjectileController : MonoBehaviour
     {
         if (_parryable != null)
         {
-            _parryable.OnDeflect -= _parryable_OnDeflect;
+            _parryable.OnDeflect -= Parryable_OnDeflect;
         }
     }
 
@@ -52,7 +53,7 @@ public class ProjectileController : MonoBehaviour
         Destroy(gameObject, 5f);
     }    
     
-    private void _parryable_OnDeflect(GameObject parriedObject, bool deflected)
+    private void Parryable_OnDeflect(GameObject parriedObject, bool deflected)
     {
         if (parriedObject == gameObject && deflected)
         {
@@ -67,6 +68,8 @@ public class ProjectileController : MonoBehaviour
             }
             else // Use position set in Start
             {
+                _directionToOrigin = (_deflectTargetPosition - (Vector2)transform.position).normalized;
+
                 _rigidBody.velocity = Vector2.zero;
                 _rigidBody.AddForce(_directionToOrigin * _deflectForce, ForceMode2D.Impulse);
             }
