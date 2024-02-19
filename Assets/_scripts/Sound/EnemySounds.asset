@@ -20,4 +20,3 @@ MonoBehaviour:
     Volume: 1
     Pitch: 1
     SpatialBlend: 0
-  SFXObject: {fileID: 4049137333977391548, guid: 340b3cc7adb89b044895be01b0bd3ea5, type: 3}

@@ -12,4 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2824276550084e048b1528aba54d6ab3, type: 3}
   m_Name: ProjectileSounds
   m_EditorClassIdentifier: 
-  Sounds: []
+  Sounds:
+  - Name: Shoot
+    AudioClips:
+    - {fileID: 8300000, guid: c911917efc12846448aa3aba5eaf551d, type: 3}
+    - {fileID: 8300000, guid: d169afa01de5c8645876f0c2f87d268e, type: 3}
+    Volume: 1
+    Pitch: 1
+    SpatialBlend: 0
+  - Name: Deflect
+    AudioClips:
+    - {fileID: 8300000, guid: 776a9501760a189469b04643de1ed9f9, type: 3}
+    - {fileID: 8300000, guid: 6a1d5bb13a1bd2b488fb1640c44d88df, type: 3}
+    Volume: 1
+    Pitch: 1
+    SpatialBlend: 0

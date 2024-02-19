@@ -40,14 +40,6 @@ public class HandleGameStateUI : MonoBehaviour
 
     private Vector3 _respawnPoint;
 
-    private void Awake()
-    {
-        if (StartGameUI != null)
-        {
-            OnGameUIActivate?.Invoke(StartFirstSelectedButton);
-        }
-    }
-
     private void OnEnable()
     {
         HandlePlayerHealth.OnHealthChange += HandlePlayerHealth_OnHealthChange;
@@ -66,9 +58,8 @@ public class HandleGameStateUI : MonoBehaviour
         GameStateManager.OnPlayerPause -= GameStateManager_OnPlayerPause;
     }
 
-    private void Update()
+    private void Start()
     {
-        // check if StartGameUi is active. If active, set the first selected button
         if (StartGameUI != null)
         {
             if (StartGameUI.activeSelf)
