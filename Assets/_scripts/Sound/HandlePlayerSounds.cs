@@ -10,6 +10,7 @@ public class HandlePlayerSounds : MonoBehaviour
     {
         PlayerJump.OnJump += PlayerJump_OnJump;
         PlayerParry.OnParryBounce += PlayerParry_OnParryBounce;
+        HandlePlayerCollisions.OnPassiveBounce += HandlePlayerCollisions_OnPassiveBounce;
         HandlePlayerHealth.OnPlayerHurtBig += HandlePlayerHealth_OnPlayerHurtBig;
         HandlePlayerHealth.OnPlayerHurtSmall += HandlePlayerHealth_OnPlayerHurtSmall;
         HandlePlayerHealth.OnPlayerHealthReplenish += HandlePlayerHealth_OnPlayerHealthReplenish;
@@ -19,6 +20,7 @@ public class HandlePlayerSounds : MonoBehaviour
     {
         PlayerJump.OnJump -= PlayerJump_OnJump;
         PlayerParry.OnParryBounce -= PlayerParry_OnParryBounce;
+        HandlePlayerCollisions.OnPassiveBounce -= HandlePlayerCollisions_OnPassiveBounce;
         HandlePlayerHealth.OnPlayerHurtBig -= HandlePlayerHealth_OnPlayerHurtBig;
         HandlePlayerHealth.OnPlayerHurtSmall -= HandlePlayerHealth_OnPlayerHurtSmall;
         HandlePlayerHealth.OnPlayerHealthReplenish -= HandlePlayerHealth_OnPlayerHealthReplenish;
@@ -61,6 +63,14 @@ public class HandlePlayerSounds : MonoBehaviour
         if (_playerSounds != null && _playerSounds.Sounds.Length > 0)
         {
             _playerSounds.PlaySound("HealthReplenish", transform);
+        }
+    }
+
+    private void HandlePlayerCollisions_OnPassiveBounce()
+    {
+        if (_playerSounds != null && _playerSounds.Sounds.Length > 0)
+        {
+            _playerSounds.PlaySound("PassiveBounce", transform);
         }
     }
 
