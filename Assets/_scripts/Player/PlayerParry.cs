@@ -50,18 +50,6 @@ public class PlayerParry : MonoBehaviour
         HandlePlayerCollisions.OnCollision += HandlePlayerCollisions_OnCollision;
     }
 
-    private void HandlePlayerStun_OnStunned(bool stunned)
-    {
-        if (stunned)
-        {
-            _stunned = true;
-        }
-        else
-        {
-            _stunned = false;
-        }
-    }
-
     private void OnDisable()
     {
         playerControls.Gameplay.Disable();
@@ -73,6 +61,18 @@ public class PlayerParry : MonoBehaviour
         CheckPlayerGrounded.OnGrounded -= CheckPlayerGrounded_OnGrounded;
         HandlePlayerStun.OnStunned -= HandlePlayerStun_OnStunned;
         HandlePlayerCollisions.OnCollision -= HandlePlayerCollisions_OnCollision;
+    }
+
+    private void HandlePlayerStun_OnStunned(bool stunned)
+    {
+        if (stunned)
+        {
+            _stunned = true;
+        }
+        else
+        {
+            _stunned = false;
+        }
     }
 
     private void Parry_performed(InputAction.CallbackContext value)
@@ -140,24 +140,42 @@ public class PlayerParry : MonoBehaviour
         _forceApplied = false;
     }
 
+
     private IEnumerator ParryActiveTimer()
     {
         _parryActive = true;
         OnParryActive?.Invoke(_parryActive);
-        //Debug.Log($"Parry active: {_parryActive}");
-        yield return new WaitForSeconds(_parryActiveLength);
-        _parryActive = false;
-        OnParryActive?.Invoke(_parryActive);
-        //Debug.Log($"Parry active: {_parryActive}");
+
+        float timer = 0f; // Initialize timer
+
+        while (_parryActive && timer < _parryActiveLength)
+        {
+            // Increment timer each frame
+            timer += Time.deltaTime;
+            yield return null; // Wait for the next frame
+        }
+
+        // Check if _parryActive is still true when exiting the loop
+        if (_parryActive)
+        {
+            _parryActive = false;
+            OnParryActive?.Invoke(_parryActive);
+        }
+        else
+        {
+            // Reset the timer if _parryActive became false before _parryActiveLength elapsed
+            timer = 0f;
+        }
     }
 
-/*    private void PlayParryAttackSound()
-    {
-        SoundManager.Instance.PlaySFX(parryAttackSound, transform, 1f);
-    }
+    /*    private void PlayParryAttackSound()
+        {
+            SoundManager.Instance.PlaySFX(parryAttackSound, transform, 1f);
+        }
 
-    private void PlayParryBounceSound()
-    {
-        SoundManager.Instance.PlaySFX(parryBounceSound, transform, 1f);
-    }
-*/}
+        private void PlayParryBounceSound()
+        {
+            SoundManager.Instance.PlaySFX(parryBounceSound, transform, 1f);
+        }
+    */
+}

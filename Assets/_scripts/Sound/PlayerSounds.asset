@@ -51,3 +51,9 @@ MonoBehaviour:
     Volume: 0.8
     Pitch: 1
     SpatialBlend: 0
+  - Name: PassiveBounce
+    AudioClips:
+    - {fileID: 8300000, guid: 7f5dce0d460b00745828d631a7926c9f, type: 3}
+    Volume: 1
+    Pitch: 1
+    SpatialBlend: 0
