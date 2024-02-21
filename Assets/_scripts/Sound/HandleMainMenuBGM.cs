@@ -10,8 +10,8 @@ public class HandleMainMenuBGM : MonoBehaviour
 
     private void Awake()
     {
-        _mainMenuAudioSource = GetComponent<AudioSource>();
-        _mainMenuAudioSource.volume = 0;
+        //_mainMenuAudioSource = GetComponent<AudioSource>();
+        Debug.Log($"Main menu audio source: {_mainMenuAudioSource}");
     }
 
     private void OnEnable()
@@ -19,16 +19,21 @@ public class HandleMainMenuBGM : MonoBehaviour
         HandleGameStateUI.OnStartButtonPressed += HandleGameStateUI_OnStartButtonPressed;
     }
 
-    private void Start()
-    {
-        // slowly fade in the main menu music
-        StartCoroutine(FadeInMainMenuBGM());
-    }
-
     private void OnDisable()
     {
         HandleGameStateUI.OnStartButtonPressed -= HandleGameStateUI_OnStartButtonPressed;
     }
+
+    private void Start()
+    {
+        _mainMenuAudioSource.volume = 0;
+        _mainMenuAudioSource.Play();
+        Debug.Log("Playing main menu music...");
+
+        // slowly fade in the main menu music
+        StartCoroutine(FadeInMainMenuBGM());
+    }
+
 
     private void HandleGameStateUI_OnStartButtonPressed()
     {
@@ -38,8 +43,11 @@ public class HandleMainMenuBGM : MonoBehaviour
 
     private IEnumerator FadeInMainMenuBGM()
     {
+        Debug.Log("Fade in coroutine started");
+
         while (_mainMenuAudioSource.volume < 1)
         {
+            Debug.Log("Entered while loop");
             _mainMenuAudioSource.volume += Time.deltaTime * _fadeInSpeed;
             yield return null;
         }
@@ -47,6 +55,7 @@ public class HandleMainMenuBGM : MonoBehaviour
 
     private IEnumerator FadeOutMainMenuBGM()
     {
+        Debug.Log("Fade out coroutine started");
         while (_mainMenuAudioSource.volume > 0)
         {
             _mainMenuAudioSource.volume -= Time.deltaTime * _fadeOutSpeed;

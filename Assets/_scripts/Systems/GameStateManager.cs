@@ -30,6 +30,7 @@ public class GameStateManager : MonoBehaviour
         HandleBossDeath.OnBossDeathAnimEnd += HandleBossDeath_OnBossDeathAnimEnd;
         HandleEnterFinish.OnLevelFinish += HandleEnterFinish_OnLevelFinish;
         HandleGameStateUI.OnGameRestart += HandleGameStateUI_OnGameRestart;
+        HandleGameStateUI.OnGoToMainMenu += HandleGameStateUI_OnGoToMainMenu;
     }
 
     private void OnDisable()
@@ -42,6 +43,7 @@ public class GameStateManager : MonoBehaviour
         HandleBossDeath.OnBossDeathAnimEnd -= HandleBossDeath_OnBossDeathAnimEnd;
         HandleEnterFinish.OnLevelFinish -= HandleEnterFinish_OnLevelFinish;
         HandleGameStateUI.OnGameRestart -= HandleGameStateUI_OnGameRestart;
+        HandleGameStateUI.OnGoToMainMenu -= HandleGameStateUI_OnGoToMainMenu;
     }
 
     private void Pause_performed(InputAction.CallbackContext value)
@@ -101,6 +103,12 @@ public class GameStateManager : MonoBehaviour
     }
 
     private void HandleGameStateUI_OnGameRestart(Vector3 respawnPosition)
+    {
+        _pauseTime = false;
+        HandlePauseTime(_pauseTime);
+    }
+
+    private void HandleGameStateUI_OnGoToMainMenu()
     {
         _pauseTime = false;
         HandlePauseTime(_pauseTime);

@@ -45,9 +45,10 @@ public class TrackHostages : MonoBehaviour
     private void TrackScene_OnSceneChecked()
     {
         _hostagePresent = CheckForTagInScene(_hostageTag);
-        Debug.Log($"Hostage present in scene: {_hostagePresent}");
+        //Debug.Log($"Hostage present in scene: {_hostagePresent}");
         if (_hostagePresent)
         {
+            CollectableTracker.HostagePresent = true;
             CollectableTracker.AddHostageToTotal();
         }
     }

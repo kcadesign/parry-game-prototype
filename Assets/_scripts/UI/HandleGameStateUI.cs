@@ -12,6 +12,7 @@ public class HandleGameStateUI : MonoBehaviour
     public static event Action OnStartButtonPressed;
     public static event Action OnStartGame;
     public static event Action OnResetGameProgress;
+    public static event Action OnGoToMainMenu;
     public static event Action OnExitGame;
 
     public delegate void GameUIActivate(GameObject firstSelectedButton);
@@ -166,6 +167,7 @@ public class HandleGameStateUI : MonoBehaviour
 
     public void GoToMainMenu()
     {
+        OnGoToMainMenu?.Invoke();
         SceneManager.LoadScene(0);
     }
 
