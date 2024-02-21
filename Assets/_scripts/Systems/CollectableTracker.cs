@@ -6,7 +6,7 @@ using UnityEngine;
 public class CollectableTracker : ScriptableObject
 {
     [Header("Lists")]
-    public List<string> GameplayLevelsList = new();
+    public List<string> GameplayLevelsList;
     public Dictionary<string, int> EnemiesDestroyedDictionary = new();
     public Dictionary<string, bool> HostagesRescuedDictionary = new();
 
@@ -41,12 +41,28 @@ public class CollectableTracker : ScriptableObject
 
     public void AddSceneNameToList(string currentSceneName)
     {
-        Debug.Log($"Enemies present: {CurrentLevelEnemyCount}");
-        Debug.Log($"Scene name exists in list: {GameplayLevelsList.Contains(currentSceneName)}");
-
-        if ((CurrentLevelEnemyCount > 0 || HostagePresent) && !GameplayLevelsList.Contains(currentSceneName))
+        // Check if enemies or a hostage is present
+        if (CurrentLevelEnemyCount > 0 || HostagePresent)
         {
-            GameplayLevelsList.Add(currentSceneName);
+            Debug.Log($"Enemies present: {CurrentLevelEnemyCount}");
+            Debug.Log($"Hostage present: {HostagePresent}");
+
+            // Check if the list is not initialized or empty
+            if (GameplayLevelsList == null || GameplayLevelsList.Count == 0)
+            {
+                // Initialize the list and add the current scene name
+                GameplayLevelsList = new List<string>();
+                GameplayLevelsList.Add(currentSceneName);
+            }
+            else
+            {
+                // Check if the scene name exists in the list
+                if (!GameplayLevelsList.Contains(currentSceneName))
+                {
+                    // Add the scene name to the list
+                    GameplayLevelsList.Add(currentSceneName);
+                }
+            }
         }
     }
 

@@ -22,10 +22,13 @@ public class TrackScene : MonoBehaviour
 
     private void SceneManager_onSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        CollectableTracker.CheckIfSceneChanged(scene.name);
-        CollectableTracker.StoreCurrentSceneName(scene.name);
-        OnSceneChecked?.Invoke();
-        CollectableTracker.AddSceneNameToList(scene.name);
+        if (scene.name != null)
+        {
+            CollectableTracker.CheckIfSceneChanged(scene.name);
+            CollectableTracker.StoreCurrentSceneName(scene.name);
+            OnSceneChecked?.Invoke();
+            CollectableTracker.AddSceneNameToList(scene.name);
+        }
     }
 
 }

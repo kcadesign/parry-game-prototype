@@ -27,11 +27,13 @@ public class GameManager : MonoBehaviour
 
     private void HandleMainMenuUI_OnStartGame()
     {
+        Debug.Log("Starting game...");
         SaveData.LoadGameProgress();
         LoadSavedSceneOrDefault();
     }
     private void HandleMainMenuUI_OnResetGameProgress()
     {
+        CollectableTracker.ClearAllFields();
         SaveData.ResetGameProgress();
     }
 
@@ -43,13 +45,15 @@ public class GameManager : MonoBehaviour
 
     private void LoadSavedSceneOrDefault()
     {
-        if (!string.IsNullOrEmpty(CollectableTracker.CurrentSceneName))
+        if (string.IsNullOrEmpty(CollectableTracker.CurrentSceneName))
         {
-            SceneManager.LoadScene(CollectableTracker.CurrentSceneName);
+            Debug.Log($"Loading default scene: {_firstLevelName}");
+            SceneManager.LoadScene(_firstLevelName);
         }
         else
         {
-            SceneManager.LoadScene(_firstLevelName);
+            Debug.Log($"Loading saved scene: {CollectableTracker.CurrentSceneName}");
+            SceneManager.LoadScene(CollectableTracker.CurrentSceneName);
         }
     }
 
