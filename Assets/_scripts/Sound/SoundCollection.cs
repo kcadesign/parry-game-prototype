@@ -41,7 +41,7 @@ public class SoundCollection : ScriptableObject
     }
 
     // Method to find a Sound by its name
-    private Sound FindSoundByName(string name)
+    public Sound FindSoundByName(string name)
     {
         foreach (Sound sound in Sounds)
         {
@@ -53,4 +53,5 @@ public class SoundCollection : ScriptableObject
         // If no matching Sound is found, return null
         return null;
     }
+
 }
