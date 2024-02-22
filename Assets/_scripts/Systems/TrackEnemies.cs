@@ -45,7 +45,7 @@ public class TrackEnemies : MonoBehaviour
         Debug.Log($"Level finished: {levelFinished}");
         if (levelFinished)
         {
-            CollectableTracker.UpdateEnemiesDestroyedDictionary(_currentEnemiesDestroyed);
+            //CollectableTracker.UpdateEnemiesDestroyedDictionary(_currentEnemiesDestroyed);
             CollectableTracker.AddCurrentDestroyedEnemiesToTotal(_currentEnemiesDestroyed);
         }
     }

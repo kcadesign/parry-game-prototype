@@ -98,7 +98,7 @@ public class CollectableTracker : ScriptableObject
         }
     }
 
-    public void UpdateEnemiesDestroyedDictionary(int count)
+/*    public void UpdateEnemiesDestroyedDictionary(int count)
     {
         EnemiesDestroyedDictionary[CurrentSceneName] = count;
         PrintEnemiesDestroyedDictionary();
@@ -109,7 +109,7 @@ public class CollectableTracker : ScriptableObject
         HostagesRescuedDictionary[CurrentSceneName] = rescued;
         PrintHostagesSavedDisctionary();
     }
-
+*/
     public void ClearAllFields()
     {
         GameplayLevelsList = null;

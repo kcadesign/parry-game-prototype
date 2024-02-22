@@ -34,6 +34,11 @@ public class HandleLevelBGM : MonoBehaviour
         HandleGameStateUI.OnStartButtonPressed += HandleGameStateUI_OnStartButtonPressed;
     }
 
+    private void OnDisable()
+    {
+        HandleGameStateUI.OnStartButtonPressed -= HandleGameStateUI_OnStartButtonPressed;
+    }
+
     private void Start()
     {
         // check the level index and set the audio source clip to play the appropriate music
@@ -51,16 +56,9 @@ public class HandleLevelBGM : MonoBehaviour
             _audioSource.clip = BGMCollection.FindSoundByName("World1Boss").AudioClips[0];
         }
 
-        // play the audio source
+        // play and fade in the audio source
         _audioSource.Play();
-
-        // slowly fade in the main menu music
         StartCoroutine(FadeInBGM());
-    }
-
-    private void OnDisable()
-    {
-        HandleGameStateUI.OnStartButtonPressed -= HandleGameStateUI_OnStartButtonPressed;
     }
 
     private void HandleGameStateUI_OnStartButtonPressed()

@@ -34,7 +34,7 @@ public class TrackHostages : MonoBehaviour
         _levelFinished = levelFinished;
 
         CheckHostageRescue();
-        CollectableTracker.UpdateHostageRescuedDictionary(_hostageRescued);
+        //CollectableTracker.UpdateHostageRescuedDictionary(_hostageRescued);
     }
 
     private void FollowOnTriggerEnter_OnFollow(bool isFollowing)
