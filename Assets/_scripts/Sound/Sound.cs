@@ -13,4 +13,6 @@ public class Sound
     public float Pitch = 1f;
 
     public float SpatialBlend = 0f;
+
+    public bool Loop;
 }

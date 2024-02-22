@@ -19,15 +19,18 @@ MonoBehaviour:
     Volume: 0.5
     Pitch: 1
     SpatialBlend: 0
+    Loop: 1
   - Name: World1Level
     AudioClips:
     - {fileID: 8300000, guid: 5c636e394165c054aac92848b523237b, type: 3}
     Volume: 0.5
     Pitch: 1
     SpatialBlend: 0
+    Loop: 1
   - Name: World1Boss
     AudioClips:
     - {fileID: 8300000, guid: af9cd9f6b3ff71241970425d5b349f17, type: 3}
     Volume: 0.5
     Pitch: 1
     SpatialBlend: 0
+    Loop: 1

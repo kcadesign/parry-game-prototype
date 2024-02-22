@@ -26,6 +26,7 @@ public class SoundCollection : ScriptableObject
             audioSource.volume = desiredSound.Volume;
             audioSource.pitch = desiredSound.Pitch;
             audioSource.spatialBlend = desiredSound.SpatialBlend;
+            audioSource.loop = desiredSound.Loop;
             // Add other settings here
 
             // Play the random AudioClip using the AudioSource
