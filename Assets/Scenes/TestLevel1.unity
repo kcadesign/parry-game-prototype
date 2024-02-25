@@ -13155,18 +13155,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: -----Cameras-----
       objectReference: {fileID: 0}
-    - target: {fileID: 2968352379653642751, guid: 88aae58b941d0d04ab58d31daf4620fb, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -40.18225
-      objectReference: {fileID: 0}
-    - target: {fileID: 2968352379653642751, guid: 88aae58b941d0d04ab58d31daf4620fb, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -1.1457921
-      objectReference: {fileID: 0}
-    - target: {fileID: 2968352379653642751, guid: 88aae58b941d0d04ab58d31daf4620fb, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -10
-      objectReference: {fileID: 0}
     - target: {fileID: 3316226500171233390, guid: 88aae58b941d0d04ab58d31daf4620fb, type: 3}
       propertyPath: Backgrounds.Array.data[0]
       value: 
@@ -13183,18 +13171,6 @@ PrefabInstance:
       propertyPath: Backgrounds.Array.data[3]
       value: 
       objectReference: {fileID: 42941833}
-    - target: {fileID: 5094137550019942055, guid: 88aae58b941d0d04ab58d31daf4620fb, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -40.18225
-      objectReference: {fileID: 0}
-    - target: {fileID: 5094137550019942055, guid: 88aae58b941d0d04ab58d31daf4620fb, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -1.1457921
-      objectReference: {fileID: 0}
-    - target: {fileID: 5094137550019942055, guid: 88aae58b941d0d04ab58d31daf4620fb, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -10
-      objectReference: {fileID: 0}
     - target: {fileID: 6287425546003058481, guid: 88aae58b941d0d04ab58d31daf4620fb, type: 3}
       propertyPath: m_Follow
       value: 

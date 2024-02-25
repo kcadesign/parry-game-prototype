@@ -167,15 +167,4 @@ public class PlayerParry : MonoBehaviour
             timer = 0f;
         }
     }
-
-    /*    private void PlayParryAttackSound()
-        {
-            SoundManager.Instance.PlaySFX(parryAttackSound, transform, 1f);
-        }
-
-        private void PlayParryBounceSound()
-        {
-            SoundManager.Instance.PlaySFX(parryBounceSound, transform, 1f);
-        }
-    */
 }

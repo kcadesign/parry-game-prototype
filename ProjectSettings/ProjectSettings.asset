@@ -22,7 +22,7 @@ PlayerSettings:
   m_SplashScreenOverlayOpacity: 1
   m_SplashScreenAnimation: 1
   m_SplashScreenLogoStyle: 1
-  m_SplashScreenDrawMode: 0
+  m_SplashScreenDrawMode: 1
   m_SplashScreenBackgroundAnimationZoom: 1
   m_SplashScreenLogoAnimationZoom: 1
   m_SplashScreenBackgroundLandscapeAspect: 1
@@ -40,6 +40,8 @@ PlayerSettings:
     width: 1
     height: 1
   m_SplashScreenLogos:
+  - logo: {fileID: 10404, guid: 0000000000000000f000000000000000, type: 0}
+    duration: 2
   - logo: {fileID: 21300000, guid: 85bd93e92d4468e479567e88e6af1a9c, type: 3}
     duration: 2
   m_VirtualRealitySplashScreen: {fileID: 0}
@@ -102,7 +104,7 @@ PlayerSettings:
   xboxEnableFitness: 0
   visibleInBackground: 1
   allowFullscreenSwitch: 1
-  fullscreenMode: 3
+  fullscreenMode: 1
   xboxSpeechDB: 0
   xboxEnableHeadOrientation: 0
   xboxEnableGuest: 0
@@ -136,7 +138,8 @@ PlayerSettings:
   vulkanEnableCommandBufferRecycling: 1
   loadStoreDebugModeEnabled: 0
   bundleVersion: 0.2
-  preloadedAssets: []
+  preloadedAssets:
+  - {fileID: 11400000, guid: 3f3735034e0557746ace58d367ed367a, type: 2}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -281,7 +284,7 @@ PlayerSettings:
   - m_BuildTarget: 
     m_Icons:
     - serializedVersion: 2
-      m_Icon: {fileID: 2800000, guid: 85bd93e92d4468e479567e88e6af1a9c, type: 3}
+      m_Icon: {fileID: 2800000, guid: 91d096a68431e534e86234cdd6e0decf, type: 3}
       m_Width: 128
       m_Height: 128
       m_Kind: 0
