@@ -1694,6 +1694,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6114877157283642790}
   - component: {fileID: 1318027311575155328}
+  - component: {fileID: 2034484925932984307}
   m_Layer: 0
   m_Name: Circle
   m_TagString: HurtBox
@@ -1759,7 +1760,7 @@ SpriteRenderer:
   m_SortingLayer: 3
   m_SortingOrder: 3
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.5019608}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1769,3 +1770,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 2
   m_SpriteSortPoint: 0
+--- !u!114 &2034484925932984307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9048106347259649893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8103add964dfcc5408b44f12c8f299cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Colors:
+  - {r: 1, g: 0.2716652, b: 0, a: 1}
+  - {r: 1, g: 0.9844948, b: 0, a: 1}
+  - {r: 0.073868036, g: 1, b: 0, a: 1}
+  - {r: 0, g: 0.61087227, b: 1, a: 1}
+  - {r: 0.60134554, g: 0, b: 1, a: 1}
+  CycleDuration: 0.15

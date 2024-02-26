@@ -54,10 +54,6 @@ public class PlayerJump : MonoBehaviour
         //Time.timeScale = 0.25f;
     }
 
-    // When jump is pressed the buffer time begins to count up
-    // If the timer is less then the buffer limit when the player hits the ground, the player will jump
-    // If the timer is greater than the buffer limit, the player will not jump
-
     private void Update()
     {
         if (_jumpDesired)
@@ -81,7 +77,6 @@ public class PlayerJump : MonoBehaviour
         {
             _jumpBufferCounter = 0;
         }
-
     }
 
     private void Jump_performed(InputAction.CallbackContext obj)
