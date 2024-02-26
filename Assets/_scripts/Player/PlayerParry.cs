@@ -101,13 +101,14 @@ public class PlayerParry : MonoBehaviour
         }
         OnParryActive?.Invoke(_parryActive);
     }
-    
+
     private void CheckPlayerGrounded_OnGrounded(bool grounded)
     {
         //Debug.Log($"Is grounded: {grounded}");
         if (grounded)
         {
-            HandleParryBounce();
+            //HandleParryBounce();
+            _canParryBounce = false;
         }
         else if (!grounded)
         {

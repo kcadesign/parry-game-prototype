@@ -1001,8 +1001,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 968e69f36e5ee20418e6cb2bb46af0f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _jumpPower: 35
-  _restrictJumpCount: 1
+  _jumpPower: 55
+  JumpBufferLimit: 0.3
+  _jumpBufferCounter: 0
+  _jumpDesired: 0
 --- !u!114 &3474076648582695106
 MonoBehaviour:
   m_ObjectHideFlags: 0

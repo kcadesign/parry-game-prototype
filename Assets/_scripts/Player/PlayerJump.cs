@@ -15,13 +15,11 @@ public class PlayerJump : MonoBehaviour
 
     [SerializeField] private float _jumpPower = 5;
 
-    [SerializeField] private bool _restrictJumpCount;
-    private bool _isJumping;
+    [Range(0f, 0.3f)] public float JumpBufferLimit = 0.15f;
+    [SerializeField] private float _jumpBufferCounter;
+    [SerializeField] private bool _jumpDesired;
     private bool _isGrounded;
     private bool _canJump = true;
-
-    //[Header("Audio")]
-    //[SerializeField] private AudioClip[] jumpSounds;
 
     private void Awake()
     {
@@ -40,7 +38,6 @@ public class PlayerJump : MonoBehaviour
         HandlePlayerStun.OnStunned += HandlePlayerStun_OnStunned;
     }
 
-
     private void OnDisable()
     {
         playerControls.Gameplay.Disable();
@@ -52,22 +49,57 @@ public class PlayerJump : MonoBehaviour
         HandlePlayerStun.OnStunned -= HandlePlayerStun_OnStunned;
     }
 
+    private void Start()
+    {
+        //Time.timeScale = 0.25f;
+    }
+
+    // When jump is pressed the buffer time begins to count up
+    // If the timer is less then the buffer limit when the player hits the ground, the player will jump
+    // If the timer is greater than the buffer limit, the player will not jump
+
+    private void Update()
+    {
+        if (_jumpDesired)
+        {
+            _jumpBufferCounter += Time.deltaTime;
+
+            if (_isGrounded && _jumpBufferCounter <= JumpBufferLimit)
+            {
+                Debug.Log("Jumping from buffer");
+                _jumpBufferCounter = 0;
+                _jumpDesired = false;
+                HandleJump();
+            }
+            else if (_jumpBufferCounter > JumpBufferLimit)
+            {
+                _jumpBufferCounter = 0;
+                _jumpDesired = false;
+            }
+        }
+        else
+        {
+            _jumpBufferCounter = 0;
+        }
+
+    }
+
     private void Jump_performed(InputAction.CallbackContext obj)
     {
-        if (_canJump)
+        if (_canJump && _isGrounded)
         {
-            _isJumping = true;
             HandleJump();
-            _isJumping = false;
-            OnJump?.Invoke(_isJumping);
+        }
+
+        if (!_isGrounded)
+        {
+            _jumpDesired = true;
         }
     }
 
     private void Jump_canceled(InputAction.CallbackContext obj)
     {
-        //Debug.Log("Jump released");
-        _isJumping = false;
-        OnJump?.Invoke(_isJumping);
+        OnJump?.Invoke(false);
     }
 
     private void CheckPlayerGrounded_OnGrounded(bool grounded)
@@ -90,29 +122,10 @@ public class PlayerJump : MonoBehaviour
 
     private void HandleJump()
     {
-        Vector2 jumpForce = new(0, 0)
-        {
-            y = _jumpPower
-        };
+        Vector2 jumpForce = new(0, _jumpPower);
 
-        if (_restrictJumpCount)
-        {
-            if (_isGrounded)
-            {
-                _rigidbody.velocity = new(_rigidbody.velocity.x, 0);
-                _rigidbody.AddForce(jumpForce, ForceMode2D.Impulse);
-                OnJump?.Invoke(_isJumping);
-            }
-        }
-        else if (!_restrictJumpCount)
-        {
-            _rigidbody.velocity = new(_rigidbody.velocity.x, 0);
-            _rigidbody.AddForce(jumpForce, ForceMode2D.Impulse);
-        }
+        _rigidbody.velocity = new(_rigidbody.velocity.x, 0);
+        _rigidbody.AddForce(jumpForce, ForceMode2D.Impulse);
+        OnJump?.Invoke(true);
     }
-
-/*    private void PlayJumpSound()
-    {
-        SoundManager.Instance.PlayRandomSFX(jumpSounds, transform, 1);
-    }
-*/}
+}

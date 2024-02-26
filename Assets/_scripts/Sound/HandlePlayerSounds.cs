@@ -28,6 +28,7 @@ public class HandlePlayerSounds : MonoBehaviour
 
     private void PlayerJump_OnJump(bool jumping)
     {
+        //Debug.Log("PlayerJump_OnJump signal recieved");
         if (jumping && _playerSounds != null && _playerSounds.Sounds.Length > 0)
         {
             _playerSounds.PlaySound("Jump", transform);
