@@ -13,6 +13,8 @@ public class PlayerMove : MonoBehaviour
 
     [SerializeField] private float _rollSpeed = 5;
     [SerializeField] private float _maxVelocity = 2;
+    [SerializeField] private float _acceleration = 1;
+    [SerializeField] private float _deceleration = 1;
 
     private void Awake()
     {
@@ -39,6 +41,7 @@ public class PlayerMove : MonoBehaviour
     void FixedUpdate()
     {
         HandleHorizontalMovement();
+        HandleDeceleration();
         OnPlayerMoveInput?.Invoke(_rigidBody.velocity);
         //Debug.Log($"Player current velocity magnitude is: {_rigidBody.velocity.magnitude}");
     }
@@ -71,5 +74,14 @@ public class PlayerMove : MonoBehaviour
             _rigidBody.AddForce(Vector2.zero);
         }
 
+    }
+
+    private void HandleDeceleration()
+    {
+        if (_movementAxis.magnitude == 0 && _rigidBody.velocity.magnitude > 0)
+        {
+            Vector2 decelerationForce = _deceleration * Time.fixedDeltaTime * -_rigidBody.velocity.normalized;
+            _rigidBody.AddForce(decelerationForce, ForceMode2D.Impulse);
+        }
     }
 }

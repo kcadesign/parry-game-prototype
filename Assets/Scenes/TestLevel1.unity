@@ -13053,6 +13053,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 2725460280139121086, guid: 9b60d9937a2653a4fa996b5d49e6adbe, type: 3}
+      propertyPath: _fallMultiplier
+      value: 3.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2725460280139121086, guid: 9b60d9937a2653a4fa996b5d49e6adbe, type: 3}
+      propertyPath: _jumpMultiplier
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8496972563218401469, guid: 9b60d9937a2653a4fa996b5d49e6adbe, type: 3}
       propertyPath: m_LocalPosition.x
       value: -34.51
