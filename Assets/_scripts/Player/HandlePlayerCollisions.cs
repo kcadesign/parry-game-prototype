@@ -10,7 +10,6 @@ public class HandlePlayerCollisions : HandleCollisions, IParryable
 
     public static event Action<GameObject> OnCollision;
 
-    public static event Action OnPassiveBounce;
 
     private bool _parryActive = false;
     private bool _blockActive = false;
@@ -49,11 +48,10 @@ public class HandlePlayerCollisions : HandleCollisions, IParryable
         OnCollision?.Invoke(collidedObject);
     }
     
-    protected override void HandleCollisionWithEnvironment(GameObject collidedObject)
+/*    protected override void HandleCollisionWithEnvironment(GameObject collidedObject)
     {
         if (!_parryActive && _grounded)
         {
-            OnPassiveBounce?.Invoke();
         }
     }
-}
+*/}

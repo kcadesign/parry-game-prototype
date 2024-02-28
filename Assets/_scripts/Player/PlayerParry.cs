@@ -147,12 +147,12 @@ public class PlayerParry : MonoBehaviour
         _parryActive = true;
         OnParryActive?.Invoke(_parryActive);
 
-        float timer = 0f; // Initialize timer
+        float parryTimer = 0f; // Initialize timer
 
-        while (_parryActive && timer < _parryActiveLength)
+        while (_parryActive && parryTimer < _parryActiveLength)
         {
             // Increment timer each frame
-            timer += Time.deltaTime;
+            parryTimer += Time.deltaTime;
             yield return null; // Wait for the next frame
         }
 
@@ -165,7 +165,7 @@ public class PlayerParry : MonoBehaviour
         else
         {
             // Reset the timer if _parryActive became false before _parryActiveLength elapsed
-            timer = 0f;
+            parryTimer = 0f;
         }
     }
 }

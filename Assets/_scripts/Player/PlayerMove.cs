@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -68,9 +66,10 @@ public class PlayerMove : MonoBehaviour
         {
             _rigidBody.AddForce(movementForce, ForceMode2D.Impulse);
         }
-        else if(_rigidBody.velocity.magnitude > _maxVelocity)
+        else if (_movementAxis.magnitude > 0 && _rigidBody.velocity.magnitude >= _maxVelocity)
         {
             _rigidBody.AddForce(Vector2.zero);
         }
+
     }
 }

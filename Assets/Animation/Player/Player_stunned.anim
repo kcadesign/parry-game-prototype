@@ -34,7 +34,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Color.r
-    path: Collider/BodySprite
+    path: BodySprite
     classID: 212
     script: {fileID: 0}
     flags: 0
@@ -55,7 +55,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Color.g
-    path: Collider/BodySprite
+    path: BodySprite
     classID: 212
     script: {fileID: 0}
     flags: 0
@@ -76,7 +76,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Color.b
-    path: Collider/BodySprite
+    path: BodySprite
     classID: 212
     script: {fileID: 0}
     flags: 0
@@ -96,7 +96,7 @@ AnimationClip:
     - time: 1.5
       value: {fileID: 892094710, guid: 5f49afa83fd3ec6459b26462fbbb3e7d, type: 3}
     attribute: m_Sprite
-    path: Collider/BodySprite/FaceSprites
+    path: BodySprite/FaceSprites
     classID: 212
     script: {fileID: 0}
     flags: 2
@@ -108,7 +108,7 @@ AnimationClip:
   m_ClipBindingConstant:
     genericBindings:
     - serializedVersion: 2
-      path: 3614446192
+      path: 4213396595
       attribute: 0
       script: {fileID: 0}
       typeID: 212
@@ -117,7 +117,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 2235529237
+      path: 1413341484
       attribute: 2526845255
       script: {fileID: 0}
       typeID: 212
@@ -126,7 +126,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 2235529237
+      path: 1413341484
       attribute: 4215373228
       script: {fileID: 0}
       typeID: 212
@@ -135,7 +135,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 2235529237
+      path: 1413341484
       attribute: 2334886179
       script: {fileID: 0}
       typeID: 212
@@ -188,7 +188,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Color.r
-    path: Collider/BodySprite
+    path: BodySprite
     classID: 212
     script: {fileID: 0}
     flags: 0
@@ -209,7 +209,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Color.g
-    path: Collider/BodySprite
+    path: BodySprite
     classID: 212
     script: {fileID: 0}
     flags: 0
@@ -230,7 +230,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Color.b
-    path: Collider/BodySprite
+    path: BodySprite
     classID: 212
     script: {fileID: 0}
     flags: 0
