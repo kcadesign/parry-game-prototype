@@ -15,16 +15,22 @@ public class PlayerJump : MonoBehaviour
 
     [SerializeField] private float _jumpPower = 5;
     [Range(0f, 0.3f)] public float JumpBufferLimit = 0.15f;
-    [SerializeField] private float _jumpBufferCounter;
+    private float _jumpBufferCounter;
 
-    [SerializeField] private bool _consecutiveJumpDesired;
+    private bool _jumpDesired;
     private bool _isGrounded;
     private bool _canJump = true;
+
+    [Header("Gravity")]
+    [SerializeField] private float _baseGravity = 1;
+    [SerializeField][Range(0f, 5f)] private float _jumpMultiplier = 0;
+    [SerializeField][Range(0f, 5f)] private float _fallMultiplier = 0;
 
     private void Awake()
     {
         playerControls = new PlayerControls();
         _rigidbody = GetComponent<Rigidbody2D>();
+        _baseGravity = _rigidbody.gravityScale;
     }
 
     private void OnEnable()
@@ -52,12 +58,14 @@ public class PlayerJump : MonoBehaviour
     private void Update()
     {
         HandleJumpBuffering();
+        SetJumpGravity();
     }
+
 
     private void Jump_performed(InputAction.CallbackContext obj)
     {
         if (_canJump && _isGrounded) DoJump();
-        if (!_isGrounded) _consecutiveJumpDesired = true;
+        if (!_isGrounded) _jumpDesired = true;
     }
 
     private void Jump_canceled(InputAction.CallbackContext obj)
@@ -68,6 +76,7 @@ public class PlayerJump : MonoBehaviour
     private void CheckPlayerGrounded_OnGrounded(bool grounded)
     {
         _isGrounded = grounded;
+        ResetGravity();
     }
 
     private void HandlePlayerStun_OnStunned(bool stunned)
@@ -79,7 +88,7 @@ public class PlayerJump : MonoBehaviour
 
     private void HandleJumpBuffering()
     {
-        if (!_consecutiveJumpDesired)
+        if (!_jumpDesired)
         {
             _jumpBufferCounter = 0;
         }
@@ -91,15 +100,31 @@ public class PlayerJump : MonoBehaviour
             {
                 //Debug.Log("Jumping from buffer");
                 _jumpBufferCounter = 0;
-                _consecutiveJumpDesired = false;
+                _jumpDesired = false;
                 DoJump();
             }
             else if (_jumpBufferCounter > JumpBufferLimit)
             {
                 _jumpBufferCounter = 0;
-                _consecutiveJumpDesired = false;
+                _jumpDesired = false;
             }
         }
+    }
+    private void SetJumpGravity()
+    {
+        if (_rigidbody.velocity.y > 0 && !_isGrounded) SetNewGravity(_jumpMultiplier);
+        else if (_rigidbody.velocity.y < 0 && !_isGrounded) SetNewGravity(_fallMultiplier);
+        else ResetGravity();
+    }
+
+    private void SetNewGravity(float gravityMultiplier)
+    {
+        _rigidbody.gravityScale = gravityMultiplier;
+    }
+
+    private void ResetGravity()
+    {
+        _rigidbody.gravityScale = _baseGravity;
     }
 
     private void DoJump()

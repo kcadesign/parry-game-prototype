@@ -38,7 +38,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 160253897861744471}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -40.18225, y: -1.8097919, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -145,10 +145,10 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 5
+  m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0
-  m_GravityScale: 2
+  m_GravityScale: 1
   m_Material: {fileID: 6200000, guid: 1874446056ab46546bf5f9a0c76b11e9, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
@@ -172,7 +172,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b69cc5722d8ec854480520cfcacf5215, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rollSpeed: 100
+  _rollSpeed: 25
   _maxVelocity: 8
 --- !u!114 &6484127941827786668
 MonoBehaviour:
@@ -200,10 +200,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 968e69f36e5ee20418e6cb2bb46af0f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _jumpPower: 55
-  JumpBufferLimit: 0.3
-  _jumpBufferCounter: 0
-  _jumpDesired: 0
+  _jumpPower: 10
+  JumpBufferLimit: 0.15
+  _baseGravity: 1
+  _jumpMultiplier: 3.5
+  _fallMultiplier: 4
 --- !u!114 &9098692095844864125
 MonoBehaviour:
   m_ObjectHideFlags: 0
