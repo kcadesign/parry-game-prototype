@@ -63,7 +63,7 @@ public class AnimatePlayer : MonoBehaviour
 
         _animator.SetFloat("VelocityX", Mathf.Abs(velocityX));
 
-        if (velocityX > -0.1 && velocityX < 0.1) _animator.SetBool("Moving", false);
+        if (velocityX > -0.01 && velocityX < 0.01) _animator.SetBool("Moving", false);
         else _animator.SetBool("Moving", true);
         
     }

@@ -13,8 +13,8 @@ public class PlayerMove : MonoBehaviour
 
     [SerializeField] private float _rollSpeed = 5;
     [SerializeField] private float _maxVelocity = 2;
-    [SerializeField] private float _acceleration = 1;
-    [SerializeField] private float _deceleration = 1;
+    //[SerializeField] private float _acceleration = 1;
+    [SerializeField][Range(0f,10f)] private float _deceleration = 1;
 
     private void Awake()
     {

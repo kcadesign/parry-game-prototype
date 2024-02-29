@@ -172,8 +172,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b69cc5722d8ec854480520cfcacf5215, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rollSpeed: 25
+  _rollSpeed: 15
   _maxVelocity: 8
+  _acceleration: 1
+  _deceleration: 2
 --- !u!114 &6484127941827786668
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,7 +189,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _parryActiveLength: 0.5
-  _parryForce: 55
+  _parryForce: 10
 --- !u!114 &2725460280139121086
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -200,11 +202,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 968e69f36e5ee20418e6cb2bb46af0f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _jumpPower: 10
+  _jumpPower: 10.5
   JumpBufferLimit: 0.15
   _baseGravity: 1
-  _jumpMultiplier: 3.5
-  _fallMultiplier: 4
+  _jumpGravity: 2.4
+  _fallGravity: 3.5
 --- !u!114 &9098692095844864125
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -219,7 +221,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hitStunMultiplier: 2
   _hitStunDuration: 1.5
-  _knockbackForce: 40
+  _knockbackForce: 8
 --- !u!114 &338853399537350769
 MonoBehaviour:
   m_ObjectHideFlags: 0
