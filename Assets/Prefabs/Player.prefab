@@ -174,8 +174,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rollSpeed: 15
   _maxVelocity: 8
-  _acceleration: 1
-  _deceleration: 2
+  _deceleration: 6.5
 --- !u!114 &6484127941827786668
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -203,10 +202,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _jumpPower: 10.5
-  JumpBufferLimit: 0.15
+  _jumpBufferLimit: 0.15
+  _coyoteTimeLimit: 0.15
+  _coyoteTimeCounter: 0
+  _isGrounded: 0
+  _currentlyJumping: 0
   _baseGravity: 1
-  _jumpGravity: 2.4
-  _fallGravity: 3.5
+  _jumpGravity: 2.3
+  _fallGravity: 3.6
 --- !u!114 &9098692095844864125
 MonoBehaviour:
   m_ObjectHideFlags: 0

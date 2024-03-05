@@ -9,7 +9,7 @@ public class PlayerMove : MonoBehaviour
     protected PlayerControls playerControls;
     private Rigidbody2D _rigidBody;
 
-    private Vector2 _movementAxis;
+    private Vector2 _movementInput;
 
     [SerializeField] private float _rollSpeed = 5;
     [SerializeField] private float _maxVelocity = 2;
@@ -48,28 +48,28 @@ public class PlayerMove : MonoBehaviour
 
     private void Rolling_performed(InputAction.CallbackContext value)
     {
-        _movementAxis = value.ReadValue<Vector2>();
+        _movementInput = value.ReadValue<Vector2>();
     }
 
     private void Rolling_canceled(InputAction.CallbackContext value)
     {
-        _movementAxis = value.ReadValue<Vector2>();
+        _movementInput = value.ReadValue<Vector2>();
     }
 
     private void HandleHorizontalMovement()
     {
-        Vector2 movementDirection = _movementAxis.normalized;
+        Vector2 movementDirection = _movementInput.normalized;
         movementDirection.y = 0f;
 
         Vector2 movementForce = _rollSpeed * Time.fixedDeltaTime * movementDirection;
         movementForce.y = 0f;
 
         // Would like to be able to add force in the opposite direction even if velocity is over max
-        if (_movementAxis.magnitude > 0 && _rigidBody.velocity.magnitude < _maxVelocity)
+        if (_movementInput.magnitude > 0 && _rigidBody.velocity.magnitude < _maxVelocity)
         {
             _rigidBody.AddForce(movementForce, ForceMode2D.Impulse);
         }
-        else if (_movementAxis.magnitude > 0 && _rigidBody.velocity.magnitude >= _maxVelocity)
+        else if (_movementInput.magnitude > 0 && _rigidBody.velocity.magnitude >= _maxVelocity)
         {
             _rigidBody.AddForce(Vector2.zero);
         }
@@ -78,7 +78,7 @@ public class PlayerMove : MonoBehaviour
 
     private void HandleDeceleration()
     {
-        if (_movementAxis.magnitude == 0 && _rigidBody.velocity.magnitude > 0)
+        if (_movementInput.magnitude == 0 && _rigidBody.velocity.magnitude > 0)
         {
             Vector2 decelerationForce = _deceleration * Time.fixedDeltaTime * -_rigidBody.velocity.normalized;
             _rigidBody.AddForce(decelerationForce, ForceMode2D.Impulse);

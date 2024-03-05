@@ -146,8 +146,9 @@ public class PlayerJump : MonoBehaviour
     private void DoJump()
     {
         Vector2 jumpForce = new(0, _jumpPower);
+
         _currentlyJumping = true;
-        Debug.Log("Jumping");
+
         OnJump?.Invoke(true);
         _rigidbody.velocity = new(_rigidbody.velocity.x, 0);
         _rigidbody.AddForce(jumpForce, ForceMode2D.Impulse);
