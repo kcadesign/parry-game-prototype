@@ -177,6 +177,48 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Player_roll_2
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f69d0005ccfe6bd42b16fe7d67928f0e
+      internalID: 1425520171
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_roll_3
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a0c354f246732b94ca24add362b50f08
+      internalID: 1431119420
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -190,6 +232,8 @@ TextureImporter:
     nameFileIdTable:
       Player_roll_0: 1139971467
       Player_roll_1: -2109015408
+      Player_roll_2: 1425520171
+      Player_roll_3: 1431119420
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
