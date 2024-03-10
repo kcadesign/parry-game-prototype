@@ -87,8 +87,9 @@ public class AnimatePlayer : MonoBehaviour
 
     private void PlayerJump_OnJump(bool jumping)
     {
-        if (_grounded && !_stunned)
+        if (_grounded && !_stunned && jumping)
         {
+            _animator.ResetTrigger("Landed");
             _animator.SetTrigger("Jumping");
         }
     }

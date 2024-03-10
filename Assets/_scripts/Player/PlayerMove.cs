@@ -58,22 +58,18 @@ public class PlayerMove : MonoBehaviour
 
     private void HandleHorizontalMovement()
     {
-        Vector2 movementDirection = _movementInput.normalized;
-        movementDirection.y = 0f;
-
-        Vector2 movementForce = _rollSpeed * Time.fixedDeltaTime * movementDirection;
-        movementForce.y = 0f;
-
-        // Would like to be able to add force in the opposite direction even if velocity is over max
-        if (_movementInput.magnitude > 0 && _rigidBody.velocity.magnitude < _maxVelocity)
+        if (_rigidBody.velocity.magnitude < _maxVelocity)
         {
+            Vector2 movementDirection = _movementInput.normalized;
+            Vector2 movementForce = _rollSpeed * Time.fixedDeltaTime * movementDirection;
+            movementForce.y = 0f;
+
             _rigidBody.AddForce(movementForce, ForceMode2D.Impulse);
         }
-        else if (_movementInput.magnitude > 0 && _rigidBody.velocity.magnitude >= _maxVelocity)
+        else if (_rigidBody.velocity.magnitude >= _maxVelocity)
         {
             _rigidBody.AddForce(Vector2.zero);
         }
-
     }
 
     private void HandleDeceleration()
