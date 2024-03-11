@@ -176,7 +176,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rollSpeed: 9
-  _maxVelocity: 7.5
   _acceleration: 4.5
   _deceleration: 3
 --- !u!114 &6484127941827786668
@@ -227,8 +226,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hitStunMultiplier: 2
-  _hitStunDuration: 1.5
-  _knockbackForce: 8
+  _hitStunDuration: 0.5
+  _knockbackForce: 7
 --- !u!114 &338853399537350769
 MonoBehaviour:
   m_ObjectHideFlags: 0

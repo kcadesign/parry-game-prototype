@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -5,32 +6,43 @@ using UnityEngine;
 
 public class JuiceSystems : MonoBehaviour
 {
+    [SerializeField] private CinemachineImpulseSource _impulseSource;
+
     [SerializeField] private float _enemyDeathStopDuration = 0.1f;
     [SerializeField] private float _playerDamageStopDuration = 0.1f;
+
+    [SerializeField] private float _screenShakeAmount = 1;
+
+    private void Awake()
+    {
+        _impulseSource = GetComponent<CinemachineImpulseSource>();
+    }
 
     private void OnEnable()
     {
         HandleEnemyHealth.OnEnemyDeath += HandleEnemyHealth_OnEnemyDeath;
-        HandlePlayerStun.OnStunned += HandlePlayerStun_OnStunned;
+        HandlePlayerHealth.OnPlayerHurtBig += HandlePlayerHealth_OnPlayerHurtBig;
     }
 
     private void OnDisable()
     {
         HandleEnemyHealth.OnEnemyDeath -= HandleEnemyHealth_OnEnemyDeath;
-        HandlePlayerStun.OnStunned -= HandlePlayerStun_OnStunned;
+        HandlePlayerHealth.OnPlayerHurtBig -= HandlePlayerHealth_OnPlayerHurtBig;
     }
 
     private void HandleEnemyHealth_OnEnemyDeath(GameObject deadEnemy)
     {
         // when an enemy is destroyed, pause time briefly (hit stop)
         StartCoroutine(HitStop(_enemyDeathStopDuration));
+        ScreenShake(_screenShakeAmount);
     }
 
-    private void HandlePlayerStun_OnStunned(bool stunned)
+    private void HandlePlayerHealth_OnPlayerHurtBig(bool stunned)
     {
         Debug.Log("Player stunned");
         // when the player is damaged, pause time briefly (hit stop)
         StartCoroutine(HitStop(_playerDamageStopDuration));
+        ScreenShake(_screenShakeAmount);
     }
 
     private IEnumerator HitStop(float hitStopDuration)
@@ -42,9 +54,8 @@ public class JuiceSystems : MonoBehaviour
         Time.timeScale = 1f;
     }
 
-    private void ScreenShake()
+    private void ScreenShake(float shakeAmount)
     {
-        // Use cinemachine to shake the camera
-
+        _impulseSource.GenerateImpulseWithForce(shakeAmount);
     }
 }
