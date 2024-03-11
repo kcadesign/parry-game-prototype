@@ -7,6 +7,7 @@ public class AnimatePlayer : MonoBehaviour
 
     public Rigidbody2D PlayerRigidbody;
     private Animator _animator;
+    public ParticleSystem DustParticles;
 
     private bool _grounded;
     private bool _stunned;
@@ -63,9 +64,14 @@ public class AnimatePlayer : MonoBehaviour
 
         _animator.SetFloat("VelocityX", Mathf.Abs(velocityX));
 
-        if (velocityX > -0.01 && velocityX < 0.01) _animator.SetBool("Moving", false);
+        if (velocityX > -0.02 && velocityX < 0.02) _animator.SetBool("Moving", false);
         else _animator.SetBool("Moving", true);
-        
+
+/*        if(_grounded && PlayerRigidbody.velocity.magnitude > 0.1f)
+        {
+            CreateDustParticles();
+        }
+*/        
     }
 
     private void CheckPlayerGrounded_OnGrounded(bool grounded)
@@ -74,6 +80,7 @@ public class AnimatePlayer : MonoBehaviour
 
         if (_grounded && !_localGroundedCheck)
         {
+            CreateDustParticles();
             _animator.SetTrigger("Landed");
             OnPassiveBounce?.Invoke();
 
@@ -90,6 +97,7 @@ public class AnimatePlayer : MonoBehaviour
         if (_grounded && !_stunned && jumping)
         {
             _animator.ResetTrigger("Landed");
+            CreateDustParticles();
             _animator.SetTrigger("Jumping");
         }
     }
@@ -130,4 +138,8 @@ public class AnimatePlayer : MonoBehaviour
         }
     }
 
+    public void CreateDustParticles()
+    {
+        DustParticles.Play();
+    }
 }

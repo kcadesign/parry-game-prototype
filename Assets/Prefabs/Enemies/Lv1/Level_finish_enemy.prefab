@@ -486,6 +486,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Level_finish_enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 7976323921639655483, guid: 033d711d75361e441b1fd89cf0622f53, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 9097890226027746778, guid: 033d711d75361e441b1fd89cf0622f53, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1

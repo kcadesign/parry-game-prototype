@@ -12,9 +12,9 @@ public class PlayerMove : MonoBehaviour
     private Vector2 _movementInput;
 
     [SerializeField] private float _rollSpeed = 5;
-    [SerializeField] private float _maxVelocity = 2;
-    //[SerializeField] private float _acceleration = 1;
-    [SerializeField][Range(0f,10f)] private float _deceleration = 1;
+    //[SerializeField] private float _maxVelocity = 2;
+    [SerializeField][Range(0f, 10f)] private float _acceleration = 1;
+    [SerializeField][Range(0f, 10f)] private float _deceleration = 1;
 
     private void Awake()
     {
@@ -41,9 +41,7 @@ public class PlayerMove : MonoBehaviour
     void FixedUpdate()
     {
         HandleHorizontalMovement();
-        HandleDeceleration();
         OnPlayerMoveInput?.Invoke(_rigidBody.velocity);
-        //Debug.Log($"Player current velocity magnitude is: {_rigidBody.velocity.magnitude}");
     }
 
     private void Rolling_performed(InputAction.CallbackContext value)
@@ -58,26 +56,11 @@ public class PlayerMove : MonoBehaviour
 
     private void HandleHorizontalMovement()
     {
-        if (_rigidBody.velocity.magnitude < _maxVelocity)
-        {
-            Vector2 movementDirection = _movementInput.normalized;
-            Vector2 movementForce = _rollSpeed * Time.fixedDeltaTime * movementDirection;
-            movementForce.y = 0f;
-
-            _rigidBody.AddForce(movementForce, ForceMode2D.Impulse);
-        }
-        else if (_rigidBody.velocity.magnitude >= _maxVelocity)
-        {
-            _rigidBody.AddForce(Vector2.zero);
-        }
+        float targetSpeed = _movementInput.x * _rollSpeed;
+        float speedDifference = targetSpeed - _rigidBody.velocity.x;
+        float accelerationRate = (Mathf.Abs(targetSpeed) > 0.01f) ? _acceleration : _deceleration;
+        float movementForce = (Mathf.Abs(speedDifference) * accelerationRate) * Mathf.Sign(speedDifference);
+        _rigidBody.AddForce(movementForce * Vector2.right);
     }
 
-    private void HandleDeceleration()
-    {
-        if (_movementInput.magnitude == 0 && _rigidBody.velocity.magnitude > 0)
-        {
-            Vector2 decelerationForce = _deceleration * Time.fixedDeltaTime * -_rigidBody.velocity.normalized;
-            _rigidBody.AddForce(decelerationForce, ForceMode2D.Impulse);
-        }
-    }
 }

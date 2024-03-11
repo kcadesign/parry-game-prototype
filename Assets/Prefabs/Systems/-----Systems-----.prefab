@@ -44,7 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59c8a33a03971ce4a8156e0188fbab75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyDeathStopDuration: 0.04
+  _enemyDeathStopDuration: 0.15
+  _playerDamageStopDuration: 0.15
 --- !u!1 &1200046456755782995
 GameObject:
   m_ObjectHideFlags: 0
