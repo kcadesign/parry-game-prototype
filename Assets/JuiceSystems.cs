@@ -48,7 +48,7 @@ public class JuiceSystems : MonoBehaviour
     private IEnumerator HitStop(float hitStopDuration)
     {
         // pause time for hitStopDuration
-        Time.timeScale = 0f;
+        Time.timeScale = 0.4f;
         yield return new WaitForSecondsRealtime(hitStopDuration);
         // resume time
         Time.timeScale = 1f;

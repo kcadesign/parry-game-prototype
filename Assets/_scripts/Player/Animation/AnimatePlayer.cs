@@ -67,11 +67,11 @@ public class AnimatePlayer : MonoBehaviour
         if (velocityX > -0.02 && velocityX < 0.02) _animator.SetBool("Moving", false);
         else _animator.SetBool("Moving", true);
 
-/*        if(_grounded && PlayerRigidbody.velocity.magnitude > 0.1f)
+        if (_grounded && PlayerRigidbody.velocity.magnitude > 0.1f)
         {
             CreateDustParticles();
         }
-*/        
+
     }
 
     private void CheckPlayerGrounded_OnGrounded(bool grounded)
@@ -94,7 +94,7 @@ public class AnimatePlayer : MonoBehaviour
 
     private void PlayerJump_OnJump(bool jumping)
     {
-        if (_grounded && !_stunned && jumping)
+        if (jumping)
         {
             _animator.ResetTrigger("Landed");
             CreateDustParticles();
