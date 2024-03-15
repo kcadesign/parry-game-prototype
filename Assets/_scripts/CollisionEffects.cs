@@ -12,13 +12,11 @@ public class CollisionEffects : MonoBehaviour
     private void OnEnable()
     {
         PlayerParry.OnParryActive += PlayerParry_OnParryActive;
-        //HandlePlayerCollisions.OnCollision += HandlePlayerCollisions_OnCollision;
     }
 
     private void OnDisable()
     {
         PlayerParry.OnParryActive -= PlayerParry_OnParryActive;
-        //HandlePlayerCollisions.OnCollision -= HandlePlayerCollisions_OnCollision;
     }
 
     private void PlayerParry_OnParryActive(bool parryActive)
@@ -28,28 +26,25 @@ public class CollisionEffects : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        // Get the point of contact
+        Vector2 collisionPoint = collision.ClosestPoint(transform.position);
+
         Debug.Log("Collision with " + collision.gameObject.tag);
         if ((collision.gameObject.CompareTag("HurtBox") || collision.gameObject.CompareTag("Projectile")) && _parryActive)
         {
             Debug.Log("Parry collision with enemy");
-            SpawnParryParticles();
+            SpawnParryParticles(collisionPoint, transform.position);
         }
-
     }
 
-    /*    private void HandlePlayerCollisions_OnCollision(GameObject collidedObject)
-        {
-            if (collidedObject.CompareTag("HurtBox") && _parryActive)
-            {
-                Debug.Log("Parry collision with enemy");
-                SpawnParryParticles();
-            }
-        }
-    */
-
-    private void SpawnParryParticles()
+    private void SpawnParryParticles(Vector2 collisionPoint, Vector2 position)
     {
-        _parryParticlesInstance = Instantiate(_parryParticles, transform.position, Quaternion.identity, gameObject.transform);
-    }
+        Vector2 direction = collisionPoint - position;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
+        _parryParticlesInstance = Instantiate(_parryParticles, position, Quaternion.identity);
+        var shape = _parryParticlesInstance.shape;
+        shape.rotation = new Vector3(0, 0, angle);
+        _parryParticlesInstance.Play();
+    }
 }
