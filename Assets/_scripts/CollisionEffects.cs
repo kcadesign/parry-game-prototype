@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class CollisionEffects : MonoBehaviour
 {
-    [SerializeField] private ParticleSystem _parryParticles;
-    private ParticleSystem _parryParticlesInstance;
-
+    [SerializeField] private GameObject _parryEffectPrefab; // Prefab for the parry effect
     private bool _parryActive;
 
     private void OnEnable()
@@ -26,25 +24,18 @@ public class CollisionEffects : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // Get the point of contact
-        Vector2 collisionPoint = collision.ClosestPoint(transform.position);
-
-        Debug.Log("Collision with " + collision.gameObject.tag);
-        if ((collision.gameObject.CompareTag("HurtBox") || collision.gameObject.CompareTag("Projectile")) && _parryActive)
+        if (_parryActive && (collision.CompareTag("HurtBox") || collision.CompareTag("Projectile")))
         {
-            Debug.Log("Parry collision with enemy");
-            SpawnParryParticles(collisionPoint, transform.position);
+            // Instantiate the parry effect
+            GameObject parryEffectInstance = Instantiate(_parryEffectPrefab, transform.position, Quaternion.identity);
+
+            // get the angle of the parry and set the rotation of the effect
+            Vector3 targetDir = collision.transform.position - transform.position;
+            float angle = Mathf.Atan2(targetDir.y, targetDir.x) * Mathf.Rad2Deg;
+            parryEffectInstance.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+
+            // Destroy the instantiated effect after a delay
+            Destroy(parryEffectInstance, 0.2f);
         }
-    }
-
-    private void SpawnParryParticles(Vector2 collisionPoint, Vector2 position)
-    {
-        Vector2 direction = collisionPoint - position;
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-
-        _parryParticlesInstance = Instantiate(_parryParticles, position, Quaternion.identity);
-        var shape = _parryParticlesInstance.shape;
-        shape.rotation = new Vector3(0, 0, angle);
-        _parryParticlesInstance.Play();
     }
 }

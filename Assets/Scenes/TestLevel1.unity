@@ -2799,6 +2799,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -3.584
       objectReference: {fileID: 0}
+    - target: {fileID: 9056939801834722159, guid: 35cbf832939b4104db8f1243c761cc46, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9135106871874799126, guid: 35cbf832939b4104db8f1243c761cc46, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -11682,6 +11686,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2239151311410739751, guid: 782abbd3b5bdbcd47ad6548704860cd1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4748130280748966392, guid: 782abbd3b5bdbcd47ad6548704860cd1, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8283890522789967028, guid: 782abbd3b5bdbcd47ad6548704860cd1, type: 3}
       propertyPath: m_Name
       value: HUDCanvas
@@ -13847,5 +13859,5 @@ SceneRoots:
   - {fileID: 14985612}
   - {fileID: 1328369439}
   - {fileID: 1085939949}
-  - {fileID: 1627266482}
   - {fileID: 2078758862}
+  - {fileID: 1627266482}
