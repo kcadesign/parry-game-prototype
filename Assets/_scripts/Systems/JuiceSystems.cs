@@ -2,6 +2,7 @@ using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class JuiceSystems : MonoBehaviour
@@ -45,13 +46,14 @@ public class JuiceSystems : MonoBehaviour
         ScreenShake(_screenShakeAmount);
     }
 
+
     private IEnumerator HitStop(float hitStopDuration)
     {
         // pause time for hitStopDuration
         Time.timeScale = 0.4f;
         yield return new WaitForSecondsRealtime(hitStopDuration);
         // resume time
-        Time.timeScale = 1f;
+            Time.timeScale = 1f;
     }
 
     private void ScreenShake(float shakeAmount)

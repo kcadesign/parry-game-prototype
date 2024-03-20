@@ -5,8 +5,9 @@ using UnityEngine;
 
 public class HandlePlayerHealth : MonoBehaviour
 {
-    public delegate void PlayerHealthChange(int currentHealth, bool playerAlive);
+    public delegate void PlayerHealthChange(int currentHealth);
     public static event PlayerHealthChange OnHealthChange;
+    public static Action OnPlayerDead;
     public static event Action OnPlayerHealthReplenish;
 
     public static event Action<GameObject> OnDamageRecieved;
@@ -31,7 +32,7 @@ public class HandlePlayerHealth : MonoBehaviour
         {
             PlayerHealth = new HealthSystem(_maxHealth);
             _currentHealth = PlayerHealth.GetHealth();
-            OnHealthChange?.Invoke(_currentHealth, _playerAlive);
+            OnHealthChange?.Invoke(_currentHealth);
         }
     }
 
@@ -61,7 +62,7 @@ public class HandlePlayerHealth : MonoBehaviour
             {
                 PlayerHealth.ChangeHealth(_maxHealth);
                 _currentHealth = PlayerHealth.GetHealth();
-                OnHealthChange?.Invoke(_currentHealth, _playerAlive);
+                OnHealthChange?.Invoke(_currentHealth);
                 OnPlayerHealthReplenish?.Invoke();
 
                 StopHealTimer();
@@ -93,7 +94,7 @@ public class HandlePlayerHealth : MonoBehaviour
                 StartHealTimer();
 
                 OnDamageRecieved?.Invoke(objectDamager);
-                OnHealthChange?.Invoke(_currentHealth, _playerAlive);
+                OnHealthChange?.Invoke(_currentHealth);
                 
                 OnPlayerHurtBig?.Invoke(false);
             }
@@ -115,7 +116,7 @@ public class HandlePlayerHealth : MonoBehaviour
             ResetHealTimer();
             StartHealTimer();
 
-            OnHealthChange?.Invoke(_currentHealth, _playerAlive);
+            OnHealthChange?.Invoke(_currentHealth);
 
             OnPlayerHurtSmall?.Invoke(false);
         }
@@ -126,6 +127,7 @@ public class HandlePlayerHealth : MonoBehaviour
         if (_currentHealth <= 0)
         {
             _playerAlive = false;
+            OnPlayerDead?.Invoke();
         }
         else
         {
@@ -138,7 +140,7 @@ public class HandlePlayerHealth : MonoBehaviour
         PlayerHealth.ChangeHealth(_maxHealth);
         _currentHealth = PlayerHealth.GetHealth();
         CheckPlayerAlive();
-        OnHealthChange?.Invoke(_currentHealth, _playerAlive);
+        OnHealthChange?.Invoke(_currentHealth);
     }
 
     private void HandlePlayerStun_OnStunned(bool stunned)

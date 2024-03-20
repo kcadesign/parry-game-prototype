@@ -43,7 +43,9 @@ public class HandleGameStateUI : MonoBehaviour
 
     private void OnEnable()
     {
-        HandlePlayerHealth.OnHealthChange += HandlePlayerHealth_OnHealthChange;
+        //HandlePlayerHealth.OnHealthChange += HandlePlayerHealth_OnHealthChange;
+        //HandlePlayerHealth.OnPlayerDead += HandlePlayerHealth_OnPlayerDead;
+        HandlePlayerDeath.OnPlayerDeathAnimEnd += HandlePlayerDeath_OnPlayerDeathAnimEnd;
         HandleBossDeath.OnBossDeathAnimEnd += HandleBossDeath_OnBossDeathAnimEnd;
         HandleEnterFinish.OnLevelFinish += HandleEnterFinish_OnLevelFinish;
         HandleLevelProgression.OnSendCurrentCheckpoint += HandleLevelProgression_OnSendCurrentCheckpoint;
@@ -52,7 +54,9 @@ public class HandleGameStateUI : MonoBehaviour
 
     private void OnDisable()
     {
-        HandlePlayerHealth.OnHealthChange -= HandlePlayerHealth_OnHealthChange;
+        //HandlePlayerHealth.OnHealthChange -= HandlePlayerHealth_OnHealthChange;
+        //HandlePlayerHealth.OnPlayerDead -= HandlePlayerHealth_OnPlayerDead;
+        HandlePlayerDeath.OnPlayerDeathAnimEnd -= HandlePlayerDeath_OnPlayerDeathAnimEnd;
         HandleBossDeath.OnBossDeathAnimEnd -= HandleBossDeath_OnBossDeathAnimEnd;
         HandleEnterFinish.OnLevelFinish -= HandleEnterFinish_OnLevelFinish;
         HandleLevelProgression.OnSendCurrentCheckpoint -= HandleLevelProgression_OnSendCurrentCheckpoint;
@@ -70,7 +74,7 @@ public class HandleGameStateUI : MonoBehaviour
         }
     }
 
-    private void HandlePlayerHealth_OnHealthChange(int currentHealth, bool playerAlive)
+/*    private void HandlePlayerHealth_OnHealthChange(int currentHealth, bool playerAlive)
     {
         //Debug.Log($"Player is alive: {playerAlive}");
         if (GameOverUI != null)
@@ -86,7 +90,26 @@ public class HandleGameStateUI : MonoBehaviour
             }
         }
     }
+*/
 
+    private void HandlePlayerDeath_OnPlayerDeathAnimEnd()
+    {
+        if (GameOverUI != null)
+        {
+            GameOverUI.SetActive(true);
+            OnGameUIActivate?.Invoke(GameOverFirstSelectedButton);
+        }
+    }
+
+/*    private void HandlePlayerHealth_OnPlayerDead()
+    {
+        if (GameOverUI != null)
+        {
+            GameOverUI.SetActive(true);
+            OnGameUIActivate?.Invoke(GameOverFirstSelectedButton);
+        }
+    }
+*/
     private void HandleEnterFinish_OnLevelFinish(bool levelFinished)
     {
         if (LevelFinishUI != null)

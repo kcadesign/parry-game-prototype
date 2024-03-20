@@ -31,6 +31,7 @@ public class AnimatePlayer : MonoBehaviour
         HandlePlayerStun.OnStunned += HandlePlayerStun_OnStunned;
         PlayerParry.OnParryActive += PlayerParry_OnParryActive;
         HandlePlayerHealth.OnPlayerHurtSmall += HandlePlayerHealth_OnPlayerHurtSmall;
+        HandlePlayerHealth.OnPlayerDead += HandlePlayerHealth_OnPlayerDead;
     }
 
     private void OnDisable()
@@ -40,6 +41,7 @@ public class AnimatePlayer : MonoBehaviour
         HandlePlayerStun.OnStunned -= HandlePlayerStun_OnStunned;
         PlayerParry.OnParryActive -= PlayerParry_OnParryActive;
         HandlePlayerHealth.OnPlayerHurtSmall -= HandlePlayerHealth_OnPlayerHurtSmall;
+        HandlePlayerHealth.OnPlayerDead -= HandlePlayerHealth_OnPlayerDead;
     }
 
     private void Start()
@@ -136,6 +138,12 @@ public class AnimatePlayer : MonoBehaviour
         {
             _animator.SetTrigger("SmallHurt");
         }
+    }
+
+    private void HandlePlayerHealth_OnPlayerDead()
+    {
+        _animator.SetTrigger("Dead");
+        Time.timeScale = 0.1f;
     }
 
     public void CreateDustParticles()
