@@ -5,11 +5,12 @@ public class AnimatePlayer : MonoBehaviour
 {
     public static event Action OnPassiveBounce;
 
-    public Rigidbody2D PlayerRigidbody;
+    private Rigidbody2D PlayerRigidbody;
     private Animator _animator;
     public ParticleSystem DustParticles;
 
     private bool _grounded;
+    private bool _hasNegativeYVelocity;
     private bool _stunned;
 
     private bool _localGroundedCheck = false;
@@ -22,6 +23,7 @@ public class AnimatePlayer : MonoBehaviour
     private void Awake()
     {
         _animator = GetComponent<Animator>();
+        PlayerRigidbody = GetComponent<Rigidbody2D>();
     }
 
     private void OnEnable()
@@ -55,6 +57,7 @@ public class AnimatePlayer : MonoBehaviour
     void FixedUpdate()
     {
         AnimatePlayerMove();
+        if(PlayerRigidbody.velocity.y < -0.1) _hasNegativeYVelocity = true;
     }
 
     private void AnimatePlayerMove()
@@ -73,25 +76,27 @@ public class AnimatePlayer : MonoBehaviour
         {
             CreateDustParticles();
         }
-
     }
 
     private void CheckPlayerGrounded_OnGrounded(bool grounded)
     {
         _grounded = grounded;
-
-        if (_grounded && !_localGroundedCheck)
+        if (_hasNegativeYVelocity)
         {
-            CreateDustParticles();
-            _animator.SetTrigger("Landed");
-            OnPassiveBounce?.Invoke();
+            if (_grounded && !_localGroundedCheck)
+            {
+                CreateDustParticles();
+                _animator.SetTrigger("Landed");
+                OnPassiveBounce?.Invoke();
 
-            _localGroundedCheck = true;
+                _localGroundedCheck = true;
+            }
+            else if (!_grounded && _localGroundedCheck)
+            {
+                _localGroundedCheck = false;
+            }
         }
-        else if (!_grounded && _localGroundedCheck)
-        {
-            _localGroundedCheck = false;
-        }
+        _hasNegativeYVelocity = false;
     }
 
     private void PlayerJump_OnJump(bool jumping)
