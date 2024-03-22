@@ -11,14 +11,11 @@ public class AnimatePlayer : MonoBehaviour
 
     private bool _grounded;
     private bool _hasNegativeYVelocity;
-    private bool _stunned;
 
     private bool _localGroundedCheck = false;
 
     public bool SlowTime;
     [Range(0.1f, 1.0f)] public float TimeScale = 0.1f;
-
-
 
     private void Awake()
     {
@@ -57,7 +54,8 @@ public class AnimatePlayer : MonoBehaviour
     void FixedUpdate()
     {
         AnimatePlayerMove();
-        if(PlayerRigidbody.velocity.y < -0.1) _hasNegativeYVelocity = true;
+        CheckYVelocity();
+        AnimateFalling();
     }
 
     private void AnimatePlayerMove()
@@ -78,6 +76,17 @@ public class AnimatePlayer : MonoBehaviour
         }
     }
 
+    private void CheckYVelocity()
+    {
+        // check if player is falling
+        if (PlayerRigidbody.velocity.y < -0.1) _hasNegativeYVelocity = true;
+    }
+    private void AnimateFalling()
+    {
+        if (_hasNegativeYVelocity && !_grounded) _animator.SetBool("Falling", true);
+        else _animator.SetBool("Falling", false);
+    }
+
     private void CheckPlayerGrounded_OnGrounded(bool grounded)
     {
         _grounded = grounded;
@@ -96,6 +105,7 @@ public class AnimatePlayer : MonoBehaviour
                 _localGroundedCheck = false;
             }
         }
+        // if player is grounded, they are no longer falling
         _hasNegativeYVelocity = false;
     }
 
@@ -104,6 +114,7 @@ public class AnimatePlayer : MonoBehaviour
         if (jumping)
         {
             _animator.ResetTrigger("Landed");
+            _animator.SetBool("Falling", false);
             CreateDustParticles();
             _animator.SetTrigger("Jumping");
         }
@@ -111,15 +122,6 @@ public class AnimatePlayer : MonoBehaviour
 
     private void HandlePlayerStun_OnStunned(bool stunned)
     {
-        if (stunned)
-        {
-            _stunned = true;
-        }
-        else
-        {
-            _stunned = false;
-        }
-
         if (stunned)
         {
             _animator.SetBool("Stunned", true);

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 78559d5ff6b6aa84380587b4f71fdb9e
+guid: b056d0ecd3ccad94cad274b06bbc89e2
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -136,7 +136,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Player_idle_0
+      name: Player_roll_slow_0
       rect:
         serializedVersion: 2
         x: 0
@@ -150,14 +150,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 46c779e5afb051b4f84b550fcba0e388
-      internalID: 2070903033
+      spriteID: 469238f258d9ed84bbafa98d615a4ab0
+      internalID: 942370872
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_idle_1
+      name: Player_roll_slow_1
       rect:
         serializedVersion: 2
         x: 128
@@ -171,14 +171,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bb7c2aeed5cc04c4e87f8eb4aae7cf66
-      internalID: 1455996302
+      spriteID: ff125a39525bf7b49834428851bc44e1
+      internalID: -958521986
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_idle_2
+      name: Player_roll_slow_2
       rect:
         serializedVersion: 2
         x: 256
@@ -192,8 +192,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f4d257cfb5635c0438e9c81ad194edfd
-      internalID: -1173249374
+      spriteID: a46b673acb328754bab2fd1d9e715e15
+      internalID: -651948800
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_roll_slow_3
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 99d73449d3f6cc249986be7dd882f06e
+      internalID: 751889280
       vertices: []
       indices: 
       edges: []
@@ -209,9 +230,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Player_idle_0: 2070903033
-      Player_idle_1: 1455996302
-      Player_idle_2: -1173249374
+      Player_roll_slow_0: 942370872
+      Player_roll_slow_1: -958521986
+      Player_roll_slow_2: -651948800
+      Player_roll_slow_3: 751889280
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

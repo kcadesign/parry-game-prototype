@@ -18,6 +18,7 @@ public class GameStateManager : MonoBehaviour
     {
         playerControls = new PlayerControls();
         HandlePauseTime(_pauseTime);
+        Debug.Log($"Player can pause: {_playerCanPause}");
     }
 
     private void OnEnable()
@@ -46,6 +47,12 @@ public class GameStateManager : MonoBehaviour
         HandleEnterFinish.OnLevelFinish -= HandleEnterFinish_OnLevelFinish;
         HandleGameStateUI.OnGameRestart -= HandleGameStateUI_OnGameRestart;
         HandleGameStateUI.OnGoToMainMenu -= HandleGameStateUI_OnGoToMainMenu;
+    }
+
+    private void Update()
+    {
+
+
     }
 
     private void Pause_performed(InputAction.CallbackContext value)
@@ -100,6 +107,7 @@ public class GameStateManager : MonoBehaviour
     private void HandleGameStateUI_OnGameRestart(Vector3 respawnPosition)
     {
         _pauseTime = false;
+        _playerCanPause = true;
         HandlePauseTime(_pauseTime);
     }
 
