@@ -198,6 +198,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Player_idle_3
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9105cdc5188abe341ad2f20014aca423
+      internalID: 1635020304
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -212,6 +233,7 @@ TextureImporter:
       Player_idle_0: 2070903033
       Player_idle_1: 1455996302
       Player_idle_2: -1173249374
+      Player_idle_3: 1635020304
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
