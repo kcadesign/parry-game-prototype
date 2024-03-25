@@ -1,6 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using static Cinemachine.DocumentationSortingAttribute;
 
 public class HandleLevelBGM : MonoBehaviour
 {
@@ -32,16 +35,18 @@ public class HandleLevelBGM : MonoBehaviour
     private void OnEnable()
     {
         HandleGameStateUI.OnStartButtonPressed += HandleGameStateUI_OnStartButtonPressed;
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
+
 
     private void OnDisable()
     {
         HandleGameStateUI.OnStartButtonPressed -= HandleGameStateUI_OnStartButtonPressed;
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     private void Start()
     {
-        
         // check the level index and set the audio source clip to play the appropriate music
         int currentLevel = UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex;
         if (currentLevel == 0)
@@ -68,19 +73,9 @@ public class HandleLevelBGM : MonoBehaviour
         StartCoroutine(FadeInBGM());
     }
 
-    private void HandleGameStateUI_OnStartButtonPressed()
+    private void OnSceneLoaded(Scene scene, LoadSceneMode sceneMode)
     {
-        // slowly fade out the main menu music
-        StartCoroutine(FadeOutBGM());
-    }
-
-    private void OnLevelWasLoaded(int level)
-    {
-        // if the level is 0, play the main menu music
-        // if the level is 1, 2, or 3, play the world 1 level music
-        // if the level is 4, play the world 1 boss music
-        // do not restart the track if the correct music is already playing
-
+        int level = scene.buildIndex;
         if (level == 0 && _audioSource.clip != BGMCollection.FindSoundByName("MainMenu").AudioClips[0])
         {
             string mainMenuBGM = "MainMenu";
@@ -108,6 +103,12 @@ public class HandleLevelBGM : MonoBehaviour
             _audioSource.Play();
             StartCoroutine(FadeInBGM());
         }
+    }
+
+    private void HandleGameStateUI_OnStartButtonPressed()
+    {
+        // slowly fade out the main menu music
+        StartCoroutine(FadeOutBGM());
     }
 
     private IEnumerator FadeInBGM()

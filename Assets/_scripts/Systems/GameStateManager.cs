@@ -18,7 +18,7 @@ public class GameStateManager : MonoBehaviour
     {
         playerControls = new PlayerControls();
         HandlePauseTime(_pauseTime);
-        Debug.Log($"Player can pause: {_playerCanPause}");
+        //Debug.Log($"Player can pause: {_playerCanPause}");
     }
 
     private void OnEnable()

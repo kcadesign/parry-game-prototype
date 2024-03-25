@@ -78,3 +78,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Projectile: {fileID: 332823560691022870, guid: 28de881a8850cfb468c504e65a589b44, type: 3}
   SpawnPointTransform: {fileID: 8782145494615040690}
+  _projectileMovementDirection: {x: 0, y: 0}
+  _speed: 8

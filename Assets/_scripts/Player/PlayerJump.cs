@@ -25,9 +25,9 @@ public class PlayerJump : MonoBehaviour
     [SerializeField] private bool _currentlyJumping;
 
     [Header("Gravity")]
-    [SerializeField] private float _baseGravity = 1;
-    [SerializeField][Range(0f, 5f)] private float _jumpGravity = 0;
-    [SerializeField][Range(0f, 5f)] private float _fallGravity = 0;
+    [SerializeField] private float _baseGravity;
+    [SerializeField][Range(0f, 5f)] private float _jumpGravity;
+    [SerializeField][Range(0f, 5f)] private float _fallGravity;
 
     private void Awake()
     {
@@ -65,6 +65,8 @@ public class PlayerJump : MonoBehaviour
         HandleCoyoteTime();
 
         SetJumpGravity();
+        Debug.Log($"Current gravity is {_rigidbody.gravityScale}");
+
     }
 
     private void Jump_performed(InputAction.CallbackContext obj)
@@ -135,7 +137,8 @@ public class PlayerJump : MonoBehaviour
 
     private void SetNewGravity(float gravityMultiplier)
     {
-        _rigidbody.gravityScale = gravityMultiplier;
+        Debug.Log($"Setting gravity to {gravityMultiplier}");
+        _rigidbody.gravityScale *= gravityMultiplier;
     }
 
     private void ResetGravity()
@@ -145,6 +148,10 @@ public class PlayerJump : MonoBehaviour
 
     private void DoJump()
     {
+        //Debug.Log($"Base gravity is {_baseGravity}");
+        //Debug.Log($"Jump gravity is {_jumpGravity}");
+        //Debug.Log($"Fall gravity is {_fallGravity}");
+
         Vector2 jumpForce = new(0, _jumpPower);
 
         _currentlyJumping = true;
@@ -153,4 +160,5 @@ public class PlayerJump : MonoBehaviour
         _rigidbody.velocity = new(_rigidbody.velocity.x, 0);
         _rigidbody.AddForce(jumpForce, ForceMode2D.Impulse);
     }
+    
 }
