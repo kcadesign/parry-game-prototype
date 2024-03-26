@@ -141,8 +141,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec61f7174c3b4cc4d9af4ea175d3a8d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _audioSource: {fileID: 0}
   BGMCollection: {fileID: 11400000, guid: a1c18c3635816e94594da99862ceb29a, type: 2}
   _desiredVolume: 0.5
+  _pauseVolume: 0.15
   _fadeInSpeed: 0.5
   _fadeOutSpeed: 0.5

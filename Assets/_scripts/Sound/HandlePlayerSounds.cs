@@ -10,7 +10,7 @@ public class HandlePlayerSounds : MonoBehaviour
     {
         PlayerJump.OnJump += PlayerJump_OnJump;
         PlayerParry.OnParryBounce += PlayerParry_OnParryBounce;
-        HandlePlayerCollisions.OnPassiveBounce += HandlePlayerCollisions_OnPassiveBounce;
+        AnimatePlayer.OnPassiveBounce += AnimatePlayer_OnPassiveBounce;
         HandlePlayerHealth.OnPlayerHurtBig += HandlePlayerHealth_OnPlayerHurtBig;
         HandlePlayerHealth.OnPlayerHurtSmall += HandlePlayerHealth_OnPlayerHurtSmall;
         HandlePlayerHealth.OnPlayerHealthReplenish += HandlePlayerHealth_OnPlayerHealthReplenish;
@@ -20,7 +20,7 @@ public class HandlePlayerSounds : MonoBehaviour
     {
         PlayerJump.OnJump -= PlayerJump_OnJump;
         PlayerParry.OnParryBounce -= PlayerParry_OnParryBounce;
-        HandlePlayerCollisions.OnPassiveBounce -= HandlePlayerCollisions_OnPassiveBounce;
+        AnimatePlayer.OnPassiveBounce -= AnimatePlayer_OnPassiveBounce;
         HandlePlayerHealth.OnPlayerHurtBig -= HandlePlayerHealth_OnPlayerHurtBig;
         HandlePlayerHealth.OnPlayerHurtSmall -= HandlePlayerHealth_OnPlayerHurtSmall;
         HandlePlayerHealth.OnPlayerHealthReplenish -= HandlePlayerHealth_OnPlayerHealthReplenish;
@@ -28,6 +28,7 @@ public class HandlePlayerSounds : MonoBehaviour
 
     private void PlayerJump_OnJump(bool jumping)
     {
+        //Debug.Log("PlayerJump_OnJump signal recieved");
         if (jumping && _playerSounds != null && _playerSounds.Sounds.Length > 0)
         {
             _playerSounds.PlaySound("Jump", transform);
@@ -66,7 +67,7 @@ public class HandlePlayerSounds : MonoBehaviour
         }
     }
 
-    private void HandlePlayerCollisions_OnPassiveBounce()
+    private void AnimatePlayer_OnPassiveBounce()
     {
         if (_playerSounds != null && _playerSounds.Sounds.Length > 0)
         {

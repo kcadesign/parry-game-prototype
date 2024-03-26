@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,10 +9,12 @@ public class PlayerMove : MonoBehaviour
     protected PlayerControls playerControls;
     private Rigidbody2D _rigidBody;
 
-    private Vector2 _movementAxis;
+    private Vector2 _movementInput;
 
     [SerializeField] private float _rollSpeed = 5;
-    [SerializeField] private float _maxVelocity = 2;
+    //[SerializeField] private float _maxVelocity = 2;
+    [SerializeField][Range(0f, 10f)] private float _acceleration = 1;
+    [SerializeField][Range(0f, 10f)] private float _deceleration = 1;
 
     private void Awake()
     {
@@ -42,35 +42,25 @@ public class PlayerMove : MonoBehaviour
     {
         HandleHorizontalMovement();
         OnPlayerMoveInput?.Invoke(_rigidBody.velocity);
-        //Debug.Log($"Player current velocity magnitude is: {_rigidBody.velocity.magnitude}");
     }
 
     private void Rolling_performed(InputAction.CallbackContext value)
     {
-        _movementAxis = value.ReadValue<Vector2>();
+        _movementInput = value.ReadValue<Vector2>();
     }
 
     private void Rolling_canceled(InputAction.CallbackContext value)
     {
-        _movementAxis = value.ReadValue<Vector2>();
+        _movementInput = value.ReadValue<Vector2>();
     }
 
     private void HandleHorizontalMovement()
     {
-        Vector2 movementDirection = _movementAxis.normalized;
-        movementDirection.y = 0f;
-
-        Vector2 movementForce = _rollSpeed * Time.fixedDeltaTime * movementDirection;
-        movementForce.y = 0f;
-
-        // Would like to be able to add force in the opposite direction even if velocity is over max
-        if (_movementAxis.magnitude > 0 && _rigidBody.velocity.magnitude < _maxVelocity)
-        {
-            _rigidBody.AddForce(movementForce, ForceMode2D.Impulse);
-        }
-        else if(_rigidBody.velocity.magnitude > _maxVelocity)
-        {
-            _rigidBody.AddForce(Vector2.zero);
-        }
+        float targetSpeed = _movementInput.x * _rollSpeed;
+        float speedDifference = targetSpeed - _rigidBody.velocity.x;
+        float accelerationRate = (Mathf.Abs(targetSpeed) > 0.01f) ? _acceleration : _deceleration;
+        float movementForce = (Mathf.Abs(speedDifference) * accelerationRate) * Mathf.Sign(speedDifference);
+        _rigidBody.AddForce(movementForce * Vector2.right);
     }
+
 }

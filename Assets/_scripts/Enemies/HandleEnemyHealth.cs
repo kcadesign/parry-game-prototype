@@ -11,6 +11,8 @@ public class HandleEnemyHealth : MonoBehaviour
     public int MaxHealth = 25;
     public int CurrentHealth;
 
+    [SerializeField] private bool _reportDeath = true;
+
     private void Awake()
     {
         _enemyHealth = new HealthSystem(MaxHealth);
@@ -44,8 +46,12 @@ public class HandleEnemyHealth : MonoBehaviour
     {
         if (CurrentHealth <= 0)
         {
-            OnEnemyDeath?.Invoke(gameObject.transform.parent.gameObject);
+            if (_reportDeath)
+            {
+                Debug.Log($"{gameObject.transform.parent.name} has died");
+                OnEnemyDeath?.Invoke(gameObject.transform.parent.gameObject);
 
+            }
             Destroy(gameObject.transform.parent.gameObject);
 
         }

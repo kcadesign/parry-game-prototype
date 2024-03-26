@@ -20,3 +20,11 @@ MonoBehaviour:
     Volume: 1
     Pitch: 1
     SpatialBlend: 0
+    Loop: 0
+  - Name: Attack
+    AudioClips:
+    - {fileID: 8300000, guid: fdf2e25c056da39428720668da94199d, type: 3}
+    Volume: 0.7
+    Pitch: 1
+    SpatialBlend: 0
+    Loop: 0

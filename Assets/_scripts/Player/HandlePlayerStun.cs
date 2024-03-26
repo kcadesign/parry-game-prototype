@@ -83,12 +83,12 @@ public class HandlePlayerStun : MonoBehaviour
 
         if (approachDirectionX > 0)
         {
-            _rigidbody.velocity = new(_rigidbody.velocity.x, 0);
+            _rigidbody.velocity = new(0, 0);
             _rigidbody.AddForce(new Vector2(1, 1) * _knockbackForce, ForceMode2D.Impulse);
         }
         else if (approachDirectionX < 0)
         {
-            _rigidbody.velocity = new(_rigidbody.velocity.x, 0);
+            _rigidbody.velocity = new(0, 0);
             _rigidbody.AddForce(new Vector2(-1, 1) * _knockbackForce, ForceMode2D.Impulse);
         }
     }

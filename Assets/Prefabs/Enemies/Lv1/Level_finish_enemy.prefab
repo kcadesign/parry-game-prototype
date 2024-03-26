@@ -459,6 +459,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5874068999174111517, guid: 033d711d75361e441b1fd89cf0622f53, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874068999174111517, guid: 033d711d75361e441b1fd89cf0622f53, type: 3}
       propertyPath: maxHealth
       value: 25
       objectReference: {fileID: 0}
@@ -485,6 +489,10 @@ PrefabInstance:
     - target: {fileID: 7976323921639655483, guid: 033d711d75361e441b1fd89cf0622f53, type: 3}
       propertyPath: m_Name
       value: Level_finish_enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 7976323921639655483, guid: 033d711d75361e441b1fd89cf0622f53, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 9097890226027746778, guid: 033d711d75361e441b1fd89cf0622f53, type: 3}
       propertyPath: m_ConstrainProportionsScale

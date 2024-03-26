@@ -18,6 +18,7 @@ public class GameStateManager : MonoBehaviour
     {
         playerControls = new PlayerControls();
         HandlePauseTime(_pauseTime);
+        //Debug.Log($"Player can pause: {_playerCanPause}");
     }
 
     private void OnEnable()
@@ -26,7 +27,8 @@ public class GameStateManager : MonoBehaviour
 
         playerControls.Menus.Pause.performed += Pause_performed;
         playerControls.Menus.Pause.canceled += Pause_canceled;
-        HandlePlayerHealth.OnHealthChange += HandlePlayerHealth_OnHealthChange;
+
+        HandlePlayerDeath.OnPlayerDeathAnimEnd += HandlePlayerDeath_OnPlayerDeathAnimEnd;
         HandleBossDeath.OnBossDeathAnimEnd += HandleBossDeath_OnBossDeathAnimEnd;
         HandleEnterFinish.OnLevelFinish += HandleEnterFinish_OnLevelFinish;
         HandleGameStateUI.OnGameRestart += HandleGameStateUI_OnGameRestart;
@@ -39,11 +41,18 @@ public class GameStateManager : MonoBehaviour
 
         playerControls.Menus.Pause.performed -= Pause_performed;
         playerControls.Menus.Pause.canceled -= Pause_canceled;
-        HandlePlayerHealth.OnHealthChange -= HandlePlayerHealth_OnHealthChange;
+
+        HandlePlayerDeath.OnPlayerDeathAnimEnd -= HandlePlayerDeath_OnPlayerDeathAnimEnd;
         HandleBossDeath.OnBossDeathAnimEnd -= HandleBossDeath_OnBossDeathAnimEnd;
         HandleEnterFinish.OnLevelFinish -= HandleEnterFinish_OnLevelFinish;
         HandleGameStateUI.OnGameRestart -= HandleGameStateUI_OnGameRestart;
         HandleGameStateUI.OnGoToMainMenu -= HandleGameStateUI_OnGoToMainMenu;
+    }
+
+    private void Update()
+    {
+
+
     }
 
     private void Pause_performed(InputAction.CallbackContext value)
@@ -64,19 +73,13 @@ public class GameStateManager : MonoBehaviour
         return;
     }
 
-    private void HandlePlayerHealth_OnHealthChange(int currentHealth, bool playerAlive)
+    private void HandlePlayerDeath_OnPlayerDeathAnimEnd()
     {
-        if (!playerAlive)
-        {
-            _pauseTime = true;
-            _playerCanPause = false;
-        }
-        else
-        {
-            _pauseTime = false;
-            _playerCanPause = true;
-        }
-        HandlePauseTime(_pauseTime);
+        //_pauseTime = true;
+        _playerCanPause = false;
+        PauseTime();
+
+        //HandlePauseTime(_pauseTime);
     }
 
     private void HandleBossDeath_OnBossDeathAnimEnd()
@@ -85,7 +88,6 @@ public class GameStateManager : MonoBehaviour
         _playerCanPause = false;
         HandlePauseTime(_pauseTime);
     }
-
 
     private void HandleEnterFinish_OnLevelFinish(bool levelFinished)
     {
@@ -105,6 +107,7 @@ public class GameStateManager : MonoBehaviour
     private void HandleGameStateUI_OnGameRestart(Vector3 respawnPosition)
     {
         _pauseTime = false;
+        _playerCanPause = true;
         HandlePauseTime(_pauseTime);
     }
 
@@ -125,5 +128,15 @@ public class GameStateManager : MonoBehaviour
             Time.timeScale = 1f;
         }
     }    
+
+    private void PauseTime()
+    {
+        Time.timeScale = 0f;
+    }
+
+    private void UnpauseTime()
+    {
+        Time.timeScale = 1f;
+    }
 
 }

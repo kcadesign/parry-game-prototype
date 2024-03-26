@@ -1,12 +1,22 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using static Cinemachine.DocumentationSortingAttribute;
+using static GameStateManager;
 
 public class HandleLevelBGM : MonoBehaviour
 {
-    [SerializeField] private AudioSource _audioSource;
+    [Header("References")]
     public SoundCollection BGMCollection;
+    private AudioSource _audioSource;
+
+    [Header("Volume")]
     [SerializeField] private float _desiredVolume = 0.5f;
+    [SerializeField] private float _pauseVolume = 0.2f;
+
+    [Header("Fade Speed")]
     [SerializeField] private float _fadeInSpeed = 0.5f;
     [SerializeField] private float _fadeOutSpeed = 0.5f;
 
@@ -32,16 +42,23 @@ public class HandleLevelBGM : MonoBehaviour
     private void OnEnable()
     {
         HandleGameStateUI.OnStartButtonPressed += HandleGameStateUI_OnStartButtonPressed;
+        GameStateManager.OnPlayerPause += GameStateManager_OnPlayerPause;
+        HandleEnterFinish.OnLevelFinish += HandleEnterFinish_OnLevelFinish;
+
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
+
 
     private void OnDisable()
     {
         HandleGameStateUI.OnStartButtonPressed -= HandleGameStateUI_OnStartButtonPressed;
+        GameStateManager.OnPlayerPause -= GameStateManager_OnPlayerPause;
+        HandleEnterFinish.OnLevelFinish -= HandleEnterFinish_OnLevelFinish;
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     private void Start()
     {
-        
         // check the level index and set the audio source clip to play the appropriate music
         int currentLevel = UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex;
         if (currentLevel == 0)
@@ -68,19 +85,35 @@ public class HandleLevelBGM : MonoBehaviour
         StartCoroutine(FadeInBGM());
     }
 
-    private void HandleGameStateUI_OnStartButtonPressed()
+    private void GameStateManager_OnPlayerPause(bool playerPaused)
     {
-        // slowly fade out the main menu music
-        StartCoroutine(FadeOutBGM());
+        if (playerPaused)
+        {
+            _audioSource.volume = _pauseVolume;
+        }
+        else
+        {
+            _audioSource.volume = _desiredVolume;
+        }
     }
 
-    private void OnLevelWasLoaded(int level)
+    private void HandleEnterFinish_OnLevelFinish(bool levelFinished)
     {
-        // if the level is 0, play the main menu music
-        // if the level is 1, 2, or 3, play the world 1 level music
-        // if the level is 4, play the world 1 boss music
-        // do not restart the track if the correct music is already playing
+        if (levelFinished)
+        {
+            _audioSource.volume = _pauseVolume;
+        }
+        else
+        {
+            _audioSource.volume = _desiredVolume;
+        }
 
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode sceneMode)
+    {
+        StartCoroutine(FadeInBGM());
+        int level = scene.buildIndex;
         if (level == 0 && _audioSource.clip != BGMCollection.FindSoundByName("MainMenu").AudioClips[0])
         {
             string mainMenuBGM = "MainMenu";
@@ -110,6 +143,11 @@ public class HandleLevelBGM : MonoBehaviour
         }
     }
 
+    private void HandleGameStateUI_OnStartButtonPressed()
+    {
+        StartCoroutine(FadeOutBGM());
+    }
+
     private IEnumerator FadeInBGM()
     {
         while (_audioSource.volume < _desiredVolume)
@@ -129,4 +167,12 @@ public class HandleLevelBGM : MonoBehaviour
         _audioSource.Stop();
     }
 
+    private IEnumerator LowerPitch()
+    {
+        while (_audioSource.pitch > 0.5f)
+        {
+            _audioSource.pitch -= Time.deltaTime * 0.1f;
+            yield return null;
+        }
+    }
 }
