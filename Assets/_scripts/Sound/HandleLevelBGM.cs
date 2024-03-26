@@ -4,12 +4,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using static Cinemachine.DocumentationSortingAttribute;
+using static GameStateManager;
 
 public class HandleLevelBGM : MonoBehaviour
 {
-    [SerializeField] private AudioSource _audioSource;
+    [Header("References")]
     public SoundCollection BGMCollection;
+    private AudioSource _audioSource;
+
+    [Header("Volume")]
     [SerializeField] private float _desiredVolume = 0.5f;
+    [SerializeField] private float _pauseVolume = 0.2f;
+
+    [Header("Fade Speed")]
     [SerializeField] private float _fadeInSpeed = 0.5f;
     [SerializeField] private float _fadeOutSpeed = 0.5f;
 
@@ -35,6 +42,9 @@ public class HandleLevelBGM : MonoBehaviour
     private void OnEnable()
     {
         HandleGameStateUI.OnStartButtonPressed += HandleGameStateUI_OnStartButtonPressed;
+        GameStateManager.OnPlayerPause += GameStateManager_OnPlayerPause;
+        HandleEnterFinish.OnLevelFinish += HandleEnterFinish_OnLevelFinish;
+
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
@@ -42,6 +52,8 @@ public class HandleLevelBGM : MonoBehaviour
     private void OnDisable()
     {
         HandleGameStateUI.OnStartButtonPressed -= HandleGameStateUI_OnStartButtonPressed;
+        GameStateManager.OnPlayerPause -= GameStateManager_OnPlayerPause;
+        HandleEnterFinish.OnLevelFinish -= HandleEnterFinish_OnLevelFinish;
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
@@ -73,8 +85,34 @@ public class HandleLevelBGM : MonoBehaviour
         StartCoroutine(FadeInBGM());
     }
 
+    private void GameStateManager_OnPlayerPause(bool playerPaused)
+    {
+        if (playerPaused)
+        {
+            _audioSource.volume = _pauseVolume;
+        }
+        else
+        {
+            _audioSource.volume = _desiredVolume;
+        }
+    }
+
+    private void HandleEnterFinish_OnLevelFinish(bool levelFinished)
+    {
+        if (levelFinished)
+        {
+            _audioSource.volume = _pauseVolume;
+        }
+        else
+        {
+            _audioSource.volume = _desiredVolume;
+        }
+
+    }
+
     private void OnSceneLoaded(Scene scene, LoadSceneMode sceneMode)
     {
+        StartCoroutine(FadeInBGM());
         int level = scene.buildIndex;
         if (level == 0 && _audioSource.clip != BGMCollection.FindSoundByName("MainMenu").AudioClips[0])
         {
@@ -107,7 +145,6 @@ public class HandleLevelBGM : MonoBehaviour
 
     private void HandleGameStateUI_OnStartButtonPressed()
     {
-        // slowly fade out the main menu music
         StartCoroutine(FadeOutBGM());
     }
 
@@ -130,4 +167,12 @@ public class HandleLevelBGM : MonoBehaviour
         _audioSource.Stop();
     }
 
+    private IEnumerator LowerPitch()
+    {
+        while (_audioSource.pitch > 0.5f)
+        {
+            _audioSource.pitch -= Time.deltaTime * 0.1f;
+            yield return null;
+        }
+    }
 }

@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class HandleCheckpoint : MonoBehaviour
 {
+    public static Action OnPassCheckpoint;
     public HandleLevelProgression levelProgression;
 
     private SpriteRenderer _spriteRenderer;
@@ -25,6 +27,7 @@ public class HandleCheckpoint : MonoBehaviour
             levelProgression.SetCurrentCheckpoint(transform, collision.gameObject);
 
             _spriteRenderer.color = CheckpointSavedColor;
+            OnPassCheckpoint?.Invoke();
         }
     }
 }
