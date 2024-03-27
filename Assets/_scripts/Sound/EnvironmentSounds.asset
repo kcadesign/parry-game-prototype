@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2824276550084e048b1528aba54d6ab3, type: 3}
+  m_Name: EnvironmentSounds
+  m_EditorClassIdentifier: 
+  Sounds:
+  - Name: LevelEndWarp
+    AudioClips:
+    - {fileID: 8300000, guid: 7f836fd3b3e967c40a1c9a40c43459fc, type: 3}
+    Volume: 0.75
+    Pitch: 1
+    SpatialBlend: 0
+    Loop: 0
+  - Name: LevelStartWarp
+    AudioClips:
+    - {fileID: 8300000, guid: 9d30f7bfc1f509145b9bc493c444da53, type: 3}
+    Volume: 0.75
+    Pitch: 1
+    SpatialBlend: 0
+    Loop: 0

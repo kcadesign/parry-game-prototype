@@ -351,7 +351,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5efc424c3af3ad4183e2770e22ae4d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WarpObject: {fileID: 0}
+  WarpObject: {fileID: 6548867504594779929, guid: 25efc43c70089a84b8fdff50f3aba764, type: 3}
   _shockwaveTime: 3
 --- !u!114 &8343463701185325467
 MonoBehaviour:

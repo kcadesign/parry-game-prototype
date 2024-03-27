@@ -12,7 +12,6 @@ public class HandleLevelStart : MonoBehaviour
     private int _waveDistanceFromCentre = Shader.PropertyToID("_WaveDistanceFromCentre");
     private int _ShockwaveStrength = Shader.PropertyToID("_ShockwaveStrength");
 
-
     private void Start()
     {
         int currentLevel = UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex;
