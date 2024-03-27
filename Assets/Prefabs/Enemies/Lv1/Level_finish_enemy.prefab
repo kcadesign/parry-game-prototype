@@ -351,6 +351,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5efc424c3af3ad4183e2770e22ae4d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  WarpObject: {fileID: 0}
+  _shockwaveTime: 3
 --- !u!114 &8343463701185325467
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -457,6 +459,10 @@ PrefabInstance:
     - target: {fileID: 5092373360796722284, guid: 033d711d75361e441b1fd89cf0622f53, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874068999174111517, guid: 033d711d75361e441b1fd89cf0622f53, type: 3}
+      propertyPath: MaxHealth
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 5874068999174111517, guid: 033d711d75361e441b1fd89cf0622f53, type: 3}
       propertyPath: m_Enabled

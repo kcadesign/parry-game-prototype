@@ -16,14 +16,14 @@ public class TrackHostages : MonoBehaviour
 
     private void OnEnable()
     {
-        HandleEnterFinish.OnLevelFinish += HandleEnterFinish_OnLevelFinish;
+        HandleEnterFinish.OnPlayerParryFinish += HandleEnterFinish_OnLevelFinish;
         FollowOnTriggerEnter.OnFollow += FollowOnTriggerEnter_OnFollow;
         TrackScene.OnSceneChecked += TrackScene_OnSceneChecked;
     }
 
     private void OnDisable()
     {
-        HandleEnterFinish.OnLevelFinish -= HandleEnterFinish_OnLevelFinish;
+        HandleEnterFinish.OnPlayerParryFinish -= HandleEnterFinish_OnLevelFinish;
         FollowOnTriggerEnter.OnFollow -= FollowOnTriggerEnter_OnFollow;
         TrackScene.OnSceneChecked -= TrackScene_OnSceneChecked;
     }

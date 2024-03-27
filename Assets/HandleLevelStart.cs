@@ -3,56 +3,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HandleEnterFinish : MonoBehaviour
+public class HandleLevelStart : MonoBehaviour
 {
-    public delegate void FinishLevel(bool levelFinished);
-    public static event FinishLevel OnPlayerParryFinish;
-
-    public static Action OnWarpFinish;
-
     public GameObject WarpObject;
     private Material LevelFinishWarpMaterial;
-
-    private bool _parryActive;
-    private bool _levelFinished;
 
     [SerializeField] private float _shockwaveTime = 3f;
     private int _waveDistanceFromCentre = Shader.PropertyToID("_WaveDistanceFromCentre");
     private int _ShockwaveStrength = Shader.PropertyToID("_ShockwaveStrength");
 
-    private void OnEnable()
-    {
-        PlayerParry.OnParryActive += PlayerParry_OnParryActive;
-    }
 
-    private void OnDisable()
+    private void Start()
     {
-        PlayerParry.OnParryActive -= PlayerParry_OnParryActive;
-        WarpObject.SetActive(false);
-    }
-
-    private void PlayerParry_OnParryActive(bool parryPressed)
-    {
-        _parryActive = parryPressed;
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player") && _parryActive)
+        int currentLevel = UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex;
+        if (currentLevel != 1)
         {
-            _levelFinished = true;
-            OnPlayerParryFinish?.Invoke(_levelFinished);
-            StartCoroutine(LevelWarp(0, 5));
-        }
-        else
-        {
-            _levelFinished = false;
+            WarpObject.SetActive(true);
+            StartCoroutine(LevelWarp(5, 0));
         }
     }
 
     private IEnumerator LevelWarp(float startPosition, float endPosition)
     {
-        WarpObject.SetActive(true);
         LevelFinishWarpMaterial = WarpObject.GetComponent<SpriteRenderer>().material;
 
         LevelFinishWarpMaterial.SetFloat(_ShockwaveStrength, startPosition);
@@ -66,6 +38,8 @@ public class HandleEnterFinish : MonoBehaviour
             LevelFinishWarpMaterial.SetFloat(_ShockwaveStrength, lerpedAmount);
             yield return null;
         }
-        OnWarpFinish?.Invoke();
+        WarpObject.SetActive(false);
+
     }
+
 }

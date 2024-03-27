@@ -47,7 +47,8 @@ public class HandleGameStateUI : MonoBehaviour
         //HandlePlayerHealth.OnPlayerDead += HandlePlayerHealth_OnPlayerDead;
         HandlePlayerDeath.OnPlayerDeathAnimEnd += HandlePlayerDeath_OnPlayerDeathAnimEnd;
         HandleBossDeath.OnBossDeathAnimEnd += HandleBossDeath_OnBossDeathAnimEnd;
-        HandleEnterFinish.OnLevelFinish += HandleEnterFinish_OnLevelFinish;
+        HandleEnterFinish.OnPlayerParryFinish += HandleEnterFinish_OnLevelFinish;
+        HandleEnterFinish.OnWarpFinish += HandleEnterFinish_OnLevelFinish;
         HandleLevelProgression.OnSendCurrentCheckpoint += HandleLevelProgression_OnSendCurrentCheckpoint;
         GameStateManager.OnPlayerPause += GameStateManager_OnPlayerPause;
     }
@@ -58,9 +59,15 @@ public class HandleGameStateUI : MonoBehaviour
         //HandlePlayerHealth.OnPlayerDead -= HandlePlayerHealth_OnPlayerDead;
         HandlePlayerDeath.OnPlayerDeathAnimEnd -= HandlePlayerDeath_OnPlayerDeathAnimEnd;
         HandleBossDeath.OnBossDeathAnimEnd -= HandleBossDeath_OnBossDeathAnimEnd;
-        HandleEnterFinish.OnLevelFinish -= HandleEnterFinish_OnLevelFinish;
+        HandleEnterFinish.OnPlayerParryFinish -= HandleEnterFinish_OnLevelFinish;
+        HandleEnterFinish.OnWarpFinish -= HandleEnterFinish_OnLevelFinish;
         HandleLevelProgression.OnSendCurrentCheckpoint -= HandleLevelProgression_OnSendCurrentCheckpoint;
         GameStateManager.OnPlayerPause -= GameStateManager_OnPlayerPause;
+    }
+
+    private void HandleEnterFinish_OnLevelFinish()
+    {
+        NextLevel();
     }
 
     private void Start()
@@ -112,7 +119,7 @@ public class HandleGameStateUI : MonoBehaviour
 */
     private void HandleEnterFinish_OnLevelFinish(bool levelFinished)
     {
-        if (LevelFinishUI != null)
+/*        if (LevelFinishUI != null)
         {
             if (levelFinished)
             {
@@ -124,7 +131,9 @@ public class HandleGameStateUI : MonoBehaviour
                 LevelFinishUI.SetActive(false);
             }
         }
-    }
+*/    }
+
+
 
     private void HandleBossDeath_OnBossDeathAnimEnd()
     {

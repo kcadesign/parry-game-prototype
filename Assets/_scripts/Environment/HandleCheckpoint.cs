@@ -8,13 +8,12 @@ public class HandleCheckpoint : MonoBehaviour
     public static Action OnPassCheckpoint;
     public HandleLevelProgression levelProgression;
 
-    private SpriteRenderer _spriteRenderer;
-    public Color CheckpointSavedColor;
+    //private SpriteRenderer _spriteRenderer;
+    //public Color CheckpointSavedColor;
 
     private void Awake()
     {
-        _spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
-
+        //_spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -26,7 +25,7 @@ public class HandleCheckpoint : MonoBehaviour
             // Set this checkpoint as the most recent one in the parent script
             levelProgression.SetCurrentCheckpoint(transform, collision.gameObject);
 
-            _spriteRenderer.color = CheckpointSavedColor;
+            //_spriteRenderer.color = CheckpointSavedColor;
             OnPassCheckpoint?.Invoke();
         }
     }

@@ -19,14 +19,14 @@ public class TrackEnemies : MonoBehaviour
     private void OnEnable()
     {
         TrackScene.OnSceneChecked += TrackScene_OnSceneChecked;
-        HandleEnterFinish.OnLevelFinish += HandleEnterFinish_OnLevelFinish;
+        HandleEnterFinish.OnPlayerParryFinish += HandleEnterFinish_OnLevelFinish;
 
     }
 
     private void OnDisable()
     {
         TrackScene.OnSceneChecked -= TrackScene_OnSceneChecked;
-        HandleEnterFinish.OnLevelFinish -= HandleEnterFinish_OnLevelFinish;
+        HandleEnterFinish.OnPlayerParryFinish -= HandleEnterFinish_OnLevelFinish;
 
     }
 

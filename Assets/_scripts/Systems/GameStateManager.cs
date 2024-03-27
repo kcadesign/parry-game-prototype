@@ -30,7 +30,7 @@ public class GameStateManager : MonoBehaviour
 
         HandlePlayerDeath.OnPlayerDeathAnimEnd += HandlePlayerDeath_OnPlayerDeathAnimEnd;
         HandleBossDeath.OnBossDeathAnimEnd += HandleBossDeath_OnBossDeathAnimEnd;
-        HandleEnterFinish.OnLevelFinish += HandleEnterFinish_OnLevelFinish;
+        HandleEnterFinish.OnPlayerParryFinish += HandleEnterFinish_OnLevelFinish;
         HandleGameStateUI.OnGameRestart += HandleGameStateUI_OnGameRestart;
         HandleGameStateUI.OnGoToMainMenu += HandleGameStateUI_OnGoToMainMenu;
     }
@@ -44,7 +44,7 @@ public class GameStateManager : MonoBehaviour
 
         HandlePlayerDeath.OnPlayerDeathAnimEnd -= HandlePlayerDeath_OnPlayerDeathAnimEnd;
         HandleBossDeath.OnBossDeathAnimEnd -= HandleBossDeath_OnBossDeathAnimEnd;
-        HandleEnterFinish.OnLevelFinish -= HandleEnterFinish_OnLevelFinish;
+        HandleEnterFinish.OnPlayerParryFinish -= HandleEnterFinish_OnLevelFinish;
         HandleGameStateUI.OnGameRestart -= HandleGameStateUI_OnGameRestart;
         HandleGameStateUI.OnGoToMainMenu -= HandleGameStateUI_OnGoToMainMenu;
     }

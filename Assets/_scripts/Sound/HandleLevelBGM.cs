@@ -43,7 +43,7 @@ public class HandleLevelBGM : MonoBehaviour
     {
         HandleGameStateUI.OnStartButtonPressed += HandleGameStateUI_OnStartButtonPressed;
         GameStateManager.OnPlayerPause += GameStateManager_OnPlayerPause;
-        HandleEnterFinish.OnLevelFinish += HandleEnterFinish_OnLevelFinish;
+        HandleEnterFinish.OnPlayerParryFinish += HandleEnterFinish_OnLevelFinish;
 
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
@@ -53,7 +53,7 @@ public class HandleLevelBGM : MonoBehaviour
     {
         HandleGameStateUI.OnStartButtonPressed -= HandleGameStateUI_OnStartButtonPressed;
         GameStateManager.OnPlayerPause -= GameStateManager_OnPlayerPause;
-        HandleEnterFinish.OnLevelFinish -= HandleEnterFinish_OnLevelFinish;
+        HandleEnterFinish.OnPlayerParryFinish -= HandleEnterFinish_OnLevelFinish;
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 

@@ -59,3 +59,6 @@ TagManager:
   - name: Foreground
     uniqueID: 1218235449
     locked: 0
+  - name: CameraSortingLayer
+    uniqueID: 103406443
+    locked: 0
