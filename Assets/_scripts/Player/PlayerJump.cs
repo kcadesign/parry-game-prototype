@@ -65,7 +65,7 @@ public class PlayerJump : MonoBehaviour
         HandleCoyoteTime();
 
         SetJumpGravity();
-        Debug.Log($"Current gravity is {_rigidbody.gravityScale}");
+        //Debug.Log($"Current gravity is {_rigidbody.gravityScale}");
 
     }
 
@@ -137,7 +137,7 @@ public class PlayerJump : MonoBehaviour
 
     private void SetNewGravity(float gravityMultiplier)
     {
-        Debug.Log($"Setting gravity to {gravityMultiplier}");
+        //Debug.Log($"Setting gravity to {gravityMultiplier}");
         _rigidbody.gravityScale *= gravityMultiplier;
     }
 

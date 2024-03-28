@@ -7,6 +7,22 @@ public class HandleEnvironmentSFX : MonoBehaviour
 {
     public SoundCollection _environmentSounds;
 
+    public static HandleEnvironmentSFX Instance { get; set; }
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
+        DontDestroyOnLoad(gameObject);
+    }
+
     private void OnEnable()
     {
         HandleEnterFinish.OnPlayerParryFinish += HandleEnterFinish_OnPlayerParryFinish;

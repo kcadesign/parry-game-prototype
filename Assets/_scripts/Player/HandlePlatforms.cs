@@ -7,6 +7,7 @@ public class HandlePlatforms : MonoBehaviour
     protected PlayerControls playerControls;
 
     private bool _dropDownPressed = false;
+    private bool _grounded;
 
     private void Awake()
     {
@@ -19,6 +20,8 @@ public class HandlePlatforms : MonoBehaviour
 
         playerControls.Gameplay.DropDown.performed += DropDown_performed;
         playerControls.Gameplay.DropDown.canceled += DropDown_cancelled;
+
+        CheckPlayerGrounded.OnGrounded += CheckPlayerGrounded_OnGrounded;
     }
 
     private void OnDisable()
@@ -27,6 +30,8 @@ public class HandlePlatforms : MonoBehaviour
 
         playerControls.Gameplay.DropDown.performed -= DropDown_performed;
         playerControls.Gameplay.DropDown.canceled -= DropDown_cancelled;
+
+        CheckPlayerGrounded.OnGrounded -= CheckPlayerGrounded_OnGrounded;
     }
 
     private void DropDown_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
@@ -39,19 +44,28 @@ public class HandlePlatforms : MonoBehaviour
         _dropDownPressed = false;
     }
 
+    private void CheckPlayerGrounded_OnGrounded(bool grounded)
+    {
+        _grounded = grounded;
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Platform") && _dropDownPressed)
+        //Debug.Log("Collision detected : " + collision.gameObject.tag);
+        //Debug.Log($"Player grounded: {_grounded}");
+        if (collision.gameObject.CompareTag("Platform"))
         {
-            collision.gameObject.GetComponent<PlatformEffector2D>().rotationalOffset = 180;
+            if (_dropDownPressed) collision.gameObject.GetComponent<PlatformEffector2D>().rotationalOffset = 180;
+            if (_grounded) transform.parent = collision.gameObject.transform;
         }
     }
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Platform") && _dropDownPressed)
+        if (collision.gameObject.CompareTag("Platform"))
         {
-            collision.gameObject.GetComponent<PlatformEffector2D>().rotationalOffset = 180;
+            if (_dropDownPressed) collision.gameObject.GetComponent<PlatformEffector2D>().rotationalOffset = 180;
+            if (_grounded) transform.parent = collision.gameObject.transform;
         }
     }
 
@@ -60,6 +74,7 @@ public class HandlePlatforms : MonoBehaviour
         if (collision.gameObject.CompareTag("Platform"))
         {
             collision.gameObject.GetComponent<PlatformEffector2D>().rotationalOffset = 0;
+            transform.parent = null;
         }
     }
 }
