@@ -67,13 +67,13 @@ public class HandleLevelBGM : MonoBehaviour
             _audioSource.clip = BGMCollection.FindSoundByName(mainMenuBGM).AudioClips[0];
             _audioSource.loop = BGMCollection.FindSoundByName(mainMenuBGM).Loop;
         }
-        else if (currentLevel == 1 || currentLevel == 2 || currentLevel == 3)
+        else if (currentLevel == 1 || currentLevel == 2 || currentLevel == 3 || currentLevel == 4)
         {
             string world1LevelBGM = "World1Level";
             _audioSource.clip = BGMCollection.FindSoundByName(world1LevelBGM).AudioClips[0];
             _audioSource.loop = BGMCollection.FindSoundByName(world1LevelBGM).Loop;
         }
-        else if (currentLevel == 4)
+        else if (currentLevel == 5)
         {
             string world1BossBGM = "World1Boss";
             _audioSource.clip = BGMCollection.FindSoundByName(world1BossBGM).AudioClips[0];
@@ -107,7 +107,6 @@ public class HandleLevelBGM : MonoBehaviour
         {
             _audioSource.volume = _desiredVolume;
         }
-
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode sceneMode)
@@ -123,7 +122,7 @@ public class HandleLevelBGM : MonoBehaviour
             _audioSource.Play();
             StartCoroutine(FadeInBGM());
         }
-        else if ((level == 1 || level == 2 || level == 3) && _audioSource.clip != BGMCollection.FindSoundByName("World1Level").AudioClips[0])
+        else if ((level == 1 || level == 2 || level == 3 || level == 4) && _audioSource.clip != BGMCollection.FindSoundByName("World1Level").AudioClips[0])
         {
             string world1LevelBGM = "World1Level";
             _audioSource.clip = BGMCollection.FindSoundByName(world1LevelBGM).AudioClips[0];
@@ -132,7 +131,7 @@ public class HandleLevelBGM : MonoBehaviour
             _audioSource.Play();
             StartCoroutine(FadeInBGM());
         }
-        else if (level == 4 && _audioSource.clip != BGMCollection.FindSoundByName("World1Boss").AudioClips[0])
+        else if (level == 5 && _audioSource.clip != BGMCollection.FindSoundByName("World1Boss").AudioClips[0])
         {
             string world1BossBGM = "World1Boss";
             _audioSource.clip = BGMCollection.FindSoundByName(world1BossBGM).AudioClips[0];
