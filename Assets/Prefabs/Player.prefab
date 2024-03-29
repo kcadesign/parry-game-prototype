@@ -217,7 +217,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _jumpPower: 10.5
-  _jumpBufferLimit: 0.15
+  _jumpBufferLimit: 0.2
   _coyoteTimeLimit: 0.15
   _coyoteTimeCounter: 0
   _isGrounded: 0

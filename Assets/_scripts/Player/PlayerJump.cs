@@ -15,7 +15,7 @@ public class PlayerJump : MonoBehaviour
 
     [SerializeField] private float _jumpPower = 5;
     [SerializeField][Range(0f, 0.3f)] private float _jumpBufferLimit = 0.15f;
-    private float _jumpBufferCounter;
+    [SerializeField] private float _jumpBufferCounter;
     [SerializeField][Range(0f, 0.3f)] private float _coyoteTimeLimit = 0.1f;
     [SerializeField] private float _coyoteTimeCounter;
 
@@ -33,7 +33,6 @@ public class PlayerJump : MonoBehaviour
     {
         playerControls = new PlayerControls();
         _rigidbody = GetComponent<Rigidbody2D>();
-        _baseGravity = _rigidbody.gravityScale;
     }
 
     private void OnEnable()
@@ -58,7 +57,12 @@ public class PlayerJump : MonoBehaviour
         HandlePlayerStun.OnStunned -= HandlePlayerStun_OnStunned;
     }
 
-    private void Update()
+    private void Start()
+    {
+        _baseGravity = _rigidbody.gravityScale;
+    }
+
+    private void FixedUpdate()
     {
         HandleJumpBuffering();
 
@@ -66,7 +70,6 @@ public class PlayerJump : MonoBehaviour
 
         SetJumpGravity();
         //Debug.Log($"Current gravity is {_rigidbody.gravityScale}");
-
     }
 
     private void Jump_performed(InputAction.CallbackContext obj)
@@ -122,7 +125,7 @@ public class PlayerJump : MonoBehaviour
 
     private void HandleCoyoteTime()
     {
-        if(_isGrounded) _coyoteTimeCounter = _coyoteTimeLimit;
+        if (_isGrounded) _coyoteTimeCounter = _coyoteTimeLimit;
         else _coyoteTimeCounter -= Time.deltaTime;
 
         if (_coyoteTimeCounter > 0 && _jumpDesired && !_currentlyJumping) DoJump();
@@ -160,5 +163,5 @@ public class PlayerJump : MonoBehaviour
         _rigidbody.velocity = new(_rigidbody.velocity.x, 0);
         _rigidbody.AddForce(jumpForce, ForceMode2D.Impulse);
     }
-    
+
 }

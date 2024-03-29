@@ -108,7 +108,7 @@ SpriteShapeRenderer:
   m_SortingLayerID: 2001634731
   m_SortingLayer: 2
   m_SortingOrder: 2
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.6698113, g: 0.32648033, b: 0.32648033, a: 1}
   m_MaskInteraction: 0
   m_ShapeTexture: {fileID: 2800000, guid: 21b97f4bbc325a344b70568132fa989d, type: 3}
   m_Sprites:

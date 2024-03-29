@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     public CollectableTracker CollectableTracker;
     public SaveData SaveData;
 
-    private string _firstLevelName = "Level1";
+    private string _firstLevelName = "Level1-1";
 
     private void OnEnable()
     {        
