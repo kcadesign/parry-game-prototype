@@ -221,6 +221,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxHealth: 25
   CurrentHealth: 0
+  _reportDeath: 1
 --- !u!114 &5929483320299406205
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -262,7 +263,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c627a505530b73d46a58038d52fdb03b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DeathExplosion: {fileID: 0}
+  DeathExplosion: {fileID: 1386364919094566383, guid: 287c3b8639b650c4ca1ec69bb34db608, type: 3}
+  EnemyBodyParticles: {fileID: 145013227338971142, guid: d8dabe9dd19b2c3448db0c52cedc940f, type: 3}
 --- !u!1 &1427366281849500424
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,6 +5,7 @@ using UnityEngine;
 public class HandleDeath : MonoBehaviour
 {
     public GameObject DeathExplosion;
+    public GameObject EnemyBodyParticles;
 
     private void OnEnable()
     {
@@ -21,6 +22,7 @@ public class HandleDeath : MonoBehaviour
         if (deadEnemy == gameObject.transform.parent.gameObject)
         {
             Instantiate(DeathExplosion, transform.position, transform.rotation);
+            Instantiate(EnemyBodyParticles, transform.position, transform.rotation);
         }
     }
 
