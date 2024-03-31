@@ -72,10 +72,10 @@ public class HandleEnemyBodyCollisions : HandleCollisions, IParryable
     {
         if (collidedObject.GetComponent<HandleProjectileCollisions>().Deflected)
         {
-/*            ProjectileHit = true;
+            //ProjectileHit = true;
 
-            Debug.Log("Projectile hit");
-*/            OnProjectileHit?.Invoke();
+            Debug.Log(gameObject.transform.parent.name + " projectile hit");
+            OnProjectileHit?.Invoke();
         }
 
     }

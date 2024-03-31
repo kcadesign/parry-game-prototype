@@ -249,6 +249,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Untagged
       objectReference: {fileID: 0}
+    - target: {fileID: 728813285803240858, guid: 033d711d75361e441b1fd89cf0622f53, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 894887688545714950, guid: 033d711d75361e441b1fd89cf0622f53, type: 3}
       propertyPath: m_LocalPosition.x
       value: -27.650948
@@ -360,6 +364,10 @@ PrefabInstance:
     - target: {fileID: 7976323921639655483, guid: 033d711d75361e441b1fd89cf0622f53, type: 3}
       propertyPath: m_Name
       value: Enemy_lv1_static_AOE_constant
+      objectReference: {fileID: 0}
+    - target: {fileID: 7976323921639655483, guid: 033d711d75361e441b1fd89cf0622f53, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 8845792006319111637, guid: 033d711d75361e441b1fd89cf0622f53, type: 3}
       propertyPath: m_TagString
