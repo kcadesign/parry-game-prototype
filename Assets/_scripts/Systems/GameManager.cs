@@ -8,7 +8,12 @@ public class GameManager : MonoBehaviour
     public CollectableTracker CollectableTracker;
     public SaveData SaveData;
 
-    private string _firstLevelName = "Level1-1";
+    private int _nextScene;
+
+    private void Awake()
+    {
+        _nextScene = SceneManager.GetActiveScene().buildIndex + 1;
+    }
 
     private void OnEnable()
     {        
@@ -43,12 +48,12 @@ public class GameManager : MonoBehaviour
         CollectableTracker.ClearAllFields();
     }
 
-    private void LoadSavedSceneOrDefault()
+    public void LoadSavedSceneOrDefault()
     {
         if (string.IsNullOrEmpty(CollectableTracker.CurrentSceneName))
         {
-            Debug.Log($"Loading default scene: {_firstLevelName}");
-            SceneManager.LoadScene(_firstLevelName);
+            Debug.Log($"Loading default scene: {_nextScene}");
+            SceneManager.LoadScene(_nextScene);
         }
         else
         {

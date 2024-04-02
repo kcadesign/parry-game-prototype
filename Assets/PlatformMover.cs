@@ -6,11 +6,34 @@ public class PlatformMover : MonoBehaviour
 {
     public Transform Platform;
     public Transform[] PlatformWaypoints;
+
+    private LineRenderer _lineRenderer;
+
     [SerializeField] private float _platformSpeed = 1f;
     [SerializeField] private float _waitTime = 1f;
 
     private int _currentWaypointIndex = 0;
     private bool _isMoving = true;
+
+    private void Awake()
+    {
+        _lineRenderer = GetComponent<LineRenderer>();
+    }
+
+    private void Start()
+    {
+        if (PlatformWaypoints.Length < 2)
+        {
+            Debug.LogError("Not enough waypoints for the platform to move");
+            return;
+        }
+
+        _lineRenderer.positionCount = PlatformWaypoints.Length;
+        for (int i = 0; i < PlatformWaypoints.Length; i++)
+        {
+            _lineRenderer.SetPosition(i, PlatformWaypoints[i].localPosition);
+        }
+    }
 
     private void FixedUpdate()
     {

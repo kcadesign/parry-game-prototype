@@ -365,6 +365,34 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Intro"",
+            ""id"": ""72e2553a-bffa-440d-8a14-8907b4a4bca3"",
+            ""actions"": [
+                {
+                    ""name"": ""NextScene"",
+                    ""type"": ""Button"",
+                    ""id"": ""0df70d04-b57c-43a7-a261-1ceae6e25f1b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""2876c3c9-0d01-4b02-a62c-fc05e5947e6f"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""NextScene"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -380,6 +408,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         // Menus
         m_Menus = asset.FindActionMap("Menus", throwIfNotFound: true);
         m_Menus_Pause = m_Menus.FindAction("Pause", throwIfNotFound: true);
+        // Intro
+        m_Intro = asset.FindActionMap("Intro", throwIfNotFound: true);
+        m_Intro_NextScene = m_Intro.FindAction("NextScene", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -569,6 +600,52 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         }
     }
     public MenusActions @Menus => new MenusActions(this);
+
+    // Intro
+    private readonly InputActionMap m_Intro;
+    private List<IIntroActions> m_IntroActionsCallbackInterfaces = new List<IIntroActions>();
+    private readonly InputAction m_Intro_NextScene;
+    public struct IntroActions
+    {
+        private @PlayerControls m_Wrapper;
+        public IntroActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @NextScene => m_Wrapper.m_Intro_NextScene;
+        public InputActionMap Get() { return m_Wrapper.m_Intro; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(IntroActions set) { return set.Get(); }
+        public void AddCallbacks(IIntroActions instance)
+        {
+            if (instance == null || m_Wrapper.m_IntroActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_IntroActionsCallbackInterfaces.Add(instance);
+            @NextScene.started += instance.OnNextScene;
+            @NextScene.performed += instance.OnNextScene;
+            @NextScene.canceled += instance.OnNextScene;
+        }
+
+        private void UnregisterCallbacks(IIntroActions instance)
+        {
+            @NextScene.started -= instance.OnNextScene;
+            @NextScene.performed -= instance.OnNextScene;
+            @NextScene.canceled -= instance.OnNextScene;
+        }
+
+        public void RemoveCallbacks(IIntroActions instance)
+        {
+            if (m_Wrapper.m_IntroActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IIntroActions instance)
+        {
+            foreach (var item in m_Wrapper.m_IntroActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_IntroActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public IntroActions @Intro => new IntroActions(this);
     public interface IGameplayActions
     {
         void OnRolling(InputAction.CallbackContext context);
@@ -581,5 +658,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     public interface IMenusActions
     {
         void OnPause(InputAction.CallbackContext context);
+    }
+    public interface IIntroActions
+    {
+        void OnNextScene(InputAction.CallbackContext context);
     }
 }
