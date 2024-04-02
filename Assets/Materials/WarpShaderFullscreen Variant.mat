@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: WaveShaderFullscreen Variant
+  m_Name: WarpShaderFullscreen Variant
   m_Shader: {fileID: -6465566751694194690, guid: f1eeec5ac221f9f49ac00d9a96a7067c, type: 3}
   m_Parent: {fileID: -876546973899608171, guid: f1eeec5ac221f9f49ac00d9a96a7067c, type: 3}
   m_ModifiedSerializedProperties: 0
