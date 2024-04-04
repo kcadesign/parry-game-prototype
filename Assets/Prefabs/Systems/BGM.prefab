@@ -146,3 +146,6 @@ MonoBehaviour:
   _pauseVolume: 0.15
   _fadeInSpeed: 0.5
   _fadeOutSpeed: 0.5
+  _lastIntroMusicLevelIndex: 1
+  _lastStandardMusicLevelIndex: 6
+  _bossMusicLevelIndex: 7

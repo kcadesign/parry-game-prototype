@@ -53,12 +53,12 @@ TagManager:
   - name: LevelGeometry
     uniqueID: 2001634731
     locked: 0
+  - name: Characters
+    uniqueID: 3288309501
+    locked: 0
   - name: Foreground
     uniqueID: 1218235449
     locked: 0
   - name: CameraSortingLayer
     uniqueID: 103406443
-    locked: 0
-  - name: Characters
-    uniqueID: 3288309501
     locked: 0
