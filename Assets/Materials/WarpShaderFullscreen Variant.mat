@@ -25,7 +25,7 @@ Material:
     m_TexEnvs: []
     m_Ints: []
     m_Floats:
-    - _ShockwaveStrength: 0
+    - _ShockwaveStrength: 0.15
     - _WaveDistanceFromCentre: 0
     m_Colors: []
   m_BuildTextureStacks: []

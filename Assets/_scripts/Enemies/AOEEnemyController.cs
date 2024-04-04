@@ -15,4 +15,8 @@ public class AOEEnemyController : HandleBaseEnemyState
     }
     private void DisableAttackCircleCollider() => AttackCircleCollider.enabled = false;
 
+    private void EnemyAttack()
+    {
+        OnEnemyAttack?.Invoke(gameObject);
+    }
 }

@@ -529,6 +529,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7976323921639655483, guid: 033d711d75361e441b1fd89cf0622f53, type: 3}
       insertIndex: -1
       addedObject: {fileID: 547471322406087371}
+    - targetCorrespondingSourceObject: {fileID: 7976323921639655483, guid: 033d711d75361e441b1fd89cf0622f53, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6802547879415927022}
     - targetCorrespondingSourceObject: {fileID: 728813285803240858, guid: 033d711d75361e441b1fd89cf0622f53, type: 3}
       insertIndex: 1
       addedObject: {fileID: 784107013909655744}
@@ -587,6 +590,19 @@ MonoBehaviour:
   AttackCentre: {fileID: 3797476501322614433}
   AttackRange: 5
   AttackCircleCollider: {fileID: 8662546284401903621}
+--- !u!114 &6802547879415927022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2612354344797068096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47ada164be944c24bb6d2963f6a5aa9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemySounds: {fileID: 11400000, guid: fc748760042d233439146dcfa62e6669, type: 2}
 --- !u!4 &3797476501322614433 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9097890226027746778, guid: 033d711d75361e441b1fd89cf0622f53, type: 3}
