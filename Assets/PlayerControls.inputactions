@@ -345,11 +345,11 @@
             ]
         },
         {
-            "name": "Intro",
+            "name": "IntroOutro",
             "id": "72e2553a-bffa-440d-8a14-8907b4a4bca3",
             "actions": [
                 {
-                    "name": "NextScene",
+                    "name": "Progress",
                     "type": "Button",
                     "id": "0df70d04-b57c-43a7-a261-1ceae6e25f1b",
                     "expectedControlType": "Button",
@@ -366,7 +366,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "NextScene",
+                    "action": "Progress",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

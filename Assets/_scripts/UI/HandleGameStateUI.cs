@@ -44,7 +44,7 @@ public class HandleGameStateUI : MonoBehaviour
     private void OnEnable()
     {
         HandlePlayerDeath.OnPlayerDeathAnimEnd += HandlePlayerDeath_OnPlayerDeathAnimEnd;
-        HandleBossDeath.OnBossDeathAnimEnd += HandleBossDeath_OnBossDeathAnimEnd;
+        //HandleBossDeath.OnBossDeathAnimEnd += HandleBossDeath_OnBossDeathAnimEnd;
         HandleEnterFinish.OnWarpFinish += HandleEnterFinish_OnLevelFinish;
         HandleLevelProgression.OnSendCurrentCheckpoint += HandleLevelProgression_OnSendCurrentCheckpoint;
         GameStateManager.OnPlayerPause += GameStateManager_OnPlayerPause;
@@ -53,7 +53,7 @@ public class HandleGameStateUI : MonoBehaviour
     private void OnDisable()
     {
         HandlePlayerDeath.OnPlayerDeathAnimEnd -= HandlePlayerDeath_OnPlayerDeathAnimEnd;
-        HandleBossDeath.OnBossDeathAnimEnd -= HandleBossDeath_OnBossDeathAnimEnd;
+        //HandleBossDeath.OnBossDeathAnimEnd -= HandleBossDeath_OnBossDeathAnimEnd;
         HandleEnterFinish.OnWarpFinish -= HandleEnterFinish_OnLevelFinish;
         HandleLevelProgression.OnSendCurrentCheckpoint -= HandleLevelProgression_OnSendCurrentCheckpoint;
         GameStateManager.OnPlayerPause -= GameStateManager_OnPlayerPause;
@@ -84,7 +84,7 @@ public class HandleGameStateUI : MonoBehaviour
         }
     }
 
-    private void HandleBossDeath_OnBossDeathAnimEnd()
+/*    private void HandleBossDeath_OnBossDeathAnimEnd()
     {
         Debug.Log("Boss death anim finished, show game end menu");
         if (GameFinishUI != null)
@@ -93,7 +93,7 @@ public class HandleGameStateUI : MonoBehaviour
             OnGameUIActivate?.Invoke(GameFinishFirstSelectedButton);
         }
     }
-
+*/
     private void HandleLevelProgression_OnSendCurrentCheckpoint(Vector3 currentCheckpoint, GameObject checkpointActivator)
     {
         _respawnPoint = currentCheckpoint;

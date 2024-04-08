@@ -18,18 +18,18 @@ public class HandleIntroScreen : MonoBehaviour
 
     private void OnEnable()
     {
-        playerControls.Intro.Enable();
+        playerControls.IntroOutro.Enable();
 
-        playerControls.Intro.NextScene.performed += NextScene_performed;
-        playerControls.Intro.NextScene.canceled += NextScene_canceled;
+        playerControls.IntroOutro.Progress.performed += NextScene_performed;
+        playerControls.IntroOutro.Progress.canceled += NextScene_canceled;
     }
 
     private void OnDisable()
     {
-        playerControls.Intro.Disable();
+        playerControls.IntroOutro.Disable();
 
-        playerControls.Intro.NextScene.performed -= NextScene_performed;
-        playerControls.Intro.NextScene.canceled -= NextScene_canceled;
+        playerControls.IntroOutro.Progress.performed -= NextScene_performed;
+        playerControls.IntroOutro.Progress.canceled -= NextScene_canceled;
     }
 
     private void NextScene_performed(InputAction.CallbackContext obj)

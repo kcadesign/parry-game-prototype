@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class GameStateManager : MonoBehaviour
 {
@@ -49,12 +50,6 @@ public class GameStateManager : MonoBehaviour
         HandleGameStateUI.OnGoToMainMenu -= HandleGameStateUI_OnGoToMainMenu;
     }
 
-    private void Update()
-    {
-
-
-    }
-
     private void Pause_performed(InputAction.CallbackContext value)
     {
         //Debug.Log($"Pause button pressed");
@@ -84,9 +79,9 @@ public class GameStateManager : MonoBehaviour
 
     private void HandleBossDeath_OnBossDeathAnimEnd()
     {
-        _pauseTime = true;
-        _playerCanPause = false;
-        HandlePauseTime(_pauseTime);
+        // load current scene + 1
+        int currentScene = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(currentScene + 1);
     }
 
     private void HandleEnterFinish_OnLevelFinish(bool levelFinished)
@@ -139,4 +134,8 @@ public class GameStateManager : MonoBehaviour
         Time.timeScale = 1f;
     }
 
+    public void GoToMainMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
 }

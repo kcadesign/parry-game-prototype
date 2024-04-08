@@ -367,11 +367,11 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             ]
         },
         {
-            ""name"": ""Intro"",
+            ""name"": ""IntroOutro"",
             ""id"": ""72e2553a-bffa-440d-8a14-8907b4a4bca3"",
             ""actions"": [
                 {
-                    ""name"": ""NextScene"",
+                    ""name"": ""Progress"",
                     ""type"": ""Button"",
                     ""id"": ""0df70d04-b57c-43a7-a261-1ceae6e25f1b"",
                     ""expectedControlType"": ""Button"",
@@ -388,7 +388,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""NextScene"",
+                    ""action"": ""Progress"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -408,9 +408,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         // Menus
         m_Menus = asset.FindActionMap("Menus", throwIfNotFound: true);
         m_Menus_Pause = m_Menus.FindAction("Pause", throwIfNotFound: true);
-        // Intro
-        m_Intro = asset.FindActionMap("Intro", throwIfNotFound: true);
-        m_Intro_NextScene = m_Intro.FindAction("NextScene", throwIfNotFound: true);
+        // IntroOutro
+        m_IntroOutro = asset.FindActionMap("IntroOutro", throwIfNotFound: true);
+        m_IntroOutro_Progress = m_IntroOutro.FindAction("Progress", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -601,51 +601,51 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     }
     public MenusActions @Menus => new MenusActions(this);
 
-    // Intro
-    private readonly InputActionMap m_Intro;
-    private List<IIntroActions> m_IntroActionsCallbackInterfaces = new List<IIntroActions>();
-    private readonly InputAction m_Intro_NextScene;
-    public struct IntroActions
+    // IntroOutro
+    private readonly InputActionMap m_IntroOutro;
+    private List<IIntroOutroActions> m_IntroOutroActionsCallbackInterfaces = new List<IIntroOutroActions>();
+    private readonly InputAction m_IntroOutro_Progress;
+    public struct IntroOutroActions
     {
         private @PlayerControls m_Wrapper;
-        public IntroActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @NextScene => m_Wrapper.m_Intro_NextScene;
-        public InputActionMap Get() { return m_Wrapper.m_Intro; }
+        public IntroOutroActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Progress => m_Wrapper.m_IntroOutro_Progress;
+        public InputActionMap Get() { return m_Wrapper.m_IntroOutro; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(IntroActions set) { return set.Get(); }
-        public void AddCallbacks(IIntroActions instance)
+        public static implicit operator InputActionMap(IntroOutroActions set) { return set.Get(); }
+        public void AddCallbacks(IIntroOutroActions instance)
         {
-            if (instance == null || m_Wrapper.m_IntroActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_IntroActionsCallbackInterfaces.Add(instance);
-            @NextScene.started += instance.OnNextScene;
-            @NextScene.performed += instance.OnNextScene;
-            @NextScene.canceled += instance.OnNextScene;
+            if (instance == null || m_Wrapper.m_IntroOutroActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_IntroOutroActionsCallbackInterfaces.Add(instance);
+            @Progress.started += instance.OnProgress;
+            @Progress.performed += instance.OnProgress;
+            @Progress.canceled += instance.OnProgress;
         }
 
-        private void UnregisterCallbacks(IIntroActions instance)
+        private void UnregisterCallbacks(IIntroOutroActions instance)
         {
-            @NextScene.started -= instance.OnNextScene;
-            @NextScene.performed -= instance.OnNextScene;
-            @NextScene.canceled -= instance.OnNextScene;
+            @Progress.started -= instance.OnProgress;
+            @Progress.performed -= instance.OnProgress;
+            @Progress.canceled -= instance.OnProgress;
         }
 
-        public void RemoveCallbacks(IIntroActions instance)
+        public void RemoveCallbacks(IIntroOutroActions instance)
         {
-            if (m_Wrapper.m_IntroActionsCallbackInterfaces.Remove(instance))
+            if (m_Wrapper.m_IntroOutroActionsCallbackInterfaces.Remove(instance))
                 UnregisterCallbacks(instance);
         }
 
-        public void SetCallbacks(IIntroActions instance)
+        public void SetCallbacks(IIntroOutroActions instance)
         {
-            foreach (var item in m_Wrapper.m_IntroActionsCallbackInterfaces)
+            foreach (var item in m_Wrapper.m_IntroOutroActionsCallbackInterfaces)
                 UnregisterCallbacks(item);
-            m_Wrapper.m_IntroActionsCallbackInterfaces.Clear();
+            m_Wrapper.m_IntroOutroActionsCallbackInterfaces.Clear();
             AddCallbacks(instance);
         }
     }
-    public IntroActions @Intro => new IntroActions(this);
+    public IntroOutroActions @IntroOutro => new IntroOutroActions(this);
     public interface IGameplayActions
     {
         void OnRolling(InputAction.CallbackContext context);
@@ -659,8 +659,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     {
         void OnPause(InputAction.CallbackContext context);
     }
-    public interface IIntroActions
+    public interface IIntroOutroActions
     {
-        void OnNextScene(InputAction.CallbackContext context);
+        void OnProgress(InputAction.CallbackContext context);
     }
 }
