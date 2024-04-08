@@ -47,7 +47,7 @@ public class HandleGameStateUI : MonoBehaviour
         //HandlePlayerHealth.OnPlayerDead += HandlePlayerHealth_OnPlayerDead;
         HandlePlayerDeath.OnPlayerDeathAnimEnd += HandlePlayerDeath_OnPlayerDeathAnimEnd;
         HandleBossDeath.OnBossDeathAnimEnd += HandleBossDeath_OnBossDeathAnimEnd;
-        HandleEnterFinish.OnPlayerParryFinish += HandleEnterFinish_OnLevelFinish;
+        HandleEnterFinish.OnPlayerParryFinish += HandleEnterFinish_OnPlayerParryFinish;
         HandleEnterFinish.OnWarpFinish += HandleEnterFinish_OnLevelFinish;
         HandleLevelProgression.OnSendCurrentCheckpoint += HandleLevelProgression_OnSendCurrentCheckpoint;
         GameStateManager.OnPlayerPause += GameStateManager_OnPlayerPause;
@@ -59,7 +59,7 @@ public class HandleGameStateUI : MonoBehaviour
         //HandlePlayerHealth.OnPlayerDead -= HandlePlayerHealth_OnPlayerDead;
         HandlePlayerDeath.OnPlayerDeathAnimEnd -= HandlePlayerDeath_OnPlayerDeathAnimEnd;
         HandleBossDeath.OnBossDeathAnimEnd -= HandleBossDeath_OnBossDeathAnimEnd;
-        HandleEnterFinish.OnPlayerParryFinish -= HandleEnterFinish_OnLevelFinish;
+        HandleEnterFinish.OnPlayerParryFinish -= HandleEnterFinish_OnPlayerParryFinish;
         HandleEnterFinish.OnWarpFinish -= HandleEnterFinish_OnLevelFinish;
         HandleLevelProgression.OnSendCurrentCheckpoint -= HandleLevelProgression_OnSendCurrentCheckpoint;
         GameStateManager.OnPlayerPause -= GameStateManager_OnPlayerPause;
@@ -117,7 +117,7 @@ public class HandleGameStateUI : MonoBehaviour
         }
     }
 */
-    private void HandleEnterFinish_OnLevelFinish(bool levelFinished)
+    private void HandleEnterFinish_OnPlayerParryFinish(bool levelFinished)
     {
 /*        if (LevelFinishUI != null)
         {

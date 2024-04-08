@@ -915,6 +915,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DeathExplosion: {fileID: 1386364919094566383, guid: 287c3b8639b650c4ca1ec69bb34db608, type: 3}
+  EnemyBodyParticles: {fileID: 0}
 --- !u!114 &126043188
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17178,7 +17179,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6887984842571010704, guid: 35cbf832939b4104db8f1243c761cc46, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9135106871874799126, guid: 35cbf832939b4104db8f1243c761cc46, type: 3}
       propertyPath: m_LocalPosition.x

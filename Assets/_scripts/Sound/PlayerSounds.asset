@@ -21,39 +21,54 @@ MonoBehaviour:
     Volume: 1
     Pitch: 1
     SpatialBlend: 0
+    Loop: 0
   - Name: ParryBounce
     AudioClips:
     - {fileID: 8300000, guid: cc4aa21600b1a3e4c9976da656d544b1, type: 3}
     Volume: 1
     Pitch: 1
     SpatialBlend: 0
-  - Name: ParryAttack
-    AudioClips:
-    - {fileID: 8300000, guid: c4503e40a3874aa479bceea8c2ca11b4, type: 3}
-    Volume: 1
-    Pitch: 1
-    SpatialBlend: 0
+    Loop: 0
   - Name: HurtBig
     AudioClips:
     - {fileID: 8300000, guid: 40999c77efe386540a31e66780593b74, type: 3}
     Volume: 1
     Pitch: 1
     SpatialBlend: 0
+    Loop: 0
   - Name: HurtSmall
     AudioClips:
     - {fileID: 8300000, guid: ac670b00af720bf4ca1feb1e57ebd419, type: 3}
     Volume: 1
     Pitch: 1
     SpatialBlend: 0
+    Loop: 0
   - Name: HealthReplenish
     AudioClips:
     - {fileID: 8300000, guid: aeebc271847ad2a48a6276b409dd4d33, type: 3}
     Volume: 0.8
     Pitch: 1
     SpatialBlend: 0
+    Loop: 0
   - Name: PassiveBounce
     AudioClips:
     - {fileID: 8300000, guid: 7f5dce0d460b00745828d631a7926c9f, type: 3}
     Volume: 1
     Pitch: 1
     SpatialBlend: 0
+    Loop: 0
+  - Name: Parry
+    AudioClips:
+    - {fileID: 8300000, guid: b0483787acefb2146983b04150388be7, type: 3}
+    - {fileID: 8300000, guid: b20931a89ec3e804abe0c53e5e7eb2f7, type: 3}
+    Volume: 1
+    Pitch: 1
+    SpatialBlend: 0
+    Loop: 0
+  - Name: Roll
+    AudioClips:
+    - {fileID: 8300000, guid: ef1b14f2575073c4d9bdb96ec2bb5f4a, type: 3}
+    Volume: 0.5
+    Pitch: 1
+    SpatialBlend: 0
+    Loop: 0

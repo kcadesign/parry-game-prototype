@@ -6,24 +6,39 @@ public class HandlePlayerSounds : MonoBehaviour
 {
     public SoundCollection _playerSounds;
 
+    private AudioSource _audioSource;
+
+    private bool _grounded;
+
+    private void Awake()
+    {
+        _audioSource = GetComponent<AudioSource>();
+    }
+
     private void OnEnable()
     {
         PlayerJump.OnJump += PlayerJump_OnJump;
+        PlayerParry.OnParryActive += PlayerParry_OnParryActive;
         PlayerParry.OnParryBounce += PlayerParry_OnParryBounce;
         AnimatePlayer.OnPassiveBounce += AnimatePlayer_OnPassiveBounce;
         HandlePlayerHealth.OnPlayerHurtBig += HandlePlayerHealth_OnPlayerHurtBig;
         HandlePlayerHealth.OnPlayerHurtSmall += HandlePlayerHealth_OnPlayerHurtSmall;
         HandlePlayerHealth.OnPlayerHealthReplenish += HandlePlayerHealth_OnPlayerHealthReplenish;
+        PlayerMove.OnPlayerMoveInput += PlayerMove_OnPlayerMoveInput;
+        CheckPlayerGrounded.OnGrounded += CheckPlayerGrounded_OnGrounded;
     }
 
     private void OnDisable()
     {
         PlayerJump.OnJump -= PlayerJump_OnJump;
+        PlayerParry.OnParryActive -= PlayerParry_OnParryActive;
         PlayerParry.OnParryBounce -= PlayerParry_OnParryBounce;
         AnimatePlayer.OnPassiveBounce -= AnimatePlayer_OnPassiveBounce;
         HandlePlayerHealth.OnPlayerHurtBig -= HandlePlayerHealth_OnPlayerHurtBig;
         HandlePlayerHealth.OnPlayerHurtSmall -= HandlePlayerHealth_OnPlayerHurtSmall;
         HandlePlayerHealth.OnPlayerHealthReplenish -= HandlePlayerHealth_OnPlayerHealthReplenish;
+        PlayerMove.OnPlayerMoveInput -= PlayerMove_OnPlayerMoveInput;
+        CheckPlayerGrounded.OnGrounded -= CheckPlayerGrounded_OnGrounded;
     }
 
     private void PlayerJump_OnJump(bool jumping)
@@ -32,6 +47,14 @@ public class HandlePlayerSounds : MonoBehaviour
         if (jumping && _playerSounds != null && _playerSounds.Sounds.Length > 0)
         {
             _playerSounds.PlaySound("Jump", transform);
+        }
+    }
+
+    private void PlayerParry_OnParryActive(bool parryActive)
+    {
+        if (parryActive && _playerSounds != null && _playerSounds.Sounds.Length > 0)
+        {
+            _playerSounds.PlaySound("Parry", transform);
         }
     }
 
@@ -75,5 +98,34 @@ public class HandlePlayerSounds : MonoBehaviour
         }
     }
 
+    private void CheckPlayerGrounded_OnGrounded(bool grounded)
+    {
+        _grounded = grounded;
+    }
 
+    private void PlayerMove_OnPlayerMoveInput(Vector2 velocity)
+    {
+        float velocityX = Mathf.Abs(velocity.x);
+        if (_playerSounds != null && _playerSounds.Sounds.Length > 0)
+        {
+            bool rolling;
+            if (velocityX > 0.4f && _grounded)
+            {
+                rolling = true;
+            }
+            else
+            {
+                rolling = false;
+            }
+
+            if (rolling && !_audioSource.isPlaying)
+            {
+                _audioSource.Play();
+            }
+            else
+            {
+                _audioSource.Stop();
+            }
+        }
+    }
 }
