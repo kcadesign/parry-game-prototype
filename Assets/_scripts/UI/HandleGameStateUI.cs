@@ -43,11 +43,8 @@ public class HandleGameStateUI : MonoBehaviour
 
     private void OnEnable()
     {
-        //HandlePlayerHealth.OnHealthChange += HandlePlayerHealth_OnHealthChange;
-        //HandlePlayerHealth.OnPlayerDead += HandlePlayerHealth_OnPlayerDead;
         HandlePlayerDeath.OnPlayerDeathAnimEnd += HandlePlayerDeath_OnPlayerDeathAnimEnd;
         HandleBossDeath.OnBossDeathAnimEnd += HandleBossDeath_OnBossDeathAnimEnd;
-        HandleEnterFinish.OnPlayerParryFinish += HandleEnterFinish_OnPlayerParryFinish;
         HandleEnterFinish.OnWarpFinish += HandleEnterFinish_OnLevelFinish;
         HandleLevelProgression.OnSendCurrentCheckpoint += HandleLevelProgression_OnSendCurrentCheckpoint;
         GameStateManager.OnPlayerPause += GameStateManager_OnPlayerPause;
@@ -55,11 +52,8 @@ public class HandleGameStateUI : MonoBehaviour
 
     private void OnDisable()
     {
-        //HandlePlayerHealth.OnHealthChange -= HandlePlayerHealth_OnHealthChange;
-        //HandlePlayerHealth.OnPlayerDead -= HandlePlayerHealth_OnPlayerDead;
         HandlePlayerDeath.OnPlayerDeathAnimEnd -= HandlePlayerDeath_OnPlayerDeathAnimEnd;
         HandleBossDeath.OnBossDeathAnimEnd -= HandleBossDeath_OnBossDeathAnimEnd;
-        HandleEnterFinish.OnPlayerParryFinish -= HandleEnterFinish_OnPlayerParryFinish;
         HandleEnterFinish.OnWarpFinish -= HandleEnterFinish_OnLevelFinish;
         HandleLevelProgression.OnSendCurrentCheckpoint -= HandleLevelProgression_OnSendCurrentCheckpoint;
         GameStateManager.OnPlayerPause -= GameStateManager_OnPlayerPause;
@@ -81,24 +75,6 @@ public class HandleGameStateUI : MonoBehaviour
         }
     }
 
-/*    private void HandlePlayerHealth_OnHealthChange(int currentHealth, bool playerAlive)
-    {
-        //Debug.Log($"Player is alive: {playerAlive}");
-        if (GameOverUI != null)
-        {
-            if (!playerAlive)
-            {
-                GameOverUI.SetActive(true);
-                OnGameUIActivate?.Invoke(GameOverFirstSelectedButton);
-            }
-            else
-            {
-                GameOverUI.SetActive(false);
-            }
-        }
-    }
-*/
-
     private void HandlePlayerDeath_OnPlayerDeathAnimEnd()
     {
         if (GameOverUI != null)
@@ -107,33 +83,6 @@ public class HandleGameStateUI : MonoBehaviour
             OnGameUIActivate?.Invoke(GameOverFirstSelectedButton);
         }
     }
-
-/*    private void HandlePlayerHealth_OnPlayerDead()
-    {
-        if (GameOverUI != null)
-        {
-            GameOverUI.SetActive(true);
-            OnGameUIActivate?.Invoke(GameOverFirstSelectedButton);
-        }
-    }
-*/
-    private void HandleEnterFinish_OnPlayerParryFinish(bool levelFinished)
-    {
-/*        if (LevelFinishUI != null)
-        {
-            if (levelFinished)
-            {
-                LevelFinishUI.SetActive(true);
-                OnGameUIActivate?.Invoke(LevelFinishFirstSelectedButton);
-            }
-            else
-            {
-                LevelFinishUI.SetActive(false);
-            }
-        }
-*/    }
-
-
 
     private void HandleBossDeath_OnBossDeathAnimEnd()
     {
