@@ -24,7 +24,8 @@ public class HandleLevelBGM : MonoBehaviour
     [SerializeField] private int _bossMusicLevelIndex;
 
     [Header("BGM Strings")]
-    private string _mainMenuBGM = "MainMenu";
+    private string _menuBGM = "MainMenu";
+    private string _storyScreenBGM = "Story";
     private string _world1LevelBGM = "World1Level";
     private string _world1BossBGM = "World1Boss";
 
@@ -60,23 +61,36 @@ public class HandleLevelBGM : MonoBehaviour
     private void Start()
     {
         // check the level index and set the audio source clip to play the appropriate music
-        int currentLevel = SceneManager.GetActiveScene().buildIndex;
-        if (currentLevel <= _lastIntroMusicLevelIndex)
+        //int currentLevel = SceneManager.GetActiveScene().buildIndex;
+        Scene scene = SceneManager.GetActiveScene();
+        if (scene.name.StartsWith("Menu"))
         {
-            _audioSource.clip = BGMCollection.FindSoundByName(_mainMenuBGM).AudioClips[0];
-            _audioSource.loop = BGMCollection.FindSoundByName(_mainMenuBGM).Loop;
+            // play menu music
+            _audioSource.clip = BGMCollection.FindSoundByName(_menuBGM).AudioClips[0];
+            _audioSource.loop = BGMCollection.FindSoundByName(_menuBGM).Loop;
+            _audioSource.volume = 0;
         }
-        else if (currentLevel > _lastIntroMusicLevelIndex && currentLevel < _bossMusicLevelIndex)
+        else if (scene.name.StartsWith("Story"))
         {
+            // play story screen music
+            _audioSource.clip = BGMCollection.FindSoundByName(_storyScreenBGM).AudioClips[0];
+            _audioSource.loop = BGMCollection.FindSoundByName(_storyScreenBGM).Loop;
+            _audioSource.volume = 0;
+        }
+        else if (scene.name.StartsWith("World1"))
+        {
+            // play world 1 music
             _audioSource.clip = BGMCollection.FindSoundByName(_world1LevelBGM).AudioClips[0];
             _audioSource.loop = BGMCollection.FindSoundByName(_world1LevelBGM).Loop;
+            _audioSource.volume = 0;
         }
-        else if (currentLevel == _bossMusicLevelIndex)
+        else if (scene.name.StartsWith("Boss1"))
         {
+            // play boss music
             _audioSource.clip = BGMCollection.FindSoundByName(_world1BossBGM).AudioClips[0];
             _audioSource.loop = BGMCollection.FindSoundByName(_world1BossBGM).Loop;
+            _audioSource.volume = 0;
         }
-
         // play and fade in the audio source
         _audioSource.Play();
         StartCoroutine(FadeInBGM());
@@ -90,38 +104,43 @@ public class HandleLevelBGM : MonoBehaviour
 
     private void HandleEnterFinish_OnLevelFinish(bool levelFinished)
     {
-        if (levelFinished)  _audioSource.volume = _pauseVolume;
+        if (levelFinished) _audioSource.volume = _pauseVolume;
         else _audioSource.volume = _defaultVolume;
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode sceneMode)
     {
-        StartCoroutine(FadeInBGM());
-        int level = scene.buildIndex;
-        if (level <= _lastIntroMusicLevelIndex && _audioSource.clip != BGMCollection.FindSoundByName("MainMenu").AudioClips[0])
+        if (scene.name.StartsWith("Menu") && _audioSource.clip != BGMCollection.FindSoundByName("MainMenu").AudioClips[0])
         {
-            _audioSource.clip = BGMCollection.FindSoundByName(_mainMenuBGM).AudioClips[0];
-            _audioSource.loop = BGMCollection.FindSoundByName(_mainMenuBGM).Loop;
+            // play menu music
+            _audioSource.clip = BGMCollection.FindSoundByName(_menuBGM).AudioClips[0];
+            _audioSource.loop = BGMCollection.FindSoundByName(_menuBGM).Loop;
             _audioSource.volume = 0;
-            _audioSource.Play();
-            StartCoroutine(FadeInBGM());
         }
-        else if ((level > _lastIntroMusicLevelIndex && level < _bossMusicLevelIndex) && _audioSource.clip != BGMCollection.FindSoundByName("World1Level").AudioClips[0])
+        else if (scene.name.StartsWith("Story") && _audioSource.clip != BGMCollection.FindSoundByName("Story").AudioClips[0])
         {
+            // play story screen music
+            _audioSource.clip = BGMCollection.FindSoundByName(_storyScreenBGM).AudioClips[0];
+            _audioSource.loop = BGMCollection.FindSoundByName(_storyScreenBGM).Loop;
+            _audioSource.volume = 0;
+        }
+        else if (scene.name.StartsWith("World1") && _audioSource.clip != BGMCollection.FindSoundByName("World1Level").AudioClips[0])
+        {
+            // play world 1 music
             _audioSource.clip = BGMCollection.FindSoundByName(_world1LevelBGM).AudioClips[0];
             _audioSource.loop = BGMCollection.FindSoundByName(_world1LevelBGM).Loop;
             _audioSource.volume = 0;
-            _audioSource.Play();
-            StartCoroutine(FadeInBGM());
         }
-        else if (level == _bossMusicLevelIndex && _audioSource.clip != BGMCollection.FindSoundByName("World1Boss").AudioClips[0])
+        else if (scene.name.StartsWith("Boss1") && _audioSource.clip != BGMCollection.FindSoundByName("World1Boss").AudioClips[0])
         {
+            // play boss music
             _audioSource.clip = BGMCollection.FindSoundByName(_world1BossBGM).AudioClips[0];
             _audioSource.loop = BGMCollection.FindSoundByName(_world1BossBGM).Loop;
             _audioSource.volume = 0;
-            _audioSource.Play();
-            StartCoroutine(FadeInBGM());
         }
+        _audioSource.Play();
+        StartCoroutine(FadeInBGM());
+
     }
 
     private void HandleGameStateUI_OnStartButtonPressed()

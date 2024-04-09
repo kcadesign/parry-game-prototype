@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class JuiceSystems : MonoBehaviour
 {
-    [SerializeField] private CinemachineImpulseSource _impulseSource;
+    private CinemachineImpulseSource _impulseSource;
 
     [SerializeField] private float _enemyDeathStopDuration = 0.1f;
     [SerializeField] private float _playerDamageStopDuration = 0.1f;
