@@ -53,8 +53,8 @@ public class HandleEnvironmentSFX : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode sceneMode)
     {
-        int currentLevel = UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex;
-        if (currentLevel != 1)
+        int currentLevel = SceneManager.GetActiveScene().buildIndex;
+        if (currentLevel > 2 || currentLevel < 8)
         {
             _environmentSounds.PlaySound("LevelStartWarp", transform);
         }

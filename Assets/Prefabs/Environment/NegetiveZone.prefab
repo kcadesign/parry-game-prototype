@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3227533120288999795}
   - component: {fileID: 6416951001540653341}
   m_Layer: 0
-  m_Name: Negetive_zone
+  m_Name: NegetiveZone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

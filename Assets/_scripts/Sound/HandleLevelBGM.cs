@@ -18,11 +18,11 @@ public class HandleLevelBGM : MonoBehaviour
     [SerializeField] private float _fadeInSpeed = 0.5f;
     [SerializeField] private float _fadeOutSpeed = 0.5f;
 
-    [Header("Level Index")]
+/*    [Header("Level Index")]
     [SerializeField] private int _lastIntroMusicLevelIndex;
     [SerializeField] private int _lastStandardMusicLevelIndex;
     [SerializeField] private int _bossMusicLevelIndex;
-
+*/
     [Header("BGM Strings")]
     private string _menuBGM = "MainMenu";
     private string _storyScreenBGM = "Story";
@@ -140,7 +140,6 @@ public class HandleLevelBGM : MonoBehaviour
         }
         _audioSource.Play();
         StartCoroutine(FadeInBGM());
-
     }
 
     private void HandleGameStateUI_OnStartButtonPressed()

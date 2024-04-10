@@ -20,6 +20,13 @@ MonoBehaviour:
     Pitch: 1
     SpatialBlend: 0
     Loop: 1
+  - Name: Story
+    AudioClips:
+    - {fileID: 8300000, guid: 5b40ecc06628e824dbed847266d64be1, type: 3}
+    Volume: 0.5
+    Pitch: 1
+    SpatialBlend: 0
+    Loop: 1
   - Name: World1Level
     AudioClips:
     - {fileID: 8300000, guid: 5c636e394165c054aac92848b523237b, type: 3}
