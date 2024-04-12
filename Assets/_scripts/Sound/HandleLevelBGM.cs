@@ -18,11 +18,6 @@ public class HandleLevelBGM : MonoBehaviour
     [SerializeField] private float _fadeInSpeed = 0.5f;
     [SerializeField] private float _fadeOutSpeed = 0.5f;
 
-/*    [Header("Level Index")]
-    [SerializeField] private int _lastIntroMusicLevelIndex;
-    [SerializeField] private int _lastStandardMusicLevelIndex;
-    [SerializeField] private int _bossMusicLevelIndex;
-*/
     [Header("BGM Strings")]
     private string _menuBGM = "MainMenu";
     private string _storyScreenBGM = "Story";
@@ -46,7 +41,6 @@ public class HandleLevelBGM : MonoBehaviour
     {
         HandleGameStateUI.OnStartButtonPressed += HandleGameStateUI_OnStartButtonPressed;
         GameStateManager.OnPlayerPause += GameStateManager_OnPlayerPause;
-        //HandleEnterFinish.OnPlayerParryFinish += HandleEnterFinish_OnLevelFinish;
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
@@ -54,14 +48,12 @@ public class HandleLevelBGM : MonoBehaviour
     {
         HandleGameStateUI.OnStartButtonPressed -= HandleGameStateUI_OnStartButtonPressed;
         GameStateManager.OnPlayerPause -= GameStateManager_OnPlayerPause;
-        //HandleEnterFinish.OnPlayerParryFinish -= HandleEnterFinish_OnLevelFinish;
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     private void Start()
     {
-        // check the level index and set the audio source clip to play the appropriate music
-        //int currentLevel = SceneManager.GetActiveScene().buildIndex;
+        // check the level name type and set the audio source clip to play the appropriate music
         Scene scene = SceneManager.GetActiveScene();
         if (scene.name.StartsWith("Menu"))
         {
@@ -91,26 +83,17 @@ public class HandleLevelBGM : MonoBehaviour
             _audioSource.loop = BGMCollection.FindSoundByName(_world1BossBGM).Loop;
             _audioSource.volume = 0;
         }
-        // play and fade in the audio source
+        // play and fade in the audio source whichever level you start in
         _audioSource.Play();
         StartCoroutine(FadeInBGM());
         Debug.Log("Playing audio source clip: " + _audioSource.clip.name);
     }
 
-    private void GameStateManager_OnPlayerPause(bool playerPaused)
-    {
-        if (playerPaused) _audioSource.volume = _pauseVolume;
-        else _audioSource.volume = _defaultVolume;
-    }
 
-/*    private void HandleEnterFinish_OnLevelFinish(bool levelFinished)
-    {
-        if (levelFinished) _audioSource.volume = _pauseVolume;
-        else _audioSource.volume = _defaultVolume;
-    }
-*/
     private void OnSceneLoaded(Scene scene, LoadSceneMode sceneMode)
     {
+        // check the level name type and set the audio source clip to play the appropriate music
+        // music only changes if logic is met
         if (scene.name.StartsWith("Menu") && _audioSource.clip != BGMCollection.FindSoundByName("MainMenu").AudioClips[0])
         {
             // play menu music
@@ -148,6 +131,11 @@ public class HandleLevelBGM : MonoBehaviour
             StartCoroutine(FadeInBGM());
         }
         Debug.Log("Playing audio source clip: " + _audioSource.clip.name);
+    }
+    private void GameStateManager_OnPlayerPause(bool playerPaused)
+    {
+        if (playerPaused) _audioSource.volume = _pauseVolume;
+        else _audioSource.volume = _defaultVolume;
     }
 
     private void HandleGameStateUI_OnStartButtonPressed()

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class HandleLevelStart : MonoBehaviour
 {
@@ -14,8 +15,8 @@ public class HandleLevelStart : MonoBehaviour
 
     private void Start()
     {
-        int currentLevel = UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex;
-        if (currentLevel != 1)
+        int currentLevelIndex = SceneManager.GetActiveScene().buildIndex;
+        if (currentLevelIndex > 2 && currentLevelIndex < 8)
         {
             WarpObject.SetActive(true);
             StartCoroutine(LevelWarp(5, 0));

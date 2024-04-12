@@ -19,7 +19,6 @@ public class HandleEnvironmentSFX : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
         DontDestroyOnLoad(gameObject);
     }
 
@@ -53,12 +52,10 @@ public class HandleEnvironmentSFX : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode sceneMode)
     {
-        int currentLevel = SceneManager.GetActiveScene().buildIndex;
-        if (currentLevel > 2 || currentLevel < 8)
+        int currentLevelIndex = scene.buildIndex;
+        if (currentLevelIndex > 2 && currentLevelIndex < 8)
         {
             _environmentSounds.PlaySound("LevelStartWarp", transform);
         }
-
     }
-
 }
