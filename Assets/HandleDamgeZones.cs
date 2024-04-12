@@ -29,36 +29,41 @@ public class HandleDamgeZones : MonoBehaviour
 
     private void Update()
     {
-        if (TriggerLeft.ActivateBehaviour && !TriggerRight.ActivateBehaviour)
+        if (TriggerLeft.TriggerActive && !TriggerRight.TriggerActive)
         {
-            NegativeZoneLeft.SetActive(true);
             MoveZone(NegativeZoneLeft, new Vector3(-10, 0, 0));
         }
-        else if (!TriggerLeft.ActivateBehaviour)
+        else if (!TriggerLeft.TriggerActive)
         {
-            NegativeZoneLeft.SetActive(false);
-            ResetPosition(NegativeZoneLeft, _zoneLeftStartPosition);
+            ResetZone(NegativeZoneLeft, _zoneLeftStartPosition);
         }
 
-        if (TriggerRight.ActivateBehaviour && !TriggerLeft.ActivateBehaviour)
+        if (TriggerRight.TriggerActive && !TriggerLeft.TriggerActive)
         {
-            NegativeZoneRight.SetActive(true);
             MoveZone(NegativeZoneRight, new Vector3(10, 0, 0));
         }
-        else if (!TriggerRight.ActivateBehaviour)
+        else if (!TriggerRight.TriggerActive)
         {
-            NegativeZoneRight.SetActive(false);
-            ResetPosition(NegativeZoneRight, _zoneRightStartPosition);
+            ResetZone(NegativeZoneRight, _zoneRightStartPosition);
         }
     }
 
     private void MoveZone(GameObject zone, Vector3 targetPosition)
     {
+        zone.SetActive(true);
         zone.transform.position = Vector3.MoveTowards(zone.transform.position, targetPosition, ActiveZoneMoveSpeed * Time.deltaTime);
     }
 
-    private void ResetPosition(GameObject zone, Vector3 originalPosition)
+    private void ResetZone(GameObject zone, Vector3 originalPosition)
     {
-        zone.transform.position = originalPosition;
+        //zone.transform.position = originalPosition;
+        // move back towards original position
+        zone.transform.position = Vector3.MoveTowards(zone.transform.position, originalPosition, ActiveZoneMoveSpeed * Time.deltaTime);
+
+        // if we are close enough to the original position, deactivate the zone
+        if (Vector3.Distance(zone.transform.position, originalPosition) < 0.1f)
+        {
+            zone.SetActive(false);
+        }
     }
 }

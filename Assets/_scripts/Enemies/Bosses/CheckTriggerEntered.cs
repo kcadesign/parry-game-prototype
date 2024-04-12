@@ -12,7 +12,7 @@ public class CheckTriggerEntered : MonoBehaviour
     private float _triggerEnteredTimer = 0f;
     public float TimeDelay;
 
-    public bool ActivateBehaviour = false;
+    public bool TriggerActive = false;
 
 /*    private void Awake()
     {
@@ -44,7 +44,7 @@ public class CheckTriggerEntered : MonoBehaviour
             if(_triggerEnteredTimer >= TimeDelay)
             {
                 //Debug.Log($"Player has been in {gameObject.name} for {_triggerEnteredDuration} seconds");
-                ActivateBehaviour = true;
+                TriggerActive = true;
                 //_spriteRenderer.color = _bossAttackTriggeredColor;
             }
         }
@@ -57,7 +57,7 @@ public class CheckTriggerEntered : MonoBehaviour
             // Reset timer
             ResetTriggerEnteredTimer();
 
-            ActivateBehaviour = false;
+            TriggerActive = false;
 
             //Debug.Log($"Player exited {gameObject.name}");
             //_spriteRenderer.color = _originalColor;

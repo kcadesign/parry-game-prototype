@@ -108,19 +108,19 @@ public class Boss1StateManager : MonoBehaviour
 
     private void DecideAttackZone()
     {
-        if (TriggerZoneLeft.ActivateBehaviour)
+        if (TriggerZoneLeft.TriggerActive)
         {
             CanAttackLeft = true;
             CanAttackRight = false;
             CanAttackBottom = false;
         }
-        else if (TriggerZoneRight.ActivateBehaviour)
+        else if (TriggerZoneRight.TriggerActive)
         {
             CanAttackLeft = false;
             CanAttackRight = true;
             CanAttackBottom = false;
         }
-        else if (TriggerZoneBottom.ActivateBehaviour)
+        else if (TriggerZoneBottom.TriggerActive)
         {
             CanAttackLeft = false;
             CanAttackRight = false;

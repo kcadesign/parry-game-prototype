@@ -46,7 +46,7 @@ public class HandleLevelBGM : MonoBehaviour
     {
         HandleGameStateUI.OnStartButtonPressed += HandleGameStateUI_OnStartButtonPressed;
         GameStateManager.OnPlayerPause += GameStateManager_OnPlayerPause;
-        HandleEnterFinish.OnPlayerParryFinish += HandleEnterFinish_OnLevelFinish;
+        //HandleEnterFinish.OnPlayerParryFinish += HandleEnterFinish_OnLevelFinish;
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
@@ -54,7 +54,7 @@ public class HandleLevelBGM : MonoBehaviour
     {
         HandleGameStateUI.OnStartButtonPressed -= HandleGameStateUI_OnStartButtonPressed;
         GameStateManager.OnPlayerPause -= GameStateManager_OnPlayerPause;
-        HandleEnterFinish.OnPlayerParryFinish -= HandleEnterFinish_OnLevelFinish;
+        //HandleEnterFinish.OnPlayerParryFinish -= HandleEnterFinish_OnLevelFinish;
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
@@ -94,6 +94,7 @@ public class HandleLevelBGM : MonoBehaviour
         // play and fade in the audio source
         _audioSource.Play();
         StartCoroutine(FadeInBGM());
+        Debug.Log("Playing audio source clip: " + _audioSource.clip.name);
     }
 
     private void GameStateManager_OnPlayerPause(bool playerPaused)
@@ -102,12 +103,12 @@ public class HandleLevelBGM : MonoBehaviour
         else _audioSource.volume = _defaultVolume;
     }
 
-    private void HandleEnterFinish_OnLevelFinish(bool levelFinished)
+/*    private void HandleEnterFinish_OnLevelFinish(bool levelFinished)
     {
         if (levelFinished) _audioSource.volume = _pauseVolume;
         else _audioSource.volume = _defaultVolume;
     }
-
+*/
     private void OnSceneLoaded(Scene scene, LoadSceneMode sceneMode)
     {
         if (scene.name.StartsWith("Menu") && _audioSource.clip != BGMCollection.FindSoundByName("MainMenu").AudioClips[0])
@@ -116,6 +117,8 @@ public class HandleLevelBGM : MonoBehaviour
             _audioSource.clip = BGMCollection.FindSoundByName(_menuBGM).AudioClips[0];
             _audioSource.loop = BGMCollection.FindSoundByName(_menuBGM).Loop;
             _audioSource.volume = 0;
+            _audioSource.Play();
+            StartCoroutine(FadeInBGM());
         }
         else if (scene.name.StartsWith("Story") && _audioSource.clip != BGMCollection.FindSoundByName("Story").AudioClips[0])
         {
@@ -123,6 +126,8 @@ public class HandleLevelBGM : MonoBehaviour
             _audioSource.clip = BGMCollection.FindSoundByName(_storyScreenBGM).AudioClips[0];
             _audioSource.loop = BGMCollection.FindSoundByName(_storyScreenBGM).Loop;
             _audioSource.volume = 0;
+            _audioSource.Play();
+            StartCoroutine(FadeInBGM());
         }
         else if (scene.name.StartsWith("World1") && _audioSource.clip != BGMCollection.FindSoundByName("World1Level").AudioClips[0])
         {
@@ -130,6 +135,8 @@ public class HandleLevelBGM : MonoBehaviour
             _audioSource.clip = BGMCollection.FindSoundByName(_world1LevelBGM).AudioClips[0];
             _audioSource.loop = BGMCollection.FindSoundByName(_world1LevelBGM).Loop;
             _audioSource.volume = 0;
+            _audioSource.Play();
+            StartCoroutine(FadeInBGM());
         }
         else if (scene.name.StartsWith("Boss1") && _audioSource.clip != BGMCollection.FindSoundByName("World1Boss").AudioClips[0])
         {
@@ -137,9 +144,10 @@ public class HandleLevelBGM : MonoBehaviour
             _audioSource.clip = BGMCollection.FindSoundByName(_world1BossBGM).AudioClips[0];
             _audioSource.loop = BGMCollection.FindSoundByName(_world1BossBGM).Loop;
             _audioSource.volume = 0;
+            _audioSource.Play();
+            StartCoroutine(FadeInBGM());
         }
-        _audioSource.Play();
-        StartCoroutine(FadeInBGM());
+        Debug.Log("Playing audio source clip: " + _audioSource.clip.name);
     }
 
     private void HandleGameStateUI_OnStartButtonPressed()

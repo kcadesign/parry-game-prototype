@@ -391,6 +391,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Progress"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1a7dbbec-c3aa-4ef1-8687-178425ffc0e9"",
+                    ""path"": ""<Keyboard>/anyKey"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Progress"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
