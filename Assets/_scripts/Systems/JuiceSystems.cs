@@ -23,12 +23,16 @@ public class JuiceSystems : MonoBehaviour
     {
         HandleEnemyHealth.OnEnemyDeath += HandleEnemyHealth_OnEnemyDeath;
         HandlePlayerHealth.OnPlayerHurtBig += HandlePlayerHealth_OnPlayerHurtBig;
+        HandleBossHealth.OnBossHealthChange += HandleBossHealth_OnBossHealthChange;
+        HandleBossHealth.OnBossDeath += HandleBossHealth_OnBossDeath;
     }
 
     private void OnDisable()
     {
         HandleEnemyHealth.OnEnemyDeath -= HandleEnemyHealth_OnEnemyDeath;
         HandlePlayerHealth.OnPlayerHurtBig -= HandlePlayerHealth_OnPlayerHurtBig;
+        HandleBossHealth.OnBossHealthChange -= HandleBossHealth_OnBossHealthChange;
+        HandleBossHealth.OnBossDeath -= HandleBossHealth_OnBossDeath;
     }
 
     private void HandleEnemyHealth_OnEnemyDeath(GameObject deadEnemy)
@@ -46,6 +50,19 @@ public class JuiceSystems : MonoBehaviour
         ScreenShake(_screenShakeAmount);
     }
 
+    private void HandleBossHealth_OnBossHealthChange(int currentHealth, int maxHealth)
+    {
+        // when the boss is damaged, pause time briefly (hit stop)
+        StartCoroutine(HitStop(_enemyDeathStopDuration));
+        ScreenShake(_screenShakeAmount);
+    }
+
+    private void HandleBossHealth_OnBossDeath()
+    {
+        Debug.Log("Boss deaad, shake screen");
+        // shake screen violently when boss is destroyed
+        StartCoroutine(MultiShake(3, 10, 0.3f));
+    }
 
     private IEnumerator HitStop(float hitStopDuration)
     {
@@ -59,5 +76,14 @@ public class JuiceSystems : MonoBehaviour
     private void ScreenShake(float shakeAmount)
     {
         _impulseSource.GenerateImpulseWithForce(shakeAmount);
+    }
+
+    private IEnumerator MultiShake(float shakeAmount, int shakeCount, float interval)
+    {
+        for (int i = 0; i < shakeCount; i++)
+        {
+            ScreenShake(shakeAmount);
+            yield return new WaitForSeconds(interval);
+        }
     }
 }
