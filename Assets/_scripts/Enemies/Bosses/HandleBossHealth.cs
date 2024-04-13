@@ -17,7 +17,7 @@ public class HandleBossHealth : MonoBehaviour
         _bossHealth = new HealthSystem(MaxHealth);
         CurrentHealth = _bossHealth.GetHealth();
 
-        OnBossHealthChange?.Invoke(CurrentHealth, MaxHealth);
+        //OnBossHealthChange?.Invoke(CurrentHealth, MaxHealth);
 
         Debug.Log($"{gameObject.transform.parent.name}'s health: {CurrentHealth}");
     }

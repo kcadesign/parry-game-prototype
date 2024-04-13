@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HandleEnemySounds : MonoBehaviour
 {
-    public SoundCollection _enemySounds;
+    public SoundCollection EnemySounds;
 
     private void OnEnable()
     {
@@ -22,7 +22,7 @@ public class HandleEnemySounds : MonoBehaviour
     {
         if (deadEnemy == gameObject)
         {
-            _enemySounds.PlaySound("Death", transform);
+            EnemySounds.PlaySound("Death", transform);
         }
     }
 
@@ -30,7 +30,7 @@ public class HandleEnemySounds : MonoBehaviour
     {
         if (attackingEnemy == gameObject)
         {
-            _enemySounds.PlaySound("Attack", transform);
+            EnemySounds.PlaySound("Attack", transform);
         }
     }
 
