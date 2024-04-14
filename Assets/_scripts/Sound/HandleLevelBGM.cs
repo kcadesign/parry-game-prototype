@@ -89,7 +89,6 @@ public class HandleLevelBGM : MonoBehaviour
         Debug.Log("Playing audio source clip: " + _audioSource.clip.name);
     }
 
-
     private void OnSceneLoaded(Scene scene, LoadSceneMode sceneMode)
     {
         // check the level name type and set the audio source clip to play the appropriate music
@@ -130,7 +129,7 @@ public class HandleLevelBGM : MonoBehaviour
             _audioSource.Play();
             StartCoroutine(FadeInBGM());
         }
-        Debug.Log("Playing audio source clip: " + _audioSource.clip.name);
+        //Debug.Log("Playing audio source clip: " + _audioSource.clip.name);
     }
     private void GameStateManager_OnPlayerPause(bool playerPaused)
     {
