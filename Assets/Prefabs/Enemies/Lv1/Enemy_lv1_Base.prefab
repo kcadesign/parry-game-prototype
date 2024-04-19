@@ -1017,7 +1017,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47ada164be944c24bb6d2963f6a5aa9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemySounds: {fileID: 11400000, guid: fc748760042d233439146dcfa62e6669, type: 2}
+  EnemySounds: {fileID: 11400000, guid: fc748760042d233439146dcfa62e6669, type: 2}
 --- !u!1 &8845792006319111637
 GameObject:
   m_ObjectHideFlags: 0
