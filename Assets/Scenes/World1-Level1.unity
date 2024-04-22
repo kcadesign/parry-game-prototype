@@ -2526,7 +2526,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5087428944256880765, guid: 3a5071f3964c0b9479e1130c1e17efcf, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 56.172913
+      value: 55.06
       objectReference: {fileID: 0}
     - target: {fileID: 5087428944256880765, guid: 3a5071f3964c0b9479e1130c1e17efcf, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2692,11 +2692,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7729972475179886043, guid: 35cbf832939b4104db8f1243c761cc46, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 174.47
+      value: 259.08
       objectReference: {fileID: 0}
     - target: {fileID: 7729972475179886043, guid: 35cbf832939b4104db8f1243c761cc46, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.813
+      value: -7.38
       objectReference: {fileID: 0}
     - target: {fileID: 7973663304530971650, guid: 35cbf832939b4104db8f1243c761cc46, type: 3}
       propertyPath: LevelFinishWarpSprite
@@ -2704,7 +2704,7 @@ PrefabInstance:
       objectReference: {fileID: 513719159}
     - target: {fileID: 8029411339064260938, guid: 35cbf832939b4104db8f1243c761cc46, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 114.42
+      value: 122.17
       objectReference: {fileID: 0}
     - target: {fileID: 8029411339064260938, guid: 35cbf832939b4104db8f1243c761cc46, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2753,6 +2753,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 6867368710425990057, guid: 35cbf832939b4104db8f1243c761cc46, type: 3}
+    - {fileID: 2957934883781807444, guid: 35cbf832939b4104db8f1243c761cc46, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 35cbf832939b4104db8f1243c761cc46, type: 3}
