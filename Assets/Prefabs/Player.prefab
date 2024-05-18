@@ -350,7 +350,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34765bf8602bdf84cba44c62eebbd7b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 100
+  _maxHealth: 80
   _autoHealWaitTime: 10
 --- !u!114 &353915930429101027
 MonoBehaviour:
