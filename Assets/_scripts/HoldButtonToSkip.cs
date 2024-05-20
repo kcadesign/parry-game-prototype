@@ -65,6 +65,7 @@ public class HoldButtonToSkip : MonoBehaviour
         if (_holdDuration >= _requiredHoldTime)
         {
             Debug.Log("Button held to execution");
+            _holdDuration = _requiredHoldTime;
         }
         else if (_holdDuration <= 0)
         {
