@@ -60,6 +60,7 @@ public class HoldButtonToSkip : MonoBehaviour
 
         GetSetCurrentFill();
     }
+
     private void CheckHoldDuration()
     {
         if (_holdDuration >= _requiredHoldTime)
