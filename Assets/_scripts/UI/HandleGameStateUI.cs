@@ -45,7 +45,7 @@ public class HandleGameStateUI : MonoBehaviour
     {
         HandlePlayerDeath.OnPlayerDeathAnimEnd += HandlePlayerDeath_OnPlayerDeathAnimEnd;
         //HandleBossDeath.OnBossDeathAnimEnd += HandleBossDeath_OnBossDeathAnimEnd;
-        HandleEnterFinish.OnWarpFinish += HandleEnterFinish_OnLevelFinish;
+        //HandleEnterFinish.OnWarpFinish += HandleEnterFinish_OnLevelFinish;
         HandleLevelProgression.OnSendCurrentCheckpoint += HandleLevelProgression_OnSendCurrentCheckpoint;
         GameStateManager.OnPlayerPause += GameStateManager_OnPlayerPause;
     }
@@ -54,16 +54,16 @@ public class HandleGameStateUI : MonoBehaviour
     {
         HandlePlayerDeath.OnPlayerDeathAnimEnd -= HandlePlayerDeath_OnPlayerDeathAnimEnd;
         //HandleBossDeath.OnBossDeathAnimEnd -= HandleBossDeath_OnBossDeathAnimEnd;
-        HandleEnterFinish.OnWarpFinish -= HandleEnterFinish_OnLevelFinish;
+        //HandleEnterFinish.OnWarpFinish -= HandleEnterFinish_OnLevelFinish;
         HandleLevelProgression.OnSendCurrentCheckpoint -= HandleLevelProgression_OnSendCurrentCheckpoint;
         GameStateManager.OnPlayerPause -= GameStateManager_OnPlayerPause;
     }
 
-    private void HandleEnterFinish_OnLevelFinish()
+/*    private void HandleEnterFinish_OnLevelFinish()
     {
         NextLevel();
     }
-
+*/
     private void Start()
     {
         if (StartGameUI != null)
@@ -127,12 +127,12 @@ public class HandleGameStateUI : MonoBehaviour
         SceneManager.LoadScene(currentSceneName);
     }
 
-    public void NextLevel()
+/*    public void NextLevel()
     {
         int currentSceneName = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(currentSceneName + 1);
     }
-
+*/
     public void StartGame()
     {
         OnStartButtonPressed?.Invoke();

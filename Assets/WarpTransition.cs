@@ -35,7 +35,7 @@ public class WarpTransition : SceneTransition
         float elapsedTime = 0f;
         while (elapsedTime < _transitionDuration)
         {
-            elapsedTime += Time.deltaTime;
+            elapsedTime += Time.unscaledDeltaTime;
             lerpedAmount = Mathf.Lerp(startPosition, endPosition, (elapsedTime / _transitionDuration));
             WarpMaterial.SetFloat(_ShockwaveStrength, lerpedAmount);
             yield return null;
@@ -53,7 +53,7 @@ public class WarpTransition : SceneTransition
         float elapsedTime = 0f;
         while (elapsedTime < _transitionDuration)
         {
-            elapsedTime += Time.deltaTime;
+            elapsedTime += Time.unscaledDeltaTime;
             lerpedAmount = Mathf.Lerp(startPosition, endPosition, (elapsedTime / _transitionDuration));
             WarpMaterial.SetFloat(_ShockwaveStrength, lerpedAmount);
             yield return null;
