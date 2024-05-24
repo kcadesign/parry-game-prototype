@@ -6,16 +6,16 @@ using UnityEngine.SceneManagement;
 
 public class SceneTransitionManager : MonoBehaviour
 {
-    public static SceneTransitionManager instance;
+    public static SceneTransitionManager TransitionManagerInstance;
 
     public GameObject TransitionContainer;
     private SceneTransition[] _transitions;
 
     private void Awake()
     {
-        if (instance == null)
+        if (TransitionManagerInstance == null)
         {
-            instance = this;
+            TransitionManagerInstance = this;
             DontDestroyOnLoad(gameObject);
         }
         else

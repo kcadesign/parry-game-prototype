@@ -8,57 +8,60 @@ public class GameManager : MonoBehaviour
     public CollectableTracker CollectableTracker;
     public SaveData SaveData;
 
-    private int _nextScene;
-
-    private void Awake()
-    {
-        _nextScene = SceneManager.GetActiveScene().buildIndex + 1;
-    }
-
     private void OnEnable()
     {        
-        HandleGameStateUI.OnStartGame += HandleMainMenuUI_OnStartGame;
-        HandleGameStateUI.OnResetGameProgress += HandleMainMenuUI_OnResetGameProgress;
-        HandleGameStateUI.OnExitGame += HandleGameStateUI_OnExitGame;
+        MainMenu.OnStartButtonPressed += MainMenuManager_OnStartButtonPressed;
+        MainMenu.OnResetProgressButtonPressed += MainMenuManager_OnResetProgressButtonPressed;
+        MainMenu.OnExitGameButtonPressed += MainMenuManager_OnExitGameButtonPressed;
     }
-
 
     private void OnDisable()
     {
-        HandleGameStateUI.OnStartGame -= HandleMainMenuUI_OnStartGame;
-        HandleGameStateUI.OnResetGameProgress -= HandleMainMenuUI_OnResetGameProgress;
-        HandleGameStateUI.OnExitGame -= HandleGameStateUI_OnExitGame;
+        MainMenu.OnStartButtonPressed -= MainMenuManager_OnStartButtonPressed;
+        MainMenu.OnResetProgressButtonPressed -= MainMenuManager_OnResetProgressButtonPressed;
+        MainMenu.OnExitGameButtonPressed -= MainMenuManager_OnExitGameButtonPressed;
     }
 
-    private void HandleMainMenuUI_OnStartGame()
+    private void MainMenuManager_OnStartButtonPressed()
     {
-        Debug.Log("Starting game...");
+        Debug.Log("Starting session...");
         SaveData.LoadGameProgress();
         LoadSavedSceneOrDefault();
     }
-    private void HandleMainMenuUI_OnResetGameProgress()
+    private void MainMenuManager_OnResetProgressButtonPressed()
     {
         CollectableTracker.ClearAllFields();
         SaveData.ResetGameProgress();
+
+        // Create reset progress visual effect for here
     }
 
-    private void HandleGameStateUI_OnExitGame()
+    private void MainMenuManager_OnExitGameButtonPressed()
     {
         SaveData.SaveGameProgress(CollectableTracker.CurrentSceneName);
         CollectableTracker.ClearAllFields();
+
+        // Create exit game transition for here
+
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#endif
+        Application.Quit();
+
     }
 
     public void LoadSavedSceneOrDefault()
     {
         if (string.IsNullOrEmpty(CollectableTracker.CurrentSceneName))
         {
-            Debug.Log($"Loading default scene: {_nextScene}");
-            SceneManager.LoadScene(_nextScene);
+            Debug.Log($"Loading default scene");
+            SceneTransitionManager.TransitionManagerInstance.LoadScene("Story-IntroScreen", "WipePinkTransition");
         }
         else
         {
             Debug.Log($"Loading saved scene: {CollectableTracker.CurrentSceneName}");
-            SceneManager.LoadScene(CollectableTracker.CurrentSceneName);
+            //SceneManager.LoadScene(CollectableTracker.CurrentSceneName);
+            SceneTransitionManager.TransitionManagerInstance.LoadScene(CollectableTracker.CurrentSceneName, "WipePink");
         }
     }
 

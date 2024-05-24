@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MenuManager : MonoBehaviour
+public class SplashScreenManager : MonoBehaviour
 {
     protected PlayerControls playerControls;
 
@@ -30,7 +30,7 @@ public class MenuManager : MonoBehaviour
     private void Start_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
         Debug.Log("Start requested on splash screen");
-        SceneTransitionManager.instance.LoadScene("Menu-Start", "WipePink");
+        SceneTransitionManager.TransitionManagerInstance.LoadScene("Menu-Start", "WipePinkTransition");
     }
 
     private void Start_canceled(UnityEngine.InputSystem.InputAction.CallbackContext obj)

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,16 +9,24 @@ public class HoldButtonToSkip : MonoBehaviour
 {
     protected PlayerControls playerControls;
 
+    public static event Action OnButtonHeldToExecution;
+
     private Image BarValueImage;
 
     private bool _buttonHeld;
     [SerializeField] private float _holdDuration = 0f;
     [SerializeField] private float _requiredHoldTime = 5f;
+    private bool _buttonHeldToExecution;
 
     private void Awake()
     {
         playerControls = new PlayerControls();
         BarValueImage = GetComponent<Image>();
+    }
+
+    private void Start()
+    {
+        _buttonHeldToExecution = false;
     }
 
     private void OnEnable()
@@ -49,13 +58,17 @@ public class HoldButtonToSkip : MonoBehaviour
 
     private void Update()
     {
-        CheckButtonHeld();
-        CheckHoldDuration();
+        if(_buttonHeldToExecution) return;
+        else if ((!_buttonHeldToExecution))
+        {
+            CheckButtonHeld();
+            CheckHoldDuration();
+        }
     }
 
     private void CheckButtonHeld()
     {
-        if (_buttonHeld) _holdDuration += Time.deltaTime;
+        if (_buttonHeld && _holdDuration < _requiredHoldTime) _holdDuration += Time.deltaTime;
         else  _holdDuration -= Time.deltaTime * 3f;
 
         GetSetCurrentFill();
@@ -66,7 +79,9 @@ public class HoldButtonToSkip : MonoBehaviour
         if (_holdDuration >= _requiredHoldTime)
         {
             Debug.Log("Button held to execution");
-            _holdDuration = _requiredHoldTime;
+            OnButtonHeldToExecution?.Invoke();
+            _buttonHeldToExecution = true;
+            //_holdDuration = _requiredHoldTime;
         }
         else if (_holdDuration <= 0)
         {

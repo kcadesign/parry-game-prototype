@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class CrossFade : SceneTransition
+public class CrossFadeTransition : SceneTransition
 {
     private CanvasGroup _canvasGroup;
 
