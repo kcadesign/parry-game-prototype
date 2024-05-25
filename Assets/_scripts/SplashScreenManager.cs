@@ -30,7 +30,7 @@ public class SplashScreenManager : MonoBehaviour
     private void Start_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
         Debug.Log("Start requested on splash screen");
-        SceneTransitionManager.TransitionManagerInstance.LoadScene("Menu-Start", "WipePinkTransition");
+        SceneTransitionManager.TransitionManagerInstance.LoadScene("Menu-Start", "CrossFadeWhiteTransition");
     }
 
     private void Start_canceled(UnityEngine.InputSystem.InputAction.CallbackContext obj)
