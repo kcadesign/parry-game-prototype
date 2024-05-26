@@ -18,12 +18,21 @@ public class HandlePlayerHealthBar : MonoBehaviour
 
     private void OnEnable()
     {
+        HandlePlayerHealth.OnHealthInitialise += HandlePlayerHealth_OnHealthInitialise;
         HandlePlayerHealth.OnHealthChange += HandlePlayerHealth_OnHealthChange;
     }
 
     private void OnDisable()
     {
+        HandlePlayerHealth.OnHealthInitialise -= HandlePlayerHealth_OnHealthInitialise;
         HandlePlayerHealth.OnHealthChange -= HandlePlayerHealth_OnHealthChange;
+    }
+
+    private void HandlePlayerHealth_OnHealthInitialise(int maxHealth)
+    {
+        _maxFill = maxHealth;
+        _currentFill = maxHealth;
+        GetSetCurrentFill();
     }
 
     private void HandlePlayerHealth_OnHealthChange(int currentHealth)
