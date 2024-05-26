@@ -16,12 +16,12 @@ public class HandleMainMenuBGM : MonoBehaviour
 
     private void OnEnable()
     {
-        HandleGameStateUI.OnStartButtonPressed += HandleGameStateUI_OnStartButtonPressed;
+        //HandleGameStateUI.OnStartButtonPressed += HandleGameStateUI_OnStartButtonPressed;
     }
 
     private void OnDisable()
     {
-        HandleGameStateUI.OnStartButtonPressed -= HandleGameStateUI_OnStartButtonPressed;
+        //HandleGameStateUI.OnStartButtonPressed -= HandleGameStateUI_OnStartButtonPressed;
     }
 
     private void Start()
@@ -35,12 +35,12 @@ public class HandleMainMenuBGM : MonoBehaviour
     }
 
 
-    private void HandleGameStateUI_OnStartButtonPressed()
+/*    private void HandleGameStateUI_OnStartButtonPressed()
     {
         // slowly fade out the main menu music
         StartCoroutine(FadeOutMainMenuBGM());
     }
-
+*/
     private IEnumerator FadeInMainMenuBGM()
     {
         Debug.Log("Fade in coroutine started");

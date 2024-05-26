@@ -10,7 +10,7 @@ public class GameStateManager : MonoBehaviour
     protected PlayerControls playerControls;
 
     public delegate void PlayerPause(bool playerPaused);
-    public static event PlayerPause OnPlayerPause;
+    public static event PlayerPause OnPauseButtonPressed;
 
     private bool _pauseTime = false;
     private bool _playerCanPause = true;
@@ -59,7 +59,7 @@ public class GameStateManager : MonoBehaviour
         {
             _pauseTime = !_pauseTime;
             HandlePauseTime(_pauseTime);
-            OnPlayerPause?.Invoke(_pauseTime);
+            OnPauseButtonPressed?.Invoke(_pauseTime);
         }
     }
 

@@ -17,6 +17,6 @@ public class ScrollImage : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Image.uvRect = new Rect(Image.uvRect.position + new Vector2(x, y) * Time.deltaTime, Image.uvRect.size);
+        Image.uvRect = new Rect(Image.uvRect.position + new Vector2(x, y) * Time.unscaledDeltaTime, Image.uvRect.size);
     }
 }

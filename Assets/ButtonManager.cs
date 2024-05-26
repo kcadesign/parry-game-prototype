@@ -26,6 +26,7 @@ public class ButtonManager : MonoBehaviour
         PlayerControls.Menus.Enable();
         PlayerControls.Menus.Navigate.performed += Navigate_performed;
 
+        AnimateButtonIntro();
         StartCoroutine(SetSelectedAfterOneFrame());
     }
 
@@ -33,11 +34,8 @@ public class ButtonManager : MonoBehaviour
     {
         PlayerControls.Menus.Disable();
         PlayerControls.Menus.Navigate.performed -= Navigate_performed;
-    }
 
-    void Start()
-    {
-        AnimateButtonIntro();
+        ResetButtonPosition();
     }
 
     private void Update()
@@ -57,7 +55,6 @@ public class ButtonManager : MonoBehaviour
                 }
             }
         }
-
     }
 
     private void AnimateButtonIntro()
@@ -71,7 +68,16 @@ public class ButtonManager : MonoBehaviour
         // move the buttons from off screen to their starting position using lean tween\
         for (int i = 0; i < Buttons.Length; i++)
         {
-            LeanTween.moveLocalY(Buttons[i], Buttons[i].transform.localPosition.y + 1000, 1f).setEase(LeanTweenType.easeOutExpo).setDelay(i * 0.25f);
+            LeanTween.moveLocalY(Buttons[i], Buttons[i].transform.localPosition.y + 1000, 1f).setEase(LeanTweenType.easeOutExpo).setDelay(i * 0.25f).setIgnoreTimeScale(true);
+        }
+    }
+
+    private void ResetButtonPosition()
+    {
+        // move the buttons off screen
+        for (int i = 0; i < Buttons.Length; i++)
+        {
+            Buttons[i].transform.localPosition = new Vector3(0, Buttons[i].transform.localPosition.y, 0);
         }
     }
 

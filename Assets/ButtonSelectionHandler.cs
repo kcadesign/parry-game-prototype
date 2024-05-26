@@ -44,7 +44,7 @@ public class ButtonSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPoin
     public void OnSelect(BaseEventData eventData)
     {
         Debug.Log($"{gameObject.name} selected");
-        LeanTween.scale(gameObject, _originalScale * _scaleAmount, _moveTime).setEase(LeanTweenType.easeOutExpo);
+        LeanTween.scale(gameObject, _originalScale * _scaleAmount, _moveTime).setEase(LeanTweenType.easeInOutExpo).setIgnoreTimeScale(true);
         
         ButtonManager.LastSelectedButton = gameObject;
         for (int i = 0; i < ButtonManager.Buttons.Length; i++)
@@ -61,7 +61,7 @@ public class ButtonSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPoin
 
     public void OnDeselect(BaseEventData eventData)
     {
-        LeanTween.scale(gameObject, _originalScale, _moveTime).setEase(LeanTweenType.easeOutExpo);
+        LeanTween.scale(gameObject, _originalScale, _moveTime).setEase(LeanTweenType.easeInOutExpo).setIgnoreTimeScale(true);
         ButtonSelector.SetActive(false);
     }
 
