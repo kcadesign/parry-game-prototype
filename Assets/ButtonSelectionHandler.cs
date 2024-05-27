@@ -55,7 +55,6 @@ public class ButtonSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPoin
                 return;
             }
         }
-
         ButtonSelector.SetActive(true);
     }
 
@@ -63,6 +62,7 @@ public class ButtonSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPoin
     {
         LeanTween.scale(gameObject, _originalScale, _moveTime).setEase(LeanTweenType.easeInOutExpo).setIgnoreTimeScale(true);
         ButtonSelector.SetActive(false);
+
     }
 
     public void OnPointerDown()
@@ -75,8 +75,8 @@ public class ButtonSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPoin
     {
         Debug.Log("Pointer Up");
         MoveTextWithButton(_buttonTextOriginalPosition);
-    }    
-    
+     }
+
     public void MoveTextWithButton(Vector3 buttonPosition)
     {
         ButtonText.transform.position = buttonPosition;
