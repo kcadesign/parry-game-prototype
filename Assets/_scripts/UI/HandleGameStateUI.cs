@@ -80,8 +80,8 @@ public class HandleGameStateUI : MonoBehaviour
         if (PauseGameUI != null)
         {
             PauseGameUI.SetActive(true);
-            LeanTween.moveY(PauseGameUI, ScreenMiddle.transform.position.y, 0.5f)
-                    .setEase(LeanTweenType.easeInOutExpo)
+            LeanTween.moveY(PauseGameUI, ScreenMiddle.transform.position.y, 1f)
+                    .setEase(LeanTweenType.easeOutExpo)
                     .setIgnoreTimeScale(true);
         }
         yield return new WaitWhile(() => LeanTween.isTweening(PauseGameUI));
@@ -92,7 +92,7 @@ public class HandleGameStateUI : MonoBehaviour
     {
         if (PauseGameUI != null)
         {
-            LeanTween.moveY(PauseGameUI, ScreenBelow.transform.position.y, 0.5f)
+            LeanTween.moveY(PauseGameUI, ScreenBelow.transform.position.y, 1f)
                      .setEase(LeanTweenType.easeInOutExpo)
                      .setIgnoreTimeScale(true);
 
