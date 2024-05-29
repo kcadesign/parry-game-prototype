@@ -11,7 +11,7 @@ public class CollectableTracker : ScriptableObject
     public Dictionary<string, bool> HostagesRescuedDictionary = new();
 
     [Header("Scene Management")]
-    public string CurrentSceneName;
+    public string SavedSceneName;
     public bool NewScene;
     //public bool LevelFinished;
     public bool HostagePresent;
@@ -27,17 +27,17 @@ public class CollectableTracker : ScriptableObject
 
     public void CheckIfSceneChanged(string currentSceneName)
     {
-        if (currentSceneName != CurrentSceneName)
+        if (currentSceneName != SavedSceneName)
         {
             NewScene = true;
         }
-        else if (currentSceneName == CurrentSceneName)
+        else if (currentSceneName == SavedSceneName)
         {
             NewScene = false;
         }
     }
 
-    public void StoreCurrentSceneName(string currentSceneName) => CurrentSceneName = currentSceneName;
+    public void StoreCurrentSceneName(string currentSceneName) => SavedSceneName = currentSceneName;
 
     public void AddSceneNameToList(string currentSceneName)
     {
@@ -116,7 +116,7 @@ public class CollectableTracker : ScriptableObject
         EnemiesDestroyedDictionary = null;
         HostagesRescuedDictionary = null;
 
-        CurrentSceneName = null;
+        SavedSceneName = null;
         NewScene = false;
         HostagePresent = false;
 

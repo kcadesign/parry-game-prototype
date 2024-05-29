@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
 
     private void MainMenuManager_OnExitGameButtonPressed()
     {
-        SaveData.SaveGameProgress(CollectableTracker.CurrentSceneName);
+        SaveData.SaveGameProgress(CollectableTracker.SavedSceneName);
         CollectableTracker.ClearAllFields();
 
         // Create exit game transition for here
@@ -52,16 +52,16 @@ public class GameManager : MonoBehaviour
 
     public void LoadSavedSceneOrDefault()
     {
-        if (string.IsNullOrEmpty(CollectableTracker.CurrentSceneName))
+        if (string.IsNullOrEmpty(CollectableTracker.SavedSceneName))
         {
             Debug.Log($"Loading default scene");
             SceneTransitionManager.TransitionManagerInstance.LoadScene("Story-IntroScreen", "WipePinkTransition");
         }
         else
         {
-            Debug.Log($"Loading saved scene: {CollectableTracker.CurrentSceneName}");
+            Debug.Log($"Loading saved scene: {CollectableTracker.SavedSceneName}");
             //SceneManager.LoadScene(CollectableTracker.CurrentSceneName);
-            SceneTransitionManager.TransitionManagerInstance.LoadScene(CollectableTracker.CurrentSceneName, "WipePink");
+            SceneTransitionManager.TransitionManagerInstance.LoadScene(CollectableTracker.SavedSceneName, "WipePink");
         }
     }
 
