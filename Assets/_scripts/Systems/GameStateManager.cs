@@ -84,9 +84,7 @@ public class GameStateManager : MonoBehaviour
 
     private void HandleBossDeath_OnBossDeathAnimEnd()
     {
-        // load current scene + 1
-        int currentScene = SceneManager.GetActiveScene().buildIndex;
-        SceneManager.LoadScene(currentScene + 1);
+        SceneTransitionManager.TransitionManagerInstance.LoadScene("Story-OutroScreen", "CrossFadeWhiteTransition");
     }
 
     private void HandleEnterFinish_OnLevelFinish(bool levelFinished)

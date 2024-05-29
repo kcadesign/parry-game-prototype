@@ -5,6 +5,7 @@ using UnityEngine;
 public class HandleNextScene : MonoBehaviour
 {
     public string NextSceneName;
+    public string TransitionName;
 
     private void OnEnable()
     {
@@ -18,6 +19,6 @@ public class HandleNextScene : MonoBehaviour
 
     private void HoldButtonToSkip_OnButtonHeldToExecution()
     {
-        SceneTransitionManager.TransitionManagerInstance.LoadScene(NextSceneName, "CrossFadeWhiteTransition");
+        SceneTransitionManager.TransitionManagerInstance.LoadScene(NextSceneName, TransitionName);
     }
 }

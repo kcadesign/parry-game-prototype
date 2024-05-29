@@ -7,24 +7,29 @@ public class HandleDamgeZones : MonoBehaviour
     [Header("Triggers")]
     public CheckTriggerEntered TriggerLeft;
     public CheckTriggerEntered TriggerRight;
+    public CheckTriggerEntered TriggerBottom;
 
     [Header("Negative Zones")]
     public GameObject NegativeZoneLeft;
     public GameObject NegativeZoneRight;
+    public GameObject NegativeZoneBottom;
 
     public float ActivateDelay = 2f;
     public float ActiveZoneMoveSpeed = 1f;
 
     private Vector3 _zoneLeftStartPosition;
     private Vector3 _zoneRightStartPosition;
+    private Vector3 _zoneBottomStartPosition;
 
     private void Start()
     {
         TriggerLeft.SetAttackDelay(ActivateDelay);
         TriggerRight.SetAttackDelay(ActivateDelay);
+        TriggerBottom.SetAttackDelay(ActivateDelay);
 
         _zoneLeftStartPosition = NegativeZoneLeft.transform.position;
         _zoneRightStartPosition = NegativeZoneRight.transform.position;
+        _zoneBottomStartPosition = NegativeZoneBottom.transform.position;
     }
 
     private void Update()
@@ -45,6 +50,15 @@ public class HandleDamgeZones : MonoBehaviour
         else if (!TriggerRight.TriggerActive)
         {
             ResetZone(NegativeZoneRight, _zoneRightStartPosition);
+        }
+
+        if (TriggerBottom.TriggerActive)
+        {
+            MoveZone(NegativeZoneBottom, new Vector3(0, -10, 0));
+        }
+        else if (!TriggerBottom.TriggerActive)
+        {
+            ResetZone(NegativeZoneBottom, _zoneBottomStartPosition);
         }
     }
 
