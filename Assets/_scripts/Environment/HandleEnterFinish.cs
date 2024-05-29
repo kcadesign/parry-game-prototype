@@ -19,7 +19,7 @@ public class HandleEnterFinish : MonoBehaviour
     {
         _currentScene = SceneManager.GetActiveScene();
         _nextSceneName = GetNextSceneName();
-        Debug.Log(_nextSceneName);
+        //Debug.Log(_nextSceneName);
     }
 
     private string GetNextSceneName()
