@@ -74,8 +74,15 @@ public class PlayerJump : MonoBehaviour
 
     private void Jump_performed(InputAction.CallbackContext obj)
     {
-        if (_canJump && _isGrounded) DoJump();
-        if (!_isGrounded) _jumpDesired = true;
+        if (Time.timeScale == 0)
+        {
+            return;
+        }
+        else
+        {
+            if (_canJump && _isGrounded) DoJump();
+            if (!_isGrounded) _jumpDesired = true;
+        }
     }
 
     private void Jump_canceled(InputAction.CallbackContext obj)
@@ -100,25 +107,32 @@ public class PlayerJump : MonoBehaviour
 
     private void HandleJumpBuffering()
     {
-        if (!_jumpDesired)
+        if(Time.timeScale == 0)
         {
-            _jumpBufferCounter = 0;
+            return;
         }
         else
         {
-            _jumpBufferCounter += Time.deltaTime;
-
-            if (_isGrounded && _jumpBufferCounter <= _jumpBufferLimit)
+            if (!_jumpDesired)
             {
-                //Debug.Log("Jumping from buffer");
                 _jumpBufferCounter = 0;
-                _jumpDesired = false;
-                DoJump();
             }
-            else if (_jumpBufferCounter > _jumpBufferLimit)
+            else
             {
-                _jumpBufferCounter = 0;
-                _jumpDesired = false;
+                _jumpBufferCounter += Time.deltaTime;
+
+                if (_isGrounded && _jumpBufferCounter <= _jumpBufferLimit)
+                {
+                    //Debug.Log("Jumping from buffer");
+                    _jumpBufferCounter = 0;
+                    _jumpDesired = false;
+                    DoJump();
+                }
+                else if (_jumpBufferCounter > _jumpBufferLimit)
+                {
+                    _jumpBufferCounter = 0;
+                    _jumpDesired = false;
+                }
             }
         }
     }
@@ -154,14 +168,20 @@ public class PlayerJump : MonoBehaviour
         //Debug.Log($"Base gravity is {_baseGravity}");
         //Debug.Log($"Jump gravity is {_jumpGravity}");
         //Debug.Log($"Fall gravity is {_fallGravity}");
+        if (Time.timeScale == 0)
+        {
+            return;
+        }
+        else
+        {
+            Vector2 jumpForce = new(0, _jumpPower);
 
-        Vector2 jumpForce = new(0, _jumpPower);
+            _currentlyJumping = true;
 
-        _currentlyJumping = true;
-
-        OnJump?.Invoke(true);
-        _rigidbody.velocity = new(_rigidbody.velocity.x, 0);
-        _rigidbody.AddForce(jumpForce, ForceMode2D.Impulse);
+            OnJump?.Invoke(true);
+            _rigidbody.velocity = new(_rigidbody.velocity.x, 0);
+            _rigidbody.AddForce(jumpForce, ForceMode2D.Impulse);
+        }
     }
 
 }

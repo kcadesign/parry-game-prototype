@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Menu-SplashScreen.unity
+    guid: d73e5ed789949484b91db6b6ed6fb83b
+  - enabled: 1
     path: Assets/Scenes/Menu-Start.unity
     guid: a8f01d43fdb6236479040b18fc4d2ef6
   - enabled: 1
@@ -32,5 +35,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Story-OutroScreen.unity
     guid: 3f78c1282a8fdd44b9b7985f977310f4
+  - enabled: 1
+    path: Assets/Scenes/Menu-ThanksScreen.unity
+    guid: 9fc36607ccad47949bfee2eaf8c4958b
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 3f3735034e0557746ace58d367ed367a, type: 2}

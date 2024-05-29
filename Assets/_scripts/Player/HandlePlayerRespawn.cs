@@ -10,14 +10,14 @@ public class HandlePlayerRespawn : MonoBehaviour
     {
         _rigidbody = GetComponent<Rigidbody2D>();
     }
-    private void OnEnable()
+/*    private void OnEnable()
     {
-        HandleGameStateUI.OnGameRestart += HandleGameStateUI_OnGameRestart;
+        HandleGameStateUI.OnRestartButtonPressed += HandleGameStateUI_OnGameRestart;
     }
 
     private void OnDisable()
     {
-        HandleGameStateUI.OnGameRestart -= HandleGameStateUI_OnGameRestart;
+        HandleGameStateUI.OnRestartButtonPressed -= HandleGameStateUI_OnGameRestart;
     }
 
     private void HandleGameStateUI_OnGameRestart(Vector3 respawnPosition)
@@ -26,4 +26,4 @@ public class HandlePlayerRespawn : MonoBehaviour
 
         gameObject.transform.position = respawnPosition;
     }
-}
+*/}

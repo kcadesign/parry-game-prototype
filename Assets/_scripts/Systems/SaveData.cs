@@ -32,7 +32,7 @@ public class SaveData
             SaveData data = JsonUtility.FromJson<SaveData>(json);
 
             // Save loaded data to scriptable object
-            CollectableTracker.CurrentSceneName = data.CurrentLevel;
+            CollectableTracker.SavedSceneName = data.CurrentLevel;
 
             Debug.Log("Game progress loaded successfully.");
         }

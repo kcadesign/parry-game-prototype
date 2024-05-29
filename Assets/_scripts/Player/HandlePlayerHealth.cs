@@ -2,9 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class HandlePlayerHealth : MonoBehaviour
 {
+    public static event Action<int> OnHealthInitialise;
     public delegate void PlayerHealthChange(int currentHealth);
     public static event PlayerHealthChange OnHealthChange;
     public static Action OnPlayerDead;
@@ -17,7 +19,7 @@ public class HandlePlayerHealth : MonoBehaviour
     public HealthSystem PlayerHealth;
 
     [SerializeField] private int _maxHealth = 5;
-    private int _currentHealth;
+    public int _currentHealth;
     //private bool _playerAlive = true;
 
     private float _autoHealTimer;
@@ -33,23 +35,31 @@ public class HandlePlayerHealth : MonoBehaviour
             PlayerHealth = new HealthSystem(_maxHealth);
             _currentHealth = PlayerHealth.GetHealth();
             OnHealthChange?.Invoke(_currentHealth);
+
         }
+    }
+
+    private void Start()
+    {
+        OnHealthInitialise?.Invoke(_maxHealth);
     }
 
     private void OnEnable()
     {
         HandleDamageOut.OnOutputDamage += HandleDamageOutput_OnOutputDamage;
         PlayerTriggerEnter.OnAreaDamagePlayer += PlayerTriggerEnter_OnAreaDamagePlayer;
-        HandleGameStateUI.OnGameRestart += HandleGameStateUI_OnGameRestart;
+        //HandleGameStateUI.OnRestartButtonPressed += HandleGameStateUI_OnGameRestart;
         HandlePlayerStun.OnStunned += HandlePlayerStun_OnStunned;
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     private void OnDisable()
     {
         HandleDamageOut.OnOutputDamage -= HandleDamageOutput_OnOutputDamage;
         PlayerTriggerEnter.OnAreaDamagePlayer -= PlayerTriggerEnter_OnAreaDamagePlayer;
-        HandleGameStateUI.OnGameRestart -= HandleGameStateUI_OnGameRestart;
+        //HandleGameStateUI.OnRestartButtonPressed -= HandleGameStateUI_OnGameRestart;
         HandlePlayerStun.OnStunned -= HandlePlayerStun_OnStunned;
+        SceneManager.sceneLoaded -= OnSceneLoaded;
 
     }
 
@@ -77,9 +87,6 @@ public class HandlePlayerHealth : MonoBehaviour
 
     private void HandleDamageOutput_OnOutputDamage(GameObject objectDamager, GameObject collisionObject, int damageAmount)
     {
-        //Debug.Log($"Damage recieved by player");
-        //Debug.Log($"SUBSCRIBER - Can be damaged: {_canBeDamaged}");
-
         if (_canBeDamaged)
         {
             if (collisionObject == gameObject)
@@ -135,14 +142,14 @@ public class HandlePlayerHealth : MonoBehaviour
         }
 */    }
 
-    private void HandleGameStateUI_OnGameRestart(Vector3 respawnPosition)
+/*    private void HandleGameStateUI_OnGameRestart()
     {
         PlayerHealth.ChangeHealth(_maxHealth);
         _currentHealth = PlayerHealth.GetHealth();
         CheckPlayerAlive();
         OnHealthChange?.Invoke(_currentHealth);
     }
-
+*/
     private void HandlePlayerStun_OnStunned(bool stunned)
     {
         //Debug.Log($"Player stunned: {stunned}");
@@ -156,6 +163,13 @@ public class HandlePlayerHealth : MonoBehaviour
         }
     }
 
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        PlayerHealth.ChangeHealth(_maxHealth);
+        _currentHealth = PlayerHealth.GetHealth();
+        CheckPlayerAlive();
+        OnHealthChange?.Invoke(_currentHealth);
+    }
 
     public void StartHealTimer() => _isCounting = true;
     public void StopHealTimer() => _isCounting = false;

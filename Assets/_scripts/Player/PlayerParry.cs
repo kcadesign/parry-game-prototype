@@ -144,6 +144,12 @@ public class PlayerParry : MonoBehaviour
 
     private IEnumerator ParryActiveTimer()
     {
+        // if time scale is 0, the player cannot parry
+        if (Time.timeScale == 0)
+        {
+            yield break;
+        }
+
         _parryActive = true;
         OnParryActive?.Invoke(_parryActive);
 

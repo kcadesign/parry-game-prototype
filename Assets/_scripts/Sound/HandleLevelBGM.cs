@@ -39,15 +39,15 @@ public class HandleLevelBGM : MonoBehaviour
 
     private void OnEnable()
     {
-        HandleGameStateUI.OnStartButtonPressed += HandleGameStateUI_OnStartButtonPressed;
-        GameStateManager.OnPlayerPause += GameStateManager_OnPlayerPause;
+        //HandleGameStateUI.OnStartButtonPressed += HandleGameStateUI_OnStartButtonPressed;
+        GameStateManager.OnPauseButtonPressed += GameStateManager_OnPlayerPause;
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     private void OnDisable()
     {
-        HandleGameStateUI.OnStartButtonPressed -= HandleGameStateUI_OnStartButtonPressed;
-        GameStateManager.OnPlayerPause -= GameStateManager_OnPlayerPause;
+        //HandleGameStateUI.OnStartButtonPressed -= HandleGameStateUI_OnStartButtonPressed;
+        GameStateManager.OnPauseButtonPressed -= GameStateManager_OnPlayerPause;
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
@@ -137,11 +137,11 @@ public class HandleLevelBGM : MonoBehaviour
         else _audioSource.volume = _defaultVolume;
     }
 
-    private void HandleGameStateUI_OnStartButtonPressed()
+/*    private void HandleGameStateUI_OnStartButtonPressed()
     {
         StartCoroutine(FadeOutBGM());
     }
-
+*/
     private IEnumerator FadeInBGM()
     {
         while (_audioSource.volume < _defaultVolume)
