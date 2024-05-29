@@ -6,11 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class HandleGameStateUI : MonoBehaviour
 {
-    public delegate void GameRestart(Vector3 respawnPosition);
-    public static event GameRestart OnGameRestart;
-
-    public static event Action OnGoToMainMenu;
-    public static event Action OnExitGame;
+    public static event Action OnRestartButtonPressed;
+    public static event Action OnMenuButtonPressed;
+    public static event Action OnExitGameButtonPressed;
 
     public delegate void GameUIActivate(GameObject firstSelectedButton);
     public static event GameUIActivate OnGameUIActivate;
@@ -33,103 +31,98 @@ public class HandleGameStateUI : MonoBehaviour
     private void OnEnable()
     {
         HandlePlayerDeath.OnPlayerDeathAnimEnd += HandlePlayerDeath_OnPlayerDeathAnimEnd;
-        HandleLevelProgression.OnSendCurrentCheckpoint += HandleLevelProgression_OnSendCurrentCheckpoint;
+        //HandleLevelProgression.OnSendCurrentCheckpoint += HandleLevelProgression_OnSendCurrentCheckpoint;
         GameStateManager.OnPauseButtonPressed += GameStateManager_OnPauseButtonPressed;
     }
 
     private void OnDisable()
     {
         HandlePlayerDeath.OnPlayerDeathAnimEnd -= HandlePlayerDeath_OnPlayerDeathAnimEnd;
-        HandleLevelProgression.OnSendCurrentCheckpoint -= HandleLevelProgression_OnSendCurrentCheckpoint;
+        //HandleLevelProgression.OnSendCurrentCheckpoint -= HandleLevelProgression_OnSendCurrentCheckpoint;
         GameStateManager.OnPauseButtonPressed -= GameStateManager_OnPauseButtonPressed;
     }
 
     private void Start()
     {
         PauseGameUI.transform.position = ScreenBelow.transform.position;
+        PauseGameUI.SetActive(false);
+        GameOverUI.transform.position = ScreenBelow.transform.position;
+        GameOverUI.SetActive(false);
     }
 
     private void HandlePlayerDeath_OnPlayerDeathAnimEnd()
     {
-        if (GameOverUI != null)
-        {
-            GameOverUI.SetActive(true);
-            OnGameUIActivate?.Invoke(GameOverFirstSelectedButton);
-        }
+        StartCoroutine(GameUIIn(GameOverUI));
+        OnGameUIActivate?.Invoke(GameOverFirstSelectedButton);
     }
 
-    private void HandleLevelProgression_OnSendCurrentCheckpoint(Vector3 currentCheckpoint, GameObject checkpointActivator)
+/*    private void HandleLevelProgression_OnSendCurrentCheckpoint(Vector3 currentCheckpoint, GameObject checkpointActivator)
     {
         _respawnPoint = currentCheckpoint;
     }
-
+*/
     private void GameStateManager_OnPauseButtonPressed(bool playerPaused)
     {
         if (playerPaused)
         {
-            StartCoroutine(PauseProcedureIn());
+            StartCoroutine(GameUIIn(PauseGameUI));
+            OnGameUIActivate?.Invoke(PauseFirstSelectedButton);
         }
         else
         {
-            StartCoroutine(PauseProcedureOut());
+            StartCoroutine(GameUIOut(PauseGameUI));
         }
     }
 
-    private IEnumerator PauseProcedureIn()
+    private IEnumerator GameUIIn(GameObject inGameUI)
     {
-        if (PauseGameUI != null)
+        if (inGameUI != null)
         {
-            PauseGameUI.SetActive(true);
-            LeanTween.moveY(PauseGameUI, ScreenMiddle.transform.position.y, 1f)
+            inGameUI.SetActive(true);
+            LeanTween.moveY(inGameUI, ScreenMiddle.transform.position.y, 1f)
                     .setEase(LeanTweenType.easeOutExpo)
                     .setIgnoreTimeScale(true);
         }
-        yield return new WaitWhile(() => LeanTween.isTweening(PauseGameUI));
-        OnGameUIActivate?.Invoke(PauseFirstSelectedButton);
+        yield return new WaitWhile(() => LeanTween.isTweening(inGameUI));
     }
 
-    private IEnumerator PauseProcedureOut()
+    private IEnumerator GameUIOut(GameObject inGameUI)
     {
-        if (PauseGameUI != null)
+        if (inGameUI != null)
         {
-            LeanTween.moveY(PauseGameUI, ScreenBelow.transform.position.y, 1f)
+            LeanTween.moveY(inGameUI, ScreenBelow.transform.position.y, 1f)
                      .setEase(LeanTweenType.easeInOutExpo)
                      .setIgnoreTimeScale(true);
 
             // Wait until the tweening is done
-            yield return new WaitWhile(() => LeanTween.isTweening(PauseGameUI));
+            yield return new WaitWhile(() => LeanTween.isTweening(inGameUI));
 
             // Deactivate the UI element after the animation is done
-            PauseGameUI.SetActive(false);
+            inGameUI.SetActive(false);
         }
     }
 
-    public void RestartAtLatestCheckpoint()
+/*    public void RestartAtLatestCheckpoint()
     {
-        OnGameRestart?.Invoke(_respawnPoint);
+        OnRestartButtonPressed?.Invoke(_respawnPoint);
         GameOverUI.SetActive(false);
     }
-
+*/
     public void RestartLevelButtonPressed()
     {
-        int currentSceneName = SceneManager.GetActiveScene().buildIndex;
-        SceneManager.LoadScene(currentSceneName);
+        //int currentSceneName = SceneManager.GetActiveScene().buildIndex;
+        //SceneManager.LoadScene(currentSceneName);
+        OnRestartButtonPressed?.Invoke();
     }
 
     public void MainMenuButtonPressed()
     {
-        OnGoToMainMenu?.Invoke();
-        SceneManager.LoadScene(1);
+        OnMenuButtonPressed?.Invoke();
     }
 
     public void ExitGameButtonPressed()
     {
-        OnExitGame?.Invoke();
-
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#endif
-        Application.Quit();
+        OnExitGameButtonPressed?.Invoke();
     }
 
 }

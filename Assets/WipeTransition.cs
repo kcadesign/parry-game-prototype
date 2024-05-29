@@ -16,7 +16,7 @@ public class WipeTransition : SceneTransition
         float elapsedTime = 0f;
         while (elapsedTime < _transitionDuration)
         {
-            elapsedTime += Time.deltaTime;
+            elapsedTime += Time.unscaledDeltaTime;
             float t = elapsedTime / _transitionDuration;
             transform.position = Vector3.Lerp(_startObject.transform.position, _midObject.transform.position, t);
             yield return null;
@@ -28,7 +28,7 @@ public class WipeTransition : SceneTransition
         float elapsedTime = 0f;
         while (elapsedTime < _transitionDuration)
         {
-            elapsedTime += Time.deltaTime;
+            elapsedTime += Time.unscaledDeltaTime;
             float t = elapsedTime / _transitionDuration;
             transform.position = Vector3.Lerp(_midObject.transform.position, _endObject.transform.position, t);
             yield return null;

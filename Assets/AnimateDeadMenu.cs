@@ -26,13 +26,13 @@ public class AnimateDeadMenu : MonoBehaviour
 
     private IEnumerator FadeInText()
     {
-        LeanTween.alphaCanvas(_canvasGroup, 1, 1f);
-        yield return null;
+        LeanTween.alphaCanvas(_canvasGroup, 1, 2f).setDelay(0.5f).setIgnoreTimeScale(true);
+        yield return new WaitWhile(() => LeanTween.isTweening(gameObject));
     }
 
     private IEnumerator FadeOutText()
     {
-        LeanTween.alphaCanvas(_canvasGroup, 0, 1f).setDelay(3f);
+        LeanTween.alphaCanvas(_canvasGroup, 0, 1f).setDelay(2f).setIgnoreTimeScale(true);
         yield return new WaitWhile(() => LeanTween.isTweening(gameObject));
         ButtonContainer.SetActive(true);
     }

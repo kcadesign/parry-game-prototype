@@ -17,7 +17,7 @@ public class CrossFadeTransition : SceneTransition
         float elapsedTime = 0f;
         while (_canvasGroup.alpha < 1)
         {
-            elapsedTime += Time.deltaTime;
+            elapsedTime += Time.unscaledDeltaTime;
             _canvasGroup.alpha = Mathf.Clamp01(elapsedTime / FadeDuration);
             yield return null;
         }
@@ -28,7 +28,7 @@ public class CrossFadeTransition : SceneTransition
         float elapsedTime = 0f;
         while (_canvasGroup.alpha > 0)
         {
-            elapsedTime += Time.deltaTime;
+            elapsedTime += Time.unscaledDeltaTime;
             _canvasGroup.alpha = Mathf.Clamp01(1 - (elapsedTime / FadeDuration));
             yield return null;
         }
