@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 86329662}
   - component: {fileID: 86329659}
   m_Layer: 5
-  m_Name: StoryIntroImage
+  m_Name: ThanksText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

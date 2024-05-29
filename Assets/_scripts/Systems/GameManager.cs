@@ -5,14 +5,34 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public CollectableTracker CollectableTracker;
     public SaveData SaveData;
 
+    public static GameManager GameManagerInstance;
+
+    private void Awake()
+    {
+        if (GameManagerInstance == null)
+        {
+            GameManagerInstance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
+        SaveData = new SaveData();
+    }
+
     private void OnEnable()
-    {        
+    {
         MainMenu.OnStartButtonPressed += MainMenuManager_OnStartButtonPressed;
         MainMenu.OnResetProgressButtonPressed += MainMenuManager_OnResetProgressButtonPressed;
         MainMenu.OnExitGameButtonPressed += MainMenuManager_OnExitGameButtonPressed;
+        HandleBossDeath.OnBossDeathAnimEnd += HandleBossDeath_OnBossDeathAnimEnd;
+        HandleGameStateUI.OnRestartButtonPressed += HandleGameStateUI_OnRestartButtonPressed;
+        HandleGameStateUI.OnMenuButtonPressed += HandleGameStateUI_OnMenuButtonPressed;
+        HandleGameStateUI.OnExitGameButtonPressed += HandleGameStateUI_OnExitGameButtonPressed;
     }
 
     private void OnDisable()
@@ -20,49 +40,69 @@ public class GameManager : MonoBehaviour
         MainMenu.OnStartButtonPressed -= MainMenuManager_OnStartButtonPressed;
         MainMenu.OnResetProgressButtonPressed -= MainMenuManager_OnResetProgressButtonPressed;
         MainMenu.OnExitGameButtonPressed -= MainMenuManager_OnExitGameButtonPressed;
+        HandleBossDeath.OnBossDeathAnimEnd -= HandleBossDeath_OnBossDeathAnimEnd;
+        HandleGameStateUI.OnRestartButtonPressed -= HandleGameStateUI_OnRestartButtonPressed;
+        HandleGameStateUI.OnMenuButtonPressed -= HandleGameStateUI_OnMenuButtonPressed;
+        HandleGameStateUI.OnExitGameButtonPressed -= HandleGameStateUI_OnExitGameButtonPressed;
     }
 
     private void MainMenuManager_OnStartButtonPressed()
     {
-        Debug.Log("Starting session...");
         SaveData.LoadGameProgress();
-        LoadSavedSceneOrDefault();
+        LoadSavedOrDefaultScene();
     }
     private void MainMenuManager_OnResetProgressButtonPressed()
     {
-        CollectableTracker.ClearAllFields();
         SaveData.ResetGameProgress();
-
         // Create reset progress visual effect for here
     }
 
     private void MainMenuManager_OnExitGameButtonPressed()
     {
-        SaveData.SaveGameProgress(CollectableTracker.SavedSceneName);
-        CollectableTracker.ClearAllFields();
-
-        // Create exit game transition for here
-
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#endif
-        Application.Quit();
-
+        QuitGame();
     }
 
-    public void LoadSavedSceneOrDefault()
+    private void HandleGameStateUI_OnRestartButtonPressed()
     {
-        if (string.IsNullOrEmpty(CollectableTracker.SavedSceneName))
+        SceneTransitionManager.TransitionManagerInstance.LoadScene(SceneManager.GetActiveScene().name, "CrossFadeWhiteTransition");
+    }
+
+    private void HandleGameStateUI_OnMenuButtonPressed()
+    {
+        SaveData.SaveGameProgress(SceneManager.GetActiveScene().name);
+        SceneTransitionManager.TransitionManagerInstance.LoadScene("MainMenu", "CrossFadeWhiteTransition");
+    }
+
+    private void HandleGameStateUI_OnExitGameButtonPressed()
+    {
+        SaveData.SaveGameProgress(SceneManager.GetActiveScene().name);
+        QuitGame();
+    }
+
+    private void HandleBossDeath_OnBossDeathAnimEnd()
+    {
+        SceneTransitionManager.TransitionManagerInstance.LoadScene("Story-OutroScreen", "CrossFadeWhiteTransition");
+    }
+
+    public void LoadSavedOrDefaultScene()
+    {
+        if (string.IsNullOrEmpty(SaveData.SavedScene))
         {
             Debug.Log($"Loading default scene");
             SceneTransitionManager.TransitionManagerInstance.LoadScene("Story-IntroScreen", "WipePinkTransition");
         }
         else
         {
-            Debug.Log($"Loading saved scene: {CollectableTracker.SavedSceneName}");
-            //SceneManager.LoadScene(CollectableTracker.CurrentSceneName);
-            SceneTransitionManager.TransitionManagerInstance.LoadScene(CollectableTracker.SavedSceneName, "WipePink");
+            Debug.Log($"Loading saved scene: {SaveData.SavedScene}");
+            SceneTransitionManager.TransitionManagerInstance.LoadScene(SaveData.SavedScene, "WipePinkTransition");
         }
     }
 
+    private static void QuitGame()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#endif
+        Application.Quit();
+    }
 }

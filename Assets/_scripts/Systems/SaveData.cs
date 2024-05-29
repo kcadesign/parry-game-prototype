@@ -6,14 +6,14 @@ using System.IO;
 [System.Serializable]
 public class SaveData
 {
-    public CollectableTracker CollectableTracker;
+    //public CollectableTracker CollectableTracker;
     
-    public string CurrentLevel;
+    public string SavedScene;
 
     public void SaveGameProgress(string currentLevel)
     {
         SaveData data = new SaveData();
-        data.CurrentLevel = currentLevel;
+        data.SavedScene = currentLevel;
 
         string json = JsonUtility.ToJson(data);
         string filePath = Application.persistentDataPath + "/saveData.json";
@@ -32,7 +32,8 @@ public class SaveData
             SaveData data = JsonUtility.FromJson<SaveData>(json);
 
             // Save loaded data to scriptable object
-            CollectableTracker.SavedSceneName = data.CurrentLevel;
+            //CollectableTracker.SavedSceneName = data.CurrentLevel;
+            SavedScene = data.SavedScene;
 
             Debug.Log("Game progress loaded successfully.");
         }

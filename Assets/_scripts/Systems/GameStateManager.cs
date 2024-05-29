@@ -12,7 +12,7 @@ public class GameStateManager : MonoBehaviour
     public delegate void PlayerPause(bool playerPaused);
     public static event PlayerPause OnPauseButtonPressed;
 
-    private Scene _currentScene;
+    //private Scene _currentScene;
 
     private bool _pauseTime = false;
     private bool _playerCanPause = true;
@@ -21,7 +21,7 @@ public class GameStateManager : MonoBehaviour
     {
         playerControls = new PlayerControls();
         HandlePauseTime(_pauseTime);
-        _currentScene = SceneManager.GetActiveScene();
+        //_currentScene = SceneManager.GetActiveScene();
         //Debug.Log($"Player can pause: {_playerCanPause}");
     }
 
@@ -33,11 +33,7 @@ public class GameStateManager : MonoBehaviour
         playerControls.Menus.Pause.canceled += Pause_canceled;
 
         HandlePlayerDeath.OnPlayerDeathAnimEnd += HandlePlayerDeath_OnPlayerDeathAnimEnd;
-        HandleBossDeath.OnBossDeathAnimEnd += HandleBossDeath_OnBossDeathAnimEnd;
         HandleEnterFinish.OnPlayerParryFinish += HandleEnterFinish_OnLevelFinish;
-        HandleGameStateUI.OnRestartButtonPressed += HandleGameStateUI_OnRestartButtonPressed;
-        HandleGameStateUI.OnMenuButtonPressed += HandleGameStateUI_OnMenuButtonPressed;
-        HandleGameStateUI.OnExitGameButtonPressed += HandleGameStateUI_OnExitGameButtonPressed;
     }
 
     private void OnDisable()
@@ -48,11 +44,7 @@ public class GameStateManager : MonoBehaviour
         playerControls.Menus.Pause.canceled -= Pause_canceled;
 
         HandlePlayerDeath.OnPlayerDeathAnimEnd -= HandlePlayerDeath_OnPlayerDeathAnimEnd;
-        HandleBossDeath.OnBossDeathAnimEnd -= HandleBossDeath_OnBossDeathAnimEnd;
         HandleEnterFinish.OnPlayerParryFinish -= HandleEnterFinish_OnLevelFinish;
-        HandleGameStateUI.OnRestartButtonPressed -= HandleGameStateUI_OnRestartButtonPressed;
-        HandleGameStateUI.OnMenuButtonPressed -= HandleGameStateUI_OnMenuButtonPressed;
-        HandleGameStateUI.OnExitGameButtonPressed -= HandleGameStateUI_OnExitGameButtonPressed;
     }
 
     private void Pause_performed(InputAction.CallbackContext value)
@@ -82,11 +74,6 @@ public class GameStateManager : MonoBehaviour
         //HandlePauseTime(_pauseTime);
     }
 
-    private void HandleBossDeath_OnBossDeathAnimEnd()
-    {
-        SceneTransitionManager.TransitionManagerInstance.LoadScene("Story-OutroScreen", "CrossFadeWhiteTransition");
-    }
-
     private void HandleEnterFinish_OnLevelFinish(bool levelFinished)
     {
         if (levelFinished)
@@ -102,24 +89,6 @@ public class GameStateManager : MonoBehaviour
         HandlePauseTime(_pauseTime);
     }
 
-    private void HandleGameStateUI_OnRestartButtonPressed()
-    {
-        SceneTransitionManager.TransitionManagerInstance.LoadScene(_currentScene.name, "CrossFadeWhiteTransition");
-    }
-
-    private void HandleGameStateUI_OnMenuButtonPressed()
-    {
-        _pauseTime = false;
-        HandlePauseTime(_pauseTime);
-    }
-
-    private void HandleGameStateUI_OnExitGameButtonPressed()
-    {
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#endif
-        Application.Quit();
-    }
 
     private void HandlePauseTime(bool pauseTime)
     {
