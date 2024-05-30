@@ -433,7 +433,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4254335814554716302}
-  - component: {fileID: 6800911487655029841}
   m_Layer: 0
   m_Name: HurtVignetteContainer
   m_TagString: Untagged
@@ -461,19 +460,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &6800911487655029841
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3827609096491722805}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0be5e71f49df43f4f9d9ca54385b75e0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HurtVignette: {fileID: 4943578229536965410}
 --- !u!1 &4748130280748966392
 GameObject:
   m_ObjectHideFlags: 0

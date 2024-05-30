@@ -35,7 +35,6 @@ public class HandlePlayerHealth : MonoBehaviour
             PlayerHealth = new HealthSystem(_maxHealth);
             _currentHealth = PlayerHealth.GetHealth();
             OnHealthChange?.Invoke(_currentHealth);
-
         }
     }
 

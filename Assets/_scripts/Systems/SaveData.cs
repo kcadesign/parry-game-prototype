@@ -40,6 +40,7 @@ public class SaveData
         else
         {
             Debug.Log("No save data found.");
+            SavedScene = null;
         }
     }
 

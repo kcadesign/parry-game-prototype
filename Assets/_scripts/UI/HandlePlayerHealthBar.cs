@@ -11,7 +11,7 @@ public class HandlePlayerHealthBar : MonoBehaviour
 
     private void Awake()
     {
-        BarValueMask.fillAmount = 1.0f;
+        //BarValueMask.fillAmount = 1.0f;
     }
 
     private void OnEnable()

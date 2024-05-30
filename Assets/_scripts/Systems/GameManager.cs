@@ -70,7 +70,7 @@ public class GameManager : MonoBehaviour
     private void HandleGameStateUI_OnMenuButtonPressed()
     {
         SaveData.SaveGameProgress(SceneManager.GetActiveScene().name);
-        SceneTransitionManager.TransitionManagerInstance.LoadScene("MainMenu", "CrossFadeWhiteTransition");
+        SceneTransitionManager.TransitionManagerInstance.LoadScene("Menu-Start", "CrossFadeWhiteTransition");
     }
 
     private void HandleGameStateUI_OnExitGameButtonPressed()

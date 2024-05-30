@@ -36,11 +36,32 @@ public class SceneTransitionManager : MonoBehaviour
 
     private IEnumerator LoadSceneAsync(string sceneName, string transitionName)
     {
+        // Find the specified transition
         SceneTransition transition = _transitions.First(t => t.name == transitionName);
+
+        // Start loading the scene asynchronously
         AsyncOperation scene = SceneManager.LoadSceneAsync(sceneName);
         scene.allowSceneActivation = false;
+
+        // Start transition-in animation
         yield return transition.TransitionIn();
+
+        // Wait until the scene is almost done loading
+        while (scene.progress < 0.9f)
+        {
+            yield return null;
+        }
+
+        // Allow the scene to activate
         scene.allowSceneActivation = true;
+
+        // Wait for the scene to fully load
+        while (!scene.isDone)
+        {
+            yield return null;
+        }
+
+        // Start transition-out animation
         yield return transition.TransitionOut();
     }
 }

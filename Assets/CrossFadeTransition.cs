@@ -14,23 +14,13 @@ public class CrossFadeTransition : SceneTransition
 
     public override IEnumerator TransitionIn()
     {
-        float elapsedTime = 0f;
-        while (_canvasGroup.alpha < 1)
-        {
-            elapsedTime += Time.unscaledDeltaTime;
-            _canvasGroup.alpha = Mathf.Clamp01(elapsedTime / FadeDuration);
-            yield return null;
-        }
+        LeanTween.alphaCanvas(_canvasGroup, 1, FadeDuration).setIgnoreTimeScale(true);
+        yield return new WaitWhile(() => LeanTween.isTweening(gameObject));
     }
 
     public override IEnumerator TransitionOut()
     {
-        float elapsedTime = 0f;
-        while (_canvasGroup.alpha > 0)
-        {
-            elapsedTime += Time.unscaledDeltaTime;
-            _canvasGroup.alpha = Mathf.Clamp01(1 - (elapsedTime / FadeDuration));
-            yield return null;
-        }
+        LeanTween.alphaCanvas(_canvasGroup, 0, FadeDuration).setIgnoreTimeScale(true);
+        yield return new WaitWhile(() => LeanTween.isTweening(gameObject));
     }
 }
