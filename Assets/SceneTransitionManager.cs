@@ -61,6 +61,8 @@ public class SceneTransitionManager : MonoBehaviour
             yield return null;
         }
 
+        yield return new WaitForSeconds(0.5f);
+
         // Start transition-out animation
         yield return transition.TransitionOut();
     }

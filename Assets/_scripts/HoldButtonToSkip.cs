@@ -68,8 +68,9 @@ public class HoldButtonToSkip : MonoBehaviour
 
     private void CheckButtonHeld()
     {
-        if (_buttonHeld && _holdDuration < _requiredHoldTime) _holdDuration += Time.deltaTime;
-        else  _holdDuration -= Time.deltaTime * 3f;
+        //Debug.Log("Button held: " + _buttonHeld);
+        if (_buttonHeld && _holdDuration < _requiredHoldTime) _holdDuration += Time.unscaledDeltaTime;
+        else  _holdDuration -= Time.unscaledDeltaTime * 3f;
 
         GetSetCurrentFill();
     }

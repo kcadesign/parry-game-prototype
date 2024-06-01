@@ -29,6 +29,8 @@ public class GameStateManager : MonoBehaviour
     {
         playerControls.Menus.Enable();
 
+        SceneManager.sceneLoaded += SceneManager_sceneLoaded;
+
         playerControls.Menus.Pause.performed += Pause_performed;
         playerControls.Menus.Pause.canceled += Pause_canceled;
 
@@ -36,15 +38,23 @@ public class GameStateManager : MonoBehaviour
         HandleEnterFinish.OnPlayerParryFinish += HandleEnterFinish_OnLevelFinish;
     }
 
+
     private void OnDisable()
     {
         playerControls.Menus.Enable();
+
+        SceneManager.sceneLoaded -= SceneManager_sceneLoaded;
 
         playerControls.Menus.Pause.performed -= Pause_performed;
         playerControls.Menus.Pause.canceled -= Pause_canceled;
 
         HandlePlayerDeath.OnPlayerDeathAnimEnd -= HandlePlayerDeath_OnPlayerDeathAnimEnd;
         HandleEnterFinish.OnPlayerParryFinish -= HandleEnterFinish_OnLevelFinish;
+    }
+
+    private void SceneManager_sceneLoaded(Scene arg0, LoadSceneMode arg1)
+    {
+        UnpauseTime();
     }
 
     private void Pause_performed(InputAction.CallbackContext value)

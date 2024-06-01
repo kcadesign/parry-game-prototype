@@ -31,14 +31,14 @@ public class ButtonSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPoin
     {
         eventData.selectedObject = gameObject;
         //LeanTween.scale(gameObject, _originalScale * _scaleAmount, _moveTime).setEase(LeanTweenType.easeOutExpo);
-        ButtonSelector.SetActive(true);
+        //ButtonSelector.SetActive(true);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         eventData.selectedObject = null;
         //LeanTween.scale(gameObject, _originalScale, _moveTime).setEase(LeanTweenType.easeOutExpo);
-        ButtonSelector.SetActive(false);
+        //ButtonSelector.SetActive(false);
     }
 
     public void OnSelect(BaseEventData eventData)
@@ -82,4 +82,13 @@ public class ButtonSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPoin
         ButtonText.transform.position = buttonPosition;
     }
 
+    private IEnumerator AnimateButtonIn()
+    {
+        yield return null;
+    }
+
+    private IEnumerator AnimateButtonOut()
+    {
+        yield return null;
+    }
 }

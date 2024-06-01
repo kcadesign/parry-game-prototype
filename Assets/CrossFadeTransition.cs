@@ -14,12 +14,14 @@ public class CrossFadeTransition : SceneTransition
 
     public override IEnumerator TransitionIn()
     {
+        Debug.Log("White cross fade transitioning in");
         LeanTween.alphaCanvas(_canvasGroup, 1, FadeDuration).setIgnoreTimeScale(true);
         yield return new WaitWhile(() => LeanTween.isTweening(gameObject));
     }
 
     public override IEnumerator TransitionOut()
     {
+        Debug.Log("White cross fade transitioning out");
         LeanTween.alphaCanvas(_canvasGroup, 0, FadeDuration).setIgnoreTimeScale(true);
         yield return new WaitWhile(() => LeanTween.isTweening(gameObject));
     }

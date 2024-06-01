@@ -13,25 +13,14 @@ public class WipeTransition : SceneTransition
 
     public override IEnumerator TransitionIn()
     {
-        float elapsedTime = 0f;
-        while (elapsedTime < _transitionDuration)
-        {
-            elapsedTime += Time.unscaledDeltaTime;
-            float t = elapsedTime / _transitionDuration;
-            transform.position = Vector3.Lerp(_startObject.transform.position, _midObject.transform.position, t);
-            yield return null;
-        }
+        gameObject.transform.position = _startObject.transform.position;
+        LeanTween.moveX(gameObject, _midObject.transform.position.x, _transitionDuration).setEaseOutExpo().setIgnoreTimeScale(true);
+        yield return new WaitWhile(() => LeanTween.isTweening(gameObject));
     }
 
     public override IEnumerator TransitionOut()
     {
-        float elapsedTime = 0f;
-        while (elapsedTime < _transitionDuration)
-        {
-            elapsedTime += Time.unscaledDeltaTime;
-            float t = elapsedTime / _transitionDuration;
-            transform.position = Vector3.Lerp(_midObject.transform.position, _endObject.transform.position, t);
-            yield return null;
-        }
+        LeanTween.moveX(gameObject, _endObject.transform.position.x, _transitionDuration).setEaseOutExpo().setIgnoreTimeScale(true);
+        yield return new WaitWhile(() => LeanTween.isTweening(gameObject));
     }
 }
