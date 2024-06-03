@@ -80,6 +80,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""035e86ae-92fc-459c-a297-1a7ce4e6ad82"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -324,36 +333,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""DropDown"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                }
-            ]
-        },
-        {
-            ""name"": ""Menus"",
-            ""id"": ""2430884e-8677-4709-983c-d9187363e20d"",
-            ""actions"": [
-                {
-                    ""name"": ""Pause"",
-                    ""type"": ""Button"",
-                    ""id"": ""fe636b82-a606-4fd4-8d2d-cd183a8422b5"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Navigate"",
-                    ""type"": ""Value"",
-                    ""id"": ""f0d79cfe-ad9e-4120-bcc7-0de92e8659b0"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                }
-            ],
-            ""bindings"": [
-                {
                     ""name"": """",
-                    ""id"": ""aa6d93f9-5c16-44de-a3c9-a35e4c4a9afa"",
+                    ""id"": ""b82a19ad-8979-4300-a6cc-4a01463cc002"",
                     ""path"": ""<Gamepad>/start"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -364,7 +347,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""521a05a6-eb40-4a95-90f1-f10e29417437"",
+                    ""id"": ""d10362a0-84c1-4676-bcd7-88029b430695"",
                     ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -372,7 +355,33 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Menus"",
+            ""id"": ""2430884e-8677-4709-983c-d9187363e20d"",
+            ""actions"": [
+                {
+                    ""name"": ""Navigate"",
+                    ""type"": ""Value"",
+                    ""id"": ""f0d79cfe-ad9e-4120-bcc7-0de92e8659b0"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 },
+                {
+                    ""name"": ""Execute"",
+                    ""type"": ""Button"",
+                    ""id"": ""7c5a0505-600e-4c5b-a2c3-320e272c6bea"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
                 {
                     ""name"": ""2D Vector"",
                     ""id"": ""413d38d7-90df-46f8-bb89-74e28beef367"",
@@ -482,6 +491,28 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Navigate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9da5bd0a-adf1-4f49-9f4a-e4cf24180157"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Execute"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""903f878a-4e4f-4f66-9638-6723bbcd7295"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Execute"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -594,10 +625,11 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Gameplay_Jump = m_Gameplay.FindAction("Jump", throwIfNotFound: true);
         m_Gameplay_ActivateFriend = m_Gameplay.FindAction("ActivateFriend", throwIfNotFound: true);
         m_Gameplay_DropDown = m_Gameplay.FindAction("DropDown", throwIfNotFound: true);
+        m_Gameplay_Pause = m_Gameplay.FindAction("Pause", throwIfNotFound: true);
         // Menus
         m_Menus = asset.FindActionMap("Menus", throwIfNotFound: true);
-        m_Menus_Pause = m_Menus.FindAction("Pause", throwIfNotFound: true);
         m_Menus_Navigate = m_Menus.FindAction("Navigate", throwIfNotFound: true);
+        m_Menus_Execute = m_Menus.FindAction("Execute", throwIfNotFound: true);
         // IntroOutro
         m_IntroOutro = asset.FindActionMap("IntroOutro", throwIfNotFound: true);
         m_IntroOutro_Progress = m_IntroOutro.FindAction("Progress", throwIfNotFound: true);
@@ -669,6 +701,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_Jump;
     private readonly InputAction m_Gameplay_ActivateFriend;
     private readonly InputAction m_Gameplay_DropDown;
+    private readonly InputAction m_Gameplay_Pause;
     public struct GameplayActions
     {
         private @PlayerControls m_Wrapper;
@@ -679,6 +712,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Jump => m_Wrapper.m_Gameplay_Jump;
         public InputAction @ActivateFriend => m_Wrapper.m_Gameplay_ActivateFriend;
         public InputAction @DropDown => m_Wrapper.m_Gameplay_DropDown;
+        public InputAction @Pause => m_Wrapper.m_Gameplay_Pause;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -706,6 +740,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @DropDown.started += instance.OnDropDown;
             @DropDown.performed += instance.OnDropDown;
             @DropDown.canceled += instance.OnDropDown;
+            @Pause.started += instance.OnPause;
+            @Pause.performed += instance.OnPause;
+            @Pause.canceled += instance.OnPause;
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
@@ -728,6 +765,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @DropDown.started -= instance.OnDropDown;
             @DropDown.performed -= instance.OnDropDown;
             @DropDown.canceled -= instance.OnDropDown;
+            @Pause.started -= instance.OnPause;
+            @Pause.performed -= instance.OnPause;
+            @Pause.canceled -= instance.OnPause;
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -749,14 +789,14 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     // Menus
     private readonly InputActionMap m_Menus;
     private List<IMenusActions> m_MenusActionsCallbackInterfaces = new List<IMenusActions>();
-    private readonly InputAction m_Menus_Pause;
     private readonly InputAction m_Menus_Navigate;
+    private readonly InputAction m_Menus_Execute;
     public struct MenusActions
     {
         private @PlayerControls m_Wrapper;
         public MenusActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Pause => m_Wrapper.m_Menus_Pause;
         public InputAction @Navigate => m_Wrapper.m_Menus_Navigate;
+        public InputAction @Execute => m_Wrapper.m_Menus_Execute;
         public InputActionMap Get() { return m_Wrapper.m_Menus; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -766,22 +806,22 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_MenusActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_MenusActionsCallbackInterfaces.Add(instance);
-            @Pause.started += instance.OnPause;
-            @Pause.performed += instance.OnPause;
-            @Pause.canceled += instance.OnPause;
             @Navigate.started += instance.OnNavigate;
             @Navigate.performed += instance.OnNavigate;
             @Navigate.canceled += instance.OnNavigate;
+            @Execute.started += instance.OnExecute;
+            @Execute.performed += instance.OnExecute;
+            @Execute.canceled += instance.OnExecute;
         }
 
         private void UnregisterCallbacks(IMenusActions instance)
         {
-            @Pause.started -= instance.OnPause;
-            @Pause.performed -= instance.OnPause;
-            @Pause.canceled -= instance.OnPause;
             @Navigate.started -= instance.OnNavigate;
             @Navigate.performed -= instance.OnNavigate;
             @Navigate.canceled -= instance.OnNavigate;
+            @Execute.started -= instance.OnExecute;
+            @Execute.performed -= instance.OnExecute;
+            @Execute.canceled -= instance.OnExecute;
         }
 
         public void RemoveCallbacks(IMenusActions instance)
@@ -879,11 +919,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnActivateFriend(InputAction.CallbackContext context);
         void OnDropDown(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
     public interface IMenusActions
     {
-        void OnPause(InputAction.CallbackContext context);
         void OnNavigate(InputAction.CallbackContext context);
+        void OnExecute(InputAction.CallbackContext context);
     }
     public interface IIntroOutroActions
     {

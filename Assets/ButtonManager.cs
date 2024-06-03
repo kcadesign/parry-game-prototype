@@ -40,6 +40,11 @@ public class ButtonManager : MonoBehaviour
 
     private void Update()
     {
+        HandleActiveSelector();
+    }
+
+    private void HandleActiveSelector()
+    {
         // set Button selector to active on the currently selected button
         if (EventSystem.current.currentSelectedGameObject != null)
         {

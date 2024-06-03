@@ -27,12 +27,12 @@ public class GameStateManager : MonoBehaviour
 
     private void OnEnable()
     {
-        playerControls.Menus.Enable();
+        playerControls.Gameplay.Enable();
 
         SceneManager.sceneLoaded += SceneManager_sceneLoaded;
 
-        playerControls.Menus.Pause.performed += Pause_performed;
-        playerControls.Menus.Pause.canceled += Pause_canceled;
+        playerControls.Gameplay.Pause.performed += Pause_performed;
+        playerControls.Gameplay.Pause.canceled += Pause_canceled;
 
         HandlePlayerDeath.OnPlayerDeathAnimEnd += HandlePlayerDeath_OnPlayerDeathAnimEnd;
         HandleEnterFinish.OnPlayerParryFinish += HandleEnterFinish_OnLevelFinish;
@@ -41,12 +41,12 @@ public class GameStateManager : MonoBehaviour
 
     private void OnDisable()
     {
-        playerControls.Menus.Enable();
+        playerControls.Gameplay.Enable();
 
         SceneManager.sceneLoaded -= SceneManager_sceneLoaded;
 
-        playerControls.Menus.Pause.performed -= Pause_performed;
-        playerControls.Menus.Pause.canceled -= Pause_canceled;
+        playerControls.Gameplay.Pause.performed -= Pause_performed;
+        playerControls.Gameplay.Pause.canceled -= Pause_canceled;
 
         HandlePlayerDeath.OnPlayerDeathAnimEnd -= HandlePlayerDeath_OnPlayerDeathAnimEnd;
         HandleEnterFinish.OnPlayerParryFinish -= HandleEnterFinish_OnLevelFinish;

@@ -58,6 +58,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Pause",
+                    "type": "Button",
+                    "id": "035e86ae-92fc-459c-a297-1a7ce4e6ad82",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -302,36 +311,10 @@
                     "action": "DropDown",
                     "isComposite": false,
                     "isPartOfComposite": false
-                }
-            ]
-        },
-        {
-            "name": "Menus",
-            "id": "2430884e-8677-4709-983c-d9187363e20d",
-            "actions": [
-                {
-                    "name": "Pause",
-                    "type": "Button",
-                    "id": "fe636b82-a606-4fd4-8d2d-cd183a8422b5",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
                 },
                 {
-                    "name": "Navigate",
-                    "type": "Value",
-                    "id": "f0d79cfe-ad9e-4120-bcc7-0de92e8659b0",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                }
-            ],
-            "bindings": [
-                {
                     "name": "",
-                    "id": "aa6d93f9-5c16-44de-a3c9-a35e4c4a9afa",
+                    "id": "b82a19ad-8979-4300-a6cc-4a01463cc002",
                     "path": "<Gamepad>/start",
                     "interactions": "",
                     "processors": "",
@@ -342,7 +325,7 @@
                 },
                 {
                     "name": "",
-                    "id": "521a05a6-eb40-4a95-90f1-f10e29417437",
+                    "id": "d10362a0-84c1-4676-bcd7-88029b430695",
                     "path": "<Keyboard>/escape",
                     "interactions": "",
                     "processors": "",
@@ -350,7 +333,33 @@
                     "action": "Pause",
                     "isComposite": false,
                     "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Menus",
+            "id": "2430884e-8677-4709-983c-d9187363e20d",
+            "actions": [
+                {
+                    "name": "Navigate",
+                    "type": "Value",
+                    "id": "f0d79cfe-ad9e-4120-bcc7-0de92e8659b0",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 },
+                {
+                    "name": "Execute",
+                    "type": "Button",
+                    "id": "7c5a0505-600e-4c5b-a2c3-320e272c6bea",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
                 {
                     "name": "2D Vector",
                     "id": "413d38d7-90df-46f8-bb89-74e28beef367",
@@ -460,6 +469,28 @@
                     "action": "Navigate",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "9da5bd0a-adf1-4f49-9f4a-e4cf24180157",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Execute",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "903f878a-4e4f-4f66-9638-6723bbcd7295",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Execute",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
