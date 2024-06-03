@@ -12,6 +12,7 @@ public class AnimateParryText : MonoBehaviour
 
     private IEnumerator AnimateText()
     {
+        yield return new WaitForSeconds(2);
         LeanTween.scale(gameObject, new Vector3(1f, 1f, 1f), 0.75f).setEaseInExpo();
         yield return new WaitWhile(() => LeanTween.isTweening(gameObject));
         LeanTween.scale(gameObject, new Vector3(0.8f, 0.8f, 0.8f), 0.75f);

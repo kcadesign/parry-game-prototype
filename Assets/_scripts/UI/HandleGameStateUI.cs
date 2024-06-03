@@ -56,11 +56,11 @@ public class HandleGameStateUI : MonoBehaviour
         OnGameUIActivate?.Invoke(GameOverFirstSelectedButton);
     }
 
-/*    private void HandleLevelProgression_OnSendCurrentCheckpoint(Vector3 currentCheckpoint, GameObject checkpointActivator)
-    {
-        _respawnPoint = currentCheckpoint;
-    }
-*/
+    /*    private void HandleLevelProgression_OnSendCurrentCheckpoint(Vector3 currentCheckpoint, GameObject checkpointActivator)
+        {
+            _respawnPoint = currentCheckpoint;
+        }
+    */
     private void GameStateManager_OnPauseButtonPressed(bool playerPaused)
     {
         if (playerPaused)
@@ -102,16 +102,14 @@ public class HandleGameStateUI : MonoBehaviour
         }
     }
 
-/*    public void RestartAtLatestCheckpoint()
-    {
-        OnRestartButtonPressed?.Invoke(_respawnPoint);
-        GameOverUI.SetActive(false);
-    }
-*/
+    /*    public void RestartAtLatestCheckpoint()
+        {
+            OnRestartButtonPressed?.Invoke(_respawnPoint);
+            GameOverUI.SetActive(false);
+        }
+    */
     public void RestartLevelButtonPressed()
     {
-        //int currentSceneName = SceneManager.GetActiveScene().buildIndex;
-        //SceneManager.LoadScene(currentSceneName);
         OnRestartButtonPressed?.Invoke();
     }
 

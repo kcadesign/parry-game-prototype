@@ -18,6 +18,8 @@ public class AnimateBossHealthBar : MonoBehaviour
 
     private IEnumerator IncreaseHealthOverTime()
     {
+        yield return new WaitForSeconds(1);
+
         while (HealthMask.fillAmount < 1)
         {
             // slowly increase the fill amount of the health mask

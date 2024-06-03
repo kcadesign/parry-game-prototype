@@ -14,13 +14,13 @@ public class GameStateManager : MonoBehaviour
 
     //private Scene _currentScene;
 
-    private bool _pauseTime = false;
+    private bool _timePaused = false;
     private bool _playerCanPause = true;
 
     private void Awake()
     {
         playerControls = new PlayerControls();
-        HandlePauseTime(_pauseTime);
+        HandleGamePause(_timePaused);
         //_currentScene = SceneManager.GetActiveScene();
         //Debug.Log($"Player can pause: {_playerCanPause}");
     }
@@ -64,9 +64,17 @@ public class GameStateManager : MonoBehaviour
 
         if (_playerCanPause)
         {
-            _pauseTime = !_pauseTime;
-            HandlePauseTime(_pauseTime);
-            OnPauseButtonPressed?.Invoke(_pauseTime);
+            _timePaused = !_timePaused;
+            if (_timePaused)
+            {
+                PauseTime();
+                OnPauseButtonPressed?.Invoke(_timePaused);
+            }
+            else if (!_timePaused)
+            {
+                UnpauseTime();
+                OnPauseButtonPressed?.Invoke(_timePaused);
+            }
         }
     }
 
@@ -88,19 +96,18 @@ public class GameStateManager : MonoBehaviour
     {
         if (levelFinished)
         {
-            _pauseTime = true;
+            PauseTime();
             _playerCanPause = false;
         }
         else
         {
-            _pauseTime = false;
+            UnpauseTime();
             _playerCanPause = true;
         }
-        HandlePauseTime(_pauseTime);
     }
 
 
-    private void HandlePauseTime(bool pauseTime)
+    private void HandleGamePause(bool pauseTime)
     {
         if (pauseTime)
         {

@@ -26,8 +26,11 @@ public class ButtonManager : MonoBehaviour
         PlayerControls.Menus.Enable();
         PlayerControls.Menus.Navigate.performed += Navigate_performed;
 
-        AnimateButtonIntro();
+        GameStateManager.OnPauseButtonPressed += GameStateManager_OnPauseButtonPressed;
+
         StartCoroutine(SetSelectedAfterOneFrame());
+
+        AnimateButtonIntro();
     }
 
     private void OnDisable()
@@ -35,12 +38,23 @@ public class ButtonManager : MonoBehaviour
         PlayerControls.Menus.Disable();
         PlayerControls.Menus.Navigate.performed -= Navigate_performed;
 
-        ResetButtonPosition();
+        GameStateManager.OnPauseButtonPressed -= GameStateManager_OnPauseButtonPressed;
+
+        Debug.Log("Button Manager disabled");
     }
 
     private void Update()
     {
         HandleActiveSelector();
+    }
+
+    private void GameStateManager_OnPauseButtonPressed(bool playerPaused)
+    {
+        Debug.Log("Game paused: " + playerPaused);
+        if (!playerPaused)
+        {
+            ResetButtonPosition();
+        }
     }
 
     private void HandleActiveSelector()
@@ -64,13 +78,14 @@ public class ButtonManager : MonoBehaviour
 
     private void AnimateButtonIntro()
     {
+        
         // move the buttons off screen
         for (int i = 0; i < Buttons.Length; i++)
         {
             Buttons[i].transform.localPosition = new Vector3(0, Buttons[i].transform.localPosition.y - 1000, 0);
         }
 
-        // move the buttons from off screen to their starting position using lean tween\
+        // move the buttons from off screen to their starting position using lean tween
         for (int i = 0; i < Buttons.Length; i++)
         {
             LeanTween.moveLocalY(Buttons[i], Buttons[i].transform.localPosition.y + 1000, 1f).setEase(LeanTweenType.easeOutExpo).setDelay(i * 0.25f).setIgnoreTimeScale(true);
@@ -83,6 +98,7 @@ public class ButtonManager : MonoBehaviour
         for (int i = 0; i < Buttons.Length; i++)
         {
             Buttons[i].transform.localPosition = new Vector3(0, Buttons[i].transform.localPosition.y, 0);
+            // debug the position of each button
         }
     }
 
