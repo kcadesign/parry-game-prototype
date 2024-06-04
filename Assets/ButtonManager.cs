@@ -19,14 +19,14 @@ public class ButtonManager : MonoBehaviour
     private void Awake()
     {
         PlayerControls = new PlayerControls();
+
+
     }
 
     private void OnEnable()
     {
         PlayerControls.Menus.Enable();
         PlayerControls.Menus.Navigate.performed += Navigate_performed;
-
-        GameStateManager.OnPauseButtonPressed += GameStateManager_OnPauseButtonPressed;
 
         StartCoroutine(SetSelectedAfterOneFrame());
 
@@ -38,23 +38,12 @@ public class ButtonManager : MonoBehaviour
         PlayerControls.Menus.Disable();
         PlayerControls.Menus.Navigate.performed -= Navigate_performed;
 
-        GameStateManager.OnPauseButtonPressed -= GameStateManager_OnPauseButtonPressed;
-
-        Debug.Log("Button Manager disabled");
+        ResetButtonPosition();
     }
 
     private void Update()
     {
         HandleActiveSelector();
-    }
-
-    private void GameStateManager_OnPauseButtonPressed(bool playerPaused)
-    {
-        Debug.Log("Game paused: " + playerPaused);
-        if (!playerPaused)
-        {
-            ResetButtonPosition();
-        }
     }
 
     private void HandleActiveSelector()

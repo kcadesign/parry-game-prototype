@@ -12,7 +12,8 @@ public class ButtonSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPoin
 
     public GameObject ButtonSelector;
     public TextMeshProUGUI ButtonText;
-    private Vector3 _buttonTextOriginalPosition;
+    private Vector3 _buttonPressedPosition;
+    private float _buttonMoveAmount = 10;
 
     [SerializeField] private float _moveTime = 0.1f;
     [Range(0, 2), SerializeField] private float _scaleAmount = 1.1f;
@@ -27,11 +28,7 @@ public class ButtonSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPoin
     {
         playerControls = new PlayerControls();
 
-        _buttonTextOriginalPosition = ButtonText.transform.position;
-
-        _startPosition = transform.position;
-        _originalScale = transform.localScale;
-
+        //_buttonTextOriginalPosition = ButtonText.transform.position;
     }
 
     private void OnEnable()
@@ -40,6 +37,10 @@ public class ButtonSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPoin
 
         playerControls.Menus.Execute.performed += Execute_performed;
         playerControls.Menus.Execute.canceled += Execute_canceled;
+
+
+        _startPosition = transform.position;
+        _originalScale = transform.localScale;
     }
 
     private void OnDisable()
@@ -66,7 +67,7 @@ public class ButtonSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPoin
     {
         _executePressed = false;
         //Debug.Log("Execute canceled");
-        MoveTextWithButton(_buttonTextOriginalPosition);
+        MoveTextWithButton(new Vector3(transform.position.x, transform.position.y + _buttonMoveAmount, transform.position.z));
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -81,11 +82,13 @@ public class ButtonSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPoin
 
     public void OnSelect(BaseEventData eventData)
     {
+        //_buttonTextOriginalPosition = ButtonText.transform.position;
+
         //Debug.Log($"{gameObject.name} selected");
         _buttonSelected = true;
 
         LeanTween.scale(gameObject, _originalScale * _scaleAmount, _moveTime).setEase(LeanTweenType.easeInOutExpo).setIgnoreTimeScale(true);
-        
+
         ButtonManager.LastSelectedButton = gameObject;
         for (int i = 0; i < ButtonManager.Buttons.Length; i++)
         {
@@ -108,14 +111,12 @@ public class ButtonSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPoin
 
     public void OnPointerDown()
     {
-        //Debug.Log("Pointer Down");
         MoveTextWithButton(new Vector3(transform.position.x, transform.position.y, transform.position.z));
     }
 
     public void OnPointerUp()
     {
-        //Debug.Log("Pointer Up");
-        MoveTextWithButton(_buttonTextOriginalPosition);
+        MoveTextWithButton(new Vector3(transform.position.x, transform.position.y + _buttonMoveAmount, transform.position.z));
     }
 
     public void MoveTextWithButton(Vector3 buttonPosition)
@@ -127,7 +128,6 @@ public class ButtonSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPoin
     {
         yield return new WaitForSeconds(0.1f);
         _executePressed = false;
-        MoveTextWithButton(_buttonTextOriginalPosition);
-
+        MoveTextWithButton(new Vector3(transform.position.x, transform.position.y + _buttonMoveAmount, transform.position.z));
     }
 }
