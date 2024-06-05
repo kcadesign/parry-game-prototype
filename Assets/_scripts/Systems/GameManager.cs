@@ -27,25 +27,31 @@ public class GameManager : MonoBehaviour
     private void OnEnable()
     {
         SceneManager.sceneLoaded += SceneManager_sceneLoaded;
+
         MainMenu.OnStartButtonPressed += MainMenuManager_OnStartButtonPressed;
         MainMenu.OnResetProgressButtonPressed += MainMenuManager_OnResetProgressButtonPressed;
         MainMenu.OnExitGameButtonPressed += MainMenuManager_OnExitGameButtonPressed;
-        HandleBossDeath.OnBossDeathAnimEnd += HandleBossDeath_OnBossDeathAnimEnd;
+
         HandleGameStateUI.OnRestartButtonPressed += HandleGameStateUI_OnRestartButtonPressed;
         HandleGameStateUI.OnMenuButtonPressed += HandleGameStateUI_OnMenuButtonPressed;
         HandleGameStateUI.OnExitGameButtonPressed += HandleGameStateUI_OnExitGameButtonPressed;
+
+        HandleBossDeath.OnBossDeathAnimEnd += HandleBossDeath_OnBossDeathAnimEnd;
     }
 
     private void OnDisable()
     {
         SceneManager.sceneLoaded -= SceneManager_sceneLoaded;
+
         MainMenu.OnStartButtonPressed -= MainMenuManager_OnStartButtonPressed;
         MainMenu.OnResetProgressButtonPressed -= MainMenuManager_OnResetProgressButtonPressed;
         MainMenu.OnExitGameButtonPressed -= MainMenuManager_OnExitGameButtonPressed;
-        HandleBossDeath.OnBossDeathAnimEnd -= HandleBossDeath_OnBossDeathAnimEnd;
+
         HandleGameStateUI.OnRestartButtonPressed -= HandleGameStateUI_OnRestartButtonPressed;
         HandleGameStateUI.OnMenuButtonPressed -= HandleGameStateUI_OnMenuButtonPressed;
         HandleGameStateUI.OnExitGameButtonPressed -= HandleGameStateUI_OnExitGameButtonPressed;
+
+        HandleBossDeath.OnBossDeathAnimEnd -= HandleBossDeath_OnBossDeathAnimEnd;
     }
 
     private void SceneManager_sceneLoaded(Scene scene, LoadSceneMode mode)
