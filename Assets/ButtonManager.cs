@@ -19,8 +19,6 @@ public class ButtonManager : MonoBehaviour
     private void Awake()
     {
         PlayerControls = new PlayerControls();
-
-
     }
 
     private void OnEnable()
@@ -67,7 +65,6 @@ public class ButtonManager : MonoBehaviour
 
     private void AnimateButtonIntro()
     {
-        
         // move the buttons off screen
         for (int i = 0; i < Buttons.Length; i++)
         {

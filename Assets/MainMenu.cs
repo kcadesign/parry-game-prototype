@@ -106,6 +106,7 @@ public class MainMenu : MonoBehaviour
 
         ResetConfirmTMP.text = "Are you sure you would like to reset all progress?";
         ResetConfirmTMPShadow.text = "Are you sure you would like to reset all progress?";
+        ResetButtonContainer.SetActive(true);
 
         // Deactivate the UI element after the animation is done
         gameUI.SetActive(false);
