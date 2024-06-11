@@ -857,7 +857,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Did you see that big pyramid thing back there!? What a time to be alive
+  m_text: There's some big pyramid thing in the distance too! What a time to be alive
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0ad90943a71d5ff4dabb91150dbc8d9e, type: 2}
   m_sharedMaterial: {fileID: -7594859192112348600, guid: 0ad90943a71d5ff4dabb91150dbc8d9e, type: 2}
@@ -3143,6 +3143,7 @@ GameObject:
   - component: {fileID: 447318906}
   - component: {fileID: 447318908}
   - component: {fileID: 447318907}
+  - component: {fileID: 447318909}
   m_Layer: 0
   m_Name: JumpTutorialContainer
   m_TagString: Untagged
@@ -3229,6 +3230,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 7.7093987, y: 11.7159395}
   m_EdgeRadius: 0
+--- !u!114 &447318909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 447318905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70b738dc35223ee41a95ea151bee9bfb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  KeyboardUI: {fileID: 321432960}
+  GamepadUI: {fileID: 209546759}
 --- !u!1 &452382274
 GameObject:
   m_ObjectHideFlags: 0
@@ -4881,6 +4896,7 @@ GameObject:
   - component: {fileID: 703771504}
   - component: {fileID: 703771506}
   - component: {fileID: 703771505}
+  - component: {fileID: 703771507}
   m_Layer: 0
   m_Name: DropThroughTutorialContainer
   m_TagString: Untagged
@@ -4967,6 +4983,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 7.7093987, y: 11.7159395}
   m_EdgeRadius: 0
+--- !u!114 &703771507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 703771503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70b738dc35223ee41a95ea151bee9bfb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  KeyboardUI: {fileID: 783860103}
+  GamepadUI: {fileID: 608099260}
 --- !u!1 &713527161
 GameObject:
   m_ObjectHideFlags: 0
@@ -6739,7 +6769,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: This one seems different to the others. Maybe if you destroy it something
-    different will happen.
+    interesting will happen.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0ad90943a71d5ff4dabb91150dbc8d9e, type: 2}
   m_sharedMaterial: {fileID: -7594859192112348600, guid: 0ad90943a71d5ff4dabb91150dbc8d9e, type: 2}
@@ -7437,6 +7467,7 @@ GameObject:
   - component: {fileID: 990698133}
   - component: {fileID: 990698135}
   - component: {fileID: 990698134}
+  - component: {fileID: 990698136}
   m_Layer: 0
   m_Name: MovementTutorialContainer
   m_TagString: Untagged
@@ -7523,6 +7554,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 7.7093987, y: 11.7159395}
   m_EdgeRadius: 0
+--- !u!114 &990698136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 990698132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70b738dc35223ee41a95ea151bee9bfb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  KeyboardUI: {fileID: 1671098193}
+  GamepadUI: {fileID: 891807090}
 --- !u!1 &1004369148
 GameObject:
   m_ObjectHideFlags: 0
@@ -8481,6 +8526,7 @@ GameObject:
   - component: {fileID: 1195004282}
   - component: {fileID: 1195004284}
   - component: {fileID: 1195004283}
+  - component: {fileID: 1195004285}
   m_Layer: 0
   m_Name: ParryTutorialContainer
   m_TagString: Untagged
@@ -8567,6 +8613,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 7.7093987, y: 11.7159395}
   m_EdgeRadius: 0
+--- !u!114 &1195004285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1195004281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70b738dc35223ee41a95ea151bee9bfb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  KeyboardUI: {fileID: 337737653}
+  GamepadUI: {fileID: 1639483834}
 --- !u!1 &1196399817
 GameObject:
   m_ObjectHideFlags: 0

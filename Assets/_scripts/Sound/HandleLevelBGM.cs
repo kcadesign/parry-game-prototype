@@ -86,7 +86,7 @@ public class HandleLevelBGM : MonoBehaviour
         // play and fade in the audio source whichever level you start in
         _audioSource.Play();
         StartCoroutine(FadeInBGM());
-        Debug.Log("Playing audio source clip: " + _audioSource.clip.name);
+        //Debug.Log("Playing audio source clip: " + _audioSource.clip.name);
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode sceneMode)
@@ -131,6 +131,7 @@ public class HandleLevelBGM : MonoBehaviour
         }
         //Debug.Log("Playing audio source clip: " + _audioSource.clip.name);
     }
+
     private void GameStateManager_OnPlayerPause(bool playerPaused)
     {
         if (playerPaused) _audioSource.volume = _pauseVolume;
