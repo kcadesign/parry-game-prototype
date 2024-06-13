@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyDeathStopDuration: 0.15
   _playerDamageStopDuration: 0.15
-  _screenShakeAmount: 1
+  _screenShakeAmount: 2
 --- !u!114 &2007273394239638753
 MonoBehaviour:
   m_ObjectHideFlags: 0

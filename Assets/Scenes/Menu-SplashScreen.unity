@@ -1022,7 +1022,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UIItem: {fileID: 1447912289}
-  _blinkInterval: 1
+  _blinkInterval: 0.75
 --- !u!114 &1174580533
 MonoBehaviour:
   m_ObjectHideFlags: 0

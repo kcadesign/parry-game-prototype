@@ -91,6 +91,7 @@ public class HandleLevelBGM : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode sceneMode)
     {
+        _audioSource.volume = _defaultVolume;
         // check the level name type and set the audio source clip to play the appropriate music
         // music only changes if logic is met
         if (scene.name.StartsWith("Menu") && _audioSource.clip != BGMCollection.FindSoundByName("MainMenu").AudioClips[0])
@@ -138,11 +139,6 @@ public class HandleLevelBGM : MonoBehaviour
         else _audioSource.volume = _defaultVolume;
     }
 
-/*    private void HandleGameStateUI_OnStartButtonPressed()
-    {
-        StartCoroutine(FadeOutBGM());
-    }
-*/
     private IEnumerator FadeInBGM()
     {
         while (_audioSource.volume < _defaultVolume)

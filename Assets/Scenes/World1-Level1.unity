@@ -12171,41 +12171,33 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
-    - position: {x: 52.61297, y: 4.2707753, z: 0}
-      leftTangent: {x: -1.5784073, y: -1.1467996, z: 0}
-      rightTangent: {x: 2.5465622, y: 1.850215, z: 0}
+    - position: {x: 55.85168, y: 3.8730745, z: 0}
+      leftTangent: {x: -7.5001526, y: -3.2014132, z: 0}
+      rightTangent: {x: 4.7645264, y: 2.03372, z: 0}
       mode: 1
       height: 1
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
-    - position: {x: 57.986515, y: 6.11955, z: 0}
-      leftTangent: {x: -2.6570244, y: -1.470057, z: 0}
-      rightTangent: {x: 3.6581802, y: 2.0239673, z: 0}
+    - position: {x: 67.20609, y: 3.0943995, z: 0}
+      leftTangent: {x: -3.0145416, y: 0.09784627, z: 0}
+      rightTangent: {x: 5.451889, y: -0.17695785, z: 0}
       mode: 1
       height: 1
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
-    - position: {x: 67.32176, y: 4.367043, z: 0}
-      leftTangent: {x: -3.0145416, y: 0.09784651, z: 0}
-      rightTangent: {x: 5.451889, y: -0.1769582, z: 0}
-      mode: 1
-      height: 1
-      spriteIndex: 0
-      corner: 1
-      m_CornerMode: 1
-    - position: {x: 77.13452, y: 6.75747, z: 0}
+    - position: {x: 81.182915, y: 2.3827572, z: 0}
       leftTangent: {x: -4.534851, y: 0.44491243, z: 0}
-      rightTangent: {x: 5.5096436, y: -0.5405488, z: 0}
+      rightTangent: {x: 5.509659, y: -0.54054904, z: 0}
       mode: 1
       height: 1
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
-    - position: {x: 88.223656, y: -0.21856587, z: 0}
-      leftTangent: {x: -3.7682486, y: -0.062410723, z: -0}
-      rightTangent: {x: 3.4291973, y: 0.056795266, z: 0}
+    - position: {x: 90.07435, y: 0.8949976, z: 0}
+      leftTangent: {x: -3.7682343, y: -0.062410712, z: 0}
+      rightTangent: {x: 3.4292068, y: 0.0567953, z: 0}
       mode: 1
       height: 1
       spriteIndex: 0
@@ -18551,10 +18543,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3724272360608872550, guid: 70d2712a8bdb63349ad45d399b05414c, type: 3}
-      propertyPath: m_MoveRepeatDelay
-      value: 0.25
-      objectReference: {fileID: 0}
     - target: {fileID: 3924564743266024033, guid: 70d2712a8bdb63349ad45d399b05414c, type: 3}
       propertyPath: m_Name
       value: -----Systems-----
@@ -18598,10 +18586,6 @@ PrefabInstance:
     - target: {fileID: 4297191643742616484, guid: 70d2712a8bdb63349ad45d399b05414c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8607429967326032020, guid: 70d2712a8bdb63349ad45d399b05414c, type: 3}
-      propertyPath: _screenShakeAmount
-      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -18864,10 +18848,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameStateCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 732817120048099349, guid: ee7945cfd6ed98a43afe54620c33f78e, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 732817120048099349, guid: ee7945cfd6ed98a43afe54620c33f78e, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 732817120048099349, guid: ee7945cfd6ed98a43afe54620c33f78e, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 17.184326
+      objectReference: {fileID: 0}
     - target: {fileID: 808610762800382522, guid: ee7945cfd6ed98a43afe54620c33f78e, type: 3}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 4236415679738221512}
+    - target: {fileID: 3703689326047237470, guid: ee7945cfd6ed98a43afe54620c33f78e, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3703689326047237470, guid: ee7945cfd6ed98a43afe54620c33f78e, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3703689326047237470, guid: ee7945cfd6ed98a43afe54620c33f78e, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 17.184326
+      objectReference: {fileID: 0}
     - target: {fileID: 6440921679455610645, guid: ee7945cfd6ed98a43afe54620c33f78e, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -18946,6 +18954,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6440921679455610645, guid: ee7945cfd6ed98a43afe54620c33f78e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7512129414570638817, guid: ee7945cfd6ed98a43afe54620c33f78e, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

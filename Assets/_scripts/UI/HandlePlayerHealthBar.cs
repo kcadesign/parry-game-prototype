@@ -9,11 +9,6 @@ public class HandlePlayerHealthBar : MonoBehaviour
     private float _maxFill;
     [SerializeField] private float _fillSpeed = 1.0f;
 
-    private void Awake()
-    {
-        //BarValueMask.fillAmount = 1.0f;
-    }
-
     private void OnEnable()
     {
         HandlePlayerHealth.OnHealthInitialise += HandlePlayerHealth_OnHealthInitialise;
@@ -46,7 +41,7 @@ public class HandlePlayerHealthBar : MonoBehaviour
         Debug.Log($"Health Changed: currentHealth = {currentHealth}");
 
         _currentFill = currentHealth;
-        // Use a coroutine to smoothly update the fill amount
+
         StartCoroutine(ChangeFillOverTime(currentHealth));
     }
 

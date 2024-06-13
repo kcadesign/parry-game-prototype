@@ -4,9 +4,13 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class ButtonSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, ISelectHandler, IDeselectHandler
 {
+    public static event Action OnButtonSelected;
+    public static event Action OnButtonpressed;
+
     public ButtonManager ButtonManager;
     protected PlayerControls playerControls;
 
@@ -58,6 +62,7 @@ public class ButtonSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPoin
         if (_buttonSelected && _executePressed)
         {
             MoveTextWithButton(new Vector3(transform.position.x, transform.position.y, transform.position.z));
+            OnButtonpressed?.Invoke();
         }
 
         StartCoroutine(CancelExecute());
@@ -82,6 +87,8 @@ public class ButtonSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPoin
 
     public void OnSelect(BaseEventData eventData)
     {
+        OnButtonSelected?.Invoke();
+
         //_buttonTextOriginalPosition = ButtonText.transform.position;
 
         //Debug.Log($"{gameObject.name} selected");
@@ -112,6 +119,7 @@ public class ButtonSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPoin
     public void OnPointerDown()
     {
         MoveTextWithButton(new Vector3(transform.position.x, transform.position.y, transform.position.z));
+        OnButtonpressed?.Invoke();
     }
 
     public void OnPointerUp()
