@@ -9,6 +9,7 @@ public class HandlePlayerSounds : MonoBehaviour
     private AudioSource _audioSource;
 
     private bool _grounded;
+    private float _maxHealth;
 
     private void Awake()
     {
@@ -21,9 +22,13 @@ public class HandlePlayerSounds : MonoBehaviour
         PlayerParry.OnParryActive += PlayerParry_OnParryActive;
         PlayerParry.OnParryBounce += PlayerParry_OnParryBounce;
         AnimatePlayer.OnPassiveBounce += AnimatePlayer_OnPassiveBounce;
+
+        HandlePlayerHealth.OnHealthInitialise += HandlePlayerHealth_OnHealthInitialise;
+        HandlePlayerHealth.OnHealthChange += HandlePlayerHealth_OnHealthChange;
         HandlePlayerHealth.OnPlayerHurtBig += HandlePlayerHealth_OnPlayerHurtBig;
         HandlePlayerHealth.OnPlayerHurtSmall += HandlePlayerHealth_OnPlayerHurtSmall;
         HandlePlayerHealth.OnPlayerHealthReplenish += HandlePlayerHealth_OnPlayerHealthReplenish;
+
         PlayerMove.OnPlayerMoveInput += PlayerMove_OnPlayerMoveInput;
         CheckPlayerGrounded.OnGrounded += CheckPlayerGrounded_OnGrounded;
     }
@@ -34,9 +39,13 @@ public class HandlePlayerSounds : MonoBehaviour
         PlayerParry.OnParryActive -= PlayerParry_OnParryActive;
         PlayerParry.OnParryBounce -= PlayerParry_OnParryBounce;
         AnimatePlayer.OnPassiveBounce -= AnimatePlayer_OnPassiveBounce;
+
+        HandlePlayerHealth.OnHealthInitialise -= HandlePlayerHealth_OnHealthInitialise;
+        HandlePlayerHealth.OnHealthChange -= HandlePlayerHealth_OnHealthChange;
         HandlePlayerHealth.OnPlayerHurtBig -= HandlePlayerHealth_OnPlayerHurtBig;
         HandlePlayerHealth.OnPlayerHurtSmall -= HandlePlayerHealth_OnPlayerHurtSmall;
         HandlePlayerHealth.OnPlayerHealthReplenish -= HandlePlayerHealth_OnPlayerHealthReplenish;
+
         PlayerMove.OnPlayerMoveInput -= PlayerMove_OnPlayerMoveInput;
         CheckPlayerGrounded.OnGrounded -= CheckPlayerGrounded_OnGrounded;
     }
@@ -64,6 +73,36 @@ public class HandlePlayerSounds : MonoBehaviour
         {
             _playerSounds.PlaySound("ParryBounce", transform);
         }
+    }
+
+    private void HandlePlayerHealth_OnHealthInitialise(int maxHealth) => _maxHealth = maxHealth;
+
+    private void HandlePlayerHealth_OnHealthChange(int currentHealth)
+    {
+        if (_playerSounds != null && _playerSounds.Sounds.Length > 0)
+        {
+            if (currentHealth <= _maxHealth * 0.25f)
+            {
+                // Start repeating the sound if not already repeating
+                if (!IsInvoking(nameof(PlayLowHealthSound)))
+                {
+                    InvokeRepeating(nameof(PlayLowHealthSound), 0f, 1.0f);
+                }
+            }
+            else
+            {
+                // Stop repeating the sound if it is repeating
+                if (IsInvoking(nameof(PlayLowHealthSound)))
+                {
+                    CancelInvoke(nameof(PlayLowHealthSound));
+                }
+            }
+        }
+    }
+
+    private void PlayLowHealthSound()
+    {
+        _playerSounds.PlaySound("LowHealth", transform);
     }
 
     private void HandlePlayerHealth_OnPlayerHurtBig(bool playerHurt)

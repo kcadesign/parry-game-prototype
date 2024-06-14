@@ -72,3 +72,10 @@ MonoBehaviour:
     Pitch: 1
     SpatialBlend: 0
     Loop: 0
+  - Name: LowHealth
+    AudioClips:
+    - {fileID: 8300000, guid: 0187c46c5dfab5e40a40a643aed59f68, type: 3}
+    Volume: 0.5
+    Pitch: 1
+    SpatialBlend: 0
+    Loop: 1
