@@ -4,6 +4,11 @@ using UnityEngine.UI;
 
 public class HandlePlayerHealthBar : MonoBehaviour
 {
+    [Header("Health Icon")]
+    public GameObject HealthIcon;
+    public GameObject HealthIconShadow;
+
+    [Header("Health Bar")]
     public Image BarValueMask;
     private float _currentFill;
     private float _maxFill;
@@ -43,6 +48,8 @@ public class HandlePlayerHealthBar : MonoBehaviour
         _currentFill = currentHealth;
 
         StartCoroutine(ChangeFillOverTime(currentHealth));
+
+        HandleLowHealth(currentHealth);
     }
 
     private IEnumerator ChangeFillOverTime(float targetHealth)
@@ -65,5 +72,34 @@ public class HandlePlayerHealthBar : MonoBehaviour
     private void UpdateHealthBarImmediately()
     {
         BarValueMask.fillAmount = _currentFill / _maxFill;
+    }
+
+    private void HandleLowHealth(int currentHealth)
+    {
+        // if the current fill is less than 25% of max fill start the low health animation
+        if (currentHealth <= _maxFill * 0.25f)
+        {
+            StartCoroutine(LowHealthAnimation());
+        }
+        else
+        {
+            // stop lean tween animation loops
+            LeanTween.cancel(HealthIcon);
+            LeanTween.cancel(HealthIconShadow);
+        }
+    }
+
+    private IEnumerator LowHealthAnimation()
+    {
+        LeanTween.scale(HealthIcon, new Vector3(1.2f, 1.2f, 1.2f), 0.5f)
+                 .setEase(LeanTweenType.easeInOutSine)
+                 .setLoopPingPong()
+                 .setIgnoreTimeScale(true);
+
+        LeanTween.scale(HealthIconShadow, new Vector3(1.2f, 1.2f, 1.2f), 0.5f)
+                 .setEase(LeanTweenType.easeInOutSine)
+                 .setLoopPingPong()
+                 .setIgnoreTimeScale(true);
+        yield return null;
     }
 }
