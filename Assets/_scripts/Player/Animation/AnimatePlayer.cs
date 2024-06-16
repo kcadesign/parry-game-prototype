@@ -193,17 +193,17 @@ public class AnimatePlayer : MonoBehaviour
         gameObject.transform.localScale = new Vector3(1, 1, 1);
         Shadow.SetActive(false);
 
-        yield return new WaitForSecondsRealtime(0.5f);
+        yield return new WaitForSecondsRealtime(1f);
         LeanTween.moveY(gameObject, transform.position.y + 2, 0.5f).setEaseOutExpo().setIgnoreTimeScale(true);
         yield return new WaitWhile(() => LeanTween.isTweening(gameObject));
-        LeanTween.moveY(gameObject, transform.position.y - 7, 1f).setEaseInExpo().setIgnoreTimeScale(true);
+        LeanTween.moveY(gameObject, transform.position.y - 7, 0.75f).setEaseInExpo().setIgnoreTimeScale(true);
         yield return new WaitWhile(() => LeanTween.isTweening(gameObject));
         OnPlayerDeathAnimEnd?.Invoke();
     }
 
     private IEnumerator PlayerDeathRotation()
     {
-        yield return new WaitForSecondsRealtime(0.5f);
+        yield return new WaitForSecondsRealtime(1f);
         while (true)
         {
             transform.Rotate(Vector3.forward, 180f * Time.unscaledDeltaTime);

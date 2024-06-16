@@ -5,6 +5,7 @@ using UnityEngine;
 public class CollisionEffects : MonoBehaviour
 {
     [SerializeField] private GameObject _parryEffectPrefab; // Prefab for the parry effect
+    [SerializeField] private GameObject _collisionEffectPrefab; // Prefab for the collision effect
     private bool _parryActive;
 
     private void OnEnable()
@@ -36,6 +37,19 @@ public class CollisionEffects : MonoBehaviour
 
             // Destroy the instantiated effect after a delay
             Destroy(parryEffectInstance, 0.2f);
+        }
+        else if(!_parryActive && (collision.CompareTag("HurtBox") || collision.CompareTag("Projectile")))
+        {
+            // Instantiate collision effect
+            GameObject collisionEffectInstance = Instantiate(_collisionEffectPrefab, transform.position, Quaternion.identity);
+
+            // get the angle of the parry and set the rotation of the effect
+            Vector3 targetDir = collision.transform.position - transform.position;
+            float angle = Mathf.Atan2(targetDir.y, targetDir.x) * Mathf.Rad2Deg;
+            collisionEffectInstance.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+
+            // Destroy the instantiated effect after a delay
+            Destroy(collisionEffectInstance, 2f);
         }
     }
 }

@@ -18275,6 +18275,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 959388140687563353, guid: 9b60d9937a2653a4fa996b5d49e6adbe, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2763322574346709828, guid: 9b60d9937a2653a4fa996b5d49e6adbe, type: 3}
+      propertyPath: _collisionEffectPrefab
+      value: 
+      objectReference: {fileID: 145013227338971142, guid: 6e7d228d97b276e40a0b6f6fbbb6d8be, type: 3}
     - target: {fileID: 8496972563218401469, guid: 9b60d9937a2653a4fa996b5d49e6adbe, type: 3}
       propertyPath: m_LocalPosition.x
       value: -34.51
