@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 1350618555484075863}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -40.18225, y: -1.0627921, z: -10}
+  m_LocalPosition: {x: -40.18225, y: -1.2097918, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -71,7 +71,7 @@ Camera:
   far clip plane: 5000
   field of view: 40
   orthographic: 1
-  orthographic size: 4.5
+  orthographic size: 3
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -258,7 +258,7 @@ Transform:
   m_GameObject: {fileID: 3783898473441498067}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -40.18225, y: -1.0627921, z: -10}
+  m_LocalPosition: {x: -40.18225, y: -1.2097918, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -287,7 +287,7 @@ MonoBehaviour:
   m_Follow: {fileID: 0}
   m_Lens:
     FieldOfView: 40
-    OrthographicSize: 4.5
+    OrthographicSize: 3
     NearClipPlane: 0.1
     FarClipPlane: 5000
     Dutch: 0
@@ -318,8 +318,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _velocityToZoomOut: 5
   _zoomSpeed: 0.5
-  _startingOrthoSize: 4.5
-  _maxCameraOrthoSize: 6
+  _startingOrthoSize: 3
+  _maxCameraOrthoSize: 5
 --- !u!114 &2333006844876510606
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -338,7 +338,7 @@ MonoBehaviour:
   m_Use2DDistance: 0
   m_UseCameraSpace: 1
   m_ReactionSettings:
-    m_SecondaryNoise: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
+    m_SecondaryNoise: {fileID: 0}
     m_AmplitudeGain: 5
     m_FrequencyGain: 3
     m_Duration: 0.5
@@ -404,15 +404,15 @@ MonoBehaviour:
   m_LookaheadTime: 0.7
   m_LookaheadSmoothing: 2
   m_LookaheadIgnoreY: 0
-  m_XDamping: 2
-  m_YDamping: 1.5
+  m_XDamping: 3
+  m_YDamping: 3
   m_ZDamping: 0
   m_TargetMovementOnly: 1
   m_ScreenX: 0.5
-  m_ScreenY: 0.583
+  m_ScreenY: 0.6
   m_CameraDistance: 10
   m_DeadZoneWidth: 0
-  m_DeadZoneHeight: 0.391
+  m_DeadZoneHeight: 0
   m_DeadZoneDepth: 0
   m_UnlimitedSoftZone: 0
   m_SoftZoneWidth: 0.8

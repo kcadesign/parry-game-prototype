@@ -43,7 +43,7 @@ public class HandlePlayerHealthBar : MonoBehaviour
 
     private void HandlePlayerHealth_OnHealthChange(int currentHealth)
     {
-        Debug.Log($"Health Changed: currentHealth = {currentHealth}");
+        //Debug.Log($"Health Changed: currentHealth = {currentHealth}");
 
         _currentFill = currentHealth;
 

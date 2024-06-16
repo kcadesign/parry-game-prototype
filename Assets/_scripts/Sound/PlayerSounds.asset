@@ -79,3 +79,10 @@ MonoBehaviour:
     Pitch: 1
     SpatialBlend: 0
     Loop: 1
+  - Name: Death
+    AudioClips:
+    - {fileID: 8300000, guid: da6386cabfa9fb040b4f4c5f1135a525, type: 3}
+    Volume: 0.5
+    Pitch: 1
+    SpatialBlend: 0
+    Loop: 1

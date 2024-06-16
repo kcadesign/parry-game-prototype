@@ -14,6 +14,8 @@ public class JuiceSystems : MonoBehaviour
 
     [SerializeField] private float _screenShakeAmount = 1;
 
+    private bool _playerDead = false;
+
     private void Awake()
     {
         _impulseSource = GetComponent<CinemachineImpulseSource>();
@@ -23,6 +25,7 @@ public class JuiceSystems : MonoBehaviour
     {
         HandleEnemyHealth.OnEnemyDeath += HandleEnemyHealth_OnEnemyDeath;
         HandlePlayerHealth.OnPlayerHurtBig += HandlePlayerHealth_OnPlayerHurtBig;
+        HandlePlayerHealth.OnPlayerDead += () => _playerDead = true;
         HandleBossHealth.OnBossHealthChange += HandleBossHealth_OnBossHealthChange;
         HandleBossHealth.OnBossDeath += HandleBossHealth_OnBossDeath;
     }
@@ -44,10 +47,17 @@ public class JuiceSystems : MonoBehaviour
 
     private void HandlePlayerHealth_OnPlayerHurtBig(bool stunned)
     {
-        Debug.Log("Player stunned");
-        // when the player is damaged, pause time briefly (hit stop)
-        StartCoroutine(HitStop(_playerDamageStopDuration));
-        ScreenShake(_screenShakeAmount);
+        if (_playerDead)
+        {
+            return;
+        }
+        else
+        {
+            Debug.Log("Player stunned");
+            // when the player is damaged, pause time briefly (hit stop)
+            StartCoroutine(HitStop(_playerDamageStopDuration));
+            ScreenShake(_screenShakeAmount);
+        }
     }
 
     private void HandleBossHealth_OnBossHealthChange(int currentHealth, int maxHealth)
@@ -66,11 +76,13 @@ public class JuiceSystems : MonoBehaviour
 
     private IEnumerator HitStop(float hitStopDuration)
     {
+        Debug.Log("Hit stop coroutine started");
         // pause time for hitStopDuration
         Time.timeScale = 0.4f;
         yield return new WaitForSecondsRealtime(hitStopDuration);
         // resume time
-            Time.timeScale = 1f;
+        Time.timeScale = 1f;
+        Debug.Log("Hit stop coroutine ended");
     }
 
     private void ScreenShake(float shakeAmount)

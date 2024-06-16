@@ -34,7 +34,8 @@ public class GameStateManager : MonoBehaviour
         playerControls.Gameplay.Pause.performed += Pause_performed;
         playerControls.Gameplay.Pause.canceled += Pause_canceled;
 
-        HandlePlayerDeath.OnPlayerDeathAnimEnd += HandlePlayerDeath_OnPlayerDeathAnimEnd;
+        HandlePlayerHealth.OnPlayerDead += HandlePlayerDeath_OnPlayerDead;
+        //HandlePlayerDeath.OnPlayerDeathAnimEnd += HandlePlayerDeath_OnPlayerDeathAnimEnd;
         HandleEnterFinish.OnPlayerParryFinish += HandleEnterFinish_OnLevelFinish;
     }
 
@@ -48,7 +49,8 @@ public class GameStateManager : MonoBehaviour
         playerControls.Gameplay.Pause.performed -= Pause_performed;
         playerControls.Gameplay.Pause.canceled -= Pause_canceled;
 
-        HandlePlayerDeath.OnPlayerDeathAnimEnd -= HandlePlayerDeath_OnPlayerDeathAnimEnd;
+        HandlePlayerHealth.OnPlayerDead -= HandlePlayerDeath_OnPlayerDead;
+        //HandlePlayerDeath.OnPlayerDeathAnimEnd -= HandlePlayerDeath_OnPlayerDeathAnimEnd;
         HandleEnterFinish.OnPlayerParryFinish -= HandleEnterFinish_OnLevelFinish;
     }
 
@@ -83,7 +85,13 @@ public class GameStateManager : MonoBehaviour
         return;
     }
 
-    private void HandlePlayerDeath_OnPlayerDeathAnimEnd()
+    private void HandlePlayerDeath_OnPlayerDead()
+    {
+        _playerCanPause = false;
+        //PauseTime();
+    }
+
+/*    private void HandlePlayerDeath_OnPlayerDeathAnimEnd()
     {
         //_pauseTime = true;
         _playerCanPause = false;
@@ -91,7 +99,7 @@ public class GameStateManager : MonoBehaviour
 
         //HandlePauseTime(_pauseTime);
     }
-
+*/
     private void HandleEnterFinish_OnLevelFinish(bool levelFinished)
     {
         if (levelFinished)

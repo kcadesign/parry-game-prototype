@@ -30,14 +30,16 @@ public class HandleGameStateUI : MonoBehaviour
 
     private void OnEnable()
     {
-        HandlePlayerDeath.OnPlayerDeathAnimEnd += HandlePlayerDeath_OnPlayerDeathAnimEnd;
+        //HandlePlayerDeath.OnPlayerDeathAnimEnd += HandlePlayerDeath_OnPlayerDeathAnimEnd;
+        AnimatePlayer.OnPlayerDeathAnimEnd += HandlePlayerDeath_OnPlayerDeathAnimEnd;
         //HandleLevelProgression.OnSendCurrentCheckpoint += HandleLevelProgression_OnSendCurrentCheckpoint;
         GameStateManager.OnPauseButtonPressed += GameStateManager_OnPauseButtonPressed;
     }
 
     private void OnDisable()
     {
-        HandlePlayerDeath.OnPlayerDeathAnimEnd -= HandlePlayerDeath_OnPlayerDeathAnimEnd;
+        //HandlePlayerDeath.OnPlayerDeathAnimEnd -= HandlePlayerDeath_OnPlayerDeathAnimEnd;
+        AnimatePlayer.OnPlayerDeathAnimEnd -= HandlePlayerDeath_OnPlayerDeathAnimEnd;
         //HandleLevelProgression.OnSendCurrentCheckpoint -= HandleLevelProgression_OnSendCurrentCheckpoint;
         GameStateManager.OnPauseButtonPressed -= GameStateManager_OnPauseButtonPressed;
     }

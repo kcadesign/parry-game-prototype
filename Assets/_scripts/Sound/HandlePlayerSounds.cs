@@ -81,7 +81,7 @@ public class HandlePlayerSounds : MonoBehaviour
     {
         if (_playerSounds != null && _playerSounds.Sounds.Length > 0)
         {
-            if (currentHealth <= _maxHealth * 0.25f)
+            if (currentHealth <= _maxHealth * 0.25f && currentHealth != 0)
             {
                 // Start repeating the sound if not already repeating
                 if (!IsInvoking(nameof(PlayLowHealthSound)))
@@ -89,12 +89,21 @@ public class HandlePlayerSounds : MonoBehaviour
                     InvokeRepeating(nameof(PlayLowHealthSound), 0f, 1.0f);
                 }
             }
-            else
+            else if (currentHealth > _maxHealth * 0.25f)
             {
                 // Stop repeating the sound if it is repeating
                 if (IsInvoking(nameof(PlayLowHealthSound)))
                 {
                     CancelInvoke(nameof(PlayLowHealthSound));
+                }
+            }
+            else if (currentHealth == 0)
+            {
+                // Stop repeating the sound if it is repeating and play death sound
+                if (IsInvoking(nameof(PlayLowHealthSound)))
+                {
+                    CancelInvoke(nameof(PlayLowHealthSound));
+                    _playerSounds.PlaySound("Death", transform);
                 }
             }
         }

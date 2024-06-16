@@ -1,16 +1,23 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class AnimatePlayer : MonoBehaviour
 {
     public static event Action OnPassiveBounce;
+    public static event Action OnPlayerDeathAnimEnd;
 
     private Rigidbody2D PlayerRigidbody;
     private Animator _animator;
     public ParticleSystem DustParticles;
+    public SpriteRenderer PlayerSprite;
+    public Sprite DeathSprite;
+    public GameObject Shadow;
 
     private bool _grounded;
     private bool _hasNegativeYVelocity;
+
+    private bool _playerDead = false;
 
     private bool _localGroundedCheck = false;
 
@@ -21,6 +28,7 @@ public class AnimatePlayer : MonoBehaviour
     {
         _animator = GetComponent<Animator>();
         PlayerRigidbody = GetComponent<Rigidbody2D>();
+        Shadow = transform.Find("Shadow").gameObject;
     }
 
     private void OnEnable()
@@ -43,11 +51,17 @@ public class AnimatePlayer : MonoBehaviour
         HandlePlayerHealth.OnPlayerDead -= HandlePlayerHealth_OnPlayerDead;
     }
 
-    private void Start()
+    private void Update()
     {
+        // debug for slowing time to check animations
         if (SlowTime)
         {
             Time.timeScale = TimeScale;
+        }
+
+        if (_playerDead)
+        {
+            Time.timeScale = 0f;
         }
     }
 
@@ -81,10 +95,18 @@ public class AnimatePlayer : MonoBehaviour
         // check if player is falling
         if (PlayerRigidbody.velocity.y < -0.1) _hasNegativeYVelocity = true;
     }
+
     private void AnimateFalling()
     {
-        if (_hasNegativeYVelocity && !_grounded) _animator.SetBool("Falling", true);
-        else _animator.SetBool("Falling", false);
+        if (_hasNegativeYVelocity && !_grounded)
+        {
+            _animator.SetBool("Falling", true);
+            Debug.Log("Falling bool set");
+        }
+        else
+        {
+            _animator.SetBool("Falling", false);
+        }
     }
 
     private void CheckPlayerGrounded_OnGrounded(bool grounded)
@@ -149,12 +171,43 @@ public class AnimatePlayer : MonoBehaviour
 
     private void HandlePlayerHealth_OnPlayerDead()
     {
+        _playerDead = true;
+        Debug.Log("Player dead observed in animation script");
+
+        _animator.SetBool("Falling", false);
         _animator.SetTrigger("Dead");
-        Time.timeScale = 0.1f;
+
+        StartCoroutine(PlayerDeathMovement());
+        StartCoroutine(PlayerDeathRotation());
     }
 
     public void CreateDustParticles()
     {
         DustParticles.Play();
+    }
+
+    private IEnumerator PlayerDeathMovement()
+    {
+        Debug.Log("Player death movement coroutine started");
+        PlayerSprite.sprite = DeathSprite;
+        gameObject.transform.localScale = new Vector3(1, 1, 1);
+        Shadow.SetActive(false);
+
+        yield return new WaitForSecondsRealtime(0.5f);
+        LeanTween.moveY(gameObject, transform.position.y + 2, 0.5f).setEaseOutExpo().setIgnoreTimeScale(true);
+        yield return new WaitWhile(() => LeanTween.isTweening(gameObject));
+        LeanTween.moveY(gameObject, transform.position.y - 7, 1f).setEaseInExpo().setIgnoreTimeScale(true);
+        yield return new WaitWhile(() => LeanTween.isTweening(gameObject));
+        OnPlayerDeathAnimEnd?.Invoke();
+    }
+
+    private IEnumerator PlayerDeathRotation()
+    {
+        yield return new WaitForSecondsRealtime(0.5f);
+        while (true)
+        {
+            transform.Rotate(Vector3.forward, 180f * Time.unscaledDeltaTime);
+            yield return null; // Wait for the next frame
+        }
     }
 }

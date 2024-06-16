@@ -15,8 +15,8 @@ public class AnimateDeadMenu : MonoBehaviour
 
     private void OnEnable()
     {
-        StartCoroutine(FadeInText());
-        StartCoroutine(FadeOutText());
+        StartCoroutine(FadeTextInOut());
+        //StartCoroutine(FadeOutText());
     }
 
     private void OnDisable()
@@ -24,16 +24,20 @@ public class AnimateDeadMenu : MonoBehaviour
         ButtonContainer.SetActive(false);
     }
 
-    private IEnumerator FadeInText()
+    private IEnumerator FadeTextInOut()
     {
-        LeanTween.alphaCanvas(_canvasGroup, 1, 2f).setDelay(0.5f).setIgnoreTimeScale(true);
+        LeanTween.alphaCanvas(_canvasGroup, 1, 1.5f).setDelay(0.5f).setIgnoreTimeScale(true);
         yield return new WaitWhile(() => LeanTween.isTweening(gameObject));
+        LeanTween.alphaCanvas(_canvasGroup, 0, 1f).setIgnoreTimeScale(true);
+        yield return new WaitWhile(() => LeanTween.isTweening(gameObject));
+
+        ButtonContainer.SetActive(true);
     }
 
-    private IEnumerator FadeOutText()
+/*    private IEnumerator FadeOutText()
     {
         LeanTween.alphaCanvas(_canvasGroup, 0, 1f).setDelay(2f).setIgnoreTimeScale(true);
         yield return new WaitWhile(() => LeanTween.isTweening(gameObject));
         ButtonContainer.SetActive(true);
     }
-}
+*/}

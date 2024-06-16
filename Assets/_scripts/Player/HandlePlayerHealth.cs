@@ -64,6 +64,11 @@ public class HandlePlayerHealth : MonoBehaviour
 
     private void Update()
     {
+        HandleAutoHealTimer();
+    }
+
+    private void HandleAutoHealTimer()
+    {
         if (_isCounting)
         {
             _autoHealTimer += Time.deltaTime;
@@ -94,6 +99,7 @@ public class HandlePlayerHealth : MonoBehaviour
                 OnPlayerHurtBig?.Invoke(true);
 
                 _currentHealth = PlayerHealth.GetHealth();
+                Debug.Log($"Player health: {_currentHealth}");
                 CheckPlayerAlive();
 
                 ResetHealTimer();
@@ -134,6 +140,7 @@ public class HandlePlayerHealth : MonoBehaviour
         {
             //_playerAlive = false;
             OnPlayerDead?.Invoke();
+            //Debug.Log("Player is dead");
         }
 /*        else
         {

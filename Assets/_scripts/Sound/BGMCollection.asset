@@ -41,3 +41,10 @@ MonoBehaviour:
     Pitch: 1
     SpatialBlend: 0
     Loop: 1
+  - Name: GameOver
+    AudioClips:
+    - {fileID: 8300000, guid: 397b07dc53038124d9f808598ba0f89f, type: 3}
+    Volume: 0
+    Pitch: 1
+    SpatialBlend: 0
+    Loop: 1
