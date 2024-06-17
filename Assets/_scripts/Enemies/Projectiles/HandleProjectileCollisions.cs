@@ -9,50 +9,46 @@ public class HandleProjectileCollisions : HandleCollisions, IParryable
     public event Action<GameObject> OnDamageCollision;
 
     private SpriteRenderer _projectileSpriteRenderer;
+    private CycleColors _cycleColorsComponent;
 
     private bool _parryActive;
-    private bool _blockActive;
     public bool Deflected = false;
 
     private void Awake()
     {
         _projectileSpriteRenderer = GetComponent<SpriteRenderer>();
+        _cycleColorsComponent = GetComponent<CycleColors>();
     }
     
     protected void OnEnable()
     {
         PlayerParry.OnParryActive += PlayerParry_OnParryActive;
-        PlayerBlock.OnBlock += PlayerBlock_OnBlock;
     }
 
     protected void OnDisable()
     {
         PlayerParry.OnParryActive -= PlayerParry_OnParryActive;
-        PlayerBlock.OnBlock -= PlayerBlock_OnBlock;
     }
 
     private void PlayerParry_OnParryActive(bool parryPressed) => _parryActive = parryPressed;
-    private void PlayerBlock_OnBlock(bool isBlocking) => _blockActive = isBlocking;
 
     protected override void HandleCollisionWithPlayer(GameObject collidedObject)
     {
         //Debug.Log($"Projectile collided with {collidedObject.tag}");
         if (!Deflected)
         {
-            if (_parryActive && !_blockActive)
+            if (_parryActive)
             {
+                _cycleColorsComponent.enabled = false;
                 _projectileSpriteRenderer.color = Color.white;
                 Deflected = true;
                 OnDeflect?.Invoke(gameObject, Deflected);
 
                 Destroy(gameObject, 3f);
             }
-            else if (!_parryActive && _blockActive)
+            else if (!_parryActive)
             {
-                Destroy(gameObject);
-            }
-            else if (!_parryActive && !_blockActive)
-            {
+                _cycleColorsComponent.enabled = true;
                 Deflected = false;
                 
                 OnDamageCollision?.Invoke(collidedObject);
