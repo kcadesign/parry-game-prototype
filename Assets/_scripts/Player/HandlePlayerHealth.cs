@@ -47,6 +47,7 @@ public class HandlePlayerHealth : MonoBehaviour
     {
         HandleDamageOut.OnOutputDamage += HandleDamageOutput_OnOutputDamage;
         PlayerTriggerEnter.OnAreaDamagePlayer += PlayerTriggerEnter_OnAreaDamagePlayer;
+        RespawnTrigger.OnPlayerLedgeFall += HandlePlayerLedgeFall_OnPlayerLedgeFall;
         //HandleGameStateUI.OnRestartButtonPressed += HandleGameStateUI_OnGameRestart;
         HandlePlayerStun.OnStunned += HandlePlayerStun_OnStunned;
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -56,6 +57,7 @@ public class HandlePlayerHealth : MonoBehaviour
     {
         HandleDamageOut.OnOutputDamage -= HandleDamageOutput_OnOutputDamage;
         PlayerTriggerEnter.OnAreaDamagePlayer -= PlayerTriggerEnter_OnAreaDamagePlayer;
+        RespawnTrigger.OnPlayerLedgeFall -= HandlePlayerLedgeFall_OnPlayerLedgeFall;
         //HandleGameStateUI.OnRestartButtonPressed -= HandleGameStateUI_OnGameRestart;
         HandlePlayerStun.OnStunned -= HandlePlayerStun_OnStunned;
         SceneManager.sceneLoaded -= OnSceneLoaded;
@@ -132,6 +134,19 @@ public class HandlePlayerHealth : MonoBehaviour
 
             OnPlayerHurtSmall?.Invoke(false);
         }
+    }
+
+    private void HandlePlayerLedgeFall_OnPlayerLedgeFall(GameObject player)
+    {
+        PlayerHealth.Damage(10);
+
+        _currentHealth = PlayerHealth.GetHealth();
+        CheckPlayerAlive();
+
+        ResetHealTimer();
+        StartHealTimer();
+
+        OnHealthChange?.Invoke(_currentHealth);
     }
 
     private void CheckPlayerAlive()

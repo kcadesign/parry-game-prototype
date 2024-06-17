@@ -17134,6 +17134,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy_lv1_static_projectile_L
       objectReference: {fileID: 0}
+    - target: {fileID: 2418649116730073565, guid: 6f2915520730bd741a03df7daa7757a2, type: 3}
+      propertyPath: SightRange
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2418649116730073565, guid: 6f2915520730bd741a03df7daa7757a2, type: 3}
+      propertyPath: AttackRange
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 8488090625440196708, guid: 6f2915520730bd741a03df7daa7757a2, type: 3}
       propertyPath: m_LocalPosition.x
       value: -31.211193
