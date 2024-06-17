@@ -27,3 +27,10 @@ MonoBehaviour:
     Pitch: 1
     SpatialBlend: 0
     Loop: 0
+  - Name: TutorialPopup
+    AudioClips:
+    - {fileID: 8300000, guid: d16eb4e22ff70634b8fd4f1f60559d8a, type: 3}
+    Volume: 0.5
+    Pitch: 1
+    SpatialBlend: 0
+    Loop: 0

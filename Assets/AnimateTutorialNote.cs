@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class AnimateTutorialNote : MonoBehaviour
 {
+    public SoundCollection UISounds;
     public GameObject SpeechBubble;
 
     private void OnEnable()
@@ -18,6 +19,7 @@ public class AnimateTutorialNote : MonoBehaviour
         {
             SpeechBubble.SetActive(true);
             LeanTween.scale(SpeechBubble, Vector3.one, 0.5f).setEaseOutBack();
+            UISounds.PlaySound("TutorialPopup", transform);
         }
     }
 

@@ -3184,6 +3184,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 878442ff9c2a6c14a8d694ad581cde16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UISounds: {fileID: 11400000, guid: 724eae74b19fa944d8026d8443dc19c6, type: 2}
   SpeechBubble: {fileID: 1287351235}
 --- !u!61 &447318908
 BoxCollider2D:
@@ -4937,6 +4938,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 878442ff9c2a6c14a8d694ad581cde16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UISounds: {fileID: 11400000, guid: 724eae74b19fa944d8026d8443dc19c6, type: 2}
   SpeechBubble: {fileID: 1101985316}
 --- !u!61 &703771506
 BoxCollider2D:
@@ -7508,6 +7510,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 878442ff9c2a6c14a8d694ad581cde16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UISounds: {fileID: 11400000, guid: 724eae74b19fa944d8026d8443dc19c6, type: 2}
   SpeechBubble: {fileID: 1771870757}
 --- !u!61 &990698135
 BoxCollider2D:
@@ -8567,6 +8570,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 878442ff9c2a6c14a8d694ad581cde16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UISounds: {fileID: 11400000, guid: 724eae74b19fa944d8026d8443dc19c6, type: 2}
   SpeechBubble: {fileID: 1488525572}
 --- !u!61 &1195004284
 BoxCollider2D:
@@ -9589,6 +9593,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 878442ff9c2a6c14a8d694ad581cde16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UISounds: {fileID: 11400000, guid: 724eae74b19fa944d8026d8443dc19c6, type: 2}
   SpeechBubble: {fileID: 796889175}
 --- !u!61 &1303039997
 BoxCollider2D:
