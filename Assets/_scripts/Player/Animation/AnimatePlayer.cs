@@ -101,7 +101,7 @@ public class AnimatePlayer : MonoBehaviour
         if (_hasNegativeYVelocity && !_grounded)
         {
             _animator.SetBool("Falling", true);
-            Debug.Log("Falling bool set");
+            //Debug.Log("Falling bool set");
         }
         else
         {

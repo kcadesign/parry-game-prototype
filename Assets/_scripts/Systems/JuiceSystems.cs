@@ -69,20 +69,20 @@ public class JuiceSystems : MonoBehaviour
 
     private void HandleBossHealth_OnBossDeath()
     {
-        Debug.Log("Boss deaad, shake screen");
+        Debug.Log("Boss dead, shake screen");
         // shake screen violently when boss is destroyed
         StartCoroutine(MultiShake(3, 10, 0.3f));
     }
 
     private IEnumerator HitStop(float hitStopDuration)
     {
-        Debug.Log("Hit stop coroutine started");
+        //Debug.Log("Hit stop coroutine started");
         // pause time for hitStopDuration
         Time.timeScale = 0.4f;
         yield return new WaitForSecondsRealtime(hitStopDuration);
         // resume time
         Time.timeScale = 1f;
-        Debug.Log("Hit stop coroutine ended");
+        //Debug.Log("Hit stop coroutine ended");
     }
 
     private void ScreenShake(float shakeAmount)

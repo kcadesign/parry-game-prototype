@@ -382,6 +382,10 @@ PrefabInstance:
       propertyPath: m_IsCustomRangeActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 728813285803240858, guid: 033d711d75361e441b1fd89cf0622f53, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 894887688545714950, guid: 033d711d75361e441b1fd89cf0622f53, type: 3}
       propertyPath: m_LocalPosition.x
       value: -313.482
@@ -496,7 +500,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7976323921639655483, guid: 033d711d75361e441b1fd89cf0622f53, type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 9097890226027746778, guid: 033d711d75361e441b1fd89cf0622f53, type: 3}
       propertyPath: m_ConstrainProportionsScale
@@ -640,7 +644,7 @@ CapsuleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}

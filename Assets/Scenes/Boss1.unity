@@ -4400,6 +4400,7 @@ GameObject:
   - component: {fileID: 450606659}
   - component: {fileID: 450606660}
   - component: {fileID: 450606658}
+  - component: {fileID: 450606661}
   m_Layer: 0
   m_Name: Boss1
   m_TagString: Untagged
@@ -4509,6 +4510,19 @@ MonoBehaviour:
   _flashColor: {r: 1, g: 1, b: 1, a: 1}
   _flashDuration: 0.15
   FlashMaterial: {fileID: -876546973899608171, guid: 0e95060253ffe6c44838535db050e7e1, type: 3}
+--- !u!114 &450606661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 450606653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e563fd4914e778346bbff98bd3c054c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DamageParticlePrefab: {fileID: 145013227338971142, guid: d8dabe9dd19b2c3448db0c52cedc940f, type: 3}
 --- !u!1 &464039752
 GameObject:
   m_ObjectHideFlags: 0
@@ -14069,8 +14083,8 @@ SpriteShapeRenderer:
   - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
   - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
   m_LocalAABB:
-    m_Center: {x: 63.72882, y: 1.5028057, z: 0}
-    m_Extent: {x: 131.46619, y: 22.620363, z: 0}
+    m_Center: {x: 63.728752, y: 1.5026875, z: 0}
+    m_Extent: {x: 131.50427, y: 22.658405, z: 0}
   m_SpriteSortPoint: 0
 --- !u!1 &1548130943
 GameObject:

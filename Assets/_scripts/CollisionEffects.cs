@@ -6,16 +6,20 @@ public class CollisionEffects : MonoBehaviour
 {
     [SerializeField] private GameObject _parryEffectPrefab; // Prefab for the parry effect
     [SerializeField] private GameObject _collisionEffectPrefab; // Prefab for the collision effect
+    [SerializeField] private GameObject _deathEffectPrefab; // Prefab for the parry effect
     private bool _parryActive;
+    private bool _playerDead = false;
 
     private void OnEnable()
     {
         PlayerParry.OnParryActive += PlayerParry_OnParryActive;
+        HandlePlayerHealth.OnPlayerDead += HandlePlayerHealth_OnPlayerDead;
     }
 
     private void OnDisable()
     {
         PlayerParry.OnParryActive -= PlayerParry_OnParryActive;
+        HandlePlayerHealth.OnPlayerDead -= HandlePlayerHealth_OnPlayerDead;
     }
 
     private void PlayerParry_OnParryActive(bool parryActive)
@@ -23,8 +27,19 @@ public class CollisionEffects : MonoBehaviour
         _parryActive = parryActive;
     }
 
+    private void HandlePlayerHealth_OnPlayerDead()
+    {
+        _playerDead = true;
+        Instantiate(_deathEffectPrefab, transform.position, Quaternion.identity);
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (_playerDead)
+        {
+            return;
+        }
+
         if (_parryActive && (collision.CompareTag("HurtBox") || collision.CompareTag("Projectile")))
         {
             // Instantiate the parry effect
@@ -38,7 +53,7 @@ public class CollisionEffects : MonoBehaviour
             // Destroy the instantiated effect after a delay
             Destroy(parryEffectInstance, 0.2f);
         }
-        else if(!_parryActive && (collision.CompareTag("HurtBox") || collision.CompareTag("Projectile")))
+        else if (!_parryActive && (collision.CompareTag("HurtBox") || collision.CompareTag("Projectile") || collision.CompareTag("Enemy")))
         {
             // Instantiate collision effect
             GameObject collisionEffectInstance = Instantiate(_collisionEffectPrefab, transform.position, Quaternion.identity);

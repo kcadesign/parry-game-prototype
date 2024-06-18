@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyDeathStopDuration: 0.15
   _playerDamageStopDuration: 0.15
-  _screenShakeAmount: 2
+  _screenShakeAmount: 1
 --- !u!114 &2007273394239638753
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -278,6 +278,10 @@ PrefabInstance:
     - target: {fileID: 2077404819569058769, guid: 0bfd0b4c749824243a29b58b0b016d08, type: 3}
       propertyPath: m_Name
       value: CollectableTrackers
+      objectReference: {fileID: 0}
+    - target: {fileID: 2077404819569058769, guid: 0bfd0b4c749824243a29b58b0b016d08, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
