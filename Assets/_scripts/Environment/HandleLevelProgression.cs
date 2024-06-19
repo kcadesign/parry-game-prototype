@@ -10,6 +10,8 @@ public class HandleLevelProgression : MonoBehaviour
     private Transform currentCheckpoint;
     public Transform LevelStart;
 
+    private bool _playerDead = false;
+
     void Awake()
     {
         currentCheckpoint = LevelStart;
@@ -18,16 +20,26 @@ public class HandleLevelProgression : MonoBehaviour
     private void OnEnable()
     {
         RespawnTrigger.OnPlayerLedgeFall += RespawnTrigger_OnPlayerLedgeFall;
+        HandlePlayerHealth.OnPlayerDead += HandlePlayerHealth_OnPlayerDead;
     }
 
     private void OnDisable()
     {
         RespawnTrigger.OnPlayerLedgeFall -= RespawnTrigger_OnPlayerLedgeFall;
+        HandlePlayerHealth.OnPlayerDead -= HandlePlayerHealth_OnPlayerDead;
     }
 
     private void RespawnTrigger_OnPlayerLedgeFall(GameObject player)
     {
-        player.transform.position = currentCheckpoint.position;
+        if (!_playerDead)
+        {
+            player.transform.position = currentCheckpoint.position;
+        }
+    }
+
+    private void HandlePlayerHealth_OnPlayerDead()
+    {
+        _playerDead = true;
     }
 
     public void SetCurrentCheckpoint(Transform checkpoint, GameObject checkpointActivator)

@@ -36,6 +36,9 @@ public class GameManager : MonoBehaviour
         HandleGameStateUI.OnMenuButtonPressed += HandleGameStateUI_OnMenuButtonPressed;
         HandleGameStateUI.OnExitGameButtonPressed += HandleGameStateUI_OnExitGameButtonPressed;
 
+        //HandleEnterFinish.OnPlayerParryFinish += HandleEnterFinish_OnPlayerParryFinish;
+        WarpTransition.OnWarpTransitionEnd += WarpTransition_OnWarpTransitionEnd;
+
         HandleBossDeath.OnBossDeathAnimEnd += HandleBossDeath_OnBossDeathAnimEnd;
     }
 
@@ -50,6 +53,9 @@ public class GameManager : MonoBehaviour
         HandleGameStateUI.OnRestartButtonPressed -= HandleGameStateUI_OnRestartButtonPressed;
         HandleGameStateUI.OnMenuButtonPressed -= HandleGameStateUI_OnMenuButtonPressed;
         HandleGameStateUI.OnExitGameButtonPressed -= HandleGameStateUI_OnExitGameButtonPressed;
+
+        //HandleEnterFinish.OnPlayerParryFinish -= HandleEnterFinish_OnPlayerParryFinish;
+        WarpTransition.OnWarpTransitionEnd -= WarpTransition_OnWarpTransitionEnd;
 
         HandleBossDeath.OnBossDeathAnimEnd -= HandleBossDeath_OnBossDeathAnimEnd;
     }
@@ -90,6 +96,12 @@ public class GameManager : MonoBehaviour
     {
         SaveData.SaveGameProgress(SceneManager.GetActiveScene().name);
         QuitGame();
+    }
+
+    private void WarpTransition_OnWarpTransitionEnd()
+    {
+        SaveData.SaveGameProgress(SceneManager.GetActiveScene().name);
+        Debug.Log("Save level: " + SceneManager.GetActiveScene().name);
     }
 
     private void HandleBossDeath_OnBossDeathAnimEnd()

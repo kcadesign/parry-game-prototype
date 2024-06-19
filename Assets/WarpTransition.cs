@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,8 @@ using UnityEngine.UI;
 
 public class WarpTransition : SceneTransition
 {
+    public static event Action OnWarpTransitionEnd;
+
     public GameObject WarpObject;
     private Material WarpMaterial;
 
@@ -64,6 +67,7 @@ public class WarpTransition : SceneTransition
             WarpMaterial.SetFloat(_ShockwaveStrength, lerpedAmount);
             yield return null;
         }
+        OnWarpTransitionEnd?.Invoke();
         WarpObject.SetActive(false);
     }
 }
