@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class HandleBossDeath : StateMachineBehaviour
 {
+    public static event System.Action OnBossDeathAnimStart;
     public static event System.Action OnBossDeathAnimEnd;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
-    //override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    
-    //}
+    override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        OnBossDeathAnimStart?.Invoke();
+    }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     //override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

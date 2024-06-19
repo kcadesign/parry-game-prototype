@@ -954,7 +954,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fb2519264263ec40ba00e5f8381ae1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 500
+  MaxHealth: 50
   CurrentHealth: 0
 --- !u!1001 &151844814
 PrefabInstance:
@@ -4399,8 +4399,8 @@ GameObject:
   - component: {fileID: 450606656}
   - component: {fileID: 450606659}
   - component: {fileID: 450606660}
-  - component: {fileID: 450606658}
   - component: {fileID: 450606661}
+  - component: {fileID: 450606658}
   m_Layer: 0
   m_Name: Boss1
   m_TagString: Untagged
@@ -6029,10 +6029,6 @@ PrefabInstance:
     - target: {fileID: 1465754575971549879, guid: a10425bf692332348ab5ef123c84c8ca, type: 3}
       propertyPath: m_Name
       value: SceneTransitionManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 1465754575971549879, guid: a10425bf692332348ab5ef123c84c8ca, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -12606,7 +12602,6 @@ GameObject:
   - component: {fileID: 1427492806}
   - component: {fileID: 1427492809}
   - component: {fileID: 1427492808}
-  - component: {fileID: 1427492807}
   m_Layer: 0
   m_Name: HealthBarFillEase
   m_TagString: Untagged
@@ -12633,20 +12628,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1586, y: 37}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1427492807
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1427492805}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c3bfa8a7868302479f55b24968d6400, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  EaseBar: {fileID: 0}
-  _fillSpeed: 2
 --- !u!114 &1427492808
 MonoBehaviour:
   m_ObjectHideFlags: 0

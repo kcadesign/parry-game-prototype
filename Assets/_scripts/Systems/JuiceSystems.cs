@@ -27,7 +27,8 @@ public class JuiceSystems : MonoBehaviour
         HandlePlayerHealth.OnPlayerHurtBig += HandlePlayerHealth_OnPlayerHurtBig;
         HandlePlayerHealth.OnPlayerDead += () => _playerDead = true;
         HandleBossHealth.OnBossHealthChange += HandleBossHealth_OnBossHealthChange;
-        HandleBossHealth.OnBossDeath += HandleBossHealth_OnBossDeath;
+        //HandleBossHealth.OnBossDeath += HandleBossHealth_OnBossDeath;
+        HandleBossDeath.OnBossDeathAnimStart += HandleBossDeath_OnBossDeathAnimStart;
     }
 
     private void OnDisable()
@@ -35,7 +36,8 @@ public class JuiceSystems : MonoBehaviour
         HandleEnemyHealth.OnEnemyDeath -= HandleEnemyHealth_OnEnemyDeath;
         HandlePlayerHealth.OnPlayerHurtBig -= HandlePlayerHealth_OnPlayerHurtBig;
         HandleBossHealth.OnBossHealthChange -= HandleBossHealth_OnBossHealthChange;
-        HandleBossHealth.OnBossDeath -= HandleBossHealth_OnBossDeath;
+        //HandleBossHealth.OnBossDeath -= HandleBossHealth_OnBossDeath;
+        HandleBossDeath.OnBossDeathAnimStart -= HandleBossDeath_OnBossDeathAnimStart;
     }
 
     private void HandleEnemyHealth_OnEnemyDeath(GameObject deadEnemy)
@@ -67,7 +69,7 @@ public class JuiceSystems : MonoBehaviour
         ScreenShake(_screenShakeAmount);
     }
 
-    private void HandleBossHealth_OnBossDeath()
+    private void HandleBossDeath_OnBossDeathAnimStart()
     {
         Debug.Log("Boss dead, shake screen");
         // shake screen violently when boss is destroyed

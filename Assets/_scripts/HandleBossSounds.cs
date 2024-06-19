@@ -9,13 +9,15 @@ public class HandleBossSounds : MonoBehaviour
     private void OnEnable()
     {
         HandleBossHealth.OnBossHealthChange += HandleBossHealth_OnBossHealthChange;
-        HandleBossHealth.OnBossDeath += HandleBossHealth_OnBossDeath;
+        //HandleBossHealth.OnBossDeath += HandleBossHealth_OnBossDeath;
+        HandleBossDeath.OnBossDeathAnimStart += HandleBossDeath_OnBossDeathAnimStart;
     }
 
     private void OnDisable()
     {
         HandleBossHealth.OnBossHealthChange -= HandleBossHealth_OnBossHealthChange;
-        HandleBossHealth.OnBossDeath -= HandleBossHealth_OnBossDeath;
+        //HandleBossHealth.OnBossDeath -= HandleBossHealth_OnBossDeath;
+        HandleBossDeath.OnBossDeathAnimStart -= HandleBossDeath_OnBossDeathAnimStart;
     }
 
     private void HandleBossHealth_OnBossHealthChange(int currentHealth, int maxHealth)
@@ -23,7 +25,7 @@ public class HandleBossSounds : MonoBehaviour
         BossSounds.PlaySound("BossHurt", transform);
     }
 
-    private void HandleBossHealth_OnBossDeath()
+    private void HandleBossDeath_OnBossDeathAnimStart()
     {
         BossSounds.PlaySound("BossDeath", transform);
     }
