@@ -3653,8 +3653,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "This thing looks unpleasant. \nIf you parry its rainbow attack thing,
-    you should be able to destroy it, probably..."
+  m_text: 'This thing looks unpleasant...
+
+    If you parry its rainbow attack thing,
+    you should be able to destroy it'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0ad90943a71d5ff4dabb91150dbc8d9e, type: 2}
   m_sharedMaterial: {fileID: -7594859192112348600, guid: 0ad90943a71d5ff4dabb91150dbc8d9e, type: 2}

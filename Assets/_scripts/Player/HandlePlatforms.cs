@@ -89,7 +89,10 @@ public class HandlePlatforms : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Platform"))
         {
-            collision.gameObject.GetComponent<PlatformEffector2D>().rotationalOffset = 0;
+            if (collision.gameObject.TryGetComponent(out PlatformEffector2D effector))
+            {
+                effector.rotationalOffset = 0;
+            }
             _dropping = false;
             transform.parent = null;
         }
@@ -99,10 +102,10 @@ public class HandlePlatforms : MonoBehaviour
     {
         _dropping = true;
 
-        // Set the platform effector to allow dropping through
-        PlatformEffector2D effector = platform.GetComponent<PlatformEffector2D>();
-        if (effector != null)
+        // Try to get the PlatformEffector2D component
+        if (platform.TryGetComponent(out PlatformEffector2D effector))
         {
+            // Set the platform effector to allow dropping through
             effector.rotationalOffset = 180;
 
             // Wait for a short duration to allow the player to drop through the platform
