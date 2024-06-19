@@ -25,6 +25,8 @@ public class HandleLevelBGM : MonoBehaviour
     private string _world1BossBGM = "World1Boss";
     private string _gameOverBGM = "GameOver";
 
+    private int _maxHealth;
+
     public static HandleLevelBGM Instance { get; private set; }
 
     private void Awake()
@@ -45,6 +47,8 @@ public class HandleLevelBGM : MonoBehaviour
     {
         GameStateManager.OnPauseButtonPressed += GameStateManager_OnPlayerPause;
         SceneManager.sceneLoaded += OnSceneLoaded;
+        HandlePlayerHealth.OnHealthInitialise += HandlePlayerHealth_OnHealthInitialise;
+        HandlePlayerHealth.OnHealthChange += HandlePlayerHealth_OnHealthChange;
         HandlePlayerHealth.OnPlayerDead += HandlePlayerDeath_OnPlayerDead;
     }
 
@@ -52,6 +56,8 @@ public class HandleLevelBGM : MonoBehaviour
     {
         GameStateManager.OnPauseButtonPressed -= GameStateManager_OnPlayerPause;
         SceneManager.sceneLoaded -= OnSceneLoaded;
+        HandlePlayerHealth.OnHealthInitialise -= HandlePlayerHealth_OnHealthInitialise;
+        HandlePlayerHealth.OnHealthChange -= HandlePlayerHealth_OnHealthChange;
         HandlePlayerHealth.OnPlayerDead -= HandlePlayerDeath_OnPlayerDead;
     }
 
@@ -81,6 +87,25 @@ public class HandleLevelBGM : MonoBehaviour
     private void GameStateManager_OnPlayerPause(bool playerPaused)
     {
         _audioSource.volume = playerPaused ? _pauseVolume : _defaultVolume;
+    }
+
+    private void HandlePlayerHealth_OnHealthInitialise(int maxHealth)
+    {
+        _maxHealth = maxHealth;
+    }
+
+    private void HandlePlayerHealth_OnHealthChange(int currentHealth)
+    {
+        if (currentHealth < _maxHealth * 0.25f)
+        {
+            // lower the volume of the BGM
+            _audioSource.volume = _pauseVolume;
+        }
+        else
+        {
+            // restore the volume of the BGM
+            _audioSource.volume = _defaultVolume;
+        }
     }
 
     private void HandlePlayerDeath_OnPlayerDead()
@@ -122,14 +147,5 @@ public class HandleLevelBGM : MonoBehaviour
         }
         _audioSource.clip = newClip;
         yield return FadeInBGM();
-    }
-
-    private IEnumerator LowerPitch()
-    {
-        while (_audioSource.pitch > 0.5f)
-        {
-            _audioSource.pitch -= Time.unscaledDeltaTime * 0.1f;
-            yield return null;
-        }
     }
 }

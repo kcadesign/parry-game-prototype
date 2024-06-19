@@ -7,6 +7,7 @@ public class HandlePlatforms : MonoBehaviour
     protected PlayerControls playerControls;
 
     private bool _dropDownPressed = false;
+    private bool _dropping = false;
     private bool _grounded;
 
     private void Awake()
@@ -36,7 +37,10 @@ public class HandlePlatforms : MonoBehaviour
 
     private void DropDown_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
-        _dropDownPressed = true;
+        if (!_dropping && !_dropDownPressed)
+        {
+            _dropDownPressed = true;
+        }
     }
 
     private void DropDown_cancelled(UnityEngine.InputSystem.InputAction.CallbackContext obj)
@@ -51,12 +55,17 @@ public class HandlePlatforms : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        //Debug.Log("Collision detected : " + collision.gameObject.tag);
-        //Debug.Log($"Player grounded: {_grounded}");
         if (collision.gameObject.CompareTag("Platform"))
         {
-            if (_dropDownPressed) collision.gameObject.GetComponent<PlatformEffector2D>().rotationalOffset = 180;
-            if (_grounded) transform.parent = collision.gameObject.transform;
+            if (_grounded)
+            {
+                transform.parent = collision.gameObject.transform;
+            }
+
+            if (_dropDownPressed && !_dropping)
+            {
+                StartCoroutine(DropThroughPlatform(collision.gameObject));
+            }
         }
     }
 
@@ -64,8 +73,15 @@ public class HandlePlatforms : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Platform"))
         {
-            if (_dropDownPressed) collision.gameObject.GetComponent<PlatformEffector2D>().rotationalOffset = 180;
-            if (_grounded) transform.parent = collision.gameObject.transform;
+            if (_grounded)
+            {
+                transform.parent = collision.gameObject.transform;
+            }
+
+            if (_dropDownPressed && !_dropping)
+            {
+                StartCoroutine(DropThroughPlatform(collision.gameObject));
+            }
         }
     }
 
@@ -74,7 +90,29 @@ public class HandlePlatforms : MonoBehaviour
         if (collision.gameObject.CompareTag("Platform"))
         {
             collision.gameObject.GetComponent<PlatformEffector2D>().rotationalOffset = 0;
+            _dropping = false;
             transform.parent = null;
         }
+    }
+
+    private IEnumerator DropThroughPlatform(GameObject platform)
+    {
+        _dropping = true;
+
+        // Set the platform effector to allow dropping through
+        PlatformEffector2D effector = platform.GetComponent<PlatformEffector2D>();
+        if (effector != null)
+        {
+            effector.rotationalOffset = 180;
+
+            // Wait for a short duration to allow the player to drop through the platform
+            yield return new WaitForSeconds(0.5f);
+
+            // Reset the platform effector
+            effector.rotationalOffset = 0;
+        }
+
+        _dropping = false;
+        _dropDownPressed = false;
     }
 }
