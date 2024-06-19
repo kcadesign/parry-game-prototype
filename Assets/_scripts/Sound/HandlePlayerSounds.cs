@@ -166,13 +166,16 @@ public class HandlePlayerSounds : MonoBehaviour
                 rolling = false;
             }
 
-            if (rolling && !_audioSource.isPlaying)
+            if (Time.timeScale != 0)
             {
-                _audioSource.Play();
-            }
-            else
-            {
-                _audioSource.Stop();
+                if (rolling && !_audioSource.isPlaying)
+                {
+                    _audioSource.Play();
+                }
+                else
+                {
+                    _audioSource.Stop();
+                }
             }
         }
     }
