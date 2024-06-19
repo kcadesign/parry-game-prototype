@@ -488,6 +488,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   WarpObject: {fileID: 2441554288541715855}
+  _environmentSounds: {fileID: 11400000, guid: a39a23da999c151448bec79f236b108d, type: 2}
   _transitionDuration: 1.5
 --- !u!1 &9009620808596394403
 GameObject:

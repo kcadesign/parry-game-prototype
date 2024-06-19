@@ -9,6 +9,8 @@ public class WarpTransition : SceneTransition
     public GameObject WarpObject;
     private Material WarpMaterial;
 
+    public SoundCollection _environmentSounds;
+
     [SerializeField] private float _transitionDuration = 3f;
 
     private int _waveDistanceFromCentre = Shader.PropertyToID("_WaveDistanceFromCentre");
@@ -25,6 +27,8 @@ public class WarpTransition : SceneTransition
     public override IEnumerator TransitionIn()
     {
         WarpObject.SetActive(true);
+
+        _environmentSounds.PlaySound("LevelStartWarp", transform);
 
         float startPosition = 0;
         float endPosition = 5;
@@ -44,6 +48,8 @@ public class WarpTransition : SceneTransition
 
     public override IEnumerator TransitionOut()
     {
+        _environmentSounds.PlaySound("LevelEndWarp", transform);
+
         float startPosition = 5;
         float endPosition = 0;
 
