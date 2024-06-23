@@ -94,7 +94,11 @@ public class HandlePlatforms : MonoBehaviour
                 effector.rotationalOffset = 0;
             }
             _dropping = false;
-            transform.parent = null;
+
+            if (transform.parent != null)
+            {
+                transform.parent = null;
+            }
         }
     }
 

@@ -22,7 +22,6 @@ public class ButtonSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPoin
     [SerializeField] private float _moveTime = 0.1f;
     [Range(0, 2), SerializeField] private float _scaleAmount = 1.1f;
 
-    private Vector3 _startPosition;
     private Vector3 _originalScale;
 
     private bool _buttonSelected = false;
@@ -31,47 +30,41 @@ public class ButtonSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPoin
     private void Awake()
     {
         playerControls = new PlayerControls();
-
-        //_buttonTextOriginalPosition = ButtonText.transform.position;
+        _originalScale = transform.localScale;
     }
 
     private void OnEnable()
     {
         playerControls.Menus.Enable();
-
         playerControls.Menus.Execute.performed += Execute_performed;
         playerControls.Menus.Execute.canceled += Execute_canceled;
-
-
-        _startPosition = transform.position;
-        _originalScale = transform.localScale;
     }
 
     private void OnDisable()
     {
         playerControls.Menus.Disable();
-
         playerControls.Menus.Execute.performed -= Execute_performed;
         playerControls.Menus.Execute.canceled -= Execute_canceled;
+
+        // Ensure the button scale is reset when deactivated
+        //LeanTween.cancel(gameObject);
+        transform.localScale = _originalScale;
     }
 
     private void Execute_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
         _executePressed = true;
-        //Debug.Log("Execute performed");
         if (_buttonSelected && _executePressed)
         {
             MoveTextWithButton(new Vector3(transform.position.x, transform.position.y, transform.position.z));
             OnButtonpressed?.Invoke();
         }
-
         StartCoroutine(CancelExecute());
     }
 
     private void Execute_canceled(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
         _executePressed = false;
-        //Debug.Log("Execute canceled");
         MoveTextWithButton(new Vector3(transform.position.x, transform.position.y + _buttonMoveAmount, transform.position.z));
     }
 
@@ -88,10 +81,6 @@ public class ButtonSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPoin
     public void OnSelect(BaseEventData eventData)
     {
         OnButtonSelected?.Invoke();
-
-        //_buttonTextOriginalPosition = ButtonText.transform.position;
-
-        //Debug.Log($"{gameObject.name} selected");
         _buttonSelected = true;
 
         LeanTween.scale(gameObject, _originalScale * _scaleAmount, _moveTime).setEase(LeanTweenType.easeInOutExpo).setIgnoreTimeScale(true);
@@ -111,7 +100,6 @@ public class ButtonSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPoin
     public void OnDeselect(BaseEventData eventData)
     {
         _buttonSelected = false;
-
         LeanTween.scale(gameObject, _originalScale, _moveTime).setEase(LeanTweenType.easeInOutExpo).setIgnoreTimeScale(true);
         ButtonSelector.SetActive(false);
     }

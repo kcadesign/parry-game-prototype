@@ -67,4 +67,20 @@ public class CollisionEffects : MonoBehaviour
             Destroy(collisionEffectInstance, 2f);
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (!_parryActive && collision.gameObject.CompareTag("Enemy"))
+        {
+            GameObject collisionEffectInstance = Instantiate(_collisionEffectPrefab, transform.position, Quaternion.identity);
+
+            // get the angle of the parry and set the rotation of the effect
+            Vector3 targetDir = collision.transform.position - transform.position;
+            float angle = Mathf.Atan2(targetDir.y, targetDir.x) * Mathf.Rad2Deg;
+            collisionEffectInstance.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+
+            // Destroy the instantiated effect after a delay
+            Destroy(collisionEffectInstance, 2f);
+        }
+    }
 }

@@ -15,7 +15,7 @@ MonoBehaviour:
   Sounds:
   - Name: MainMenu
     AudioClips:
-    - {fileID: 8300000, guid: 9fdda8a9e31f747419a515bdd0056779, type: 3}
+    - {fileID: 8300000, guid: be155b1645493f943b42ed15d0ea6e36, type: 3}
     Volume: 0.5
     Pitch: 1
     SpatialBlend: 0
@@ -29,7 +29,7 @@ MonoBehaviour:
     Loop: 1
   - Name: World1Level
     AudioClips:
-    - {fileID: 8300000, guid: 5c636e394165c054aac92848b523237b, type: 3}
+    - {fileID: 8300000, guid: 064ae5b9eb661464693e5f2a65026bb5, type: 3}
     Volume: 0.5
     Pitch: 1
     SpatialBlend: 0

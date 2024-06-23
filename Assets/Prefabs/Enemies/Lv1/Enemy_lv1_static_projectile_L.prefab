@@ -147,7 +147,7 @@ PrefabInstance:
       objectReference: {fileID: 2906861317020210255}
     - target: {fileID: 3119735341885209127, guid: 033d711d75361e441b1fd89cf0622f53, type: 3}
       propertyPath: m_IsTrigger
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4343720833011831734, guid: 033d711d75361e441b1fd89cf0622f53, type: 3}
       propertyPath: DeathEffect

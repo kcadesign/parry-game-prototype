@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -8,15 +7,13 @@ public class HandleLevelBGM : MonoBehaviour
     [Header("References")]
     public SoundCollection BGMCollection;
     private AudioSource _audioSource;
-    private AudioClip _preloadedGameOverClip;
 
     [Header("Volume")]
     [SerializeField] private float _defaultVolume = 0.5f;
-    [SerializeField] private float _pauseVolume = 0.2f;
+    [SerializeField] private float _lowVolume = 0.2f;
 
     [Header("Fade Speed")]
-    [SerializeField] private float _fadeInSpeed = 0.5f;
-    [SerializeField] private float _fadeOutSpeed = 0.5f;
+    [SerializeField] private float _fadeSpeed = 0.5f;
 
     [Header("BGM Strings")]
     private string _menuBGM = "MainMenu";
@@ -38,9 +35,21 @@ public class HandleLevelBGM : MonoBehaviour
 
         _audioSource = GetComponent<AudioSource>();
         _audioSource.volume = 0;
+    }
 
-        // Preload the game over audio clip
-        _preloadedGameOverClip = BGMCollection.FindSoundByName(_gameOverBGM)?.AudioClips[0];
+    private void Start()
+    {
+        // Start the BGM when the game starts
+        string initialClipName = GetBGMClipNameForScene(SceneManager.GetActiveScene().name);
+        if (initialClipName != null)
+        {
+            AudioClip initialClip = BGMCollection.FindSoundByName(initialClipName)?.AudioClips[0];
+            if (initialClip != null)
+            {
+                _audioSource.clip = initialClip;
+                StartCoroutine(FadeInBGM());
+            }
+        }
     }
 
     private void OnEnable()
@@ -63,11 +72,10 @@ public class HandleLevelBGM : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode sceneMode)
     {
-        _audioSource.volume = _defaultVolume;
         string newClipName = GetBGMClipNameForScene(scene.name);
         if (newClipName != null)
         {
-            var newClip = BGMCollection.FindSoundByName(newClipName)?.AudioClips[0];
+            AudioClip newClip = BGMCollection.FindSoundByName(newClipName)?.AudioClips[0];
             if (newClip != null && _audioSource.clip != newClip)
             {
                 StartCoroutine(CrossFadeBGM(newClip));
@@ -86,7 +94,7 @@ public class HandleLevelBGM : MonoBehaviour
 
     private void GameStateManager_OnPlayerPause(bool playerPaused)
     {
-        _audioSource.volume = playerPaused ? _pauseVolume : _defaultVolume;
+        StartCoroutine(ChangeVolume(playerPaused ? _lowVolume : _defaultVolume));
     }
 
     private void HandlePlayerHealth_OnHealthInitialise(int maxHealth)
@@ -96,46 +104,42 @@ public class HandleLevelBGM : MonoBehaviour
 
     private void HandlePlayerHealth_OnHealthChange(int currentHealth)
     {
-        if (currentHealth < _maxHealth * 0.25f)
-        {
-            // lower the volume of the BGM
-            _audioSource.volume = _pauseVolume;
-        }
-        else
-        {
-            // restore the volume of the BGM
-            _audioSource.volume = _defaultVolume;
-        }
+        StartCoroutine(ChangeVolume(currentHealth < _maxHealth * 0.25f ? _lowVolume : _defaultVolume));
     }
 
     private void HandlePlayerDeath_OnPlayerDead()
     {
-        if (_preloadedGameOverClip != null)
+        AudioClip gameOverClip = BGMCollection.FindSoundByName(_gameOverBGM)?.AudioClips[0];
+        if (gameOverClip != null)
         {
-            StartCoroutine(CrossFadeBGM(_preloadedGameOverClip));
+            StartCoroutine(CrossFadeBGM(gameOverClip));
         }
+    }
+
+    private IEnumerator ChangeVolume(float targetVolume)
+    {
+        float startVolume = _audioSource.volume;
+        float time = 0;
+
+        while (!Mathf.Approximately(_audioSource.volume, targetVolume))
+        {
+            _audioSource.volume = Mathf.Lerp(startVolume, targetVolume, time / _fadeSpeed);
+            time += Time.unscaledDeltaTime;
+            yield return null;
+        }
+
+        _audioSource.volume = targetVolume;
     }
 
     private IEnumerator FadeInBGM()
     {
-        _audioSource.volume = 0;
         _audioSource.Play();
-        while (_audioSource.volume < _defaultVolume)
-        {
-            _audioSource.volume += Time.unscaledDeltaTime * _fadeInSpeed;
-            _audioSource.volume = Mathf.Clamp(_audioSource.volume, 0, _defaultVolume);
-            yield return null;
-        }
+        yield return ChangeVolume(_defaultVolume);
     }
 
     private IEnumerator FadeOutBGM()
     {
-        while (_audioSource.volume > 0)
-        {
-            _audioSource.volume -= Time.unscaledDeltaTime * _fadeOutSpeed;
-            _audioSource.volume = Mathf.Clamp(_audioSource.volume, 0, _defaultVolume);
-            yield return null;
-        }
+        yield return ChangeVolume(0);
         _audioSource.Stop();
     }
 
