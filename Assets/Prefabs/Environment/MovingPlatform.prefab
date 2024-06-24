@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 6088494126760522359}
   - component: {fileID: 8500807459714031734}
   - component: {fileID: 6955153571057879134}
+  - component: {fileID: 129969854074546200}
   m_Layer: 7
   m_Name: Platform
   m_TagString: Platform
@@ -235,6 +236,18 @@ PlatformEffector2D:
   m_UseSideFriction: 0
   m_UseSideBounce: 0
   m_SideArc: 1
+--- !u!114 &129969854074546200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5440618934194536380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 519d69e963ac5a44db1230ba5ec16560, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8422931762052841981
 GameObject:
   m_ObjectHideFlags: 0
@@ -331,6 +344,7 @@ PrefabInstance:
     - {fileID: 2979280370230396118, guid: 0972704cb7bf66f41b29fa1559272807, type: 3}
     - {fileID: 1616009575553660978, guid: 0972704cb7bf66f41b29fa1559272807, type: 3}
     - {fileID: 7918343089379640652, guid: 0972704cb7bf66f41b29fa1559272807, type: 3}
+    - {fileID: 8672814859866236979, guid: 0972704cb7bf66f41b29fa1559272807, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 3490297654686304157, guid: 0972704cb7bf66f41b29fa1559272807, type: 3}
