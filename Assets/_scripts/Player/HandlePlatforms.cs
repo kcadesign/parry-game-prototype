@@ -57,11 +57,11 @@ public class HandlePlatforms : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Platform"))
         {
-            if (_grounded)
+/*            if (_grounded)
             {
                 transform.parent = collision.gameObject.transform;
             }
-
+*/
             if (_dropDownPressed && !_dropping)
             {
                 StartCoroutine(DropThroughPlatform(collision.gameObject));
@@ -73,11 +73,11 @@ public class HandlePlatforms : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Platform"))
         {
-            if (_grounded)
+/*            if (_grounded)
             {
                 transform.parent = collision.gameObject.transform;
             }
-
+*/
             if (_dropDownPressed && !_dropping)
             {
                 StartCoroutine(DropThroughPlatform(collision.gameObject));
@@ -95,11 +95,11 @@ public class HandlePlatforms : MonoBehaviour
             }
             _dropping = false;
 
-            if (transform.parent != null)
+/*            if (transform.parent != null)
             {
                 transform.parent = null;
             }
-        }
+*/        }
     }
 
     private IEnumerator DropThroughPlatform(GameObject platform)
