@@ -69,7 +69,7 @@ public class MainMenu : MonoBehaviour
             LeanTween.moveY(gameUI, ScreenMiddle.transform.position.y, 1f)
                     .setEase(LeanTweenType.easeOutExpo)
                     .setIgnoreTimeScale(true);
-        }        
+        }
         MainMenuButtonContainer.SetActive(false);
 
         yield return new WaitWhile(() => LeanTween.isTweening(gameUI));

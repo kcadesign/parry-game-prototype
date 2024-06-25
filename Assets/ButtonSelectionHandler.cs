@@ -1,8 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 using TMPro;
 using System;
 
@@ -16,7 +14,7 @@ public class ButtonSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPoin
 
     public GameObject ButtonSelector;
     public TextMeshProUGUI ButtonText;
-    private Vector3 _buttonPressedPosition;
+    private Vector3 _buttonOriginalPosition;
     private float _buttonMoveAmount = 10;
 
     [SerializeField] private float _moveTime = 0.1f;
@@ -31,6 +29,8 @@ public class ButtonSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPoin
     {
         playerControls = new PlayerControls();
         _originalScale = transform.localScale;
+        _buttonOriginalPosition = ButtonText.transform.localPosition;
+        Debug.Log("ButtonPressedPosition: " + _buttonOriginalPosition);
     }
 
     private void OnEnable()
@@ -46,26 +46,23 @@ public class ButtonSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPoin
         playerControls.Menus.Execute.performed -= Execute_performed;
         playerControls.Menus.Execute.canceled -= Execute_canceled;
 
-        // Ensure the button scale is reset when deactivated
-        //LeanTween.cancel(gameObject);
+        // Ensure the button scale and text position are reset when deactivated
         transform.localScale = _originalScale;
+        ButtonText.transform.localPosition = _buttonOriginalPosition;
     }
 
     private void Execute_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
-        _executePressed = true;
-        if (_buttonSelected && _executePressed)
+        if (_buttonSelected)
         {
-            MoveTextWithButton(new Vector3(transform.position.x, transform.position.y, transform.position.z));
-            OnButtonpressed?.Invoke();
+            OnButtonPress();
         }
         StartCoroutine(CancelExecute());
     }
 
     private void Execute_canceled(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
-        _executePressed = false;
-        MoveTextWithButton(new Vector3(transform.position.x, transform.position.y + _buttonMoveAmount, transform.position.z));
+        // No action needed here as the cancel will be handled by the coroutine
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -106,11 +103,21 @@ public class ButtonSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPoin
 
     public void OnPointerDown()
     {
+        OnButtonPress();
+    }
+
+    public void OnPointerUp()
+    {
+        OnButtonRelease();
+    }
+
+    private void OnButtonPress()
+    {
         MoveTextWithButton(new Vector3(transform.position.x, transform.position.y, transform.position.z));
         OnButtonpressed?.Invoke();
     }
 
-    public void OnPointerUp()
+    private void OnButtonRelease()
     {
         MoveTextWithButton(new Vector3(transform.position.x, transform.position.y + _buttonMoveAmount, transform.position.z));
     }
@@ -123,7 +130,9 @@ public class ButtonSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPoin
     private IEnumerator CancelExecute()
     {
         yield return new WaitForSeconds(0.1f);
-        _executePressed = false;
-        MoveTextWithButton(new Vector3(transform.position.x, transform.position.y + _buttonMoveAmount, transform.position.z));
+        if (_buttonSelected) // Ensure the button is still selected before resetting
+        {
+            OnButtonRelease();
+        }
     }
 }
