@@ -27,8 +27,6 @@ public class ButtonSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPoin
     private Vector3 _originalScale;
     private Vector3 _originalPosition;
 
-    //private bool _buttonSelected = false;
-
     private void Awake()
     {
         playerControls = new PlayerControls();
@@ -61,7 +59,6 @@ public class ButtonSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPoin
     private void Update()
     {
         ButtonShadow.transform.localScale = gameObject.transform.localScale;
-        //Debug.Log(gameObject.name + " original position: " + _originalPosition);
     }
 
     private void Execute_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
@@ -83,21 +80,17 @@ public class ButtonSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPoin
     public void OnPointerEnter(PointerEventData eventData)
     {
         eventData.selectedObject = gameObject;
-        //_buttonSelected = true;
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         eventData.selectedObject = null;
-        //_buttonSelected = false;
         ResetButton();
     }
 
     public void OnSelect(BaseEventData eventData)
     {
-
         OnButtonSelected?.Invoke();
-        //_buttonSelected = true;
 
         LeanTween.scale(gameObject, _originalScale * _scaleAmount, _buttonSelectMoveTime).setEase(LeanTweenType.easeInOutExpo).setIgnoreTimeScale(true);
 
@@ -115,7 +108,6 @@ public class ButtonSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPoin
 
     public void OnDeselect(BaseEventData eventData)
     {
-        //_buttonSelected = false;
         LeanTween.scale(gameObject, _originalScale, _buttonSelectMoveTime).setEase(LeanTweenType.easeInOutExpo).setIgnoreTimeScale(true);
         ResetButton();
 
@@ -141,22 +133,15 @@ public class ButtonSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPoin
 
     private void OnButtonPress()
     {
-        Debug.Log("Button pressed: " + gameObject.name);
-
         LeanTween.moveLocalY(gameObject, transform.localPosition.y - _buttonMoveAmount, _buttonPressMoveTime).setEase(LeanTweenType.linear).setIgnoreTimeScale(true);
-        Debug.Log("Button moved");
         ButtonShadow.GetComponent<Image>().sprite = ButtonShadowSpritePressed;
-        Debug.Log("Shadow swapped");
 
         OnButtonpressed?.Invoke();
     }
 
     private void OnButtonRelease()
     {
-        Debug.Log("Button released: " + gameObject.name);
-
         LeanTween.moveLocalY(gameObject, transform.localPosition.y + _buttonMoveAmount, _buttonPressMoveTime).setEase(LeanTweenType.linear).setIgnoreTimeScale(true);
-
         ButtonShadow.GetComponent<Image>().sprite = ButtonShadowSpriteDefault;
     }
 

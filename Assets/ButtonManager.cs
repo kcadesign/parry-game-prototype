@@ -89,14 +89,8 @@ public class ButtonManager : MonoBehaviour
     private void Navigate_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
         _navigate = obj.ReadValue<Vector2>();
-        if (_navigate.y > 0)
-        {
-            HandleNextSelectedButton(1);
-        }
-        else if (_navigate.y < 0)
-        {
-            HandleNextSelectedButton(-1);
-        }
+        if (_navigate.y > 0) HandleNextSelectedButton(1);
+        else if (_navigate.y < 0) HandleNextSelectedButton(-1);
     }
 
     private IEnumerator SetSelectedAfterOneFrame()

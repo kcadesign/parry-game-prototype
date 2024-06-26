@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class TrackHostages : MonoBehaviour
 {
-    public CollectableTracker CollectableTracker;
+/*    public CollectableTracker CollectableTracker;
 
     private bool _levelFinished = false;
     private bool _isFollowing = false;
@@ -72,4 +72,4 @@ public class TrackHostages : MonoBehaviour
         bool hostagePresent = GameObject.FindGameObjectWithTag(tag);
         return hostagePresent;
     }
-}
+*/}
