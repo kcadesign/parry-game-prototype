@@ -50,19 +50,20 @@ public class MainMenu : MonoBehaviour
     {
         OnResetProgressButtonPressed?.Invoke();
         StartCoroutine(DataResetAnim(ResetConfirmUI));
-        MainMenuButtonContainer.SetActive(true);
-        StartCoroutine(SetSelectedAfterOneFrame());
+        //MainMenuButtonContainer.SetActive(true);
+        //StartCoroutine(SetSelectedAfterOneFrame());
     }
 
     public void CancelResetButtonPressed()
     {
         StartCoroutine(AnimateResetUIOut(ResetConfirmUI));
-        MainMenuButtonContainer.SetActive(true);
-        StartCoroutine(SetSelectedAfterOneFrame());
+        //StartCoroutine(SetSelectedAfterOneFrame());
     }
 
     private IEnumerator AnimateResetUIIn(GameObject gameUI)
     {
+        yield return new WaitForSeconds(0.5f);
+
         if (gameUI != null)
         {
             gameUI.SetActive(true);
@@ -70,13 +71,16 @@ public class MainMenu : MonoBehaviour
                     .setEase(LeanTweenType.easeOutExpo)
                     .setIgnoreTimeScale(true);
         }
-        MainMenuButtonContainer.SetActive(false);
 
         yield return new WaitWhile(() => LeanTween.isTweening(gameUI));
+        MainMenuButtonContainer.SetActive(false);
+
     }
 
     private IEnumerator AnimateResetUIOut(GameObject gameUI)
     {
+        yield return new WaitForSeconds(0.5f);
+
         if (gameUI != null)
         {
             LeanTween.moveY(gameUI, ScreenBelow.transform.position.y, 1f)
@@ -85,6 +89,8 @@ public class MainMenu : MonoBehaviour
 
             // Wait until the tweening is done
             yield return new WaitWhile(() => LeanTween.isTweening(gameUI));
+            Debug.Log("Reset progress UI tweening done");
+            MainMenuButtonContainer.SetActive(true);
 
             // Deactivate the UI element after the animation is done
             gameUI.SetActive(false);
@@ -93,6 +99,8 @@ public class MainMenu : MonoBehaviour
 
     private IEnumerator DataResetAnim(GameObject gameUI)
     {
+        yield return new WaitForSeconds(0.5f);
+
         ResetConfirmTMP.text = "Data successfully reset";
         ResetConfirmTMPShadow.text = "Data successfully reset";
         ResetButtonContainer.SetActive(false);
@@ -104,6 +112,8 @@ public class MainMenu : MonoBehaviour
 
         // Wait until the tweening is done
         yield return new WaitWhile(() => LeanTween.isTweening(gameUI));
+
+        MainMenuButtonContainer.SetActive(true);
 
         ResetConfirmTMP.text = "Are you sure you would like to reset all progress?";
         ResetConfirmTMPShadow.text = "Are you sure you would like to reset all progress?";

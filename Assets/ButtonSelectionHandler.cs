@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using TMPro;
 using System;
+using UnityEngine.UI;
 
 public class ButtonSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, ISelectHandler, IDeselectHandler
 {
@@ -13,24 +14,27 @@ public class ButtonSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPoin
     protected PlayerControls playerControls;
 
     public GameObject ButtonSelector;
-    public TextMeshProUGUI ButtonText;
-    private Vector3 _buttonOriginalPosition;
+    public GameObject ButtonShadow;
+    private Sprite ButtonShadowSpriteDefault;
+    public Sprite ButtonShadowSpritePressed;
+
+    private float _buttonSelectMoveTime = 0.25f;
     private float _buttonMoveAmount = 10;
 
-    [SerializeField] private float _moveTime = 0.1f;
-    [Range(0, 2), SerializeField] private float _scaleAmount = 1.1f;
+    private float _scaleAmount = 1.1f;
+    private float _buttonPressMoveTime = 0.1f;
 
     private Vector3 _originalScale;
+    private Vector3 _originalPosition;
 
-    private bool _buttonSelected = false;
-    private bool _executePressed = false;
+    //private bool _buttonSelected = false;
 
     private void Awake()
     {
         playerControls = new PlayerControls();
         _originalScale = transform.localScale;
-        _buttonOriginalPosition = ButtonText.transform.localPosition;
-        Debug.Log("ButtonPressedPosition: " + _buttonOriginalPosition);
+
+        ButtonShadowSpriteDefault = ButtonShadow.GetComponent<Image>().sprite;
     }
 
     private void OnEnable()
@@ -46,41 +50,56 @@ public class ButtonSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPoin
         playerControls.Menus.Execute.performed -= Execute_performed;
         playerControls.Menus.Execute.canceled -= Execute_canceled;
 
-        // Ensure the button scale and text position are reset when deactivated
-        transform.localScale = _originalScale;
-        ButtonText.transform.localPosition = _buttonOriginalPosition;
+        ResetButton();
+    }
+
+    private void Start()
+    {
+        StartCoroutine(GetButtonStartPosition());
+    }
+
+    private void Update()
+    {
+        ButtonShadow.transform.localScale = gameObject.transform.localScale;
+        //Debug.Log(gameObject.name + " original position: " + _originalPosition);
     }
 
     private void Execute_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
-        if (_buttonSelected)
+        if (EventSystem.current.currentSelectedGameObject == gameObject)
         {
             OnButtonPress();
         }
-        StartCoroutine(CancelExecute());
     }
 
     private void Execute_canceled(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
-        // No action needed here as the cancel will be handled by the coroutine
+        if (EventSystem.current.currentSelectedGameObject == gameObject)
+        {
+            OnButtonRelease();
+        }
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
         eventData.selectedObject = gameObject;
+        //_buttonSelected = true;
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         eventData.selectedObject = null;
+        //_buttonSelected = false;
+        ResetButton();
     }
 
     public void OnSelect(BaseEventData eventData)
     {
-        OnButtonSelected?.Invoke();
-        _buttonSelected = true;
 
-        LeanTween.scale(gameObject, _originalScale * _scaleAmount, _moveTime).setEase(LeanTweenType.easeInOutExpo).setIgnoreTimeScale(true);
+        OnButtonSelected?.Invoke();
+        //_buttonSelected = true;
+
+        LeanTween.scale(gameObject, _originalScale * _scaleAmount, _buttonSelectMoveTime).setEase(LeanTweenType.easeInOutExpo).setIgnoreTimeScale(true);
 
         ButtonManager.LastSelectedButton = gameObject;
         for (int i = 0; i < ButtonManager.Buttons.Length; i++)
@@ -96,43 +115,62 @@ public class ButtonSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPoin
 
     public void OnDeselect(BaseEventData eventData)
     {
-        _buttonSelected = false;
-        LeanTween.scale(gameObject, _originalScale, _moveTime).setEase(LeanTweenType.easeInOutExpo).setIgnoreTimeScale(true);
+        //_buttonSelected = false;
+        LeanTween.scale(gameObject, _originalScale, _buttonSelectMoveTime).setEase(LeanTweenType.easeInOutExpo).setIgnoreTimeScale(true);
+        ResetButton();
+
         ButtonSelector.SetActive(false);
+        Debug.Log("Button deselected: " + gameObject.name);
     }
 
     public void OnPointerDown()
     {
-        OnButtonPress();
+        if (EventSystem.current.currentSelectedGameObject == gameObject)
+        {
+            OnButtonPress();
+        }
     }
 
     public void OnPointerUp()
     {
-        OnButtonRelease();
+        if (EventSystem.current.currentSelectedGameObject == gameObject)
+        {
+            OnButtonRelease();
+        }
     }
 
     private void OnButtonPress()
     {
-        MoveTextWithButton(new Vector3(transform.position.x, transform.position.y, transform.position.z));
+        Debug.Log("Button pressed: " + gameObject.name);
+
+        LeanTween.moveLocalY(gameObject, transform.localPosition.y - _buttonMoveAmount, _buttonPressMoveTime).setEase(LeanTweenType.linear).setIgnoreTimeScale(true);
+        Debug.Log("Button moved");
+        ButtonShadow.GetComponent<Image>().sprite = ButtonShadowSpritePressed;
+        Debug.Log("Shadow swapped");
+
         OnButtonpressed?.Invoke();
     }
 
     private void OnButtonRelease()
     {
-        MoveTextWithButton(new Vector3(transform.position.x, transform.position.y + _buttonMoveAmount, transform.position.z));
+        Debug.Log("Button released: " + gameObject.name);
+
+        LeanTween.moveLocalY(gameObject, transform.localPosition.y + _buttonMoveAmount, _buttonPressMoveTime).setEase(LeanTweenType.linear).setIgnoreTimeScale(true);
+
+        ButtonShadow.GetComponent<Image>().sprite = ButtonShadowSpriteDefault;
     }
 
-    public void MoveTextWithButton(Vector3 buttonPosition)
+    private IEnumerator GetButtonStartPosition()
     {
-        ButtonText.transform.position = buttonPosition;
+        yield return new WaitWhile(() => LeanTween.isTweening(gameObject));
+        _originalPosition = transform.localPosition;
     }
 
-    private IEnumerator CancelExecute()
+    private void ResetButton()
     {
-        yield return new WaitForSeconds(0.1f);
-        if (_buttonSelected) // Ensure the button is still selected before resetting
-        {
-            OnButtonRelease();
-        }
+        transform.localScale = _originalScale;
+        transform.localPosition = _originalPosition;
+        ButtonShadow.transform.localScale = gameObject.transform.localScale;
+        ButtonShadow.GetComponent<Image>().sprite = ButtonShadowSpriteDefault;
     }
 }
