@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class HandlePlatforms : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class HandlePlatforms : MonoBehaviour
     private bool _dropDownPressed = false;
     private bool _dropping = false;
     private bool _grounded;
+
+    private bool _sceneLoaded = false;
 
     private void Awake()
     {
@@ -23,6 +26,7 @@ public class HandlePlatforms : MonoBehaviour
         playerControls.Gameplay.DropDown.canceled += DropDown_cancelled;
 
         CheckPlayerGrounded.OnGrounded += CheckPlayerGrounded_OnGrounded;
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     private void OnDisable()
@@ -33,6 +37,7 @@ public class HandlePlatforms : MonoBehaviour
         playerControls.Gameplay.DropDown.canceled -= DropDown_cancelled;
 
         CheckPlayerGrounded.OnGrounded -= CheckPlayerGrounded_OnGrounded;
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     private void DropDown_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
@@ -53,15 +58,20 @@ public class HandlePlatforms : MonoBehaviour
         _grounded = grounded;
     }
 
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        _sceneLoaded = true;
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Platform"))
         {
-/*            if (_grounded)
+            if (_grounded)
             {
                 transform.parent = collision.gameObject.transform;
             }
-*/
+
             if (_dropDownPressed && !_dropping)
             {
                 StartCoroutine(DropThroughPlatform(collision.gameObject));
@@ -73,11 +83,11 @@ public class HandlePlatforms : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Platform"))
         {
-/*            if (_grounded)
+            if (_grounded)
             {
                 transform.parent = collision.gameObject.transform;
             }
-*/
+
             if (_dropDownPressed && !_dropping)
             {
                 StartCoroutine(DropThroughPlatform(collision.gameObject));
@@ -95,11 +105,11 @@ public class HandlePlatforms : MonoBehaviour
             }
             _dropping = false;
 
-/*            if (transform.parent != null)
+            if (transform.parent != null)
             {
                 transform.parent = null;
             }
-*/        }
+        }
     }
 
     private IEnumerator DropThroughPlatform(GameObject platform)
