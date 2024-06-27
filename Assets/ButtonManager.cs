@@ -1,14 +1,12 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 public class ButtonManager : MonoBehaviour
 {
     public PlayerControls PlayerControls;
 
+    public GameObject[] ButtonContainers;
     public GameObject[] Buttons;
 
     private Vector2 _navigate;
@@ -66,24 +64,24 @@ public class ButtonManager : MonoBehaviour
     private void AnimateButtonIntro()
     {
         // move the buttons off screen
-        for (int i = 0; i < Buttons.Length; i++)
+        for (int i = 0; i < ButtonContainers.Length; i++)
         {
-            Buttons[i].transform.localPosition = new Vector3(0, Buttons[i].transform.localPosition.y - 1000, 0);
+            ButtonContainers[i].transform.localPosition = new Vector3(0, ButtonContainers[i].transform.localPosition.y - 1000, 0);
         }
 
         // move the buttons from off screen to their starting position using lean tween
-        for (int i = 0; i < Buttons.Length; i++)
+        for (int i = 0; i < ButtonContainers.Length; i++)
         {
-            LeanTween.moveLocalY(Buttons[i], Buttons[i].transform.localPosition.y + 1000, 1f).setEase(LeanTweenType.easeOutExpo).setDelay(i * 0.25f).setIgnoreTimeScale(true);
+            LeanTween.moveLocalY(ButtonContainers[i], ButtonContainers[i].transform.localPosition.y + 1000, 1f).setEase(LeanTweenType.easeOutExpo).setDelay(i * 0.25f).setIgnoreTimeScale(true);
         }
     }
 
     private void ResetButtonPosition()
     {
         // move the buttons off screen
-        for (int i = 0; i < Buttons.Length; i++)
+        for (int i = 0; i < ButtonContainers.Length; i++)
         {
-            Buttons[i].transform.localPosition = new Vector3(0, Buttons[i].transform.localPosition.y, 0);
+            ButtonContainers[i].transform.localPosition = new Vector3(0, ButtonContainers[i].transform.localPosition.y, 0);
             // debug the position of each button
         }
     }
@@ -91,14 +89,8 @@ public class ButtonManager : MonoBehaviour
     private void Navigate_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
         _navigate = obj.ReadValue<Vector2>();
-        if (_navigate.y > 0)
-        {
-            HandleNextSelectedButton(1);
-        }
-        else if (_navigate.y < 0)
-        {
-            HandleNextSelectedButton(-1);
-        }
+        if (_navigate.y > 0) HandleNextSelectedButton(1);
+        else if (_navigate.y < 0) HandleNextSelectedButton(-1);
     }
 
     private IEnumerator SetSelectedAfterOneFrame()

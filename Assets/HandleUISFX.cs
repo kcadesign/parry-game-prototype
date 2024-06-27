@@ -35,13 +35,13 @@ public class HandleUISFX : MonoBehaviour
 
     private void ButtonSelectionHandler_OnButtonSelected()
     {
-        Debug.Log("Play button selected SFX");
+        //Debug.Log("Playing button selected SFX");
         UISounds.PlaySound("ButtonSelect", transform);
     }
 
     private void ButtonSelectionHandler_OnButtonpressed()
     {
-        Debug.Log("Play button pressed SFX");
+        //Debug.Log("Playing button pressed SFX");
         UISounds.PlaySound("ButtonPress", transform);
     }
 }
