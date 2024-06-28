@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 1616009575553660978}
   - component: {fileID: 2979280370230396118}
   - component: {fileID: 2091294837238611329}
-  - component: {fileID: 8672814859866236979}
   m_Layer: 7
   m_Name: FloatingPlatform
   m_TagString: Platform
@@ -205,15 +204,3 @@ PlatformEffector2D:
   m_UseSideFriction: 0
   m_UseSideBounce: 0
   m_SideArc: 1
---- !u!114 &8672814859866236979
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7741431080247992140}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 519d69e963ac5a44db1230ba5ec16560, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

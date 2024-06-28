@@ -11,7 +11,8 @@ public class HandlePlatforms : MonoBehaviour
     private bool _dropping = false;
     private bool _grounded;
 
-    private bool _sceneLoaded = false;
+    private bool _sceneUnloaded = false;
+
 
     private void Awake()
     {
@@ -26,7 +27,6 @@ public class HandlePlatforms : MonoBehaviour
         playerControls.Gameplay.DropDown.canceled += DropDown_cancelled;
 
         CheckPlayerGrounded.OnGrounded += CheckPlayerGrounded_OnGrounded;
-        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     private void OnDisable()
@@ -37,7 +37,8 @@ public class HandlePlatforms : MonoBehaviour
         playerControls.Gameplay.DropDown.canceled -= DropDown_cancelled;
 
         CheckPlayerGrounded.OnGrounded -= CheckPlayerGrounded_OnGrounded;
-        SceneManager.sceneLoaded -= OnSceneLoaded;
+
+        Debug.Log("HandlePlatforms disabled");
     }
 
     private void DropDown_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
@@ -58,10 +59,6 @@ public class HandlePlatforms : MonoBehaviour
         _grounded = grounded;
     }
 
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        _sceneLoaded = true;
-    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -86,6 +83,7 @@ public class HandlePlatforms : MonoBehaviour
             if (_grounded)
             {
                 transform.parent = collision.gameObject.transform;
+                //Debug.Log("STAY Parenting to platform");
             }
 
             if (_dropDownPressed && !_dropping)
@@ -105,8 +103,9 @@ public class HandlePlatforms : MonoBehaviour
             }
             _dropping = false;
 
-            if (transform.parent != null)
+            if (collision.gameObject.activeInHierarchy)
             {
+                Debug.Log("Setting parent to NULL");
                 transform.parent = null;
             }
         }
