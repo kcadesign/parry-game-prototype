@@ -6,6 +6,7 @@ using UnityEngine;
 public class AOEEnemyController : HandleBaseEnemyState
 {
     public static Action<GameObject> OnEnemyAttack;
+    public static Action OnAttackWarning;
     public Collider2D AttackCircleCollider;
 
     private void EnableAttackCircleCollider()
@@ -18,5 +19,10 @@ public class AOEEnemyController : HandleBaseEnemyState
     private void EnemyAttack()
     {
         OnEnemyAttack?.Invoke(gameObject);
+    }
+
+    private void AttackWarning()
+    {
+        OnAttackWarning?.Invoke();
     }
 }

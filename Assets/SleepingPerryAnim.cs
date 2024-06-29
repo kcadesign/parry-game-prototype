@@ -25,7 +25,7 @@ public class SleepingPerryAnim : MonoBehaviour
     {
         while (true)
         {
-            LeanTween.rotateZ(SleepingPerry, 5f, AnimationLength);
+            LeanTween.rotateZ(SleepingPerry, 8f, AnimationLength);
             yield return new WaitWhile(() => LeanTween.isTweening(SleepingPerry));
             LeanTween.rotateZ(SleepingPerry, 0f, AnimationLength);
             yield return new WaitWhile(() => LeanTween.isTweening(SleepingPerry));
