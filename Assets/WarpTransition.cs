@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class WarpTransition : SceneTransition
 {
+    public static event Action OnWarpTransitionStart;
     public static event Action OnWarpTransitionEnd;
 
     public GameObject WarpObject;
@@ -29,6 +30,8 @@ public class WarpTransition : SceneTransition
 
     public override IEnumerator TransitionIn()
     {
+        OnWarpTransitionStart?.Invoke();
+
         WarpObject.SetActive(true);
 
         _environmentSounds.PlaySound("LevelStartWarp", transform);
@@ -51,7 +54,10 @@ public class WarpTransition : SceneTransition
 
     public override IEnumerator TransitionOut()
     {
+        OnWarpTransitionEnd?.Invoke();
+
         _environmentSounds.PlaySound("LevelEndWarp", transform);
+
 
         float startPosition = 5;
         float endPosition = 0;
@@ -67,7 +73,6 @@ public class WarpTransition : SceneTransition
             WarpMaterial.SetFloat(_ShockwaveStrength, lerpedAmount);
             yield return null;
         }
-        OnWarpTransitionEnd?.Invoke();
         WarpObject.SetActive(false);
     }
 }
