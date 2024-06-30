@@ -768,7 +768,7 @@ GameObject:
   - component: {fileID: 113989836}
   - component: {fileID: 113989835}
   m_Layer: 0
-  m_Name: WarpTutorialContainer (1)
+  m_Name: BulletParryTutorialContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -792,7 +792,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -62.25, y: -1.1}
+  m_AnchoredPosition: {x: -64.47, y: -1.1}
   m_SizeDelta: {x: 7.6926, y: 22.607}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &113989835
@@ -6508,8 +6508,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0045, y: 0.223}
-  m_SizeDelta: {x: 2.387, y: 0.7883}
+  m_AnchoredPosition: {x: 0.0045, y: 0.3399}
+  m_SizeDelta: {x: 2.387, y: 1.0221}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &584762116
 MonoBehaviour:
@@ -6534,7 +6534,7 @@ MonoBehaviour:
   m_text: 'Parry energy balls back at enemies.
 
     Seems anything rainbow colored
-    can be parried.'
+    can be parried. How convenient...'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0ad90943a71d5ff4dabb91150dbc8d9e, type: 2}
   m_sharedMaterial: {fileID: -7594859192112348600, guid: 0ad90943a71d5ff4dabb91150dbc8d9e, type: 2}
@@ -8428,7 +8428,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
-  m_Size: {x: 3.156347, y: 1.4202507}
+  m_Size: {x: 3.156347, y: 1.6133606}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
